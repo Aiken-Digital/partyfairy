@@ -14,14 +14,20 @@ foreach ($footer_menu as $key => $value) {
 ?>
                 <div class="col-lg-3">
                   <div class="footer--title">
-                    <img src="<?php echo  $value['menu_icon'] ?>">
+                    <img src="<?php echo  $value['menu_icon'] ?>" style="margin-right: 5px;width: 30px;height: 30px;">
                    <?php echo  $value['menu_title'] ?>
                   </div>
                   <ul class="footer--list">
-                    <li><a href="#">Themes & Occasions</a></li>
-                    <li><a href="#">Themes & Occasions</a></li>
-                    <li><a href="#">Themes & Occasions</a></li>
-                    <li><a href="#">Themes & Occasions</a></li>
+                    <?php if($value['sub_menu']) { 
+                      
+                      foreach ($value['sub_menu'] as $sub_key => $sub_value) {
+                      
+                      ?>
+                    
+                    <li><a href="<?php echo $sub_value['sub_menu_link'] ?>" <?php if($sub_value['open_new_tab'] =='y') { echo 'target="_blank"'; } ?>><?php echo $sub_value['sub_menu_title'] ?></a></li>
+                  
+                  <?php }
+                      } ?>
                   </ul>
                 </div>
 
