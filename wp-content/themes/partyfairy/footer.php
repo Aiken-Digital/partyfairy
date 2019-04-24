@@ -36,20 +36,54 @@ foreach ($footer_menu as $key => $value) {
               <div class="row">
                 <div class="col-lg-4 m-b-10">
                   <div class="footer-btm-title">
-                    <h6 class="font-12">ABOUT PARTY FAIRY</h6>
-                    <p>From small gatherings to huge events, important occasions to impromptu celebrations … we bring together the best party people so you can find everything you need to make them happen.</p>
-                    <p>No fuss, no muss, no hassle, no problems. It’s the only way to throw a party, really.</p>
-                    <p>Need help with anything? Get in touch with us via WhatsApp at (65) 9896 4800. </p>
+                    <h6 class="font-12"><?php the_field('about_as_title', 'option'); ?></h6>
+                   <?php the_field('about_as_description', 'option'); ?>
                   </div>
                 </div>
                 <div class="col-lg-4 m-b-10"> 
                   <div class="footer-btm-title">
-                    <h6 class="font-12">PAYMENT PARTNERS</h6><img src="https://www.partyfairy.com/static/version1548774359/frontend/Partyfairy/default/en_US/images/icons8-Visa.svg"><img src="https://www.partyfairy.com/static/version1548774359/frontend/Partyfairy/default/en_US/images/icons8-Visa.svg"><img src="https://www.partyfairy.com/static/version1548774359/frontend/Partyfairy/default/en_US/images/icons8-Visa.svg">
+                    <h6 class="font-12"><?php the_field('payment_partner_title', 'option'); ?></h6>
+
+                    <?php $payment = get_field('payment_partner', 'option'); 
+
+                      if($payment) {
+
+                        foreach ($payment as $key => $value) {
+                          
+                          ?>
+
+                            <img src="<?php echo $value['icon']?>">
+
+                          <?php
+
+                        }
+
+                      }
+
+                    ?>
                   </div>
                 </div>
                 <div class="col-lg-4 m-b-10">
                   <div class="footer-btm-title">
-                    <h6 class="font-12">SECURITY CERTIFICATION</h6><img src="<?php echo get_template_directory_uri()  ?>/assets/imgs/secure-cert.png">
+                    <h6 class="font-12"><?php the_field('payment_partner_title', 'option'); ?></h6>
+
+                    <?php $secure = get_field('security_certification', 'option'); 
+
+                      if($secure) {
+
+                        foreach ($secure as $key => $value) {
+                          
+                          ?>
+
+                            <img src="<?php echo $value['icon']?>">
+
+                          <?php
+
+                        }
+
+                      }
+
+                    ?>
                   </div>
                 </div>
               </div>
@@ -157,8 +191,8 @@ foreach ($footer_menu as $key => $value) {
 </svg>
                   </div>
                   <div class="newsletter-wrap--head--text">
-                    <h5 class="word">Yes, I want to be in the know!</h5>
-                    <p class="word-sub font-normal">Be the first to get updates on new products, #partyinspo, and all other fun things. All you have to do is enter your email address below.</p>
+                    <h5 class="word"><?php the_field('title_subcribe', 'option'); ?></h5>
+                    <p class="word-sub font-normal"><?php the_field('subcribe_description', 'option'); ?></p>
                   </div>
                 </div>
                 <div class="newsletter-wrap--body">
@@ -176,7 +210,7 @@ foreach ($footer_menu as $key => $value) {
                   </div>
                 </div>
                 <div class="newsletter-wrap--footer">
-                  <p>Copyright © 2017 Partyfairy.com.</p>
+                  <p><?php the_field('copyright', 'option'); ?></p>
                 </div>
               </div>
             </div>
