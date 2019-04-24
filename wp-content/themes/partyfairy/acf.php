@@ -1,11 +1,11 @@
 <?php
 if( function_exists('acf_add_local_field_group') ):
 
-acf_add_local_field_group(array (
+acf_add_local_field_group(array(
 	'key' => 'group_5cbfe5bcbb272',
 	'title' => 'Theme Settings',
-	'fields' => array (
-		array (
+	'fields' => array(
+		array(
 			'key' => 'field_5cbfe5da0508c',
 			'label' => 'Header',
 			'name' => '',
@@ -13,7 +13,7 @@ acf_add_local_field_group(array (
 			'instructions' => '',
 			'required' => 0,
 			'conditional_logic' => 0,
-			'wrapper' => array (
+			'wrapper' => array(
 				'width' => '',
 				'class' => '',
 				'id' => '',
@@ -21,47 +21,7 @@ acf_add_local_field_group(array (
 			'placement' => 'top',
 			'endpoint' => 0,
 		),
-		array (
-			'key' => 'field_5cbfefb18690e',
-			'label' => 'Menu Icon',
-			'name' => 'menu_icon',
-			'type' => 'image',
-			'instructions' => '',
-			'required' => 1,
-			'conditional_logic' => 0,
-			'wrapper' => array (
-				'width' => '',
-				'class' => '',
-				'id' => '',
-			),
-			'return_format' => 'url',
-			'preview_size' => 'thumbnail',
-			'library' => 'all',
-			'min_width' => '',
-			'min_height' => '',
-			'min_size' => '',
-			'max_width' => '',
-			'max_height' => '',
-			'max_size' => '',
-			'mime_types' => '',
-		),
-		array (
-			'key' => 'field_5cbfefe986911',
-			'label' => 'Sub Menu Link',
-			'name' => 'sub_menu_link',
-			'type' => 'url',
-			'instructions' => '',
-			'required' => 0,
-			'conditional_logic' => 0,
-			'wrapper' => array (
-				'width' => '',
-				'class' => '',
-				'id' => '',
-			),
-			'default_value' => '',
-			'placeholder' => '',
-		),
-		array (
+		array(
 			'key' => 'field_5cbfe5e40508d',
 			'label' => 'Header Icon',
 			'name' => 'header_icon',
@@ -69,7 +29,7 @@ acf_add_local_field_group(array (
 			'instructions' => '',
 			'required' => 0,
 			'conditional_logic' => 0,
-			'wrapper' => array (
+			'wrapper' => array(
 				'width' => '',
 				'class' => '',
 				'id' => '',
@@ -85,45 +45,7 @@ acf_add_local_field_group(array (
 			'max_size' => '',
 			'mime_types' => '',
 		),
-		array (
-			'key' => 'field_5cbfefc18690f',
-			'label' => 'Menu Title',
-			'name' => 'menu_title',
-			'type' => 'text',
-			'instructions' => '',
-			'required' => 1,
-			'conditional_logic' => 0,
-			'wrapper' => array (
-				'width' => '',
-				'class' => '',
-				'id' => '',
-			),
-			'default_value' => '',
-			'placeholder' => '',
-			'prepend' => '',
-			'append' => '',
-			'maxlength' => '',
-		),
-		array (
-			'key' => 'field_5cbfeff886912',
-			'label' => 'Title Sub Menu',
-			'name' => 'title_sub_menu',
-			'type' => 'text',
-			'instructions' => '',
-			'required' => 0,
-			'conditional_logic' => 0,
-			'wrapper' => array (
-				'width' => '',
-				'class' => '',
-				'id' => '',
-			),
-			'default_value' => '',
-			'placeholder' => '',
-			'prepend' => '',
-			'append' => '',
-			'maxlength' => '',
-		),
-		array (
+		array(
 			'key' => 'field_5cbfe646c5f34',
 			'label' => 'Header Text Icon',
 			'name' => 'header_text_icon',
@@ -131,7 +53,7 @@ acf_add_local_field_group(array (
 			'instructions' => '',
 			'required' => 0,
 			'conditional_logic' => 0,
-			'wrapper' => array (
+			'wrapper' => array(
 				'width' => '',
 				'class' => '',
 				'id' => '',
@@ -147,52 +69,7 @@ acf_add_local_field_group(array (
 			'max_size' => '',
 			'mime_types' => '',
 		),
-		array (
-			'key' => 'field_5cbfefdf86910',
-			'label' => 'Sub Menu',
-			'name' => 'sub_menu',
-			'type' => 'repeater',
-			'instructions' => '',
-			'required' => 0,
-			'conditional_logic' => 0,
-			'wrapper' => array (
-				'width' => '',
-				'class' => '',
-				'id' => '',
-			),
-			'collapsed' => '',
-			'min' => '',
-			'max' => '',
-			'layout' => 'table',
-			'button_label' => 'Add Row',
-			'sub_fields' => array (
-			),
-		),
-		array (
-			'key' => 'field_5cbff00486913',
-			'label' => 'Open New Tab',
-			'name' => 'open_new_tab',
-			'type' => 'radio',
-			'instructions' => '',
-			'required' => 1,
-			'conditional_logic' => 0,
-			'wrapper' => array (
-				'width' => '',
-				'class' => '',
-				'id' => '',
-			),
-			'choices' => array (
-				'y' => 'Yes',
-				'n' => 'No',
-			),
-			'allow_null' => 0,
-			'other_choice' => 0,
-			'save_other_choice' => 0,
-			'default_value' => 'n',
-			'layout' => 'vertical',
-			'return_format' => 'value',
-		),
-		array (
+		array(
 			'key' => 'field_5cbfe688fee0e',
 			'label' => 'Phone Number',
 			'name' => 'phone_number',
@@ -200,7 +77,7 @@ acf_add_local_field_group(array (
 			'instructions' => '',
 			'required' => 0,
 			'conditional_logic' => 0,
-			'wrapper' => array (
+			'wrapper' => array(
 				'width' => '',
 				'class' => '',
 				'id' => '',
@@ -213,7 +90,7 @@ acf_add_local_field_group(array (
 			'max' => '',
 			'step' => '',
 		),
-		array (
+		array(
 			'key' => 'field_5cbfef628690c',
 			'label' => 'Footer',
 			'name' => '',
@@ -221,7 +98,7 @@ acf_add_local_field_group(array (
 			'instructions' => '',
 			'required' => 0,
 			'conditional_logic' => 0,
-			'wrapper' => array (
+			'wrapper' => array(
 				'width' => '',
 				'class' => '',
 				'id' => '',
@@ -229,31 +106,154 @@ acf_add_local_field_group(array (
 			'placement' => 'top',
 			'endpoint' => 0,
 		),
-		array (
+		array(
 			'key' => 'field_5cbfef8b8690d',
 			'label' => 'Footer Menu',
 			'name' => 'footer_menu',
 			'type' => 'repeater',
 			'instructions' => '',
-			'required' => 0,
+			'required' => 1,
 			'conditional_logic' => 0,
-			'wrapper' => array (
+			'wrapper' => array(
 				'width' => '',
 				'class' => '',
 				'id' => '',
 			),
 			'collapsed' => '',
-			'min' => '',
-			'max' => '',
-			'layout' => 'table',
-			'button_label' => 'Add Row',
-			'sub_fields' => array (
+			'min' => 0,
+			'max' => 0,
+			'layout' => 'row',
+			'button_label' => 'Add Menu',
+			'sub_fields' => array(
+				array(
+					'key' => 'field_5cbfefb18690e',
+					'label' => 'Menu Icon',
+					'name' => 'menu_icon',
+					'type' => 'image',
+					'instructions' => '',
+					'required' => 1,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'return_format' => 'url',
+					'preview_size' => 'thumbnail',
+					'library' => 'all',
+					'min_width' => '',
+					'min_height' => '',
+					'min_size' => '',
+					'max_width' => '',
+					'max_height' => '',
+					'max_size' => '',
+					'mime_types' => '',
+				),
+				array(
+					'key' => 'field_5cbfefc18690f',
+					'label' => 'Menu Title',
+					'name' => 'menu_title',
+					'type' => 'text',
+					'instructions' => '',
+					'required' => 1,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'default_value' => '',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+				),
+				array(
+					'key' => 'field_5cbfefdf86910',
+					'label' => 'Sub Menu',
+					'name' => 'sub_menu',
+					'type' => 'repeater',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'collapsed' => '',
+					'min' => 0,
+					'max' => 0,
+					'layout' => 'table',
+					'button_label' => 'Sub Menu',
+					'sub_fields' => array(
+						array(
+							'key' => 'field_5cbfeff886912',
+							'label' => 'Title Sub Menu',
+							'name' => 'title_sub_menu',
+							'type' => 'text',
+							'instructions' => '',
+							'required' => 0,
+							'conditional_logic' => 0,
+							'wrapper' => array(
+								'width' => '',
+								'class' => '',
+								'id' => '',
+							),
+							'default_value' => '',
+							'placeholder' => '',
+							'prepend' => '',
+							'append' => '',
+							'maxlength' => '',
+						),
+						array(
+							'key' => 'field_5cbfefe986911',
+							'label' => 'Sub Menu Link',
+							'name' => 'sub_menu_link',
+							'type' => 'url',
+							'instructions' => '',
+							'required' => 0,
+							'conditional_logic' => 0,
+							'wrapper' => array(
+								'width' => '',
+								'class' => '',
+								'id' => '',
+							),
+							'default_value' => '',
+							'placeholder' => '',
+						),
+						array(
+							'key' => 'field_5cc02d19b1d8a',
+							'label' => 'Open New Tab',
+							'name' => 'open_new_tab',
+							'type' => 'radio',
+							'instructions' => '',
+							'required' => 1,
+							'conditional_logic' => 0,
+							'wrapper' => array(
+								'width' => '',
+								'class' => '',
+								'id' => '',
+							),
+							'choices' => array(
+								'y' => 'Yes',
+								'n' => 'No',
+							),
+							'allow_null' => 0,
+							'other_choice' => 0,
+							'default_value' => 'n',
+							'layout' => 'horizontal',
+							'return_format' => 'value',
+							'save_other_choice' => 0,
+						),
+					),
+				),
 			),
 		),
 	),
-	'location' => array (
-		array (
-			array (
+	'location' => array(
+		array(
+			array(
 				'param' => 'options_page',
 				'operator' => '==',
 				'value' => 'theme-general-settings',
@@ -266,7 +266,7 @@ acf_add_local_field_group(array (
 	'label_placement' => 'top',
 	'instruction_placement' => 'label',
 	'hide_on_screen' => '',
-	'active' => 1,
+	'active' => true,
 	'description' => '',
 ));
 
