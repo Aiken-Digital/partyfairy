@@ -24,7 +24,7 @@ foreach ($footer_menu as $key => $value) {
                       
                       ?>
                     
-                    <li><a href="<?php echo $sub_value['sub_menu_link'] ?>" <?php if($sub_value['open_new_tab'] =='y') { echo 'target="_blank"'; } ?>><?php echo $sub_value['sub_menu_title'] ?></a></li>
+                    <li><a href="<?php echo $sub_value['sub_menu_link'] ?>" <?php if($sub_value['open_new_tab'] =='y') { echo 'target="_blank"'; } ?>><?php echo $sub_value['title_sub_menu'] ?></a></li>
                   
                   <?php }
                       } ?>
