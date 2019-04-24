@@ -7,7 +7,7 @@
 
 
 
-<?php $footer_menu = get_field('social_media', 'option'); 
+<?php $footer_menu = get_field('footer_menu', 'option'); 
 if ($footer_menu){
 foreach ($footer_menu as $key => $value) {
  
