@@ -1,0 +1,5 @@
+.htaccess
+wp-content/uploads/*
+*.zip
+*.rar
+wp-config.php
