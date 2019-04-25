@@ -418,6 +418,22 @@ acf_add_local_field_group(array(
 			),
 		),
 		array(
+			'key' => 'field_5cc135fb6de06',
+			'label' => 'Subrcribe',
+			'name' => '',
+			'type' => 'tab',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'placement' => 'top',
+			'endpoint' => 0,
+		),
+		array(
 			'key' => 'field_5cc0445470806',
 			'label' => 'Footer Logo',
 			'name' => 'footer_logo',
@@ -477,7 +493,7 @@ acf_add_local_field_group(array(
 			'placeholder' => '',
 			'maxlength' => '',
 			'rows' => '',
-			'new_lines' => 'wpautop',
+			'new_lines' => '',
 		),
 		array(
 			'key' => 'field_5cc043e39a6cc',
