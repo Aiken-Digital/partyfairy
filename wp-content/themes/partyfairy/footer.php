@@ -102,18 +102,9 @@ foreach ($footer_menu as $key => $value) {
                   </div>
                 </div>
                 <div class="newsletter-wrap--body">
-                  <form class="pf-form" novalidate="novalidate" action="" method="post">
-                    <div class="form-group">
-                      <div class="newsletter-subscribe">
-                        <input name="email" type="email" placeholder="Enter your email address">
-                        <button class="action" title="Subscribe" type="submit" disabled="disabled">Join</button>
-                      </div>
-                    </div>
-                  </form>
-                  <div class="tnc-agreement"><span class="control">
-                      <input class="tnc-agreement-checkbox-newsletter" id="tnc-agreement-checkbox-newsletter" name="tnc-agreement-checkbox-newsletter" type="checkbox"></span>
-                    <label class="tnc-label textcolorwhite m-l-30" for="tnc-agreement-checkbox-newsletter">I agree to the <a class="textcolorwhite" href="terms-and-conditions">Terms & Conditions</a> and <a class="textcolorwhite" href="privacy-policy-cookie-restriction-mode">Privacy Policy</a></label>
-                  </div>
+               
+                  <?php echo do_shortcode('[mc4wp_form id="90"]'); ?>
+
                 </div>
                 <div class="newsletter-wrap--footer">
                   <p><?php the_field('copyright', 'option'); ?></p>
