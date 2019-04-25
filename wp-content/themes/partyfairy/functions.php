@@ -2,6 +2,14 @@
 
 require_once( get_template_directory() . '/acf.php' );
 
+function cc_mime_types($mimes) {
+  $mimes['svg'] = 'image/svg+xml';
+  return $mimes;
+}
+
+add_filter('upload_mimes', 'cc_mime_types');
+
+
 function add_theme_scripts() {
   
   wp_enqueue_style( 'style', get_stylesheet_uri()); 
@@ -26,9 +34,3 @@ if( function_exists('acf_add_options_page') ) {
 
 }
 
-function cc_mime_types($mimes) {
-  $mimes['svg'] = 'image/svg+xml';
-  return $mimes;
-}
-
-add_filter('upload_mimes', 'cc_mime_types');
