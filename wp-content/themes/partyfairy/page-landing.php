@@ -66,9 +66,9 @@ foreach ($f as $key => $value) {
               <div class="row justify-content-center">
 
             <?php foreach ($value['icon_featured'] as $s_key => $s_value) { ?>                
-                <div class="col-lg-4"><a class="single-hover-tile" href="<?php echo $value['url'] ?>">
-                  <img class="img-fluid" src="<?php echo $value['icon'] ?>">
-                    <h2 class="overlay-text"><?php echo $value['title'] ?></h2></a>
+                <div class="col-lg-4"><a class="single-hover-tile" href="<?php echo $s_value['url'] ?>">
+                  <img class="img-fluid" src="<?php echo $s_value['icon'] ?>">
+                    <h2 class="overlay-text"><?php echo $s_value['title'] ?></h2></a>
                   </div>
 
               <?php } ?>
