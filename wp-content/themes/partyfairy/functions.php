@@ -27,3 +27,10 @@ if( function_exists('acf_add_options_page') ) {
 
 }
 
+function wpse_setup_theme() {
+
+                add_theme_support('post-thumbnails');
+                
+}
+
+add_action( 'after_setup_theme', 'wpse_setup_theme' );
