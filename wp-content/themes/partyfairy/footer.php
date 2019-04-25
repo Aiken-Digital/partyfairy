@@ -52,7 +52,7 @@ foreach ($footer_menu as $key => $value) {
                           
                           ?>
 
-                            <img src="<?php echo $value['icon']?>">
+                            <img src="<?php echo $value['icon']?>" width="55" height="45">
 
                           <?php
 
