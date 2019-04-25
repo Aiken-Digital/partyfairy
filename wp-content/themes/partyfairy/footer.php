@@ -103,7 +103,7 @@ foreach ($footer_menu as $key => $value) {
                 </div>
                 <div class="newsletter-wrap--body">
                
-                  <?php echo do_shortcode('[mc4wp_form id="90"]'); ?>
+                 <?php the_field('subcribe_form', 'option'); ?>
 
                 </div>
                 <div class="newsletter-wrap--footer">
