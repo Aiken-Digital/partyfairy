@@ -2,13 +2,6 @@
 
 require_once( get_template_directory() . '/acf.php' );
 
-function cc_mime_types($mimes) {
-  $mimes['svg'] = 'image/svg+xml';
-  return $mimes;
-}
-
-add_filter('upload_mimes', 'cc_mime_types');
-
 
 function add_theme_scripts() {
   
