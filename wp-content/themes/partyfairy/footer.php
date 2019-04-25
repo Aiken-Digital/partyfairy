@@ -94,11 +94,11 @@ foreach ($footer_menu as $key => $value) {
               <div class="newsletter-wrap">
                 <div class="newsletter-wrap--head">
                   <div class="newsletter-wrap--head--img"><xml version="1.0" encoding="UTF-8" standalone="no">
-                    <img src="<?php the_field('footer_logo', 'option'); ?>">
+                    <img src="<?php the_field('footer_logo', 'option'); ?>" width="75" height="75">
                   </div>
                   <div class="newsletter-wrap--head--text">
                     <h5 class="word"><?php the_field('title_subcribe', 'option'); ?></h5>
-                    <p class="word-sub font-normal"><?php the_field('subcribe_description', 'option'); ?></p>
+                    <p class="word-sub font-normal"><?php the_field('description_subcribe', 'option'); ?></p>
                   </div>
                 </div>
                 <div class="newsletter-wrap--body">
