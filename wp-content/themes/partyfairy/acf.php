@@ -250,7 +250,7 @@ acf_add_local_field_group(array(
 			'collapsed' => '',
 			'min' => 0,
 			'max' => 0,
-			'layout' => 'table',
+			'layout' => 'block',
 			'button_label' => '',
 			'sub_fields' => array(
 				array(
@@ -331,7 +331,7 @@ acf_add_local_field_group(array(
 					'collapsed' => '',
 					'min' => 0,
 					'max' => 0,
-					'layout' => 'table',
+					'layout' => 'row',
 					'button_label' => '',
 					'sub_fields' => array(
 						array(
@@ -429,7 +429,7 @@ acf_add_local_field_group(array(
 			'collapsed' => '',
 			'min' => 0,
 			'max' => 0,
-			'layout' => 'table',
+			'layout' => 'row',
 			'button_label' => '',
 			'sub_fields' => array(
 				array(
@@ -657,7 +657,8 @@ acf_add_local_field_group(array(
 	'label_placement' => 'top',
 	'instruction_placement' => 'label',
 	'hide_on_screen' => array(
-		0 => 'featured_image',
+		0 => 'the_content',
+		1 => 'featured_image',
 	),
 	'active' => true,
 	'description' => '',
