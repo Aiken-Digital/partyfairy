@@ -1,6 +1,6 @@
 <?php
 
-//require_once( get_template_directory() . '/acf.php' );
+require_once( get_template_directory() . '/acf.php' );
 
 
 function add_theme_scripts() {
