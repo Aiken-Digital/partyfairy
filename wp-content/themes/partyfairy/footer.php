@@ -44,7 +44,7 @@ foreach ($footer_menu as $key => $value) {
                   <div class="footer-btm-title">
                     <h6 class="font-12"><?php the_field('payment_partner_title', 'option'); ?></h6>
 
-                    <?php $payment = get_field('payment_partne_icon', 'option'); 
+                    <?php $payment = get_field('payment_partner_icon', 'option'); 
 
                       if($payment) {
 
