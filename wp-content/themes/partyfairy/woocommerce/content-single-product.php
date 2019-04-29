@@ -12,10 +12,10 @@
             );
             woocommerce_breadcrumb($args);
 
-            $vendor_url = explode('href="', do_shortcode('[wcfm_store_info id="" data="store_url"]'));
+            $vendor_url_extract = explode('href="', do_shortcode('[wcfm_store_info id="" data="store_url"]'));
 
-            $vendor_url =  explode('"',$vendor_url[0]);
-          print_r($vendor_url);
+            $vendor_url_fix =  explode('"',$vendor_url_extract[0]);
+          print_r($vendor_url_fix);
             $vendor_gravatar = explode('src="',do_shortcode('[wcfm_store_info id="" data="store_gravatar"]'));
             $vendor_gravatar = substr($vendor_gravatar[0], 0, strpos($vendor_gravatar[0], '"'));
 
