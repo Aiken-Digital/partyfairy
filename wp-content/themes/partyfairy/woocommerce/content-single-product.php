@@ -42,19 +42,8 @@
                         <div class="pf-product--seller--name"><?php if (!empty($result_name_vendor)) { echo $result_name_vendor['name'][0]; } ?></div></a>
                       <p class="pf-product--description">
                         
+                        <?php remove_filter ('the_content', 'wpautop'); ?>
 
-                        <?php
-if (!empty($item['product'])) {
-    if ( method_exists( $item['product'], 'get_description' ) ) {
-        $_product = $item['product']->is_type( 'variation' ) ? wc_get_product( $item['product']->get_parent_id() ) : $item['product'];
-        $description = $_product->get_description();
-    } else { // WC 2.6 or older:
-        $description = $item['product']->post->post_content;
-    }
- 
-    echo $description;
-}
-?>
 
 
                       </p>

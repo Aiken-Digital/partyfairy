@@ -41,3 +41,5 @@ function party_show_sku(){
     global $product;
     echo 'SKU NO.: ' . $product->get_sku();
 }
+
+
