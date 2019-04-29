@@ -24,7 +24,7 @@
                   </div>
                   <div class="col-lg-8">
                     <div class="pf-product">
-                      <div class="pf-product--name">Premium White Buttercream Cake</div>
+                      <div class="pf-product--name"><?php the_title() ?></div>
                       <div class="pf-product--sku">SKU NO.: 290-000952</div><a class="pf-product--seller" href="#">
                         <div class="pf-product--seller--img"><img class="img-fluid" src="assets/imgs/seller-img.jpg"></div>
                         <div class="pf-product--seller--name">Naomi</div></a>
