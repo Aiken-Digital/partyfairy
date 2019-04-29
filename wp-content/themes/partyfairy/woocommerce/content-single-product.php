@@ -12,13 +12,8 @@
             );
             woocommerce_breadcrumb($args);
 
-            $vendor_url_extract = explode('href=', do_shortcode('[wcfm_store_info id="" data="store_url"]'));
-
-            print_r($vendor_url_extract);
-
-            $vendor_url_fixx = explode('>', $vendor_url_extract[0]);
-
-            print_r($vendor_url_fixx);
+           
+           do_shortcode('[wcfm_store_info id="" data="store_url"]');
 
       
 
@@ -37,7 +32,7 @@
                     <div class="pf-product">
                       <div class="pf-product--name"><?php the_title() ?></div>
                       <div class="pf-product--sku"><?php party_show_sku() ?></div><a class="pf-product--seller" href="">
-                        <div class="pf-product--seller--img"><img class="img-fluid" src="<?php echo $vendor_gravatar; ?>"></div>
+                        <div class="pf-product--seller--img"><img class="img-fluid" src=""></div>
                         <div class="pf-product--seller--name"><?php echo do_shortcode('[wcfm_store_info id="" data="store_name"]'); ?></div></a>
                       <p class="pf-product--description">"Naomi" is a name that means "enjoyment, pleasure or gratification" and that captures what Naomi aims to bring with their creative dessert creations. Starting as a tiny food stall at Golden Mile Food Centre, Naomi has gone on to become a cake powerhouse with heaps of loyal fans.</p>
                       <div class="pf-product--btm">
