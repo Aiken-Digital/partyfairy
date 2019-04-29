@@ -12,10 +12,10 @@
             );
             woocommerce_breadcrumb($args);
 
-            $vendor_url = explode('href', do_shortcode('[wcfm_store_info id="" data="store_url"]'));
+            $vendor_url = explode('href="', do_shortcode('[wcfm_store_info id="" data="store_url"]'));
 
             print_r( $vendor_url);
-            $vendor_gravatar = explode('src',do_shortcode('[wcfm_store_info id="" data="store_gravatar"]'));
+            $vendor_gravatar = explode('src="',do_shortcode('[wcfm_store_info id="" data="store_gravatar"]'));
 
             print_r($vendor_gravatar);
 
