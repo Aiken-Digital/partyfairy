@@ -231,6 +231,19 @@
               </div>
             </div>
           </form>
+
+
+<?php 
+ $product_image = new WP_Query(array( 
+  'post_type'   => 'product', 
+  'post_status' => 'publish',
+  'post__not_in' => array(get_the_ID() ),
+ 'posts_per_page' => 10,
+  'orderby'        => 'rand',
+  )); 
+  if ( $product_image->have_posts() ) : 
+
+  ?>          
           <div class="mightlike-wrap m-b-30">
             <div class="row">
               <div class="col-12">
@@ -243,14 +256,7 @@
 
     <?php 
 
- $product_image = new WP_Query(array( 
-  'post_type'   => 'product', 
-  'post_status' => 'publish',
-  'post__not_in' => array(get_the_ID() ),
- 'posts_per_page' => 10,
-  'orderby'        => 'rand',
-  )); 
-  if ( $product_image->have_posts() ) : while ( $product_image->have_posts() ) : $product_image->the_post(); 
+while ( $product_image->have_posts() ) : $product_image->the_post(); 
   global $product; 
 
   ?>
@@ -260,10 +266,13 @@
                               <div class="tiles--quatity font-normal">FROM S$210</div>
                             </div>
                 
-<?php endwhile; wp_reset_postdata(); else : endif; ?> 
+<?php endwhile; wp_reset_postdata(); else :?> 
 
             </div>
           </div>
+
+        <?php  endif;  ?>
+
         </div>
       </section>
     </div>
