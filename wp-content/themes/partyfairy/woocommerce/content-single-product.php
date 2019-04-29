@@ -13,6 +13,8 @@
             woocommerce_breadcrumb($args);
 
             $vendor_url = new SimpleXMLElement(do_shortcode('[wcfm_store_info id="" data="store_url"]'));
+
+            print_r( $vendor_url);
             $vendor_gravatar = new SimpleXMLElement(do_shortcode('[wcfm_store_info id="" data="store_gravatar"]'));
 
             ?>
