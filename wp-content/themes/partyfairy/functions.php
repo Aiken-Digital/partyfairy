@@ -34,3 +34,10 @@ function wpse_setup_theme() {
 }
 
 add_action( 'after_setup_theme', 'wpse_setup_theme' );
+
+
+add_action( 'woocommerce_single_product_summary', 'party_show_sku', 5 );
+function party_show_sku(){
+    global $product;
+    echo 'SKU NO.: ' . $product->get_sku();
+}
