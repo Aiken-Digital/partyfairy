@@ -12,7 +12,7 @@
             );
             woocommerce_breadcrumb($args);
 
-            $vendor_url_extract = explode('href="', do_shortcode('[wcfm_store_info id="" data="store_url"]'));
+            $vendor_url_extract = explode('href=', do_shortcode('[wcfm_store_info id="" data="store_url"]'));
 
             print_r($vendor_url_extract);
 
