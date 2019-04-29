@@ -14,7 +14,10 @@
 
           
   $link =  do_shortcode('[wcfm_store_info id="" data="store_url"]');
-  preg_match_all('/<a[^>]+href=([""])(?<href>.+?)\1[^>]*>/i', $link, $result_url_vendor);
+  preg_match_all('/<a[^>]+href=([""])(?<href>.+?)\1[^>]*>/i', $link, $result_url_vendor);  
+
+  $src =  do_shortcode('[wcfm_store_info id="" data="store_gravatar"]');
+  preg_match_all('/<img[^>]+src=([""])(?<src>.+?)\1[^>]*>/i', $src, $result_src_vendor);
 
             ?>
 
@@ -33,7 +36,7 @@
                     <div class="pf-product">
                       <div class="pf-product--name"><?php the_title() ?></div>
                       <div class="pf-product--sku"><?php party_show_sku() ?></div><a class="pf-product--seller" href="<?php if (!empty($result_url_vendor)) { echo $result_url_vendor['href'][0]; } ?>">
-                        <div class="pf-product--seller--img"><img class="img-fluid" src=""></div>
+                        <div class="pf-product--seller--img"><img class="img-fluid" src="<?php if (!empty($result_src_vendor)) { echo $result_src_vendor['src'][0]; } ?>"></div>
                         <div class="pf-product--seller--name"><?php echo do_shortcode('[wcfm_store_info id="" data="store_name"]'); ?></div></a>
                       <p class="pf-product--description">"Naomi" is a name that means "enjoyment, pleasure or gratification" and that captures what Naomi aims to bring with their creative dessert creations. Starting as a tiny food stall at Golden Mile Food Centre, Naomi has gone on to become a cake powerhouse with heaps of loyal fans.</p>
                       <div class="pf-product--btm">
