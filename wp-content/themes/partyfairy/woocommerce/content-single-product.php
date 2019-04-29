@@ -10,7 +10,10 @@
                 'before'      => '<li class="breadcrumb-item">',
                 'after'       => '</li>'
             );
-            woocommerce_breadcrumb($args); 
+            woocommerce_breadcrumb($args);
+
+            $vendor_url = new SimpleXMLElement(do_shortcode('[wcfm_store_info id="" data="store_url"]'));
+            
             ?>
 
           <form class="pf-form" validate>
@@ -25,8 +28,8 @@
                   <div class="col-lg-8">
                     <div class="pf-product">
                       <div class="pf-product--name"><?php the_title() ?></div>
-                      <div class="pf-product--sku"><?php party_show_sku() ?></div><a class="pf-product--seller" href="<?php echo do_shortcode('[wcfm_store_info id="" data="store_url"]'); ?>">
-                        <div class="pf-product--seller--img"><?php echo do_shortcode('[wcfm_store_info id="" data="store_gravatar"]'); ?>
+                      <div class="pf-product--sku"><?php party_show_sku() ?></div><a class="pf-product--seller" href="<?php echo echo $vendor_url['href']; ?>">
+                        <div class="pf-product--seller--img"><img class="img-fluid" src="<?php echo do_shortcode('[wcfm_store_info id="" data="store_gravatar"]'); ?>"></div>
                         <div class="pf-product--seller--name"><?php echo do_shortcode('[wcfm_store_info id="" data="store_name"]'); ?></div></a>
                       <p class="pf-product--description">"Naomi" is a name that means "enjoyment, pleasure or gratification" and that captures what Naomi aims to bring with their creative dessert creations. Starting as a tiny food stall at Golden Mile Food Centre, Naomi has gone on to become a cake powerhouse with heaps of loyal fans.</p>
                       <div class="pf-product--btm">
