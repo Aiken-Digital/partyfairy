@@ -42,7 +42,9 @@
                         <div class="pf-product--seller--name"><?php if (!empty($result_name_vendor)) { echo $result_name_vendor['name'][0]; } ?></div></a>
                       <p class="pf-product--description">
                         
-                        <?php remove_filter ('the_content', 'wpautop'); ?>
+                        <?php $imageContent = get_the_content();
+$stripped = strip_tags($imageContent, '<p> <a>'); //replace <p> and <a> with whatever tags you want to keep after the strip
+echo $stripped;?>
 
 
 
