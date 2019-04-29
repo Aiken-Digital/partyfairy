@@ -238,50 +238,30 @@
               </div>
             </div>
             <div class="-carousel p-t-45">
-                            <div class="tiles-box p-l-15 p-r-15"><a class="tiles--single" href="#">
-                                <div class="tiles--single--img border-line"><img class="img-fluid" src="https://picsum.photos/300/300"></div><a class="tiles--single--achor font-12" href="">Hello Kitty</a></a>
+
+
+
+    <?php 
+
+ $product_image = new WP_Query(array( 
+  'post_type'   => 'product', 
+  'post_status' => 'publish',
+  'post__not_in' => array(get_the_ID() ),
+ 'posts_per_page' => 10,
+  'orderby'        => 'rand',
+  )); 
+  if ( $product_image->have_posts() ) : while ( $product_image->have_posts() ) : $product_image->the_post(); 
+  global $product; 
+
+  ?>
+
+                            <div class="tiles-box p-l-15 p-r-15"><a class="tiles--single" href="<?php the_erpmalink() ?> ?>">
+                                <div class="tiles--single--img border-line"><img class="img-fluid" src="<?php if ( has_post_thumbnail() ) {the_post_thumbnail_url('full'); } else { echo get_template_directory_uri().'/images/broken/img-not-available-landscape.png'; } ?>"></div><a class="tiles--single--achor font-12" href=""><?php the_title() ?></a></a>
                               <div class="tiles--quatity font-normal">FROM S$210</div>
                             </div>
-                            <div class="tiles-box p-l-15 p-r-15"><a class="tiles--single" href="#">
-                                <div class="tiles--single--img border-line"><img class="img-fluid" src="https://picsum.photos/300/300"></div><a class="tiles--single--achor font-12" href="">Hello Kitty</a></a>
-                              <div class="tiles--quatity font-normal">FROM S$210</div>
-                            </div>
-                            <div class="tiles-box p-l-15 p-r-15"><a class="tiles--single" href="#">
-                                <div class="tiles--single--img border-line"><img class="img-fluid" src="https://picsum.photos/300/300"></div><a class="tiles--single--achor font-12" href="">Hello Kitty</a></a>
-                              <div class="tiles--quatity font-normal">FROM S$210</div>
-                            </div>
-                            <div class="tiles-box p-l-15 p-r-15"><a class="tiles--single" href="#">
-                                <div class="tiles--single--img border-line"><img class="img-fluid" src="https://picsum.photos/300/300"></div><a class="tiles--single--achor font-12" href="">Hello Kitty</a></a>
-                              <div class="tiles--quatity font-normal">FROM S$210</div>
-                            </div>
-                            <div class="tiles-box p-l-15 p-r-15"><a class="tiles--single" href="#">
-                                <div class="tiles--single--img border-line"><img class="img-fluid" src="https://picsum.photos/300/300"></div><a class="tiles--single--achor font-12" href="">Hello Kitty</a></a>
-                              <div class="tiles--quatity font-normal">FROM S$210</div>
-                            </div>
-                            <div class="tiles-box p-l-15 p-r-15"><a class="tiles--single" href="#">
-                                <div class="tiles--single--img border-line"><img class="img-fluid" src="https://picsum.photos/300/300"></div><a class="tiles--single--achor font-12" href="">Hello Kitty</a></a>
-                              <div class="tiles--quatity font-normal">FROM S$210</div>
-                            </div>
-                            <div class="tiles-box p-l-15 p-r-15"><a class="tiles--single" href="#">
-                                <div class="tiles--single--img border-line"><img class="img-fluid" src="https://picsum.photos/300/300"></div><a class="tiles--single--achor font-12" href="">Hello Kitty</a></a>
-                              <div class="tiles--quatity font-normal">FROM S$210</div>
-                            </div>
-                            <div class="tiles-box p-l-15 p-r-15"><a class="tiles--single" href="#">
-                                <div class="tiles--single--img border-line"><img class="img-fluid" src="https://picsum.photos/300/300"></div><a class="tiles--single--achor font-12" href="">Hello Kitty</a></a>
-                              <div class="tiles--quatity font-normal">FROM S$210</div>
-                            </div>
-                            <div class="tiles-box p-l-15 p-r-15"><a class="tiles--single" href="#">
-                                <div class="tiles--single--img border-line"><img class="img-fluid" src="https://picsum.photos/300/300"></div><a class="tiles--single--achor font-12" href="">Hello Kitty</a></a>
-                              <div class="tiles--quatity font-normal">FROM S$210</div>
-                            </div>
-                            <div class="tiles-box p-l-15 p-r-15"><a class="tiles--single" href="#">
-                                <div class="tiles--single--img border-line"><img class="img-fluid" src="https://picsum.photos/300/300"></div><a class="tiles--single--achor font-12" href="">Hello Kitty</a></a>
-                              <div class="tiles--quatity font-normal">FROM S$210</div>
-                            </div>
-                            <div class="tiles-box p-l-15 p-r-15"><a class="tiles--single" href="#">
-                                <div class="tiles--single--img border-line"><img class="img-fluid" src="https://picsum.photos/300/300"></div><a class="tiles--single--achor font-12" href="">Hello Kitty</a></a>
-                              <div class="tiles--quatity font-normal">FROM S$210</div>
-                            </div>
+                
+<?php endwhile; wp_reset_postdata(); else : endif; ?> 
+
             </div>
           </div>
         </div>
