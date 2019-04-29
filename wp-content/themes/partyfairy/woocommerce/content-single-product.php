@@ -13,7 +13,8 @@
             woocommerce_breadcrumb($args);
 
            
-          var_dump( do_shortcode('[wcfm_store_info id="" data="store_url"]'));
+          echo  strip_shortcodes(do_shortcode('[wcfm_store_info id="" data="store_url"]'));
+
 
       
 
