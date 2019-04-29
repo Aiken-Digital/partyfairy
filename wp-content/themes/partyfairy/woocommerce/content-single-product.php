@@ -40,7 +40,24 @@
                       <div class="pf-product--sku"><?php party_show_sku() ?></div><a class="pf-product--seller" href="<?php if (!empty($result_url_vendor)) { echo $result_url_vendor['href'][0]; } ?>">
                         <div class="pf-product--seller--img"><img class="img-fluid" src="<?php if (!empty($result_src_vendor)) { echo $result_src_vendor['src'][0]; } ?>"></div>
                         <div class="pf-product--seller--name"><?php if (!empty($result_name_vendor)) { echo $result_name_vendor['name'][0]; } ?></div></a>
-                      <p class="pf-product--description">"Naomi" is a name that means "enjoyment, pleasure or gratification" and that captures what Naomi aims to bring with their creative dessert creations. Starting as a tiny food stall at Golden Mile Food Centre, Naomi has gone on to become a cake powerhouse with heaps of loyal fans.</p>
+                      <p class="pf-product--description">
+                        
+
+                        <?php
+if (!empty($item['product'])) {
+    if ( method_exists( $item['product'], 'get_description' ) ) {
+        $_product = $item['product']->is_type( 'variation' ) ? wc_get_product( $item['product']->get_parent_id() ) : $item['product'];
+        $description = $_product->get_description();
+    } else { // WC 2.6 or older:
+        $description = $item['product']->post->post_content;
+    }
+ 
+    echo $description;
+}
+?>
+
+
+                      </p>
                       <div class="pf-product--btm">
                         <ul class="nav nav-pills m-b-30" id="pills-tab" role="tablist">
                           <li class="nav-item"><a class="nav-link active" data-toggle="pill" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Select Options</a></li>
