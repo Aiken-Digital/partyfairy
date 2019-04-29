@@ -30,7 +30,7 @@
               <div class="col-lg-8">
                 <div class="row">
                   <div class="col-lg-4">
-                    <div class="productimg"><img class="img-fluid" src="assets/imgs/whitebuttercreamcake_1.jpg">
+                    <div class="productimg"><img class="img-fluid" src="<?php if ( has_post_thumbnail() ) {the_post_thumbnail_url('full'); } else { echo get_template_directory_uri().'/images/broken/img-not-available-landscape.png'; } ?>">
                       <div class="productimg--des">Images shown on this page may differ slightly from the actual product.</div>
                     </div>
                   </div>
