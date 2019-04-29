@@ -13,11 +13,12 @@
             woocommerce_breadcrumb($args);
 
             $vendor_url = explode('href="', do_shortcode('[wcfm_store_info id="" data="store_url"]'));
-
-            print_r( $vendor_url);
+            $vendor_url = substr($vendor_url[0], 0, strpos($vendor_url[0], '"'));
+          
             $vendor_gravatar = explode('src="',do_shortcode('[wcfm_store_info id="" data="store_gravatar"]'));
+            $vendor_gravatar = substr($vendor_gravatar[0], 0, strpos($vendor_gravatar[0], '"'));
 
-            print_r($vendor_gravatar);
+      
 
             ?>
 
@@ -33,8 +34,8 @@
                   <div class="col-lg-8">
                     <div class="pf-product">
                       <div class="pf-product--name"><?php the_title() ?></div>
-                      <div class="pf-product--sku"><?php party_show_sku() ?></div><a class="pf-product--seller" href="<?php echo $vendor_url['href']; ?>">
-                        <div class="pf-product--seller--img"><img class="img-fluid" src="<?php echo $vendor_gravatar['@attributes']['src']; ?>"></div>
+                      <div class="pf-product--sku"><?php party_show_sku() ?></div><a class="pf-product--seller" href="<?php echo $vendor_url; ?>">
+                        <div class="pf-product--seller--img"><img class="img-fluid" src="<?php echo $vendor_gravatar; ?>"></div>
                         <div class="pf-product--seller--name"><?php echo do_shortcode('[wcfm_store_info id="" data="store_name"]'); ?></div></a>
                       <p class="pf-product--description">"Naomi" is a name that means "enjoyment, pleasure or gratification" and that captures what Naomi aims to bring with their creative dessert creations. Starting as a tiny food stall at Golden Mile Food Centre, Naomi has gone on to become a cake powerhouse with heaps of loyal fans.</p>
                       <div class="pf-product--btm">
