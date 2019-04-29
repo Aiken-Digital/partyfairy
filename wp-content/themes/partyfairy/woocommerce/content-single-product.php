@@ -13,9 +13,9 @@
             woocommerce_breadcrumb($args);
 
             $vendor_url = explode('href="', do_shortcode('[wcfm_store_info id="" data="store_url"]'));
-            print_r($vendor_url);
+
             $vendor_url =  explode('"',$vendor_url[0]);
-          
+          print_r($vendor_url);
             $vendor_gravatar = explode('src="',do_shortcode('[wcfm_store_info id="" data="store_gravatar"]'));
             $vendor_gravatar = substr($vendor_gravatar[0], 0, strpos($vendor_gravatar[0], '"'));
 
