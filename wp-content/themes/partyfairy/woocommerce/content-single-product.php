@@ -16,7 +16,7 @@
 
             print_r($vendor_url_extract);
 
-            $vendor_url_fixx = explode('">', $vendor_url_extract[0]);
+            $vendor_url_fixx = explode('>', $vendor_url_extract[0]);
 
             print_r($vendor_url_fixx);
 
