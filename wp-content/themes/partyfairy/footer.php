@@ -94,7 +94,11 @@ foreach ($footer_menu as $key => $value) {
               <div class="newsletter-wrap">
                 <div class="newsletter-wrap--head">
                   <div class="newsletter-wrap--head--img"><xml version="1.0" encoding="UTF-8" standalone="no">
-                    <img src="<?php the_field('footer_logo', 'option'); ?>" width="75" height="75">
+                   <?php $img_news_letter = get_field('footer_logo', 'option'); 
+                   if($img_news_letter){
+                   ?>
+                    <img src="<?php echo $img_news_letter; ?>" width="75" height="75">
+                  <?php } ?>
                   </div>
                   <div class="newsletter-wrap--head--text">
                     <h5 class="word"><?php the_field('title_subcribe', 'option'); ?></h5>
@@ -106,7 +110,7 @@ foreach ($footer_menu as $key => $value) {
                  <?php the_field('subcribe_form', 'option'); ?>
 
                 </div>
-                <div class="newsletter-wrap--footer">
+                <div class="newslethttps://wordpress.stackexchange.com/questions/247219/change-class-page-numbers-in-paginationter-wrap--footer">
                   <p><?php the_field('copyright', 'option'); ?></p>
                 </div>
               </div>
@@ -116,5 +120,7 @@ foreach ($footer_menu as $key => $value) {
       </div>
     </footer>
  <?php wp_footer() ?>
+
+
   </body>
 </html>

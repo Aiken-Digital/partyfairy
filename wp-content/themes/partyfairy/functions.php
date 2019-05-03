@@ -3,6 +3,8 @@
 //require_once( get_template_directory() . '/acf.php' );
 
 
+
+
 function add_theme_scripts() {
   
   wp_enqueue_style( 'style', get_stylesheet_uri()); 
@@ -30,6 +32,7 @@ if( function_exists('acf_add_options_page') ) {
 function wpse_setup_theme() {
 
                 add_theme_support('post-thumbnails');
+                add_theme_support( 'woocommerce' );
                 
 }
 
@@ -42,4 +45,31 @@ function party_show_sku(){
     echo 'SKU NO.: ' . $product->get_sku();
 }
 
+
+
+function partyfairy_main_sidebar() {
+    register_sidebar(
+        array (
+            'name' => __( 'Party Fairy Sidebar', 'partyfairy' ),
+            'id' => 'partyfairy-side-bar',
+            'description' => __( '', 'partyfairy' ),
+            'before_widget' => '<div class="widget-content">',
+            'after_widget' => "</div>",
+            'before_title' => '<h3 class="widget-title">',
+            'after_title' => '</h3>',
+        )
+    );
+}
+add_action( 'widgets_init', 'partyfairy_main_sidebar' );
+
+
+
+add_filter( 'loop_shop_per_page', 'new_loop_shop_per_page', 20 );
+
+function new_loop_shop_per_page( $cols ) {
+  // $cols contains the current number of products per page based on the value stored on Options -> Reading
+  // Return the number of products you wanna show per page.
+  $cols = 1;
+  return $cols;
+}
 
