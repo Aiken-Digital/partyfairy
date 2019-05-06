@@ -62,43 +62,17 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
  */
 
 
- p.form-row-wide, span {
+#customer_details span {
     width: 100% !important;
 }
 
-.woocommerce-billing-fields__field-wrapper, p, label {
+
+
+
+#customer_shipping span.woocommerce-input-wrapper {
     width: 100%;
 }
 
-span.woocommerce-input-wrapper, input {
-    height: 35px !important;
-    font-size: 16px;
+div#customer_shipping {
+    margin-top: 30px;
 }
-
-ul.select2-results__options {
-    width: 100%;
-}
-
-.select2-results {
-    display: block;
-    width: 100% !important;
-}
-
-span.select2-search.select2-search--dropdown input {
-    width: 100% !important;
-}
-
-span.select2-dropdown.select2-dropdown--below {
-    width: 614px !important;
-}
-
-
-.select2-container .select2-selection--single { 
-
-height: 35px !important;
-}
-
-.select2-container--default .select2-selection--single .select2-selection__arrow {
-    height: 32px !important;
-
-    }
