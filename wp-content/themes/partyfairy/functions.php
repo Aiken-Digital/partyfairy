@@ -191,8 +191,8 @@ function iconic_add_engraving_text_to_order_items( $item, $cart_item_key, $value
   }
 
   $item->add_meta_data( __( 'Personalise', 'personalisetext' ), $values['personalise-text'] );
-  $item->add_meta_data( __( 'Delivery', 'deliverytext' ), $cart_item['delivery'] );
-  $item->add_meta_data( __( 'Pickup', 'Pickuptext' ),  $cart_item['pickup']);
+  $item->add_meta_data( __( 'Delivery', 'deliverytext' ), $values['date-delivery'].' / '.$values['time-delivery']  );
+  $item->add_meta_data( __( 'Pickup', 'pickuptext' ),  $values['date-pickup'].' / '.$values['time-pickup'] );
 
 }
 
