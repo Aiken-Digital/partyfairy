@@ -60,3 +60,45 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
  * a custom font that includes just a Hoefler Text space replacement for that
  * character instead.
  */
+
+
+ p.form-row-wide, span {
+    width: 100% !important;
+}
+
+.woocommerce-billing-fields__field-wrapper, p, label {
+    width: 100%;
+}
+
+span.woocommerce-input-wrapper, input {
+    height: 35px !important;
+    font-size: 16px;
+}
+
+ul.select2-results__options {
+    width: 100%;
+}
+
+.select2-results {
+    display: block;
+    width: 100% !important;
+}
+
+span.select2-search.select2-search--dropdown input {
+    width: 100% !important;
+}
+
+span.select2-dropdown.select2-dropdown--below {
+    width: 614px !important;
+}
+
+
+.select2-container .select2-selection--single { 
+
+height: 35px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 32px !important;
+
+    }

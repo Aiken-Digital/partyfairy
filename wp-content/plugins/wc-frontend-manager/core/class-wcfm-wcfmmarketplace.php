@@ -157,7 +157,7 @@ class WCFM_Marketplace {
   	$wcfm_customers_array = get_users( $args );
   	if(!empty($wcfm_customers_array)) {
 			foreach( $wcfm_customers_array as $wcfm_customers_single ) {
-				$vendor_customers[$wcfm_orders_single->customer_id] = $wcfm_customers_single->ID;
+				$vendor_customers[$wcfm_customers_single->ID] = $wcfm_customers_single->ID;
 			}
 		}
   	

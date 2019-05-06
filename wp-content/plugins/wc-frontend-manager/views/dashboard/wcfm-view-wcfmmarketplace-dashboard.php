@@ -79,7 +79,7 @@ $sql .= " GROUP BY commission.order_id";
 
 $vendor_orders = $wpdb->get_results( $wpdb->prepare( $sql, $user_id ) );
 if( !empty($vendor_orders) ) {
-	$order_count = count( $vendor_orders );
+	$order_count = apply_filters( 'wcfmmp_dashboard_vendor_order_count', count( $vendor_orders ), $vendor_orders, $user_id );
 	foreach( $vendor_orders as $vendor_order ) {
 		// Order exists check
 		$order_post_title = get_the_title( $vendor_order->order_id );
@@ -138,7 +138,7 @@ if( $wcfm_is_allow_analytics = apply_filters( 'wcfm_is_allow_analytics', true ) 
 		<?php if( apply_filters( 'wcfm_is_pref_stats_box', true ) ) { ?>
 			<div class="wcfm_dashboard_stats">
 				<?php if( $wcfm_is_allow_reports = apply_filters( 'wcfm_is_allow_reports', true ) ) { ?>
-					<?php if( apply_filters( 'wcfm_sales_report_is_allow_gross_sales', true ) ) { ?>
+					<?php if( apply_filters( 'wcfm_sales_report_is_allow_gross_sales', true ) && apply_filters( 'wcfm_is_allow_stats_block_gross_sales', true ) ) { ?>
 						<div class="wcfm_dashboard_stats_block">
 							<a href="<?php echo get_wcfm_reports_url( 'month' ); ?>">
 								<span class="wcfmfa fa-currency"><?php echo get_woocommerce_currency_symbol() ; ?></span>
@@ -149,7 +149,8 @@ if( $wcfm_is_allow_analytics = apply_filters( 'wcfm_is_allow_analytics', true ) 
 							</a>
 						</div>
 					<?php } ?>
-					<?php if( apply_filters( 'wcfm_is_allow_view_commission', true ) ) { ?>
+					<?php do_action( 'wcfm_dashboard_stats_block_after_gross_sales', $user_id ); ?>
+					<?php if( apply_filters( 'wcfm_is_allow_view_commission', true ) && apply_filters( 'wcfm_is_allow_stats_block_commission', true ) ) { ?>
 						<div class="wcfm_dashboard_stats_block">
 							<a href="<?php echo get_wcfm_reports_url( ); ?>">
 								<span class="wcfmfa fa-money fa-money-bill-alt"></span>
@@ -160,17 +161,21 @@ if( $wcfm_is_allow_analytics = apply_filters( 'wcfm_is_allow_analytics', true ) 
 							</a>
 						</div>
 					<?php } ?>
-					<div class="wcfm_dashboard_stats_block">
-						<a href="<?php echo apply_filters( 'sales_by_product_report_url', get_wcfm_reports_url( ), '' ); ?>">
-							<span class="wcfmfa fa-cube"></span>
-							<div>
-								<?php printf( _n( "<strong>%s item</strong>", "<strong>%s items</strong>", $total_sell, 'wc-frontend-manager' ), $total_sell ); ?>
-								<br /><?php _e( 'sold in this month', 'wc-frontend-manager' ); ?>
-							</div>
-						</a>
-					</div>
+					<?php do_action( 'wcfm_dashboard_stats_block_after_commission', $user_id ); ?>
+					<?php if( apply_filters( 'wcfm_is_allow_stats_block_sold_item', true ) ) { ?>
+						<div class="wcfm_dashboard_stats_block">
+							<a href="<?php echo apply_filters( 'sales_by_product_report_url', get_wcfm_reports_url( ), '' ); ?>">
+								<span class="wcfmfa fa-cube"></span>
+								<div>
+									<?php printf( _n( "<strong>%s item</strong>", "<strong>%s items</strong>", $total_sell, 'wc-frontend-manager' ), $total_sell ); ?>
+									<br /><?php _e( 'sold in this month', 'wc-frontend-manager' ); ?>
+								</div>
+							</a>
+						</div>
+					<?php } ?>
+					<?php do_action( 'wcfm_dashboard_stats_block_after_sold_item', $user_id ); ?>
 				<?php } ?>
-				<?php if( $wcfm_is_allow_orders = apply_filters( 'wcfm_is_allow_orders', true ) ) { ?>
+				<?php if( apply_filters( 'wcfm_is_allow_orders', true ) && apply_filters( 'wcfm_is_allow_stats_block_orders', true ) ) { ?>
 					<div class="wcfm_dashboard_stats_block">
 						<a href="<?php echo get_wcfm_orders_url( ); ?>">
 							<span class="wcfmfa fa-cart-plus"></span>
@@ -181,10 +186,11 @@ if( $wcfm_is_allow_analytics = apply_filters( 'wcfm_is_allow_analytics', true ) 
 						</a>
 					</div>
 				<?php } ?>
+				<?php do_action( 'wcfm_dashboard_stats_block_after_orders', $user_id ); ?>
 			</div>
 			<div class="wcfm-clearfix"></div>
 		<?php } ?>
-		<?php do_action( 'wcfm_after_dashboard_stats_box' ); ?>
+		<?php do_action( 'wcfm_after_dashboard_stats_box', $user_id ); ?>
 		
 		<?php if( $wcfm_is_allow_reports = apply_filters( 'wcfm_is_allow_reports', true ) ) { ?>
 			<div class="wcfm_dashboard_wc_reports_sales">

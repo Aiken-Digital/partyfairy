@@ -131,6 +131,14 @@ class WCFM_Listings_Controller {
 					$wcfm_listings_json_arr[$index][] =  '&ndash;';
 				}
 				
+				// Applications
+				if( WCFM_Dependencies::wcfm_wp_job_manager_applications_plugin_active_check() ) {
+					$jobs_dashboard = get_permalink( get_option( 'job_manager_job_dashboard_page_id' ) );
+					if( $jobs_dashboard ) {
+						$wcfm_listings_json_arr[$index][] =  ( $count = get_job_application_count( $wcfm_listings_single->ID ) ) ? '<a target="_permalink" class="application_count" href="' . add_query_arg( array( 'action' => 'show_applications', 'job_id' => $wcfm_listings_single->ID ), $jobs_dashboard ) . '">' . $count . '</a>' : '&ndash;';
+					} else { $wcfm_listings_json_arr[$index][] =  '&ndash;'; }
+				} else { $wcfm_listings_json_arr[$index][] =  '&ndash;'; }
+				
 				// Filled?
 				$wcfm_listings_json_arr[$index][] =  is_position_filled( $wcfm_listings_single ) ? '&#10004;' : '&ndash;';
 				
@@ -167,10 +175,10 @@ class WCFM_Listings_Controller {
 					// Featured
 					if( apply_filters( 'wcfm_is_allow_featured_listing', true ) ) {
 						if( get_post_meta( $wcfm_listings_single->ID, '_featured', true ) ) {
-							$actions .= '<br/><a class="wcfm_listing_featured wcfm-action-icon" href="#" data-featured="nofeatured" data-listid="' . $wcfm_listings_single->ID . '"><span class="wcfmfa fa-star text_tip" data-tip="' . esc_attr__( 'No Featured', 'wc-frontend-manager' ) . '"></span></a>';
+							$actions .= '<br/><a class="wcfm_listing_featured wcfm-action-icon" href="#" data-featured="nofeatured" data-listid="' . $wcfm_listings_single->ID . '"><span class="wcfmfa fa-star text_tip" style="font-weight:900;" data-tip="' . esc_attr__( 'No Featured', 'wc-frontend-manager' ) . '"></span></a>';
 						} else {
 							if( apply_filters( 'wcfm_has_featured_listing_limit', true ) ) {
-								$actions .= '<br/><a class="wcfm_listing_featured wcfm-action-icon" href="#" data-featured="featured" data-listid="' . $wcfm_listings_single->ID . '"><span class="wcfmfa fa-star-half-alt text_tip" data-tip="' . esc_attr__( 'Mark Featured', 'wc-frontend-manager' ) . '"></span></a>';
+								$actions .= '<br/><a class="wcfm_listing_featured wcfm-action-icon" href="#" data-featured="featured" data-listid="' . $wcfm_listings_single->ID . '"><span class="wcfmfa fa-star text_tip" data-tip="' . esc_attr__( 'Mark Featured', 'wc-frontend-manager' ) . '"></span></a>';
 							}
 						}
 					}

@@ -57,8 +57,8 @@
                 "minimum_order_amount_fs" => array(
                   'label' => __('Minimum order amount for free shipping', 'wc-multivendor-marketplace'), 
                   'name' => 'minimum_order_amount',
-                  'type' => 'text', 
-                  'class' => 'wcfm-text wcfm_ele', 
+                  'type' => 'number', 
+                  'class' => 'wcfm-text wcfm_ele wcfm_non_negative_input', 
                   'label_class' => 'wcfm_title wcfm_ele', 
                   'placeholder' => __('0.00', 'wc-multivendor-marketplace'),
                   'value' => ''  
@@ -105,8 +105,8 @@
                 "method_cost_lp" => array(
                   'label' => __('Cost', 'wc-multivendor-marketplace'), 
                   'name' => 'method_cost',
-                  'type' => 'text', 
-                  'class' => 'wcfm-text wcfm_ele', 
+                  'type' => 'number', 
+                  'class' => 'wcfm-text wcfm_non_negative_input wcfm_ele', 
                   'label_class' => 'wcfm_title wcfm_ele', 
                   'placeholder' => __('0.00', 'wc-multivendor-marketplace'),
                   'value' => ''  
@@ -176,8 +176,8 @@
                 "method_cost_fr" => array(
                   'label' => __('Cost', 'wc-multivendor-marketplace'), 
                   'name' => 'method_cost',
-                  'type' => 'text', 
-                  'class' => 'wcfm-text wcfm_ele', 
+                  'type' => 'number', 
+                  'class' => 'wcfm-text wcfm_ele wcfm_non_negative_input', 
                   'label_class' => 'wcfm_title wcfm_ele', 
                   'placeholder' => __('0.00', 'wc-multivendor-marketplace'),
                   'value' => ''  
@@ -242,8 +242,8 @@
                       $shipping_class->slug => array(
                         'label' => __('Cost of Shipping Class: "', 'wc-multivendor-marketplace') . $shipping_class->name . '"' , 
                         'name' => 'shipping_class_cost[]',
-                        'type' => 'text', 
-                        'class' => 'wcfm-text wcfm_ele sc_vals', 
+                        'type' => 'number', 
+                        'class' => 'wcfm-text wcfm_ele wcfm_non_negative_input sc_vals', 
                         'label_class' => 'wcfm_title wcfm_ele', 
                         'placeholder' => __('N/A', 'wc-multivendor-marketplace'),
                         'value' => '',

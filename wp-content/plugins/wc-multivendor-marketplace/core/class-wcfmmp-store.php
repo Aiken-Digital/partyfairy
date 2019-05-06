@@ -223,6 +223,14 @@ class WCFMmp_Store {
 		$shop_info = get_user_meta( $this->id, 'wcfmmp_profile_settings', true );
 		$shop_info = is_array( $shop_info ) ? $shop_info : array();
 		$shop_info = wp_parse_args( $shop_info, $defaults );
+		
+		if( empty( $shop_info['store_name'] ) ) {
+			$the_vendor_user = get_user_by( 'id', $this->id );
+			$shop_info['store_name'] = $the_vendor_user->display_name;
+			if( empty( $shop_info['store_email'] ) ) {
+				$shop_info['store_email'] = $the_vendor_user->user_email;
+			}
+		}
 
 		$this->shop_data = $shop_info;
 	}

@@ -17,6 +17,7 @@
 	box-shadow: 0 0 4px 0 #ccc;
 	height: auto!important;
 }
+#wcfmmp-stores-lists *{box-sizing:border-box}
 
 #wcfmmp-stores-lists .left_sidebar{width:25%; padding:2% 3% 0 3%; background:#efefef;margin-bottom:0px;border:1px solid #efefef;}
 #wcfmmp-stores-lists .right_side{width:75%;  padding:2% 2% 0 2%;}

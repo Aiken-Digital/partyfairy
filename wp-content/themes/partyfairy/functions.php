@@ -64,6 +64,9 @@ add_action( 'widgets_init', 'partyfairy_main_sidebar' );
 
 
 
+///woocommerce
+
+
 add_filter( 'loop_shop_per_page', 'new_loop_shop_per_page', 20 );
 
 function new_loop_shop_per_page( $cols ) {
@@ -73,3 +76,124 @@ function new_loop_shop_per_page( $cols ) {
   return $cols;
 }
 
+
+///https://iconicwp.com/blog/add-custom-cart-item-data-woocommerce/
+/**
+ * Add engraving text to cart item.
+ *
+ * @param array $cart_item_data
+ * @param int   $product_id
+ * @param int   $variation_id
+ *
+ * @return array
+ */
+
+
+
+function iconic_add_engraving_text_to_cart_item( $cart_item_data, $product_id, $variation_id ) {
+    $engraving_text = filter_input( INPUT_POST, 'personalise-text' );
+    $date_delivery  = filter_input( INPUT_POST, 'date-delivery' );
+    $time_delivery  = filter_input( INPUT_POST, 'time-delivery' );
+    $date_pickup    = filter_input( INPUT_POST, 'date-pickup' );
+    $time_pickup    = filter_input( INPUT_POST, 'time-pickup' );
+ 
+    // if ( empty( $engraving_text ) ) {
+    //     return $cart_item_data;
+    // }
+    // if ( empty( $date_delivery ) ) {
+    //     return $cart_item_data;
+    // }
+    // if ( empty( $time_delivery ) ) {
+    //     return $cart_item_data;
+    // }    
+    // if ( empty( $date_pickup ) ) {
+    //     return $cart_item_data;
+    // }    
+    // if ( empty( $time_pickup ) ) {
+    //     return $cart_item_data;
+    // }
+ 
+    $cart_item_data['personalise-text'] = $engraving_text;
+    $cart_item_data['date-delivery'] = $date_delivery;
+    $cart_item_data['time-delivery'] = $time_delivery;
+    $cart_item_data['date-pickup'] = $date_pickup;
+    $cart_item_data['time-pickup'] = $time_pickup;
+ 
+
+    return $cart_item_data;
+}
+ 
+add_filter( 'woocommerce_add_cart_item_data', 'iconic_add_engraving_text_to_cart_item', 10, 3 );
+
+
+
+
+/**
+ * Display engraving text in the cart.
+ *
+ * @param array $item_data
+ * @param array $cart_item
+ *
+ * @return array
+ */
+function iconic_display_engraving_text_cart( $item_data, $cart_item ) {
+    // if ( empty( $cart_item['personalise-text'] ) ) {
+    //     return $item_data;
+    // }
+    // if ( empty( $cart_item['date-delivery'] ) ) {
+    //     return $item_data;
+    // }
+    // if ( empty( $cart_item['time-delivery'] ) ) {
+    //     return $item_data;
+    // }    
+    // if ( empty( $cart_item['date-pickup'] ) ) {
+    //     return $item_data;
+    // }    
+    // if ( empty( $cart_item['time-pickup'] ) ) {
+    //     return $item_data;
+    // }
+ 
+    $item_data[] = array(
+        'key'     => __( 'Personalise', 'personalisetext' ),
+        'value'   => wc_clean( $cart_item['personalise-text'] ),
+        'display' => '',
+    );
+
+    $item_data[] = array(
+        'key'     => __( 'Delivery', 'delivery' ),
+        'value'   => wc_clean( $cart_item['date-delivery'].' / '.$cart_item['time-delivery'] ),
+        'display' => '',
+    );    
+    $item_data[] = array(
+        'key'     => __( 'Pickup', 'Pickup' ),
+        'value'   => wc_clean( $cart_item['date-pickup'].' / '.$cart_item['time-pickup'] ),
+        'display' => '',
+    );
+ 
+    return $item_data;
+}
+ 
+add_filter( 'woocommerce_get_item_data', 'iconic_display_engraving_text_cart', 10, 2 );
+
+
+
+/**
+ * Add engraving text to order.
+ *
+ * @param WC_Order_Item_Product $item
+ * @param string                $cart_item_key
+ * @param array                 $values
+ * @param WC_Order              $order
+ */
+function iconic_add_engraving_text_to_order_items( $item, $cart_item_key, $values, $order ) {
+  if ( empty( $values['personalise-text'] ) ) {
+    return;
+  }
+
+  $item->add_meta_data( __( 'Personalise', 'personalisetext' ), $values['personalise-text'] );
+  $item->add_meta_data( __( 'Delivery', 'deliverytext' ), $cart_item['date-delivery'].' / '.$cart_item['time-delivery']  );
+  $item->add_meta_data( __( 'Pickup', 'Pickuptext' ),  $cart_item['date-pickup'].' / '.$cart_item['time-pickup'] );
+
+}
+
+add_action( 'woocommerce_checkout_create_order_line_item', 'iconic_add_engraving_text_to_order_items', 10, 4 );

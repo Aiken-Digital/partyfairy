@@ -34,9 +34,74 @@ class WCFM_Customers_Controller {
 									'count_total'  => false
 								 ); 
 		
-		if( isset( $_POST['search'] ) && !empty( $_POST['search']['value'] )) $args['search'] = $_POST['search']['value'];
-		
 		$args = apply_filters( 'wcfm_get_customers_args', $args );
+		
+		if( isset( $_POST['search'] ) && !empty( $_POST['search']['value'] )) {
+			$serach_str = esc_attr( $_POST['search']['value'] );
+			//$args['search'] = $serach_str;
+			
+			$args['meta_query'] = array( 
+																	apply_filters( 'wcfm_get_customers_meta_search', array(
+																																												 'relation' => 'OR',
+																																													array(
+																																															'key'     => 'first_name',
+																																															'value'   => $serach_str,
+																																															'compare' => 'LIKE'
+																																													),
+																																													array(
+																																															'key'     => 'last_name',
+																																															'value'   => $serach_str,
+																																															'compare' => 'LIKE'
+																																													),
+																																													array(
+																																															'key'     => 'nickname',
+																																															'value'   => $serach_str,
+																																															'compare' => 'LIKE'
+																																													),
+																																													array(
+																																															'key'     => 'billing_first_name',
+																																															'value'   => $serach_str,
+																																															'compare' => 'LIKE'
+																																													),
+																																													array(
+																																															'key'     => 'billing_email',
+																																															'value'   => $serach_str,
+																																															'compare' => 'LIKE'
+																																													),
+																																													array(
+																																															'key'     => 'billing_phone',
+																																															'value'   => $serach_str,
+																																															'compare' => 'LIKE'
+																																													),
+																																													array(
+																																															'key'     => 'billing_company',
+																																															'value'   => $serach_str,
+																																															'compare' => 'LIKE'
+																																													),
+																																													array(
+																																															'key'     => 'billing_address_1',
+																																															'value'   => $serach_str,
+																																															'compare' => 'LIKE'
+																																													),
+																																													array(
+																																															'key'     => 'billing_city',
+																																															'value'   => $serach_str,
+																																															'compare' => 'LIKE'
+																																													),
+																																													array(
+																																															'key'     => 'billing_state',
+																																															'value'   => $serach_str,
+																																															'compare' => 'LIKE'
+																																													),
+																																													array(
+																																															'key'     => 'billing_postcode',
+																																															'value'   => $serach_str,
+																																															'compare' => 'LIKE'
+																																													),
+																																											) 
+																		)
+																);
+		}
 		
 		$wcfm_customers_array = get_users( $args );
 		            

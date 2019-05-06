@@ -128,8 +128,10 @@ class WCFMmp {
 		}
 		
 		// Rewrite rules loader
-		$this->load_class( 'rewrite' );
-		$this->wcfmmp_rewrite = new WCFMmp_Rewrites();
+		if( !class_exists( 'WCFMmp_Rewrites' ) ) {
+			$this->load_class( 'rewrite' );
+			$this->wcfmmp_rewrite = new WCFMmp_Rewrites();
+		}
 		
 		// Marketplace Abstract Gateway Load
 		$this->load_class('abstract-gateway');

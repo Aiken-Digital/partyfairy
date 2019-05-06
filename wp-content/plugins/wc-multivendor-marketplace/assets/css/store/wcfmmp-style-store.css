@@ -22,6 +22,8 @@ body:not(.electro-v1).wcfm-store-page .content-area{flex: 0 0 100%}
  height: auto !important;
 }
 
+#wcfmmp-store * {box-sizing: border-box;}
+
 #wcfmmp-store section {
 	display: block;
 	margin: 0px !important;

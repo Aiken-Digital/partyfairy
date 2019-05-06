@@ -119,6 +119,7 @@ $post_a_job = get_permalink ( get_option( 'job_manager_submit_job_form_page_id' 
 							<th><?php _e( 'Store', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Status', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Products', 'wc-frontend-manager' ); ?></th>
+							<th><?php _e( 'Applications', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Filled?', 'wp-job-manager' ); ?></th>
 							<th><span class="wcfmfa fa-eye text_tip" data-tip="<?php _e( 'Views', 'wc-frontend-manager' ); ?>"></span></th>
 							<th><?php _e( 'Date Posted', 'wp-job-manager' ); ?></th>
@@ -133,6 +134,7 @@ $post_a_job = get_permalink ( get_option( 'job_manager_submit_job_form_page_id' 
 							<th><?php _e( 'Store', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Status', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Products', 'wc-frontend-manager' ); ?></th>
+							<th><?php _e( 'Applications', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Filled?', 'wp-job-manager' ); ?></th>
 							<th><span class="wcfmfa fa-eye text_tip" data-tip="<?php _e( 'Views', 'wc-frontend-manager' ); ?>"></span></th>
 							<th><?php _e( 'Date Posted', 'wp-job-manager' ); ?></th>

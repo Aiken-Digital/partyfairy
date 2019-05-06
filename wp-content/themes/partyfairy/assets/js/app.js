@@ -26,26 +26,16 @@ $('#sub').click(function () {
 
 
 
-
-
-
-function plus() {
-    
-    count++, inputQty.value = count;
-     console.log(count);
-
-    inputQty.eq(i).val(count);
-}
-
-function minus() {
-    1 < count && (count--, inputQty.value = count);
-
-    inputQty.eq(i).val(count);
-}
-
 function myFunction(e) {
-    $("#timerValue").val(e.target.value)
+    $("#timerValuedelivery").val(e.target.value)
 }
+
+
+function myFunctionpickup(e) {
+    $("#timerValuepickup").val(e.target.value)
+}
+
+
 var filterHeight = $(".page-content").height(),
     breadcrumbHeight = $(".breadcrumb").height();
 if ($(".filter-section").height(filterHeight - breadcrumbHeight), $(".close-filter").click(function() {
@@ -75,20 +65,31 @@ $(window).resize(function() {
 });
 
 
-$(".-pickdly").on("click", function() {
-    $("#calendarValue").removeAttr("value"), $("#timerValue").removeAttr("value")
-}), $(function() {
+// $(".-pickdly").on("click", function() {
+//     $("#calendarValue").removeAttr("value"), $("#timerValue").removeAttr("value")
+// }),
+
+ $(function() {
     $(".-jquery-tabs").tabs()
 }), $(".-info-tab").hide(), $(".-info-tab").first().show(), $(".pf-tab--li").click(function() {
     var e = "#" + $(this).data("target");
     $(".-info-tab").not(e).hide(), $(e).show(), $(".pf-tab--li").removeClass("active"), $(this).addClass("active")
 }), $(function() {
-    $("#datepicker").datepicker({
+    $("#datepickerdelivery").datepicker({
         minDate: 0,
         dayNamesMin: ["S", "M", "T", "W", "T", "F", "S"],
         todayHighlight: !1,
         onSelect: function(e, i) {
-            $("#calendarValue").val(e)
+            $("#calendarValuedelivery").val(e)
+        }
+    })
+}),$(function() {
+    $("#datepickerpickup").datepicker({
+        minDate: 0,
+        dayNamesMin: ["S", "M", "T", "W", "T", "F", "S"],
+        todayHighlight: !1,
+        onSelect: function(e, i) {
+            $("#calendarValuepickup").val(e)
         }
     })
 }), $(".pf-form").validate({

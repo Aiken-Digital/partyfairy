@@ -65,6 +65,9 @@ class WCFM_Articles_Manage_Controller {
 					$is_publish = true;
 				}
 				$new_article_id = wp_insert_post( $new_article, true );
+				
+				// Article Real Author
+				update_post_meta( $new_article_id, '_wcfm_article_author', get_current_user_id() );
 			} else { // For Update
 				$is_update = true;
 				$new_article['ID'] = $wcfm_articles_manage_form_data['article_id'];

@@ -297,13 +297,39 @@ class WCFM_Library {
 				if( !WCFM_Dependencies::wcfm_products_listings_active_check() ) {
 					$wcfm_screen_manager_data[3] = 'yes';
 				}
+				if( !WCFM_Dependencies::wcfm_wp_job_manager_applications_plugin_active_check() ) {
+					$wcfm_screen_manager_data[4] = 'yes';
+				}
 				if( !$WCFM->is_marketplace || wcfm_is_vendor() ) {
 	    		$wcfm_screen_manager_data[1] = 'yes';
 	    	}
 	    	if( apply_filters( 'wcfm_listings_additonal_data_hidden', true ) ) {
-	    		$wcfm_screen_manager_data[8] = 'yes';
+	    		$wcfm_screen_manager_data[9] = 'yes';
 	    	}
 	    	wp_localize_script( 'wcfm_listings_js', 'wcfm_listings_screen_manage', $wcfm_screen_manager_data );
+      break;
+      
+      case 'wcfm-applications':
+      	$this->load_datatable_lib();
+	    	wp_enqueue_script( 'wcfm_applications_js', $this->js_lib_url . 'listings/wcfm-script-applications.js', array('jquery'), $WCFM->version, true );
+	    	
+	    	// Screen manager
+	    	$wcfm_screen_manager = get_option( 'wcfm_screen_manager', array() );
+	    	$wcfm_screen_manager_data = array();
+	    	if( isset( $wcfm_screen_manager['applications'] ) ) $wcfm_screen_manager_data = $wcfm_screen_manager['applications'];
+	    	if( !isset( $wcfm_screen_manager_data['admin'] ) ) {
+					$wcfm_screen_manager_data['admin'] = $wcfm_screen_manager_data;
+					$wcfm_screen_manager_data['vendor'] = $wcfm_screen_manager_data;
+				}
+				if( wcfm_is_vendor() ) {
+					$wcfm_screen_manager_data = $wcfm_screen_manager_data['vendor'];
+				} else {
+					$wcfm_screen_manager_data = $wcfm_screen_manager_data['admin'];
+				}
+	    	if( apply_filters( 'wcfm_applications_additonal_data_hidden', true ) ) {
+	    		$wcfm_screen_manager_data[8] = 'yes';
+	    	}
+	    	wp_localize_script( 'wcfm_applications_js', 'wcfm_applications_screen_manage', $wcfm_screen_manager_data );
       break;
       
       case 'wcfm-reports-sales-by-date':
@@ -714,6 +740,10 @@ class WCFM_Library {
 	    	wp_enqueue_style( 'wcfm_listings_css',  $this->css_lib_url . 'listings/wcfm-style-listings.css', array(), $WCFM->version );
 		  break;
 		  
+		  case 'wcfm-applications':
+	    	wp_enqueue_style( 'wcfm_applications_css',  $this->css_lib_url . 'listings/wcfm-style-applications.css', array(), $WCFM->version );
+		  break;
+		  
 		  case 'wcfm-reports-sales-by-date':
 		  case 'wcfm-reports-sales-by-vendor':
 		  	wp_enqueue_style( 'wcfm_reports_menus_css',  $this->css_lib_url . 'reports/wcfm-style-reports-menus.css', array(), $WCFM->version );
@@ -857,6 +887,10 @@ class WCFM_Library {
       
       case 'wcfm-listings':
         $WCFM->template->get_template( 'listings/wcfm-view-listings.php' );
+      break;
+      
+      case 'wcfm-applications':
+        $WCFM->template->get_template( 'listings/wcfm-view-applications.php' );
       break;
       
       case 'wcfm-reports-sales-by-date':

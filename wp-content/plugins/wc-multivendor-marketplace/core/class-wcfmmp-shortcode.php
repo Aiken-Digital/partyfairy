@@ -30,6 +30,9 @@ class WCFMmp_Shortcode {
 		// WCFM Markeplace Store Hours
 		add_shortcode('wcfm_store_hours', array(&$this, 'wcfmmp_store_hours_shortcode'));
 		
+		// WCFM Markeplace More Offers
+		add_shortcode('wcfm_more_offers', array(&$this, 'wcfmmp_more_offers_shortcode'));
+		
 	}
 
 	/**
@@ -491,6 +494,11 @@ class WCFMmp_Shortcode {
 				$content .=  ob_get_clean();
 				break;
 				
+			case 'register_on':
+				$data_value = get_user_meta( $store_id, 'wcfm_register_on', true );
+				$content .=  date( wc_date_format(), $data_value );
+				break;
+				
 			default:
 				$data_value = get_user_meta( $store_id, $data_info, true );
 				$content .=  apply_filters( 'wcfmmp_additional_store_info', $data_value, $data_info, $store_id );
@@ -503,7 +511,7 @@ class WCFMmp_Shortcode {
 		
 	}
 	
-		/**
+	/**
 	 * WCFM Marketplace Store Hours Shortcode
 	 */
 	public function wcfmmp_store_hours_shortcode( $attr ) {
@@ -564,6 +572,28 @@ class WCFMmp_Shortcode {
 		$content .= ob_get_clean();
 		
 		$content .= '</div>';
+		
+		return $content;
+	}
+	
+	/**
+	 * WCFM Marketplace Store Hours Shortcode
+	 */
+	public function wcfmmp_more_offers_shortcode( $attr ) {
+		global $WCFM, $WCFMmp, $wp, $WCFM_Query, $post;
+		
+		if( !apply_filters( 'wcfm_is_pref_product_multivendor', true ) ) return;
+		
+		if( !is_product() ) return;
+		
+		//$content = '<div class="wcfmmp_more_offers">';
+		//$content .= '<span class="wcfmmp-more-offers widget-title"><span class="wcfmfa fa-clock"></span>&nbsp;' . apply_filters( 'wcfm_store_hours_label', __( 'Store Hours', 'wc-multivendor-marketplace' ) ) . '</span><div class="wcfm_clearfix"></div>';
+		
+		ob_start();
+		$WCFMmp->template->get_template( 'product_multivendor/wcfmmp-view-more-offers.php' );
+		$content .= ob_get_clean();
+		
+		//$content .= '</div>';
 		
 		return $content;
 	}

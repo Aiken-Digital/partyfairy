@@ -83,7 +83,7 @@ if( !wcfm_is_vendor() ) {
 			<p class="wcfm-refund-form-request-amount wcfm_popup_label">
 				<label for="wcfm_refund_request_amount"><strong><?php _e( 'Refund Amount', 'wc-multivendor-marketplace' ); ?> <span class="required">*</span></strong></label> 
 			</p>
-			<?php $WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_refund_fields_amount', array( "wcfm_refund_request_amount" => array( 'type' => 'number', 'attributes' => array( 'min' => '1', 'step' => '1' ), 'class' => 'wcfm-text wcfm_ele wcfm-refund-form-request-amount wcfm_popup_input', 'label_class' => 'wcfm_title', 'value' => '1' ) ) ) ); ?>
+			<?php $WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_refund_fields_amount', array( "wcfm_refund_request_amount" => array( 'type' => 'number', 'attributes' => array( 'min' => '1', 'step' => '1' ), 'class' => 'wcfm-text wcfm_ele wcfm_non_negative_input wcfm-refund-form-request-amount wcfm_popup_input', 'label_class' => 'wcfm_title', 'value' => '1' ) ) ) ); ?>
 		
 			<p class="wcfm-refund-form-reason wcfm_popup_label">
 				<label for="comment"><strong><?php _e( 'Refund Requests Reason', 'wc-multivendor-marketplace' ); ?> <span class="required">*</span></strong></label>

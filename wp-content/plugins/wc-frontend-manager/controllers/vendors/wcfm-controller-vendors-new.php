@@ -99,6 +99,9 @@ class WCFM_Vendors_New_Controller {
 						} else {
 							$vendor_id = wp_insert_user( $user_data ) ;
 							$wpdb->query( "UPDATE {$wpdb->prefix}users SET `user_nicename` = '{$store_slug}' WHERE ID =  $vendor_id" );
+							
+							// Vendor Real Author
+							update_user_meta( $vendor_id, '_wcfm_vendor_author', get_current_user_id() );
 						}
 							
 						if( !$vendor_id ) {
@@ -254,6 +257,11 @@ class WCFM_Vendors_New_Controller {
 							update_user_meta( $vendor_id, '_wcfm_email_verified', true );
 							update_user_meta( $vendor_id, '_wcfm_email_verified_for', $wcfm_vendor_form_data['user_email'] );
 							update_user_meta( $vendor_id, 'wcemailverified', 'true' );	
+							
+							// WCFM Unique IDs
+							update_user_meta( $vendor_id, '_wcfmmp_profile_id', $member_id );
+							update_user_meta( $vendor_id, '_wcfmmp_unique_id', current_time( 'timestamp' ) );
+							update_user_meta( $vendor_id, 'wcfm_register_on', strtotime( 'midnight', current_time( 'timestamp' ) ) );
 							
 							do_action( 'wcfm_vendors_new', $vendor_id, $wcfm_vendor_form_data );
 						}

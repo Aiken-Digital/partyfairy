@@ -503,7 +503,7 @@ class WCFMmp_Shipping_By_Zone extends WC_Shipping_Method {
 				if( !empty( $postcode_array ) ) {
 					$is_available = false;
 					foreach( $postcode_array as $postcode ) {
-						if( substr( $destination_postcode, 0, strlen( $postcode ) ) === $postcode ) $is_available = true;
+						if( strtolower( substr( $destination_postcode, 0, strlen( $postcode ) ) ) === strtolower($postcode) ) $is_available = true;
 					}
 				}
 

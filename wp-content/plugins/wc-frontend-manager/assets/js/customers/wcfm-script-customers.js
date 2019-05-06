@@ -1,13 +1,35 @@
 $wcfm_shop_customers_table = '';
 
 jQuery(document).ready(function($) {
+		
+	if( dataTables_config.is_allow_hidden_export ) {
+		$wcfm_datatable_button_args = [
+																		{
+																			extend: 'print',
+																		},
+																		{
+																			extend: 'pdfHtml5',
+																			orientation: 'landscape',
+																			pageSize: 'LEGAL',
+																		},
+																		{
+																			extend: 'excelHtml5',
+																		}, 
+																		{
+																			extend: 'csv',
+																		}
+																	];
+	}
 	
 	$wcfm_shop_customers_table = $('#wcfm-shop-customers').DataTable( {
 		"processing": true,
 		"serverSide": true,
+		"pageLength": parseInt(dataTables_config.pageLength),
 		"responsive": true,
+		"dom"       : 'Bfrtip',
 		"pageLength": parseInt(dataTables_config.pageLength),
 		"language"  : $.parseJSON(dataTables_language),
+		"buttons"   : $wcfm_datatable_button_args,
 		"columns"   : [
 										{ responsivePriority: 1 },
 										{ responsivePriority: 6 },

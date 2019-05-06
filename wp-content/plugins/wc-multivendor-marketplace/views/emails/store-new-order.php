@@ -60,7 +60,7 @@ $text_align = is_rtl() ? 'right' : 'left';
 
 <style>
 .order-again, div.wc-booking-summary-actions, div.wc-appointment-summary-actions { display: none; }
-table.wcfm-order-details-table th, table.wcfm-order-details-table td { border: 1px solid #e5e5e5; color: #636363; }
+table.wcfm-order-details-table th, table.shop_table th, table.wcfm-order-details-table td, table.shop_table td { border: 1px solid #e5e5e5; color: #636363; }
 table.wcfm-order-total-table th{border-right:0px;}
 table.wcfm-order-total-table td{border-left:0px;}
 </style>
@@ -430,6 +430,7 @@ if( apply_filters( 'wcfm_is_allow_wc_default_email_customer_details', false ) ) 
 	do_action( 'woocommerce_email_customer_details', $order, 0, 0, $email );
 } else {
 	?>
+	<?php if( apply_filters( 'wcfm_is_allow_order_details_after_order_table', true ) ) { do_action('woocommerce_order_details_after_order_table',  $order ); } ?>
 	<table id="addresses" cellspacing="0" cellpadding="0" style="width: 100%; vertical-align: top; margin-bottom: 40px; padding:0;" border="0">
 		<tr>
 			<?php if( $WCFM->wcfm_vendor_support->wcfm_vendor_has_capability( $vendor_id, 'view_billing_details' ) ) { ?>

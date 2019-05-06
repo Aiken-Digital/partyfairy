@@ -154,7 +154,7 @@ class WCFM_Enquiry_Tab_Controller {
 			$subject = apply_filters( 'wcfm_email_subject_wrapper', $subject );
 			$subject = str_replace( '{enquiry_for}', $enquiry_for_label, $subject );
 			$message = str_replace( '{enquiry_for}', $enquiry_for, $reply_mail_body );
-			$message = str_replace( '{enquiry_url}', get_wcfm_enquiry_url(), $message );
+			$message = str_replace( '{enquiry_url}', get_wcfm_enquiry_manage_url( $enquiry_id ), $message );
 			$message = str_replace( '{enquiry}', $enquiry, $message );
 			$message = str_replace( '{additional_info}', $additional_info, $message );
 			$message = apply_filters( 'wcfm_email_content_wrapper', $message, __( 'New Enquiry', 'wc-frontend-manager' ) );

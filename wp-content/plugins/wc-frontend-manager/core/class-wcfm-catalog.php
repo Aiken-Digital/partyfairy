@@ -112,10 +112,13 @@ class WCFM_Catalog {
 			$is_catalog = ( get_post_meta( $product_id, '_catalog', true) == 'yes' ) ? 'yes' : '';
 			if( $is_catalog == 'yes' ) { 
 				$disable_price = ( get_post_meta( $product_id, 'disable_price', true) ) ? get_post_meta( $product_id, 'disable_price', true) : 'no';
-				if( $disable_price == 'yes' ) {
+				if( ( $disable_price == 'yes' ) && has_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price') ) {
 					remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
-				} elseif( !has_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price') ) {
-					add_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
+					$WCFM->wcfm_has_catalog = true;
+				} elseif( !has_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price') && $WCFM->wcfm_has_catalog ) {
+					if ( apply_filters( 'wcfm_is_allow_add_to_cart_restore', true ) && !function_exists( 'rigid_related_products_args' ) && !function_exists( 'astra_header' ) && !function_exists( 'zita_post_loader' ) && !function_exists( 'oceanwp_get_sidebar' ) && !function_exists( 'x_get_stack' ) ) {
+					  add_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
+					}
 				}
 			}
 		}
@@ -136,10 +139,13 @@ class WCFM_Catalog {
 			$is_catalog = ( get_post_meta( $product_id, '_catalog', true) == 'yes' ) ? 'yes' : '';
 			if( $is_catalog == 'yes' ) {
 				$disable_add_to_cart = ( get_post_meta( $product_id, 'disable_add_to_cart', true) ) ? get_post_meta( $product_id, 'disable_add_to_cart', true) : 'no';
-				if( $disable_add_to_cart == 'yes' ) {
+				if( ( $disable_add_to_cart == 'yes' ) && has_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart') ) {
 					remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
-				} elseif( !has_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_add_to_cart') ) {
-					add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
+					$WCFM->wcfm_has_catalog = true;
+				} elseif( !has_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart') && $WCFM->wcfm_has_catalog ) {
+					if ( apply_filters( 'wcfm_is_allow_add_to_cart_restore', true ) && !function_exists( 'astra_header' ) && !function_exists( 'zita_post_loader' ) && !function_exists( 'oceanwp_get_sidebar' ) && !function_exists( 'martfury_content_columns' ) && !function_exists( 'x_get_stack' ) ) {
+						add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
+					}
 				}
 			}
 		}

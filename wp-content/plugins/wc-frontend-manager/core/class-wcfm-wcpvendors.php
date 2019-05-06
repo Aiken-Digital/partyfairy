@@ -175,7 +175,7 @@ class WCFM_WCPVendors {
   	$wcfm_customers_array = get_users( $args );
   	if(!empty($wcfm_customers_array)) {
 			foreach( $wcfm_customers_array as $wcfm_customers_single ) {
-				$vendor_customers[] = $wcfm_customers_single->ID;
+				$vendor_customers[$wcfm_customers_single->ID] = $wcfm_customers_single->ID;
 			}
 		}
   	
@@ -188,12 +188,12 @@ class WCFM_WCPVendors {
 			foreach($wcfm_orders_array as $wcfm_orders_single) {
 				$the_order = wc_get_order( $wcfm_orders_single->order_id );
 				if ( $the_order && is_object( $the_order ) && $the_order->get_user_id() ) {
-					$vendor_customers[] = $the_order->get_user_id();
+					$vendor_customers[$the_order->get_user_id()] = $the_order->get_user_id();
 				}
 			}
 		}
 		if( !empty( $vendor_customers ) ) {
-			$args['include'] = $vendor_customers;
+			$args['include'] = array_keys( array_unique( $vendor_customers ) );
 		} else {
 			$args['include'] = array(0);
 		}

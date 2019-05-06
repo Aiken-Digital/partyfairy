@@ -7,7 +7,7 @@ Tested up to: 5.1
 WC requires at least: 3.0
 WC tested up to: 3.5.0
 Requires PHP: 5.6
-Stable tag: 6.0.4
+Stable tag: 6.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -118,6 +118,9 @@ WCFM is now fully compatible with -
 - WooCommerce Measurement Price Calculator
 - WooCommerce Advanced Product Labels
 - WooCommerce Wholesale Prices
+- WooCommerce Min/Max Quantities
+- WooCommerce Product Badge Manager
+- WooCommerce 360 Images
 - Fancy Product Designer
 - FooEvents
 
@@ -275,6 +278,30 @@ Fully compatible with all major multi-vendor marketplace plugins - <strong>WC Ma
 25. WCFM Dashboard - Mobile view
 
 == Changelog ==
+
+= 6.0.5 =
+*Updated - 05/05/2019*
+
+* Feature - WooCommerce Min/Max Quantities compatibility added (WCFM Ultimate require)
+* Feature - WooCommerce 360 Images compatibility added (WCFM Ultimate require)
+* Feature - WooCommerce Product Badge Manager compatibility added (WCFM Ultimate require)
+* Enahnce - WC Appointment 4.4 calendar compatibility added
+* Enahnce - WC Appointment calendar staff filter added
+* Enahnce - WC Booking 1.14 manual booking compatibility added
+* Enahnce - WCFM all integrated plugins "global and group wise" capability option added
+* Enhance - Customer export option added
+* Enhance - Job Listing dashboard "WP Job Manager Applications" column added
+* Enhance - Customer list search enahnced to billing fields
+* Enahnce - Bulk stock manager screen layout improved 
+* Tweak   - Verification Auth library load restricted only for Profile page
+* Tweak   - WCFM Marketplace "vacation mode" message display at store header, previously visible with individual products
+* Tweak   - "woocommerce_order_details_after_order_table" hook enabled by default
+* Fixed   - WCFM Marketplace "vacation mode" widget product list issue rsolved
+* Fixed   - "Subscriptions" endpoint 404 issue resolved
+* Fixed   - WC Product Vendors customers not visible issue resolved
+* Fixed   - WCFM Marketplace vendor's store page analytics data update issue resolved
+* Fixed   - Chat.js and color picker library conflict issue resolved
+* Fixed   - Follower update issue resolved
 
 = 6.0.4 =
 *Updated - 22/04/2019*
@@ -1920,9 +1947,24 @@ Fully compatible with all major multi-vendor marketplace plugins - <strong>WC Ma
 
 == Upgrade Notice ==
 
-= 6.0.4 =
-* Enahnce - WCFM Marketplace Stripe split pay API refund compatibility added
-* Enahnce - WCFM Marketplace order sync with WC edit order refund compatibility added
-* Enahnce - WCFM Marketplace order sync with order item add from WC edit order compatibility added
-* Enahnce - WCFM Marketplace order sync with order item edit from WC edit order compatibility added
-* Enahnce - WCFM Marketplace order sync with order item delete from WC edit order compatibility added
+= 6.0.5 =
+* Feature - WooCommerce Min/Max Quantities compatibility added (WCFM Ultimate require)
+* Feature - WooCommerce 360 Images compatibility added (WCFM Ultimate require)
+* Feature - WooCommerce Product Badge Manager compatibility added (WCFM Ultimate require)
+* Enahnce - WC Appointment 4.4 calendar compatibility added
+* Enahnce - WC Appointment calendar staff filter added
+* Enahnce - WC Booking 1.14 manual booking compatibility added
+* Enahnce - WCFM all integrated plugins "global and group wise" capability option added
+* Enhance - Customer export option added
+* Enhance - Job Listing dashboard "WP Job Manager Applications" column added
+* Enhance - Customer list search enahnced to billing fields
+* Enahnce - Bulk stock manager screen layout improved 
+* Tweak   - Verification Auth library load restricted only for Profile page
+* Tweak   - WCFM Marketplace "vacation mode" message display at store header, previously visible with individual products
+* Tweak   - "woocommerce_order_details_after_order_table" hook enabled by default
+* Fixed   - WCFM Marketplace "vacation mode" widget product list issue rsolved
+* Fixed   - "Subscriptions" endpoint 404 issue resolved
+* Fixed   - WC Product Vendors customers not visible issue resolved
+* Fixed   - WCFM Marketplace vendor's store page analytics data update issue resolved
+* Fixed   - Chat.js and color picker library conflict issue resolved
+* Fixed   - Follower update issue resolved

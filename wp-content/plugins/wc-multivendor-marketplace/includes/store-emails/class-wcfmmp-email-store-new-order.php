@@ -80,8 +80,10 @@ if (!class_exists('WCFMmp_Email_Store_New_Order')) :
 			
 			if( $order_vendors ) {
 				
-				$WCFM->load_class( 'wcfmmarketplace' );
-				$WCFM->wcfm_marketplace = new WCFM_Marketplace();
+				if( !$WCFM->wcfm_marketplace ) {
+					$WCFM->load_class( 'wcfmmarketplace' );
+					$WCFM->wcfm_marketplace = new WCFM_Marketplace();
+				}
 				
 				foreach( $order_vendors as $vendor_id => $vendor_email ) {
 					

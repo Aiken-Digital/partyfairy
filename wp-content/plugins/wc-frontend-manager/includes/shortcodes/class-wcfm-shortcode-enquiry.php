@@ -35,7 +35,7 @@ class WCFM_Enquiry_Shortcode {
 		
 		$product_id = 0;
 		if ( isset( $attr['product'] ) && !empty( $attr['product'] ) ) { $product_id = absint($attr['product']); }
-		if( !$product_id && is_product() && $post && is_object( $post ) ) {
+		if( !$product_id && $post && is_object( $post ) ) {
 			$product_id = $post->ID;
 		}
 		
@@ -45,7 +45,7 @@ class WCFM_Enquiry_Shortcode {
 			$vendor_id = get_query_var( 'author' );
 		}
 		
-		if( !$product_id && !$vendor_id && $post && is_object( $post ) && wcfm_is_vendor( $post->post_author ) ) {
+		if( !$vendor_id && $post && is_object( $post ) && wcfm_is_vendor( $post->post_author ) ) {
 			$vendor_id = $post->post_author;
 		}
 		

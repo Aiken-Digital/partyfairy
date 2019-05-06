@@ -131,6 +131,13 @@ class WCFM_Dependencies {
 		return false;
 	}
 	
+	// WP Job Manager Applications
+	static function wcfm_wp_job_manager_applications_plugin_active_check() {
+		if ( ! self::$active_plugins ) self::init();
+		return in_array( 'wp-job-manager-applications/wp-job-manager-applications.php', self::$active_plugins ) || array_key_exists( 'wp-job-manager-applications/wp-job-manager-applications.php', self::$active_plugins );
+		return false;
+	}
+	
 	// WooCommerce PDF Invoices & Packing Slips Support
 	static function wcfm_wc_pdf_invoices_packing_slips_plugin_active_check() {
 		if ( ! self::$active_plugins ) self::init();

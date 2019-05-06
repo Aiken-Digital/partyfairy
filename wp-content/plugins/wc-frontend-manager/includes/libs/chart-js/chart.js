@@ -711,8 +711,18 @@ Color.prototype.setChannel = function (space, index, val) {
 	return this;
 };
 
-if (typeof window !== 'undefined') {
+/*if (typeof window !== 'undefined') {
 	window.Color = Color;
+}*/
+
+if (typeof window !== 'undefined') {
+    window.Chart = window.Chart || {};
+    window.Chart.Color = Color;
+
+    if (typeof window.Color === 'undefined') {
+       // maintain backward compatibility ONLY if no other Color lib has been defined
+       window.Color = Color;
+    }
 }
 
 module.exports = Color;

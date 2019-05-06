@@ -118,6 +118,8 @@ foreach( $count_products as $count_product ) {
 			
 			<?php	echo apply_filters( 'wcfm_products_limit_label', '' ); ?>
 			
+			<?php do_action( 'wcfm_products_quick_actions' ); ?>
+			
 			<div class="wcfm-clearfix"></div>
 		</div>
 		<div class="wcfm-clearfix"></div><br />

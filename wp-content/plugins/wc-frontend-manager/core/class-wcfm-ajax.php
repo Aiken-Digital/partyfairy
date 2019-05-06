@@ -200,6 +200,11 @@ class WCFM_Ajax {
 					new WCFM_Listings_Controller();
 				break;
 				
+				case 'wcfm-applications':
+					include_once( $this->controllers_path . 'listings/wcfm-controller-applications.php' );
+					new WCFM_Applications_Controller();
+				break;
+				
 				case 'wcfm-reports-out-of-stock':
 					include_once( $this->controllers_path . 'reports/wcfm-controller-reports-out-of-stock.php' );
 					new WCFM_Reports_Out_Of_Stock_Controller();
@@ -689,12 +694,12 @@ class WCFM_Ajax {
 		}
 		
 		if ( ! empty( $_POST['wcfm_wcfmu_inactive'] ) ) {
-			$offer_key = 'wcfm_wcfmu_inactive23042019';
+			$offer_key = 'wcfm_wcfmu_inactive05052019';
 			update_option( $offer_key . '_tracking_notice', 'hide' );
 		}
 		
 		if ( ! empty( $_POST['wcfm_wcfmgs_inactive'] ) ) {
-			$offer_key = 'wcfm_wcfmgs_inactive23042019';
+			$offer_key = 'wcfm_wcfmgs_inactive05052019';
 			update_option( $offer_key . '_tracking_notice', 'hide' );
 		}
   }

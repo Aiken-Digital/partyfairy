@@ -374,8 +374,10 @@ do_action( 'before_wcfm_orders_details', $order_id );
 							</tbody>
 						</table>
 					<?php } ?>
-					<?php if( apply_filters( 'wcfm_is_allow_order_details_after_order_table', false ) ) { do_action('woocommerce_order_details_after_order_table',  $order ); } ?>
+					<?php if( apply_filters( 'wcfm_is_allow_order_details_after_order_table', true ) ) { do_action('woocommerce_order_details_after_order_table',  $order ); } ?>
 					<?php do_action( 'wcfm_order_details_after_order_table',  $order ); ?>
+					
+					<div class="wcfm-clearfix"></div>
 			</div>
 		</div>
 		<!-- end collapsible -->

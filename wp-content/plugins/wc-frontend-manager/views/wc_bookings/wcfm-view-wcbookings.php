@@ -87,6 +87,9 @@ include_once( WC_BOOKINGS_ABSPATH . 'includes/admin/class-wc-bookings-admin.php'
 				}
 			}
 			?>
+			
+			<?php do_action( 'wcfm_bookings_quick_actions' ); ?>
+			
 			<div class="wcfm-clearfix"></div>
 		</div>
 	  <div class="wcfm-clearfix"></div><br />

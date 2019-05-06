@@ -45,6 +45,8 @@ if( !$wcfm_is_allow_manage_customer ) {
 			
 			<?php	echo apply_filters( 'wcfm_customers_limit_label', '' ); ?>
 			
+			<?php do_action( 'wcfm_customers_quick_actions' ); ?>
+			
 			<div class="wcfm-clearfix"></div>
 		</div>
 	  <div class="wcfm-clearfix"></div><br />

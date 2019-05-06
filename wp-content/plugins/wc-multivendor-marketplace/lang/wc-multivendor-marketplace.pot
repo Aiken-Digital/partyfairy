@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce Multivendor Marketplace\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-20 21:33+0000\n"
+"POT-Creation-Date: 2019-05-04 21:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -117,7 +117,7 @@ msgstr ""
 msgid "Back to Zone List"
 msgstr ""
 
-#: core/class-wcfmmp-ajax.php:376 core/class-wcfmmp-ajax.php:379 views/shipping/wcfmmp-view-shipping-settings.php:169
+#: core/class-wcfmmp-ajax.php:376 core/class-wcfmmp-ajax.php:379 views/shipping/wcfmmp-view-shipping-settings.php:171
 msgid "Zone Name"
 msgstr ""
 
@@ -149,7 +149,7 @@ msgstr ""
 msgid "Postcodes need to be comma separated"
 msgstr ""
 
-#: core/class-wcfmmp-ajax.php:507 views/shipping/wcfmmp-view-shipping-settings.php:171
+#: core/class-wcfmmp-ajax.php:507 views/shipping/wcfmmp-view-shipping-settings.php:173
 msgid "Shipping Method"
 msgstr ""
 
@@ -161,7 +161,7 @@ msgstr ""
 msgid "Method Title"
 msgstr ""
 
-#: core/class-wcfmmp-ajax.php:519 views/ledger/wcfmmp-view-ledger.php:106 views/ledger/wcfmmp-view-ledger.php:116 views/reviews/wcfmmp-view-reviews-manage.php:167 views/reviews/wcfmmp-view-reviews.php:84 views/reviews/wcfmmp-view-reviews.php:96
+#: core/class-wcfmmp-ajax.php:519 views/ledger/wcfmmp-view-ledger.php:107 views/ledger/wcfmmp-view-ledger.php:117 views/reviews/wcfmmp-view-reviews-manage.php:167 views/reviews/wcfmmp-view-reviews.php:84 views/reviews/wcfmmp-view-reviews.php:96
 msgid "Status"
 msgstr ""
 
@@ -173,7 +173,7 @@ msgstr ""
 msgid "No shipping method found"
 msgstr ""
 
-#: core/class-wcfmmp-ajax.php:548 views/shipping/wcfmmp-view-shipping-settings.php:186
+#: core/class-wcfmmp-ajax.php:548 views/shipping/wcfmmp-view-shipping-settings.php:188
 msgid "Edit"
 msgstr ""
 
@@ -227,7 +227,7 @@ msgstr ""
 msgid "Vendor Store On-line."
 msgstr ""
 
-#: core/class-wcfmmp-commission.php:416
+#: core/class-wcfmmp-commission.php:482
 #, php-format
 msgid "<b>%s</b> order status updated to <b>%s</b>"
 msgstr ""
@@ -354,7 +354,7 @@ msgstr ""
 msgid "Charges"
 msgstr ""
 
-#: core/class-wcfmmp-media.php:70 core/class-wcfmmp-media.php:101 core/class-wcfmmp.php:324
+#: core/class-wcfmmp-media.php:70 core/class-wcfmmp-media.php:101 core/class-wcfmmp.php:327
 msgid "Media"
 msgstr ""
 
@@ -430,7 +430,7 @@ msgstr ""
 msgid "Every second product of same type will be charged with this price"
 msgstr ""
 
-#: core/class-wcfmmp-refund.php:82 views/refund/wcfmmp-view-refund-requests-popup.php:74 views/refund/wcfmmp-view-refund-requests.php:23 views/refund/wcfmmp-view-refund-requests.php:30
+#: core/class-wcfmmp-refund.php:82 views/refund/wcfmmp-view-refund-requests-popup.php:79 views/refund/wcfmmp-view-refund-requests.php:23 views/refund/wcfmmp-view-refund-requests.php:30
 msgid "Refund Requests"
 msgstr ""
 
@@ -438,31 +438,31 @@ msgstr ""
 msgid "Refund"
 msgstr ""
 
-#: core/class-wcfmmp-refund.php:271 views/refund/wcfmmp-view-refund-requests-popup.php:65
+#: core/class-wcfmmp-refund.php:271 views/refund/wcfmmp-view-refund-requests-popup.php:70
 msgid "Refund Request"
 msgstr ""
 
-#: core/class-wcfmmp-refund.php:574
+#: core/class-wcfmmp-refund.php:585
 #, php-format
 msgid "Your Refund Request approved for Order <b>%s</b>."
 msgstr ""
 
-#: core/class-wcfmmp-refund.php:599
+#: core/class-wcfmmp-refund.php:610
 #, php-format
 msgid "Refund Request approved for Order <b>%s</b>."
 msgstr ""
 
-#: core/class-wcfmmp-refund.php:632 core/class-wcfmmp-refund.php:690
+#: core/class-wcfmmp-refund.php:643 core/class-wcfmmp-refund.php:701
 #, php-format
 msgid "Your Refund Request cancelled for Order <b>%s</b>."
 msgstr ""
 
-#: core/class-wcfmmp-refund.php:646
+#: core/class-wcfmmp-refund.php:657
 #, php-format
 msgid "Refund Request cancelled for Order <b>%s</b>."
 msgstr ""
 
-#: core/class-wcfmmp-reviews.php:84 core/class-wcfmmp-reviews.php:115 core/class-wcfmmp-store.php:136 core/class-wcfmmp-store.php:177 core/class-wcfmmp.php:323 views/reviews/wcfmmp-view-reviews.php:38
+#: core/class-wcfmmp-reviews.php:84 core/class-wcfmmp-reviews.php:115 core/class-wcfmmp-store.php:136 core/class-wcfmmp-store.php:177 core/class-wcfmmp.php:326 views/reviews/wcfmmp-view-reviews.php:38
 msgid "Reviews"
 msgstr ""
 
@@ -996,27 +996,27 @@ msgstr ""
 msgid "Add the countries you deliver your products to. You can specify states as well. If the shipping price is same except some countries, there is an option Everywhere Else, you can use that."
 msgstr ""
 
-#: core/class-wcfmmp-settings.php:695 core/class-wcfmmp-settings.php:780 views/shipping/wcfmmp-view-shipping-settings.php:117 views/shipping/wcfmmp-view-shipping-settings.php:272
+#: core/class-wcfmmp-settings.php:695 core/class-wcfmmp-settings.php:780 views/shipping/wcfmmp-view-shipping-settings.php:117 views/shipping/wcfmmp-view-shipping-settings.php:274
 msgid "Country"
 msgstr ""
 
-#: core/class-wcfmmp-settings.php:702 core/class-wcfmmp-settings.php:721 core/class-wcfmmp-settings.php:817 views/shipping/wcfmmp-view-edit-method-popup.php:106 views/shipping/wcfmmp-view-edit-method-popup.php:177 views/shipping/wcfmmp-view-shipping-settings.php:124 views/shipping/wcfmmp-view-shipping-settings.php:143 views/shipping/wcfmmp-view-shipping-settings.php:309
+#: core/class-wcfmmp-settings.php:702 core/class-wcfmmp-settings.php:721 core/class-wcfmmp-settings.php:817 views/shipping/wcfmmp-view-edit-method-popup.php:106 views/shipping/wcfmmp-view-edit-method-popup.php:177 views/shipping/wcfmmp-view-shipping-settings.php:124 views/shipping/wcfmmp-view-shipping-settings.php:144 views/shipping/wcfmmp-view-shipping-settings.php:312
 msgid "Cost"
 msgstr ""
 
-#: core/class-wcfmmp-settings.php:710 views/shipping/wcfmmp-view-shipping-settings.php:132
+#: core/class-wcfmmp-settings.php:710 views/shipping/wcfmmp-view-shipping-settings.php:133
 msgid "State Shipping Rates"
 msgstr ""
 
-#: core/class-wcfmmp-settings.php:715 views/shipping/wcfmmp-view-shipping-settings.php:137
+#: core/class-wcfmmp-settings.php:715 views/shipping/wcfmmp-view-shipping-settings.php:138
 msgid "State"
 msgstr ""
 
-#: core/class-wcfmmp-settings.php:724 core/class-wcfmmp-settings.php:812 core/class-wcfmmp-settings.php:819 helpers/wcfmmp-core-functions.php:736 includes/shipping-gateways/class-wcfmmp-shipping-by-country.php:161 includes/shipping-gateways/class-wcfmmp-shipping-by-weight.php:99 views/shipping/wcfmmp-view-shipping-settings.php:146 views/shipping/wcfmmp-view-shipping-settings.php:304 views/shipping/wcfmmp-view-shipping-settings.php:311
+#: core/class-wcfmmp-settings.php:724 core/class-wcfmmp-settings.php:812 core/class-wcfmmp-settings.php:819 helpers/wcfmmp-core-functions.php:736 includes/shipping-gateways/class-wcfmmp-shipping-by-country.php:161 includes/shipping-gateways/class-wcfmmp-shipping-by-weight.php:99 views/shipping/wcfmmp-view-shipping-settings.php:147 views/shipping/wcfmmp-view-shipping-settings.php:306 views/shipping/wcfmmp-view-shipping-settings.php:314
 msgid "Free Shipping"
 msgstr ""
 
-#: core/class-wcfmmp-settings.php:742 views/shipping/wcfmmp-view-shipping-settings.php:233
+#: core/class-wcfmmp-settings.php:742 views/shipping/wcfmmp-view-shipping-settings.php:235
 msgid "Shipping By Weight"
 msgstr ""
 
@@ -1024,35 +1024,35 @@ msgstr ""
 msgid "Uncheck this to disable weight based shipping options."
 msgstr ""
 
-#: core/class-wcfmmp-settings.php:772 views/shipping/wcfmmp-view-shipping-settings.php:265
+#: core/class-wcfmmp-settings.php:772 views/shipping/wcfmmp-view-shipping-settings.php:267
 msgid "Country and Weight wise Shipping Rate Calculation"
 msgstr ""
 
-#: core/class-wcfmmp-settings.php:776 views/shipping/wcfmmp-view-shipping-settings.php:269
+#: core/class-wcfmmp-settings.php:776 views/shipping/wcfmmp-view-shipping-settings.php:271
 msgid "Add the countries you deliver your products to and specify rates for weight range. If the shipping price is same except some countries/states, there is an option Everywhere Else, you can use that."
 msgstr ""
 
-#: core/class-wcfmmp-settings.php:787 views/shipping/wcfmmp-view-shipping-settings.php:279
+#: core/class-wcfmmp-settings.php:787 views/shipping/wcfmmp-view-shipping-settings.php:281
 msgid "Country default cost if no matching rule"
 msgstr ""
 
-#: core/class-wcfmmp-settings.php:795 views/shipping/wcfmmp-view-shipping-settings.php:287
+#: core/class-wcfmmp-settings.php:795 views/shipping/wcfmmp-view-shipping-settings.php:289
 msgid "Weight-Cost Rules"
 msgstr ""
 
-#: core/class-wcfmmp-settings.php:800 views/shipping/wcfmmp-view-shipping-settings.php:292
+#: core/class-wcfmmp-settings.php:800 views/shipping/wcfmmp-view-shipping-settings.php:294
 msgid "Weight Rule"
 msgstr ""
 
-#: core/class-wcfmmp-settings.php:805 views/shipping/wcfmmp-view-shipping-settings.php:297
+#: core/class-wcfmmp-settings.php:805 views/shipping/wcfmmp-view-shipping-settings.php:299
 msgid "Weight up to"
 msgstr ""
 
-#: core/class-wcfmmp-settings.php:806 views/shipping/wcfmmp-view-shipping-settings.php:298
+#: core/class-wcfmmp-settings.php:806 views/shipping/wcfmmp-view-shipping-settings.php:300
 msgid "Weight more than"
 msgstr ""
 
-#: core/class-wcfmmp-settings.php:810 views/shipping/wcfmmp-view-shipping-settings.php:302
+#: core/class-wcfmmp-settings.php:810 views/shipping/wcfmmp-view-shipping-settings.php:304
 msgid "Weight"
 msgstr ""
 
@@ -1269,35 +1269,35 @@ msgstr ""
 msgid "Shop for %s%d more to get free shipping"
 msgstr ""
 
-#: core/class-wcfmmp-shortcode.php:552 core/class-wcfmmp-store-hours.php:71 core/class-wcfmmp-store-hours.php:78 core/class-wcfmmp-vendor.php:941 core/class-wcfmmp-vendor.php:949 includes/store-widgets/class-wcfmmp-widget-store-hours.php:78
+#: core/class-wcfmmp-shortcode.php:560 core/class-wcfmmp-store-hours.php:71 core/class-wcfmmp-store-hours.php:78 core/class-wcfmmp-vendor.php:941 core/class-wcfmmp-vendor.php:949 includes/store-widgets/class-wcfmmp-widget-store-hours.php:78
 msgid "Monday"
 msgstr ""
 
-#: core/class-wcfmmp-shortcode.php:552 core/class-wcfmmp-store-hours.php:71 core/class-wcfmmp-store-hours.php:80 core/class-wcfmmp-vendor.php:941 core/class-wcfmmp-vendor.php:951 includes/store-widgets/class-wcfmmp-widget-store-hours.php:78
+#: core/class-wcfmmp-shortcode.php:560 core/class-wcfmmp-store-hours.php:71 core/class-wcfmmp-store-hours.php:80 core/class-wcfmmp-vendor.php:941 core/class-wcfmmp-vendor.php:951 includes/store-widgets/class-wcfmmp-widget-store-hours.php:78
 msgid "Tuesday"
 msgstr ""
 
-#: core/class-wcfmmp-shortcode.php:552 core/class-wcfmmp-store-hours.php:71 core/class-wcfmmp-store-hours.php:82 core/class-wcfmmp-vendor.php:941 core/class-wcfmmp-vendor.php:953 includes/store-widgets/class-wcfmmp-widget-store-hours.php:78
+#: core/class-wcfmmp-shortcode.php:560 core/class-wcfmmp-store-hours.php:71 core/class-wcfmmp-store-hours.php:82 core/class-wcfmmp-vendor.php:941 core/class-wcfmmp-vendor.php:953 includes/store-widgets/class-wcfmmp-widget-store-hours.php:78
 msgid "Wednesday"
 msgstr ""
 
-#: core/class-wcfmmp-shortcode.php:552 core/class-wcfmmp-store-hours.php:71 core/class-wcfmmp-store-hours.php:84 core/class-wcfmmp-vendor.php:941 core/class-wcfmmp-vendor.php:955 includes/store-widgets/class-wcfmmp-widget-store-hours.php:78
+#: core/class-wcfmmp-shortcode.php:560 core/class-wcfmmp-store-hours.php:71 core/class-wcfmmp-store-hours.php:84 core/class-wcfmmp-vendor.php:941 core/class-wcfmmp-vendor.php:955 includes/store-widgets/class-wcfmmp-widget-store-hours.php:78
 msgid "Thursday"
 msgstr ""
 
-#: core/class-wcfmmp-shortcode.php:552 core/class-wcfmmp-store-hours.php:71 core/class-wcfmmp-store-hours.php:86 core/class-wcfmmp-vendor.php:941 core/class-wcfmmp-vendor.php:957 includes/store-widgets/class-wcfmmp-widget-store-hours.php:78
+#: core/class-wcfmmp-shortcode.php:560 core/class-wcfmmp-store-hours.php:71 core/class-wcfmmp-store-hours.php:86 core/class-wcfmmp-vendor.php:941 core/class-wcfmmp-vendor.php:957 includes/store-widgets/class-wcfmmp-widget-store-hours.php:78
 msgid "Friday"
 msgstr ""
 
-#: core/class-wcfmmp-shortcode.php:552 core/class-wcfmmp-store-hours.php:71 core/class-wcfmmp-store-hours.php:88 core/class-wcfmmp-vendor.php:941 core/class-wcfmmp-vendor.php:959 includes/store-widgets/class-wcfmmp-widget-store-hours.php:78
+#: core/class-wcfmmp-shortcode.php:560 core/class-wcfmmp-store-hours.php:71 core/class-wcfmmp-store-hours.php:88 core/class-wcfmmp-vendor.php:941 core/class-wcfmmp-vendor.php:959 includes/store-widgets/class-wcfmmp-widget-store-hours.php:78
 msgid "Saturday"
 msgstr ""
 
-#: core/class-wcfmmp-shortcode.php:552 core/class-wcfmmp-store-hours.php:71 core/class-wcfmmp-store-hours.php:90 core/class-wcfmmp-vendor.php:941 core/class-wcfmmp-vendor.php:961 includes/store-widgets/class-wcfmmp-widget-store-hours.php:78
+#: core/class-wcfmmp-shortcode.php:560 core/class-wcfmmp-store-hours.php:71 core/class-wcfmmp-store-hours.php:90 core/class-wcfmmp-vendor.php:941 core/class-wcfmmp-vendor.php:961 includes/store-widgets/class-wcfmmp-widget-store-hours.php:78
 msgid "Sunday"
 msgstr ""
 
-#: core/class-wcfmmp-shortcode.php:555 core/class-wcfmmp-store-hours.php:60 core/class-wcfmmp.php:326 helpers/wcfmmp-core-functions.php:499 includes/store-widgets/class-wcfmmp-widget-store-hours.php:17 includes/store-widgets/class-wcfmmp-widget-store-hours.php:129
+#: core/class-wcfmmp-shortcode.php:563 core/class-wcfmmp-store-hours.php:60 core/class-wcfmmp.php:329 helpers/wcfmmp-core-functions.php:499 includes/store-widgets/class-wcfmmp-widget-store-hours.php:17 includes/store-widgets/class-wcfmmp-widget-store-hours.php:129
 msgid "Store Hours"
 msgstr ""
 
@@ -1395,7 +1395,7 @@ msgstr ""
 
 #: core/class-wcfmmp-vendor.php:1349
 #, php-format
-msgid "Commission for %s order."
+msgid "Commission for %s order #%s."
 msgstr ""
 
 #: core/class-wcfmmp-vendor.php:1361
@@ -1511,7 +1511,7 @@ msgstr ""
 msgid "Payment Processed"
 msgstr ""
 
-#: core/class-wcfmmp-withdraw.php:344 includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:556
+#: core/class-wcfmmp-withdraw.php:344 includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:567
 msgid "Something went wrong please try again later."
 msgstr ""
 
@@ -1533,7 +1533,7 @@ msgstr ""
 msgid "Reverse withdrawal for order #%s %s."
 msgstr ""
 
-#: core/class-wcfmmp.php:325
+#: core/class-wcfmmp.php:328
 msgid "Vendor Ledger"
 msgstr ""
 
@@ -1699,7 +1699,7 @@ msgstr ""
 msgid "Cash Pay"
 msgstr ""
 
-#: helpers/wcfmmp-core-functions.php:386 includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:293 includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:399 includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:541
+#: helpers/wcfmmp-core-functions.php:386 includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:296 includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:406 includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:552
 msgid "Stripe Split Pay"
 msgstr ""
 
@@ -1815,7 +1815,7 @@ msgstr ""
 msgid "Your refund request failed, please try after sometime."
 msgstr ""
 
-#: helpers/wcfmmp-core-functions.php:550 helpers/wcfmmp-core-functions.php:565 controllers/refund/wcfmmp-controller-refund-requests-actions.php:55 controllers/refund/wcfmmp-controller-refund-requests-actions.php:115
+#: helpers/wcfmmp-core-functions.php:550 helpers/wcfmmp-core-functions.php:565 controllers/refund/wcfmmp-controller-refund-requests-actions.php:55
 msgid "Refund requests successfully approved."
 msgstr ""
 
@@ -1923,8 +1923,16 @@ msgstr ""
 msgid "Refund processing failed, please check wcfm log."
 msgstr ""
 
-#: controllers/refund/wcfmmp-controller-refund-requests-actions.php:57 controllers/refund/wcfmmp-controller-refund-requests-actions.php:117
+#: controllers/refund/wcfmmp-controller-refund-requests-actions.php:57
 msgid "No refunds selected for approve"
+msgstr ""
+
+#: controllers/refund/wcfmmp-controller-refund-requests-actions.php:115
+msgid "Refund request(s) successfully rejected."
+msgstr ""
+
+#: controllers/refund/wcfmmp-controller-refund-requests-actions.php:117
+msgid "No refund(s) selected for approve"
 msgstr ""
 
 #: controllers/refund/wcfmmp-controller-refund-requests-form.php:92
@@ -1957,11 +1965,11 @@ msgstr ""
 msgid "Refund Cancelled"
 msgstr ""
 
-#: controllers/refund/wcfmmp-controller-refund-requests.php:110 views/refund/wcfmmp-view-refund-requests-popup.php:76
+#: controllers/refund/wcfmmp-controller-refund-requests.php:110 views/refund/wcfmmp-view-refund-requests-popup.php:81
 msgid "Partial Refund"
 msgstr ""
 
-#: controllers/refund/wcfmmp-controller-refund-requests.php:112 views/refund/wcfmmp-view-refund-requests-popup.php:76
+#: controllers/refund/wcfmmp-controller-refund-requests.php:112 views/refund/wcfmmp-view-refund-requests-popup.php:81
 msgid "Full Refund"
 msgstr ""
 
@@ -2062,6 +2070,10 @@ msgstr ""
 msgid "Stripe setting is not configured properly please contact site administrator"
 msgstr ""
 
+#: includes/payment-gateways/class-wcfmmp-gateway-stripe.php:102
+msgid "Payout for withdrawal ID #"
+msgstr ""
+
 #: includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:42
 msgid "WCFM Stripe Split Pay"
 msgstr ""
@@ -2074,44 +2086,49 @@ msgstr ""
 msgid "Pay with your credit card via Stripe."
 msgstr ""
 
-#: includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:232
+#: includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:235
 msgid "An error has occurred while processing your payment, please try again. Or contact us for assistance."
 msgstr ""
 
-#: includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:311 includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:417 includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:495
+#: includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:314 includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:424 includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:506
 msgid "Stripe Charge Error: "
 msgstr ""
 
-#: includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:318 includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:424 includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:501
+#: includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:321 includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:431 includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:512
 msgid "Stripe Split Pay Error: "
 msgstr ""
 
-#: includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:338 includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:444
+#: includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:341 includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:451
 #, php-format
 msgid "Payment for Order #%s"
 msgstr ""
 
-#: includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:566
+#: includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:577
 msgid "Error creating transfer record with Stripe: "
 msgstr ""
 
-#: includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:638
+#: includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:649
 msgid "Split Pay #"
 msgstr ""
 
-#: includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:639
+#: includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:650
 msgid "For order id #"
 msgstr ""
 
-#: includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:750 includes/shipping-gateways/class-wcfmmp-shipping-by-country.php:72 includes/shipping-gateways/class-wcfmmp-shipping-by-weight.php:132 includes/store-emails/class-wcfmmp-email-store-new-order.php:162
+#: includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:761 includes/shipping-gateways/class-wcfmmp-shipping-by-country.php:72 includes/shipping-gateways/class-wcfmmp-shipping-by-weight.php:132 includes/store-emails/class-wcfmmp-email-store-new-order.php:164
 msgid "Enable/Disable"
 msgstr ""
 
-#: includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:785
+#: includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:796
 msgid "Error creating customer record with Stripe: "
 msgstr ""
 
-#: includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:833
+#: includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:862
+#, php-format
+msgid "Refund Processed Via Stripe ( Refund ID: #%s )"
+msgstr ""
+
+#: includes/payment-gateways/class-wcfmmp-gateway-stripe_split.php:913
 #, php-format
 msgid "<strong>Stripe Gateway is disabled.</strong> Please re-check %swithdrawal setting panel%s. This occurs mostly due to absence of Stripe Secret Key"
 msgstr ""
@@ -2193,45 +2210,45 @@ msgstr ""
 msgid "New Store Order"
 msgstr ""
 
-#: includes/store-emails/class-wcfmmp-email-store-new-order.php:164
+#: includes/store-emails/class-wcfmmp-email-store-new-order.php:166
 msgid "Enable this email notification."
 msgstr ""
 
-#: includes/store-emails/class-wcfmmp-email-store-new-order.php:168
+#: includes/store-emails/class-wcfmmp-email-store-new-order.php:170
 msgid "Subject"
 msgstr ""
 
-#: includes/store-emails/class-wcfmmp-email-store-new-order.php:170
+#: includes/store-emails/class-wcfmmp-email-store-new-order.php:172
 #, php-format
 msgid "This controls the email subject line. Leave it blank to use the default subject: <code>%s</code>."
 msgstr ""
 
-#: includes/store-emails/class-wcfmmp-email-store-new-order.php:175
+#: includes/store-emails/class-wcfmmp-email-store-new-order.php:177
 msgid "Email Heading"
 msgstr ""
 
-#: includes/store-emails/class-wcfmmp-email-store-new-order.php:177
+#: includes/store-emails/class-wcfmmp-email-store-new-order.php:179
 #, php-format
 msgid "This controls the main heading contained within the email notification. Leave it blank to use the default heading: <code>%s</code>."
 msgstr ""
 
-#: includes/store-emails/class-wcfmmp-email-store-new-order.php:182
+#: includes/store-emails/class-wcfmmp-email-store-new-order.php:184
 msgid "Email Type"
 msgstr ""
 
-#: includes/store-emails/class-wcfmmp-email-store-new-order.php:184
+#: includes/store-emails/class-wcfmmp-email-store-new-order.php:186
 msgid "Choose which format of email to be sent."
 msgstr ""
 
-#: includes/store-emails/class-wcfmmp-email-store-new-order.php:188
+#: includes/store-emails/class-wcfmmp-email-store-new-order.php:190
 msgid "Plain Text"
 msgstr ""
 
-#: includes/store-emails/class-wcfmmp-email-store-new-order.php:189
+#: includes/store-emails/class-wcfmmp-email-store-new-order.php:191
 msgid "HTML"
 msgstr ""
 
-#: includes/store-emails/class-wcfmmp-email-store-new-order.php:190
+#: includes/store-emails/class-wcfmmp-email-store-new-order.php:192
 msgid "Multipart"
 msgstr ""
 
@@ -2243,7 +2260,7 @@ msgstr ""
 msgid "Best Selling Vendors"
 msgstr ""
 
-#: includes/store-widgets/class-wcfmmp-widget-store-best-selling-vendors.php:91 includes/store-widgets/class-wcfmmp-widget-store-category.php:112 includes/store-widgets/class-wcfmmp-widget-store-coupons.php:146 includes/store-widgets/class-wcfmmp-widget-store-featured-products.php:187 includes/store-widgets/class-wcfmmp-widget-store-hours.php:135 includes/store-widgets/class-wcfmmp-widget-store-lists-category-filter.php:102 includes/store-widgets/class-wcfmmp-widget-store-lists-location-filter.php:152 includes/store-widgets/class-wcfmmp-widget-store-lists-radius-filter.php:101 includes/store-widgets/class-wcfmmp-widget-store-lists-search.php:90 includes/store-widgets/class-wcfmmp-widget-store-location.php:111 includes/store-widgets/class-wcfmmp-widget-store-on-sale-products.php:185 includes/store-widgets/class-wcfmmp-widget-store-product-search.php:96 includes/store-widgets/class-wcfmmp-widget-store-recent-articles.php:142
+#: includes/store-widgets/class-wcfmmp-widget-store-best-selling-vendors.php:91 includes/store-widgets/class-wcfmmp-widget-store-category.php:112 includes/store-widgets/class-wcfmmp-widget-store-coupons.php:146 includes/store-widgets/class-wcfmmp-widget-store-featured-products.php:187 includes/store-widgets/class-wcfmmp-widget-store-hours.php:135 includes/store-widgets/class-wcfmmp-widget-store-lists-category-filter.php:235 includes/store-widgets/class-wcfmmp-widget-store-lists-location-filter.php:152 includes/store-widgets/class-wcfmmp-widget-store-lists-radius-filter.php:101 includes/store-widgets/class-wcfmmp-widget-store-lists-search.php:90 includes/store-widgets/class-wcfmmp-widget-store-location.php:111 includes/store-widgets/class-wcfmmp-widget-store-on-sale-products.php:185 includes/store-widgets/class-wcfmmp-widget-store-product-search.php:96 includes/store-widgets/class-wcfmmp-widget-store-recent-articles.php:142
 #: includes/store-widgets/class-wcfmmp-widget-store-recent-products.php:181 includes/store-widgets/class-wcfmmp-widget-store-shipping-rules.php:128 includes/store-widgets/class-wcfmmp-widget-store-taxonomy.php:117 includes/store-widgets/class-wcfmmp-widget-store-top-products.php:184 includes/store-widgets/class-wcfmmp-widget-store-top-rated-products.php:182 includes/store-widgets/class-wcfmmp-widget-store-top-rated-vendors.php:94
 msgid "Title:"
 msgstr ""
@@ -2304,7 +2321,7 @@ msgstr ""
 msgid "Store List: Category Filter"
 msgstr ""
 
-#: includes/store-widgets/class-wcfmmp-widget-store-lists-category-filter.php:96
+#: includes/store-widgets/class-wcfmmp-widget-store-lists-category-filter.php:229
 msgid "Search by Category"
 msgstr ""
 
@@ -2352,7 +2369,7 @@ msgstr ""
 msgid "Store List: Radius Filter"
 msgstr ""
 
-#: includes/store-widgets/class-wcfmmp-widget-store-lists-radius-filter.php:54 views/store-lists/wcfmmp-view-store-lists-search-form.php:77
+#: includes/store-widgets/class-wcfmmp-widget-store-lists-radius-filter.php:54 views/store-lists/wcfmmp-view-store-lists-search-form.php:210
 msgid "Insert your address .."
 msgstr ""
 
@@ -2529,43 +2546,43 @@ msgstr ""
 msgid "Telephone:"
 msgstr ""
 
-#: views/emails/store-new-order.php:437 views/emails/plain/store-new-order.php:437
+#: views/emails/store-new-order.php:438 views/emails/plain/store-new-order.php:437
 msgid "Billing address"
 msgstr ""
 
-#: views/emails/store-new-order.php:444 views/emails/plain/store-new-order.php:446
+#: views/emails/store-new-order.php:445 views/emails/plain/store-new-order.php:446
 msgid "Shipping address"
 msgstr ""
 
-#: views/ledger/wcfmmp-view-ledger.php:74
+#: views/ledger/wcfmmp-view-ledger.php:75
 msgid "total earning"
 msgstr ""
 
-#: views/ledger/wcfmmp-view-ledger.php:83
+#: views/ledger/wcfmmp-view-ledger.php:84
 msgid "total withdrawal"
 msgstr ""
 
-#: views/ledger/wcfmmp-view-ledger.php:93
+#: views/ledger/wcfmmp-view-ledger.php:94
 msgid "total refund"
 msgstr ""
 
-#: views/ledger/wcfmmp-view-ledger.php:107 views/ledger/wcfmmp-view-ledger.php:117 views/media/wcfmmp-view-media.php:68 views/media/wcfmmp-view-media.php:81 views/refund/wcfmmp-view-refund-requests.php:64 views/refund/wcfmmp-view-refund-requests.php:76
+#: views/ledger/wcfmmp-view-ledger.php:108 views/ledger/wcfmmp-view-ledger.php:118 views/media/wcfmmp-view-media.php:68 views/media/wcfmmp-view-media.php:81 views/refund/wcfmmp-view-refund-requests.php:64 views/refund/wcfmmp-view-refund-requests.php:76
 msgid "Type"
 msgstr ""
 
-#: views/ledger/wcfmmp-view-ledger.php:108 views/ledger/wcfmmp-view-ledger.php:118 views/product_multivendor/wcfmmp-view-more-offer-single.php:59 views/product_multivendor/wcfmmp-view-more-offers.php:39
+#: views/ledger/wcfmmp-view-ledger.php:109 views/ledger/wcfmmp-view-ledger.php:119 views/product_multivendor/wcfmmp-view-more-offer-single.php:59 views/product_multivendor/wcfmmp-view-more-offers.php:39
 msgid "Details"
 msgstr ""
 
-#: views/ledger/wcfmmp-view-ledger.php:109 views/ledger/wcfmmp-view-ledger.php:119
+#: views/ledger/wcfmmp-view-ledger.php:110 views/ledger/wcfmmp-view-ledger.php:120
 msgid "Credit"
 msgstr ""
 
-#: views/ledger/wcfmmp-view-ledger.php:110 views/ledger/wcfmmp-view-ledger.php:120
+#: views/ledger/wcfmmp-view-ledger.php:111 views/ledger/wcfmmp-view-ledger.php:121
 msgid "Debit"
 msgstr ""
 
-#: views/ledger/wcfmmp-view-ledger.php:111 views/ledger/wcfmmp-view-ledger.php:121 views/reviews/wcfmmp-view-reviews.php:90 views/reviews/wcfmmp-view-reviews.php:102
+#: views/ledger/wcfmmp-view-ledger.php:112 views/ledger/wcfmmp-view-ledger.php:122 views/reviews/wcfmmp-view-reviews.php:90 views/reviews/wcfmmp-view-reviews.php:102
 msgid "Dated"
 msgstr ""
 
@@ -2613,23 +2630,23 @@ msgstr ""
 msgid "Price"
 msgstr ""
 
-#: views/refund/wcfmmp-view-refund-requests-popup.php:69
+#: views/refund/wcfmmp-view-refund-requests-popup.php:74
 msgid "Product"
 msgstr ""
 
-#: views/refund/wcfmmp-view-refund-requests-popup.php:79
+#: views/refund/wcfmmp-view-refund-requests-popup.php:84
 msgid "Refund Amount"
 msgstr ""
 
-#: views/refund/wcfmmp-view-refund-requests-popup.php:84
+#: views/refund/wcfmmp-view-refund-requests-popup.php:89
 msgid "Refund Requests Reason"
 msgstr ""
 
-#: views/refund/wcfmmp-view-refund-requests-popup.php:151
+#: views/refund/wcfmmp-view-refund-requests-popup.php:156
 msgid "Submit"
 msgstr ""
 
-#: views/refund/wcfmmp-view-refund-requests-popup.php:156
+#: views/refund/wcfmmp-view-refund-requests-popup.php:161
 msgid "This order's item(s) are already requested for refund!"
 msgstr ""
 
@@ -2729,43 +2746,43 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-#: views/reviews/wcfmmp-view-reviews-new.php:26 views/reviews/wcfmmp-view-reviews-new.php:34
+#: views/reviews/wcfmmp-view-reviews-new.php:28 views/reviews/wcfmmp-view-reviews-new.php:36
 msgid "write a review"
 msgstr ""
 
-#: views/reviews/wcfmmp-view-reviews-new.php:28
+#: views/reviews/wcfmmp-view-reviews-new.php:30
 msgid "your review"
 msgstr ""
 
-#: views/reviews/wcfmmp-view-reviews-new.php:29
+#: views/reviews/wcfmmp-view-reviews-new.php:31
 msgid "Add Your Review"
 msgstr ""
 
-#: views/reviews/wcfmmp-view-reviews-new.php:34
+#: views/reviews/wcfmmp-view-reviews-new.php:36
 msgid "Cancel"
 msgstr ""
 
-#: views/reviews/wcfmmp-view-reviews-new.php:43
+#: views/reviews/wcfmmp-view-reviews-new.php:45
 msgid "Poor"
 msgstr ""
 
-#: views/reviews/wcfmmp-view-reviews-new.php:46
+#: views/reviews/wcfmmp-view-reviews-new.php:48
 msgid "Fair"
 msgstr ""
 
-#: views/reviews/wcfmmp-view-reviews-new.php:49
+#: views/reviews/wcfmmp-view-reviews-new.php:51
 msgid "Good"
 msgstr ""
 
-#: views/reviews/wcfmmp-view-reviews-new.php:52
+#: views/reviews/wcfmmp-view-reviews-new.php:54
 msgid "Excellent"
 msgstr ""
 
-#: views/reviews/wcfmmp-view-reviews-new.php:55
+#: views/reviews/wcfmmp-view-reviews-new.php:57
 msgid "WOW!!!"
 msgstr ""
 
-#: views/reviews/wcfmmp-view-reviews-new.php:68
+#: views/reviews/wcfmmp-view-reviews-new.php:70
 msgid "Publish Review"
 msgstr ""
 
@@ -2882,27 +2899,27 @@ msgstr ""
 msgid "Shipping By Country is disabled by Admin. Please contact admin for details"
 msgstr ""
 
-#: views/shipping/wcfmmp-view-shipping-settings.php:170
+#: views/shipping/wcfmmp-view-shipping-settings.php:172
 msgid "Region(s)"
 msgstr ""
 
-#: views/shipping/wcfmmp-view-shipping-settings.php:201
+#: views/shipping/wcfmmp-view-shipping-settings.php:203
 msgid "No method found&nbsp;"
 msgstr ""
 
-#: views/shipping/wcfmmp-view-shipping-settings.php:202
+#: views/shipping/wcfmmp-view-shipping-settings.php:204
 msgid " Add Shipping Methods"
 msgstr ""
 
-#: views/shipping/wcfmmp-view-shipping-settings.php:206
+#: views/shipping/wcfmmp-view-shipping-settings.php:208
 msgid " Edit Shipping Methods"
 msgstr ""
 
-#: views/shipping/wcfmmp-view-shipping-settings.php:220
+#: views/shipping/wcfmmp-view-shipping-settings.php:222
 msgid "No shipping zone found for configuration. Please contact with admin for manage your store shipping"
 msgstr ""
 
-#: views/shipping/wcfmmp-view-shipping-settings.php:236
+#: views/shipping/wcfmmp-view-shipping-settings.php:238
 msgid "Shipping By Weight is disabled by Admin. Please contact admin for details"
 msgstr ""
 

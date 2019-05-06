@@ -297,13 +297,13 @@ class WCFMmp_Admin {
 		
 		echo '<p class="form-field _wcfmmp_commission_percent_field commission_mode_field commission_mode_percent commission_mode_percent_fixed"><label for="vendor_commission_percent">' . __( 'Commission Percent(%)', 'wc-multivendor-marketplace' ) . '</label>';
 		$WCFM->wcfm_fields->wcfm_generate_form_field( array(
-					                                              "vendor_commission_percent" => array('name' => 'commission[commission_percent]', 'type' => 'number', 'class' => 'wcfm-text wcfm_ele commission_mode_field commission_mode_percent commission_mode_percent_fixed', 'value' => $vendor_commission_percent, 'attributes' => array( 'min' => '0.1', 'step' => '0.1') ),
+					                                              "vendor_commission_percent" => array('name' => 'commission[commission_percent]', 'type' => 'number', 'class' => 'wcfm-text wcfm_ele wcfm_non_negative_input commission_mode_field commission_mode_percent commission_mode_percent_fixed', 'value' => $vendor_commission_percent, 'attributes' => array( 'min' => '0.1', 'step' => '0.1') ),
 					                                              ) );
 		echo '</p>';
 		
 		echo '<p class="form-field _wcfmmp_commission_fixed_field commission_mode_field commission_mode_fixed commission_mode_percent_fixed"><label for="vendor_commission_fixed">' . __( 'Commission Fixed', 'wc-multivendor-marketplace' ) . '(' . get_woocommerce_currency_symbol() . ')' . '</label>';
 		$WCFM->wcfm_fields->wcfm_generate_form_field( array(
-					                                                                        "vendor_commission_fixed" => array('name' => 'commission[commission_fixed]', 'type' => 'number', 'class' => 'wcfm-text wcfm_ele simple variable external grouped booking commission_mode_field commission_mode_fixed commission_mode_percent_fixed', 'value' => $vendor_commission_fixed, 'attributes' => array( 'min' => '0.1', 'step' => '0.1') ),
+					                                                                        "vendor_commission_fixed" => array('name' => 'commission[commission_fixed]', 'type' => 'number', 'class' => 'wcfm-text wcfm_ele wcfm_non_negative_input simple variable external grouped booking commission_mode_field commission_mode_fixed commission_mode_percent_fixed', 'value' => $vendor_commission_fixed, 'attributes' => array( 'min' => '0.1', 'step' => '0.1') ),
 																																									) );
 		echo '</p>';
   	
@@ -459,13 +459,13 @@ class WCFMmp_Admin {
 		
 		echo '<div class="form-field _wcfmmp_commission_percent_field commission_mode_field commission_mode_percent commission_mode_percent_fixed"><label for="vendor_commission_percent">' . __( 'Commission Percent(%)', 'wc-multivendor-marketplace' ) . '</label>';
 		$WCFM->wcfm_fields->wcfm_generate_form_field( array(
-					                                              "vendor_commission_percent" => array('name' => 'commission[commission_percent]', 'type' => 'number', 'class' => 'wcfm-text wcfm_ele commission_mode_field commission_mode_percent commission_mode_percent_fixed', 'value' => $vendor_commission_percent, 'attributes' => array( 'min' => '0.1', 'step' => '0.1') ),
+					                                              "vendor_commission_percent" => array('name' => 'commission[commission_percent]', 'type' => 'number', 'class' => 'wcfm-text wcfm_ele wcfm_non_negative_input commission_mode_field commission_mode_percent commission_mode_percent_fixed', 'value' => $vendor_commission_percent, 'attributes' => array( 'min' => '0.1', 'step' => '0.1') ),
 					                                              ) );
 		echo '</div>';
 		
 		echo '<div class="form-field _wcfmmp_commission_fixed_field commission_mode_field commission_mode_fixed commission_mode_percent_fixed"><label for="vendor_commission_fixed">' . __( 'Commission Fixed', 'wc-multivendor-marketplace' ) . '(' . get_woocommerce_currency_symbol() . ')' . '</label>';
 		$WCFM->wcfm_fields->wcfm_generate_form_field( array(
-																												"vendor_commission_fixed" => array('name' => 'commission[commission_fixed]', 'type' => 'number', 'class' => 'wcfm-text wcfm_ele simple variable external grouped booking commission_mode_field commission_mode_fixed commission_mode_percent_fixed', 'value' => $vendor_commission_fixed, 'attributes' => array( 'min' => '0.1', 'step' => '0.1') ),
+																												"vendor_commission_fixed" => array('name' => 'commission[commission_fixed]', 'type' => 'number', 'class' => 'wcfm-text wcfm_ele wcfm_non_negative_input simple variable external grouped booking commission_mode_field commission_mode_fixed commission_mode_percent_fixed', 'value' => $vendor_commission_fixed, 'attributes' => array( 'min' => '0.1', 'step' => '0.1') ),
 																												) );
 		echo '</div>';
 	}

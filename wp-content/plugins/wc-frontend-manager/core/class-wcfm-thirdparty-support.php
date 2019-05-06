@@ -135,6 +135,11 @@ class WCFM_ThirdParty_Support {
 				$query_listing_vars = array(
 					'wcfm-listings'       => ! empty( $wcfm_modified_endpoints['wcfm-listings'] ) ? $wcfm_modified_endpoints['wcfm-listings'] : 'listings',
 				);
+				     
+				// WP Job Manager Applications Support
+				if ( WCFM_Dependencies::wcfm_wp_job_manager_applications_plugin_active_check() ) {
+					//$query_listing_vars['wcfm-applications'] = ! empty( $wcfm_modified_endpoints['wcfm-applications'] ) ? $wcfm_modified_endpoints['wcfm-applications'] : 'applications';
+				}
 		
 				$query_vars = array_merge( $query_vars, $query_listing_vars );
 			} else {
@@ -155,6 +160,10 @@ class WCFM_ThirdParty_Support {
   	switch ( $endpoint ) {
   		case 'wcfm-listings' :
 				$title = __( 'Listings Dashboard', 'wc-frontend-manager' );
+			break;
+			
+			case 'wcfm-applications' :
+				$title = __( 'Applications Dashboard', 'wc-frontend-manager' );
 			break;
   	}
   	
@@ -189,6 +198,9 @@ class WCFM_ThirdParty_Support {
 				$listings_endpoints = array(
 															'wcfm-listings'  		   => 'listings',
 															);
+				if ( WCFM_Dependencies::wcfm_wp_job_manager_applications_plugin_active_check() ) {
+					//$listings_endpoints['wcfm-applications'] = 'applications';
+				}
 				$endpoints = array_merge( $endpoints, $listings_endpoints );
 			}
 		}
@@ -209,12 +221,23 @@ class WCFM_ThirdParty_Support {
 				$post_a_job = get_permalink ( get_option( 'job_manager_submit_job_form_page_id' ) );
 				if( $jobs_dashboard && $post_a_job ) {
 					$menus = array_slice($menus, 0, 3, true) +
-															array( 'wcfm-listings' => array(  'label'      => __( 'Listings', 'wc-frontend-manager' ),
-																													 'url'        => get_wcfm_listings_url(),
-																													 'icon'       => 'briefcase',
-																													 'priority'   => 10
-																													) )	 +
+															array( 'wcfm-listings' => array(  'label'       => __( 'Listings', 'wc-frontend-manager' ),
+																																 'url'        => get_wcfm_listings_url(),
+																																 'icon'       => 'briefcase',
+																																 'priority'   => 10
+																																) )	 +
 																array_slice($menus, 3, count($menus) - 3, true) ;
+						
+				  // WP Job Manager Applications Support
+					if ( WCFM_Dependencies::wcfm_wp_job_manager_applications_plugin_active_check() ) {
+						/*$menus = array_slice($menus, 0, 4, true) +
+															array( 'wcfm-applications' => array(  'label'     => __( 'Applications', 'wc-frontend-manager' ),
+																																	 'url'        => get_wcfm_applications_url(),
+																																	 'icon'       => 'user-tie',
+																																	 'priority'   => 11
+																																	) )	 +
+																array_slice($menus, 4, count($menus) - 4, true) ;*/
+					}
 				}
 			}
 		}

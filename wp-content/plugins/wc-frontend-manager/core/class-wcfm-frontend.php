@@ -358,7 +358,7 @@ class WCFM_Frontend {
 	}
 	
 	function getIP() {
-		if( apply_filters( 'wcfm_is_allow_wc_geolocate', false ) && class_exists( 'WC_Geolocation' ) ) {
+		if( apply_filters( 'wcfm_is_allow_wc_geolocate', true ) && class_exists( 'WC_Geolocation' ) ) {
 			return WC_Geolocation::get_external_ip_address();
 		} else {
 			foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key) {
@@ -456,7 +456,42 @@ class WCFM_Frontend {
 						$_SESSION['wcfm_pages']['stores'][] = $vendor_id;
 					}
 		  	}
-		  }
+		  } elseif( $is_marketplace == 'wcfmmarketplace' ) {
+				if( wcfm_is_store_page() ) {
+					$wc_shop = false;
+					$custom_store_url = get_option( 'wcfm_store_url', 'store' );
+					$store_name = get_query_var( $custom_store_url );
+					$vendor_id  = 0;
+					if ( !empty( $store_name ) ) {
+						$store_user = get_user_by( 'slug', $store_name );
+					}
+					if( $store_user ) {
+						$vendor_id   		= $store_user->ID;
+					}
+					if( $vendor_id ) {
+						if( !isset( $_SESSION['wcfm_pages'] ) || !isset( $_SESSION['wcfm_pages']['stores'] ) || ( isset( $_SESSION['wcfm_pages'] ) && isset( $_SESSION['wcfm_pages']['stores'] ) && !in_array( $vendor_id, $_SESSION['wcfm_pages']['stores'] ) ) ) {
+							// wcfm_detailed_analysis Query
+							$wcfm_detailed_analysis = "INSERT into {$wpdb->prefix}wcfm_detailed_analysis 
+																				(`is_shop`, `is_store`, `is_product`, `product_id`, `author_id`, `referer`, `ip_address`, `country`, `state`, `city`)
+																				VALUES
+																				(0, 1, 0, 0, {$vendor_id}, '{$_SERVER['HTTP_REFERER']}', '{$ip_address}', '{$_SESSION['location']['country']}', '{$_SESSION['location']['state']}', '{$_SESSION['location']['city']}')";
+							$wpdb->query($wcfm_detailed_analysis);
+							
+							// wcfm_daily_analysis Query
+							$wcfm_daily_analysis = "INSERT into {$wpdb->prefix}wcfm_daily_analysis 
+																				(`is_shop`, `is_store`, `is_product`, `product_id`, `author_id`, `count`, `visited`)
+																				VALUES
+																				(0, 1, 0, 0, {$vendor_id}, 1, '{$todate}')
+																				ON DUPLICATE KEY UPDATE
+																				count = count+1";
+							$wpdb->query($wcfm_daily_analysis);
+							
+							// Session store
+							$_SESSION['wcfm_pages']['stores'][] = $vendor_id;
+						}
+					}
+				}
+			}
 		  
 		  if( $wc_shop ) {
 		  	if( !isset( $_SESSION['wcfm_pages'] ) || !isset( $_SESSION['wcfm_pages']['shop'] ) || ( isset( $_SESSION['wcfm_pages'] ) && isset( $_SESSION['wcfm_pages']['shop'] ) && ( 'no' == $_SESSION['wcfm_pages']['shop'] ) ) ) {

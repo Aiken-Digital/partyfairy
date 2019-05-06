@@ -112,9 +112,9 @@ class WCFMmp_Refund_Requests_Cancel_Controller {
 				
 				do_action( 'wcfmmp_refund_request_cancelled', $refund_id );
 			}
-			echo '{"status": true, "message": "' . __('Refund requests successfully approved.', 'wc-multivendor-marketplace') . '"}';
+			echo '{"status": true, "message": "' . __('Refund request(s) successfully rejected.', 'wc-multivendor-marketplace') . '"}';
 	  } else {
-	  	echo '{"status": false, "message": "' . __('No refunds selected for approve', 'wc-multivendor-marketplace') . '"}';
+	  	echo '{"status": false, "message": "' . __('No refund(s) selected for approve', 'wc-multivendor-marketplace') . '"}';
 	  }
 		
 		die;

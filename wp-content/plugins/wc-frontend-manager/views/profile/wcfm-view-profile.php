@@ -9,7 +9,7 @@
  * @version   2.2.5
  */
 
-global $WCFM, $wpdb, $blog_id;
+global $WCFM, $wpdb, $blog_id, $wp;
 
 if( !apply_filters( 'wcfm_is_pref_profile', true ) || !apply_filters( 'wcfm_is_allow_profile', true ) ) {
 	wcfm_restriction_message_show( "Profile" );

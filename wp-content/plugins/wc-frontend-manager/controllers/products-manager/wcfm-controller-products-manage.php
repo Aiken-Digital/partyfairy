@@ -76,6 +76,9 @@ class WCFM_Products_Manage_Controller {
 					$is_publish = true;
 				}
 				$new_product_id = wp_insert_post( $new_product, true );
+				
+				// Product Real Author
+				update_post_meta( $new_product_id, '_wcfm_product_author', get_current_user_id() );
 			} else { // For Update
 				$is_update = true;
 				$new_product['ID'] = $wcfm_products_manage_form_data['pro_id'];

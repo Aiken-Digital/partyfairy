@@ -2445,4 +2445,48 @@ class WCFM_Vendor_Support {
   		return $url;
   	}
   }
+  
+  // Verified Vendor Check
+  function get_wcfm_verification_badge() {
+		global $WCFM, $WCFMu;
+		
+		$vendor_verification_options = (array) get_option( 'wcfm_vendor_verification_options' );
+		
+		$verification_badge = isset( $vendor_verification_options['verification_badge'] ) ? $vendor_verification_options['verification_badge'] : '';
+		if( !$verification_badge ) $verification_badge = $WCFMu->plugin_url . 'assets/images/verification_badge.png';
+		
+		return $verification_badge;
+	}
+	
+	function wcfm_is_verified_vendor( $vendor_id ) {
+		global $WCFM, $WCFMu;
+		
+		$vendor_verification_data = (array) get_user_meta( $vendor_id, 'wcfm_vendor_verification_data', true );
+		
+		$verification_status = 'noprompt';
+		if( !empty( $vendor_verification_data ) && isset( $vendor_verification_data['verification_status'] ) ) $verification_status = $vendor_verification_data['verification_status'];
+		
+		$social_verification_status = 'pending';
+		if( !empty( $vendor_verification_data ) && isset( $vendor_verification_data['social_verification_status'] ) ) $social_verification_status = $vendor_verification_data['social_verification_status'];
+		
+		if( ( $verification_status == 'approve' ) && ( $social_verification_status == 'approve' ) ) return true;
+		
+		return false;
+	}
+	
+	public function wcfm_show_verified_seller_badge( $vendor_id, $badge_classses, $context = 'view' ) {
+		global $WCFM, $WCFMu;
+		if( $vendor_id ) {
+			if( $this->wcfm_is_verified_vendor( $vendor_id ) ) {
+				$badge = $this->get_wcfm_verification_badge();
+				if( $badge ) {
+					if( $context == 'view' ) {
+						echo '<div class="'.$badge_classses.' text_tip" data-tip="' . __( 'Verified Vendor', 'wc-frontend-manager-ultimate' ) . '"><img src="' . $badge . '" /></div>';
+					} else {
+						return '<span class="'.$badge_classses.' text_tip" data-tip="' . __( 'Verified Vendor', 'wc-frontend-manager-ultimate' ) . '"><img style="display: inline-block;" src="' . $badge . '" /></span>';
+					}
+				}
+			}
+		}
+	}
 }

@@ -3,11 +3,11 @@ Contributors: wclovers
 Tags: woocommerce marketplace, multivendor marketplace, multi vendor, multi seller, woocommerce product vendors 
 Donate link: https://www.paypal.me/wclovers/25usd
 Requires at least: 4.4
-Tested up to: 5.1
+Tested up to: 5.2
 WC requires at least: 3.0
 WC tested up to: 3.5.0
 Requires PHP: 5.6
-Stable tag: 3.0.4
+Stable tag: 3.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -152,6 +152,9 @@ If you already have a multi-vendor store setup using WC Marketplace or WC Vendor
 🔖 WooCommerce Measurement Price Calculator
 🔖 WooCommerce Advanced Product Labels
 🔖 WooCommerce Wholesale Prices
+🔖 WooCommerce Min/Max Quantities
+🔖 WooCommerce 360 Images
+🔖 WooCommerce Product Badge Manager
 🔖 Fancy Product Designer
 🔖 FooEvents
 
@@ -218,6 +221,20 @@ NONE.
 
 
 == Changelog ==
+
+= 3.0.5 =
+*Updated - 05/05/2019* 
+
+* Feature - WooCommerce Min/Max Quantities compatibility added (WCFM Ultimate require)
+* Feature - WooCommerce 360 Images compatibility added (WCFM Ultimate require)
+* Feature - WooCommerce Product Badge Manager compatibility added (WCFM Ultimate require)
+* Enahnce - Single product multi-vendor "more offers" short code added - wcfm_more_offers
+* Tweak   - Store list page "category filter" options filtered by only store categories, previously all categories listed 
+* Tweak   - "Vacation Mode" message display at store header, previously visible with individual products
+* Tweak   - Store Email "woocommerce_order_details_after_order_table" hook enabled by default
+* Tweak   - Negative shipping cost input restricted
+* Fixed   - "Vacation Mode" widget product list issue rsolved
+* Fixed   - Vendor's customer not visible issue resolved
 
 = 3.0.4 =
 *Updated - 23/04/2019* 
@@ -833,9 +850,14 @@ NONE.
 
 == Upgrade Notice ==
 
-= 3.0.4 =
-* Enahnce - Stripe split pay API refund compatibility added
-* Enahnce - Marketplace order sync with WC edit order refund
-* Enahnce - Marketplace order sync with order item add from WC edit order
-* Enahnce - Marketplace order sync with order item edit from WC edit order
-* Enahnce - Marketplace order sync with order item delete from WC edit order
+= 3.0.5 =
+* Feature - WooCommerce Min/Max Quantities compatibility added (WCFM Ultimate require)
+* Feature - WooCommerce 360 Images compatibility added (WCFM Ultimate require)
+* Feature - WooCommerce Product Badge Manager compatibility added (WCFM Ultimate require)
+* Enahnce - Single product multi-vendor "more offers" short code added - wcfm_more_offers
+* Tweak   - Store list page "category filter" options filtered by only store categories, previously all categories listed 
+* Tweak   - "Vacation Mode" message display at store header, previously visible with individual products
+* Tweak   - Store Email "woocommerce_order_details_after_order_table" hook enabled by default
+* Tweak   - Negative shipping cost input restricted
+* Fixed   - "Vacation Mode" widget product list issue rsolved
+* Fixed   - Vendor's customer not visible issue resolved

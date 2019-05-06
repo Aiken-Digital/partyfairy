@@ -72,10 +72,10 @@
 
     $WCFM->wcfm_fields->wcfm_generate_form_field (
         apply_filters( 'wcfmmp_settings_fields_shipping_by_country', array(
-          "wcfmmp_shipping_type_price" => array('label' => __('Default Shipping Price', 'wc-multivendor-marketplace'), 'name' => 'wcfmmp_shipping_by_country[_wcfmmp_shipping_type_price]', 'placeholder' => '0.00', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => isset($wcfmmp_shipping_by_country['_wcfmmp_shipping_type_price']) ? $wcfmmp_shipping_by_country['_wcfmmp_shipping_type_price'] : '', 'hints' => __('This is the base price and will be the starting shipping price for each product', 'wc-multivendor-marketplace') ),
-          "wcfmmp_additional_product" => array('label' => __('Per Product Additional Price', 'wc-multivendor-marketplace'), 'name' => 'wcfmmp_shipping_by_country[_wcfmmp_additional_product]', 'placeholder' => '0.00', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => isset($wcfmmp_shipping_by_country['_wcfmmp_additional_product']) ? $wcfmmp_shipping_by_country['_wcfmmp_additional_product'] : '', 'hints' => __('If a customer buys more than one type product from your store, first product of the every second type will be charged with this price', 'wc-multivendor-marketplace') ),
-          "wcfmmp_additional_qty" => array('label' => __('Per Qty Additional Price', 'wc-multivendor-marketplace'), 'name' => 'wcfmmp_shipping_by_country[_wcfmmp_additional_qty]', 'placeholder' => '0.00', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => isset($wcfmmp_shipping_by_country['_wcfmmp_additional_qty']) ? $wcfmmp_shipping_by_country['_wcfmmp_additional_qty'] : '', 'hints' => __('Every second product of same type will be charged with this price', 'wc-multivendor-marketplace') ),
-          "wcfmmp_byc_free_shipping_amount" => array('label' => __('Free Shipping Minimum Order Amount', 'wc-multivendor-marketplace'), 'name' => 'wcfmmp_shipping_by_country[_free_shipping_amount]', 'placeholder' => __( 'NO Free Shipping', 'wc-multivendor-marketplace'), 'type' => 'text', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => isset($wcfmmp_shipping_by_country['_free_shipping_amount']) ? $wcfmmp_shipping_by_country['_free_shipping_amount'] : '', 'hints' => __('Free shipping will be available if order amount more than this. Leave empty to disable Free Shipping.', 'wc-multivendor-marketplace') ),
+          "wcfmmp_shipping_type_price" => array('label' => __('Default Shipping Price', 'wc-multivendor-marketplace'), 'name' => 'wcfmmp_shipping_by_country[_wcfmmp_shipping_type_price]', 'placeholder' => '0.00', 'type' => 'number', 'class' => 'wcfm-text wcfm_non_negative_input wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => isset($wcfmmp_shipping_by_country['_wcfmmp_shipping_type_price']) ? $wcfmmp_shipping_by_country['_wcfmmp_shipping_type_price'] : '', 'hints' => __('This is the base price and will be the starting shipping price for each product', 'wc-multivendor-marketplace') ),
+          "wcfmmp_additional_product" => array('label' => __('Per Product Additional Price', 'wc-multivendor-marketplace'), 'name' => 'wcfmmp_shipping_by_country[_wcfmmp_additional_product]', 'placeholder' => '0.00', 'type' => 'number', 'class' => 'wcfm-text wcfm_non_negative_input wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => isset($wcfmmp_shipping_by_country['_wcfmmp_additional_product']) ? $wcfmmp_shipping_by_country['_wcfmmp_additional_product'] : '', 'hints' => __('If a customer buys more than one type product from your store, first product of the every second type will be charged with this price', 'wc-multivendor-marketplace') ),
+          "wcfmmp_additional_qty" => array('label' => __('Per Qty Additional Price', 'wc-multivendor-marketplace'), 'name' => 'wcfmmp_shipping_by_country[_wcfmmp_additional_qty]', 'placeholder' => '0.00', 'type' => 'number', 'class' => 'wcfm-text wcfm_non_negative_input wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => isset($wcfmmp_shipping_by_country['_wcfmmp_additional_qty']) ? $wcfmmp_shipping_by_country['_wcfmmp_additional_qty'] : '', 'hints' => __('Every second product of same type will be charged with this price', 'wc-multivendor-marketplace') ),
+          "wcfmmp_byc_free_shipping_amount" => array('label' => __('Free Shipping Minimum Order Amount', 'wc-multivendor-marketplace'), 'name' => 'wcfmmp_shipping_by_country[_free_shipping_amount]', 'placeholder' => __( 'NO Free Shipping', 'wc-multivendor-marketplace'), 'type' => 'number', 'class' => 'wcfm-text wcfm_non_negative_input wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => isset($wcfmmp_shipping_by_country['_free_shipping_amount']) ? $wcfmmp_shipping_by_country['_free_shipping_amount'] : '', 'hints' => __('Free shipping will be available if order amount more than this. Leave empty to disable Free Shipping.', 'wc-multivendor-marketplace') ),
           "wcfmmp_form_location" => array('label' => __('Ships from:', 'wc-multivendor-marketplace'), 'name' => 'wcfmmp_shipping_by_country[_wcfmmp_form_location]','type' => 'country', 'class' => 'wcfm-select wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => isset($wcfmmp_shipping_by_country['_wcfmmp_form_location']) ? $wcfmmp_shipping_by_country['_wcfmmp_form_location'] : '', 'hints' => __( 'Location from where the products are shipped for delivery. Usually it is same as the store.', 'wc-multivendor-marketplace' ) ),
           ) )
       );
@@ -125,7 +125,8 @@
                     'type' => 'number',
                     'dfvalue' => 0,
                     'placeholder' => '0.00',
-                    'class' => 'wcfm-text', 
+                    'attributes' => array( 'min' => 0, 'step' => 0.1 ),
+                    'class' => 'wcfm-text wcfm_non_negative_input', 
                     'label_class' => 'wcfm_title' 
                 ),
                 "wcfmmp_shipping_state_rates" => array(
@@ -144,7 +145,8 @@
                             'type' => 'number', 
                             'dfvalue' => 0,
                             'placeholder' => '0.00 (' . __('Free Shipping', 'wc-multivendor-marketplace') . ')', 
-                            'class' => 'wcfm-text', 
+                            'attributes' => array( 'min' => 0, 'step' => 0.1 ),
+                            'class' => 'wcfm-text wcfm_non_negative_input', 
                             'label_class' => 'wcfm_title' 
                         ),
 
@@ -280,7 +282,7 @@
                     'type' => 'number', 
 										'dfvalue' => 0,
 										'placeholder' => '0.00',
-                    'class' => 'wcfm-text wcfm_ele wcfmmp_weightwise_country_default_weight_text', 
+                    'class' => 'wcfm-text wcfm_ele wcfm_non_negative_input wcfmmp_weightwise_country_default_weight_text', 
                     'label_class' => 'wcfm_title',
                 ),
                 "wcfmmp_shipping_country_weight_settings" => array(
@@ -302,14 +304,16 @@
                             'label' => __('Weight', 'wc-multivendor-marketplace') . ' ('.$weight_unit.')', 
                             'type' => 'number', 
                             'placeholder' => '0.00 (' . __('Free Shipping', 'wc-multivendor-marketplace') . ')', 
-                            'class' => 'wcfm-text', 
+                            'attributes' => array( 'min' => 0, 'step' => 0.1 ),
+                            'class' => 'wcfm-text wcfm_non_negative_input', 
                             'label_class' => 'wcfm_title' 
                         ),
                         "wcfmmp_weight_price" => array( 
                             'label' => __('Cost', 'wc-multivendor-marketplace') . ' ('.get_woocommerce_currency_symbol().')', 
                             'type' => 'number', 
                             'placeholder' => '0.00 (' . __('Free Shipping', 'wc-multivendor-marketplace') . ')',
-                            'class' => 'wcfm-text', 
+                            'attributes' => array( 'min' => 0, 'step' => 0.1 ),
+                            'class' => 'wcfm-text wcfm_non_negative_input', 
                             'label_class' => 'wcfm_title' 
                         ),
                         

@@ -545,7 +545,12 @@ div.wcfm_popup_wrapper h2, form.wcfm_popup_wrapper h2 {
 	float: none!important;
 }
 
-.post-type-archive-product .wcfmmp_sold_by_container .wcfmmp-store-rating{margin: 0 auto;}
+.bfastmag-shop .wcfmmp_sold_by_container .wcfmmp-store-rating{margin: 0 auto;}
+.post-type-archive-product.oceanwp-theme .wcfmmp_sold_by_container .wcfmmp-store-rating{margin: 0 auto;}
+.post-type-archive-product.online-shop .wcfmmp_sold_by_container .wcfmmp-store-rating{margin: 0 auto;}
+.post-type-archive-product.woodmart-archive-shop .wcfmmp_sold_by_container .wcfmmp-store-rating{margin: 0 auto;}
+.post-type-archive-product.rigid .wcfmmp_sold_by_container .wcfmmp-store-rating{margin: 0 auto;}
+.post-type-archive-product.storefront .wcfmmp_sold_by_container .wcfmmp-store-rating{margin: 0 auto;}
 
 .wcfm_vendor_badges {
 	display: block;

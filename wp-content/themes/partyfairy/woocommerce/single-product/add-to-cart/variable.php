@@ -123,7 +123,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
                               </div>
                               <div class="col-8">
                                 <div class="form-group">
-                                  <input class="form-control" type="text" name="personalise-text">
+                                  <input class="form-control" type="text" name="personalise-text" value="-">
                                 </div>
                               </div>
                             </div>
@@ -245,14 +245,6 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
                     <p class="font-12">SELECT QUANTITY</p>
                     <div class="incrementers">
 
-
-            <!--           <input class="-minus btn" onclick="minus()" value="-" readonly>
-                      <div class="form-group m-b-0 w-100">
-                        <input class="form-control text-center" id="qty" maxlength="12" min="1" value="1" title="Qty" name="quantity" readonly>
-                      </div>
-                      <input class="-plus btn" onclick="plus()" value="+" readonly> -->
-
-
 <style type="text/css">
 	
 	input[name="quantity"] {
@@ -303,9 +295,9 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
                       <div class="home-delivery-box" id="homeDelivery">
                         <div class="calendar-ui">
                           <p class="text-center font-12 p-t-10 m-b-10">Choose Date & Time</p>
-                          <input id="calendarValue" type="hidden" value="" name="calendarValue">
-                          <input id="timerValue" type="hidden" value="" name="timerValue">
-                          <div type="text" id="datepicker"></div>
+                          <input id="calendarValuedelivery" type="hidden" value="" name="date-delivery">
+                          <input id="timerValuedelivery" type="hidden" value="" name="time-delivery">
+                          <div type="text" id="datepickerdelivery"></div>
                         </div>
                         <div class="form-group m-t-15 timercontrol d-flex align-items-center">
                           <select class="form-control timerselect" onchange="myFunction(event)">
@@ -322,7 +314,31 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
                           </select>
                         </div>
                       </div>
-                      <div id="pickUp"></div>
+                      <div class="home-delivery-box" id="pickUp">
+                      	
+                      <div class="calendar-ui">
+                          <p class="text-center font-12 p-t-10 m-b-10">Choose Date & Time</p>
+                          <input id="calendarValuepickup" type="hidden" value="" name="date-pickup">
+                          <input id="timerValuepickup" type="hidden" value="" name="time-pickup">
+                          <div type="text" id="datepickerpickup"></div>
+                        </div>
+                        <div class="form-group m-t-15 timercontrol d-flex align-items-center">
+                          <select class="form-control timerselect" onchange="myFunctionpickup(event)">
+                            <option>9.00 am to 10:00 am</option>
+                            <option>10.00 am to 11:00 am</option>
+                            <option>11.00 am to 12:00 pm</option>
+                            <option>12.00 pm to 1:00 pm</option>
+                            <option>1.00 pm to 2:00 pm</option>
+                            <option>2.00 pm to 3:00 pm</option>
+                            <option>3.00 pm to 4:00 pm</option>
+                            <option>4.00 pm to 5:00 pm</option>
+                            <option>5.00 pm to 6:00 pm</option>
+                            <option>6.00 pm to 7:00 pm</option>
+                          </select>
+                        </div>
+
+
+                      </div>
                     </div>
                   </div>
                   <div class="action d-flex align-items-center">
@@ -351,7 +367,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 				/**
 				 * Hook: woocommerce_before_single_variation.
 				 */
-				//do_action( 'woocommerce_before_single_variation' );
+			///do_action( 'woocommerce_before_single_variation' );
 
 				/**
 				 * Hook: woocommerce_single_variation. Used to output the cart button and placeholder for variation data.

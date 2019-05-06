@@ -80,8 +80,9 @@ input.wcfm-checkbox-disabled, #wc_frontend_manager_associate_listings {
 }
 
 .vendor_capability p.description, .vendor_advanced_capability p.description {
-	color: #ccc;
+	color: #20a8d8;
 	margin-left: 5%;
+	margin-top: -15px;
 	font-weight: 300;
 }
 

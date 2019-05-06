@@ -30,7 +30,7 @@ $withdrawal_reverse = isset( $WCFMmp->wcfmmp_withdrawal_options['withdrawal_reve
 ?>
 <div class="collapse wcfm-collapse" id="wcfm_ledger_listing">
   <div class="wcfm-page-headig">
-		<span class="wcfmfa fa-money"></span>
+		<span class="wcfmfa fa-money-bill-alt"></span>
 		<span class="wcfm-page-heading-text"><?php _e( 'Ledger Book', 'wc-multivendor-marketplace' ); ?></span>
 		<?php do_action( 'wcfm_page_heading' ); ?>
 	</div>
@@ -59,6 +59,7 @@ $withdrawal_reverse = isset( $WCFMmp->wcfmmp_withdrawal_options['withdrawal_reve
 					<option value="withdraw-charges"><?php  _e( 'Charges', 'wc-multivendor-marketplace' ); ?></option>
 				</select>
 			</div>
+			<?php do_action( 'wcfm_ledger_quick_actions' ); ?>
 			<div class="wcfm-clearfix"></div>
 		</div>
 	  <div class="wcfm-clearfix"></div><br />

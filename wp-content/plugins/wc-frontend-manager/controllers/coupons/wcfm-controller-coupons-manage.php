@@ -64,6 +64,9 @@ class WCFM_Coupons_Manage_Controller {
 					$is_publish = true;
 				}
 				$new_coupon_id = wp_insert_post( $new_coupon, true );
+				
+				// Coupon Real Author
+				update_post_meta( $new_coupon_id, '_wcfm_coupon_author', get_current_user_id() );
 			} else { // For Update
 				$is_update = true;
 				$new_coupon['ID'] = $wcfm_coupon_manager_form_data['coupon_id'];

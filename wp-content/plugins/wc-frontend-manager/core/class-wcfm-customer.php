@@ -157,6 +157,7 @@ class WCFM_Customer {
 	  switch( $end_point ) {
 	  	case 'wcfm-customers':
       	$WCFM->library->load_datatable_lib();
+      	$WCFM->library->load_datatable_download_lib();
 	    	wp_enqueue_script( 'wcfm_customers_js', $WCFM->library->js_lib_url . 'customers/wcfm-script-customers.js', array('jquery', 'dataTables_js'), $WCFM->version, true );
 	    	
 	    	// Screen manager

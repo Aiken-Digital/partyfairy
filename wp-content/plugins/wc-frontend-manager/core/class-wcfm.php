@@ -47,6 +47,7 @@ class WCFM {
 	public $wcfm_notification;
 	public $wcfm_buddypress;
 	public $wcfm_product_popup;
+	public $wcfm_has_catalog;
 	
 	public $wcfm_options;
 

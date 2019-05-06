@@ -88,6 +88,9 @@ class WCFM_Customers_Manage_Controller {
 						$customer_id = wp_update_user( $user_data ) ;
 					} else {
 						$customer_id = wp_insert_user( $user_data ) ;
+						
+						// Customer Real Author
+						update_user_meta( $customer_id, '_wcfm_customer_author', get_current_user_id() );
 					}
 						
 					if( !$customer_id ) {

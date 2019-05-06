@@ -317,6 +317,8 @@ ul.product_taxonomy_checklist li {
 	margin-bottom: 2px !important;
 }
 
+#wc_360_images_heading, .wcfm_enable_360_images{margin-left:15px!important;}
+
 .sales_schedule_ele, .var_sales_schedule_ele { display: none !important; }
 .sales_schedule_ele_show, .var_sales_schedule_ele_show { display: inline-block !important; }
 

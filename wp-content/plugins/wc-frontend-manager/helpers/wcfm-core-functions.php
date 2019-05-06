@@ -646,6 +646,16 @@ if(!function_exists('get_wcfm_listings_url')) {
 	}
 }
 
+if(!function_exists('get_wcfm_applications_url')) {
+	function get_wcfm_applications_url( $listing_id = '' ) {
+		global $WCFM;
+		$wcfm_page = get_wcfm_page();
+		$wcfm_applications_dashboard_url = wcfm_get_endpoint_url( 'wcfm-applications', '', $wcfm_page );
+		if($listing_id) $wcfm_applications_dashboard_url = add_query_arg( 'listing_id', $listing_id, $wcfm_applications_dashboard_url );
+		return apply_filters( 'wcfm_applications_dashboard_url', $wcfm_applications_dashboard_url );
+	}
+}
+
 if(!function_exists('get_wcfm_bookings_dashboard_url')) {
 	function get_wcfm_bookings_dashboard_url( $booking_status = '' ) {
 		global $WCFM;
@@ -1045,6 +1055,7 @@ function wcfm_get_endpoint_url( $endpoint, $value = '', $permalink = '' ) {
 	
 	// WC 3.6 FIX
 	if( $endpoint == 'orders' ) $endpoint = 'orderslist';
+	if( $endpoint == 'subscriptions' ) $endpoint = 'subscriptionslist';
 
 	if ( get_option( 'permalink_structure' ) ) {
 		if ( strstr( $permalink, '?' ) ) {

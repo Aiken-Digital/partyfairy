@@ -221,7 +221,7 @@ class WCFMmp_Frontend {
 	/**
 	 * Store related product rule
 	 */
-	function wcfmmp_store_related_products( $query, $product_id) {
+	function wcfmmp_store_related_products( $query, $product_id ) {
 		global $WCFM, $WCFMmp;
 		
 		$store_related_products   =  isset( $WCFMmp->wcfmmp_marketplace_options['store_related_products'] ) ? $WCFMmp->wcfmmp_marketplace_options['store_related_products'] : 'default';

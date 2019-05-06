@@ -27,6 +27,8 @@ $admin_fee_mode = apply_filters( 'wcfm_is_admin_fee_mode', false );
 			if( ($WCFM->is_marketplace == 'wcfmmarketplace' ) && apply_filters( 'wcfm_add_new_vendor_sub_menu', true ) ) {
 				echo '<a id="add_new_vendor_dashboard" class="add_new_wcfm_ele_dashboard text_tip" href="'.get_wcfm_vendors_new_url().'" data-tip="' . __('Add New Vendor', 'wc-frontend-manager') . '"><span class="wcfmfa fa-user-alt"></span><span class="text">' . __( 'Add New', 'wc-frontend-manager') . '</span></a>';
 				echo '<a id="add_new_vendor_dashboard" class="add_new_wcfm_ele_dashboard text_tip" href="'.get_wcfm_messages_url( 'vendor_approval' ).'" data-tip="' . __('Pending Vendors', 'wc-frontend-manager') . '"><span class="wcfmfa fa-user-times"></span><span class="text">' . __( 'Pending Vendors', 'wc-frontend-manager') . '</span></a>';
+				
+				do_action( 'wcfm_vendors_quick_actions' );
 			}
 			?>
 			<div class="wcfm-clearfix"></div>

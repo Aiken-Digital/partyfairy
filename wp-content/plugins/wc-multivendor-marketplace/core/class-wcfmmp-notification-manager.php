@@ -336,7 +336,7 @@ class WCFMmp_Notification_Manager {
     
     if( $message_to_user === 'vendor' ) {
       //$to_user = 'test';
-        $response = $this->send_push_notification($notification_message, $to_user);
+        $this->send_push_notification($notification_message, $to_user);
       //wcfm_log(json_encode($response));
     } 
     
@@ -348,7 +348,7 @@ class WCFMmp_Notification_Manager {
     $body->contents = array( 'en' => $notification_message );
     $body->include_external_user_ids = array($to_user);
     $bodyAsJson=json_encode($body);
-    $response=wp_remote_post("https://onesignal.com/api/v1/notifications", array(
+    $response = wp_remote_post("https://onesignal.com/api/v1/notifications", array(
         'method' => 'POST',
         'timeout' => 45,
         'redirection' => 5,
@@ -356,10 +356,10 @@ class WCFMmp_Notification_Manager {
         'blocking' => true,
         'headers' => array("Content-type" => "application/json;charset=UTF-8",
             "Authorization" => "Basic YzA3MWY0ZTctZmVkOC00OTE2LWJiMzEtMzM1YzJhNzc1M2Zh"),
-        'body' =>$bodyAsJson,
+        'body' => $bodyAsJson,
       )
     );
-    return $response['body'];
+    //return $response['body'];
 	}
 	
 	function wcfmmp_delivery_boy_send_notification_sms( $order_id, $order_item_id, $wcfm_tracking_data, $product_id, $wcfm_delivery_boy, $wcfm_messages ) {

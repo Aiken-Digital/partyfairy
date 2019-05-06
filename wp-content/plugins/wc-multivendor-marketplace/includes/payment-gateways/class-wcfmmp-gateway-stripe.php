@@ -99,6 +99,7 @@ class WCFMmp_Gateway_Stripe extends WCFMmp_Abstract_Gateway {
 					'amount' => $this->get_stripe_amount(),
 					'currency' => $this->currency,
 					'destination' => $this->stripe_user_id,
+					'description' => __('Payout for withdrawal ID #', 'wc-multivendor-marketplace') . sprintf( '%06u', $this->withdrawal_id )
 			);
 			$transfer_args = wp_parse_args($args, $transfer_args);
 			$transfer = Transfer::create($transfer_args);

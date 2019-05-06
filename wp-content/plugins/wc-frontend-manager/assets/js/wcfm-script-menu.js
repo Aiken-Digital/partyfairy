@@ -352,13 +352,37 @@ jQuery( document ).ready( function( $ ) {
 		setTimeout( function() {  unwrapSelect(); }, 500 );
 	}
 	
-	setTimeout( function() { 
+	function restrictNonNegativeInput() {
+	  $('.wcfm_non_negative_input').each(function() {
+	    $(this).on('change, keypress', function() {
+	    	$nval = $(this).val();
+	    	if( $nval < 0 ) $(this).val(0);
+	    });
+	    $(this).on('keydown', function(e) {
+				if(!((e.keyCode > 95 && e.keyCode < 106)
+					|| (e.keyCode > 47 && e.keyCode < 58) 
+					|| e.keyCode == 8
+					|| e.keyCode == 110
+					|| e.keyCode == 190
+					|| e.keyCode == 46
+					|| e.keyCode == 37
+					|| e.keyCode == 39)) {
+						return false;
+				}
+			});
+	  });
+	  setTimeout( function() {  restrictNonNegativeInput(); }, 500 );
+	}
+	
+	setTimeout( function() {
 		$('#wcfm-main-contentainer').find('select').each(function() {
 			if ( $(this).parent().is( "span" ) || $(this).parent().is( "label" ) ) {
 			  $(this).css( 'padding', '5px' ).css( 'min-width', '15px' ).css( 'min-height', '35px' ).css( 'padding-top', '5px' ).css( 'padding-right', '5px' ); //.change();
 			}
 		});
 		unwrapSelect();
+		
+		restrictNonNegativeInput();
 	}, 500 );
 	
 	// Menu Tip
