@@ -346,7 +346,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 <button type="submit" class="btn btn-main btn-solid w-100 p-t-15 p-b-15 tocart" title="Add to Cart"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
 
 
-
+<?php echo do_shortcode("[yith_wcwl_add_to_wishlist]") ?>
 
 
                     <a class="icon icon-md m-l-20" href="#"><xml version="1.0" encoding="UTF-8">
