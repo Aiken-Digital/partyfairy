@@ -76,3 +76,27 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 div#customer_shipping {
     margin-top: 30px;
 }
+
+.action.d-flex.align-items-center {
+    margin-top: 15px;
+}
+
+
+
+.yith-wcwl-add-to-wishlist.add-to-wishlist-17 svg {
+    width: 30px;
+}
+
+
+a.icon.icon-md.m-l-20 {
+    text-decoration: none;
+}
+
+img#ic-w-pf {
+    width: 30px;
+}
+
+a#bt-ic-w-pf {
+    text-decoration: none;
+    margin-left: 20px;
+}
