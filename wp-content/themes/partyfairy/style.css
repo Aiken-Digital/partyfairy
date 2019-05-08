@@ -100,3 +100,9 @@ a#bt-ic-w-pf {
     text-decoration: none;
     margin-left: 20px;
 }
+
+
+label.woocommerce-form__label.woocommerce-form__label-for-checkbox.woocommerce-form-login__rememberme span {
+    margin-left: 30px !important;
+    margin-right: 15px;
+}
