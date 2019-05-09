@@ -141,69 +141,82 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
                           </div>
 
 
+                          <?php $detail = get_field('detail', get_option('page_for_posts')); 
+            if($detail) {  ?>
+
                           <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab">
+                           
+<?php foreach ($detail as $key => $value) { ?>
+
                             <div class="row m-b-15">
                               <div class="col-4">
                                 <div>
-                                  <p class="uppercase">WHAT'S INCLUDED</p>
+                                  <p class="uppercase"><?php if($value['title']) { echo $value['title']; } ?></p>
                                 </div>
                               </div>
                               <div class="col-8">
                                 <div>
-                                  <p>Complementary candle(s) included.</p>
+                                
                                   <div class="d-flex align-items-center">
-                                    <div class="icon m-r-10">﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                                  <div class="icon m-r-10">﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
     <path style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans" d="M 1 3 L 1 4 L 1 14 L 1 15 L 2 15 L 3 15 L 3 47 L 3 48 L 4 48 L 46 48 L 47 48 L 47 47 L 47 15 L 48 15 L 49 15 L 49 14 L 49 4 L 49 3 L 48 3 L 2 3 L 1 3 z M 3 5 L 47 5 L 47 13 L 3 13 L 3 5 z M 5 15 L 45 15 L 45 46 L 5 46 L 5 15 z M 17.5 19 C 15.578812 19 14 20.578812 14 22.5 C 14 24.421188 15.578812 26 17.5 26 L 32.5 26 C 34.421188 26 36 24.421188 36 22.5 C 36 20.578812 34.421188 19 32.5 19 L 17.5 19 z M 17.5 21 L 32.5 21 C 33.340812 21 34 21.659188 34 22.5 C 34 23.340812 33.340812 24 32.5 24 L 17.5 24 C 16.659188 24 16 23.340812 16 22.5 C 16 21.659188 16.659188 21 17.5 21 z" overflow="visible" enable-background="accumulate" font-family="Bitstream Vera Sans"/>
 </svg>
                                     </div>
-                                    <p>Disposable knives</p>
+                                    <?php if($value['description']) { echo $value['description']; } ?>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                            <div class="row m-b-15">
-                              <div class="col-4">
-                                <div>
-                                  <p class="uppercase">notes</p>
-                                </div>
-                              </div>
-                              <div class="col-8">
-                                <div>
-                                  <ul>
-                                    <li>Serving size guideline:</li>
-                                    <li>1kg: For up to 10 pax</li>
-                                    <li>1.5kg - 2kg: For 10 to 20 pax</li>
-                                    <li>2.5kg: For 20 to 30 pax</li>
-                                    <li>3kg: For 30 to 40 pax</li>
-                                    <li>3.5kg: For 40 to 50 pax</li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </div>
+<?php } ?>
+              
                           </div>
 
+            <?php } ?>
 
-                          
-                          <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3-tab">
-                            <div class="row">
+
+
+
+
+            <?php $policies = get_field('policies', get_option('page_for_posts')); 
+            if($policies) {  ?>
+
+<div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3-tab">
+                           
+<?php foreach ($policies as $key => $value) { ?>
+
+                            <div class="row m-b-15">
                               <div class="col-4">
-                                <div class="d-flex align-items-center">
+
+                              <div class="d-flex align-items-center">
                                   <div class="icon m-r-10">﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
     <path style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans" d="M 1 3 L 1 4 L 1 14 L 1 15 L 2 15 L 3 15 L 3 47 L 3 48 L 4 48 L 46 48 L 47 48 L 47 47 L 47 15 L 48 15 L 49 15 L 49 14 L 49 4 L 49 3 L 48 3 L 2 3 L 1 3 z M 3 5 L 47 5 L 47 13 L 3 13 L 3 5 z M 5 15 L 45 15 L 45 46 L 5 46 L 5 15 z M 17.5 19 C 15.578812 19 14 20.578812 14 22.5 C 14 24.421188 15.578812 26 17.5 26 L 32.5 26 C 34.421188 26 36 24.421188 36 22.5 C 36 20.578812 34.421188 19 32.5 19 L 17.5 19 z M 17.5 21 L 32.5 21 C 33.340812 21 34 21.659188 34 22.5 C 34 23.340812 33.340812 24 32.5 24 L 17.5 24 C 16.659188 24 16 23.340812 16 22.5 C 16 21.659188 16.659188 21 17.5 21 z" overflow="visible" enable-background="accumulate" font-family="Bitstream Vera Sans"/>
 </svg>
                                   </div>
-                                  <p class="uppercase m-b-0">Returns </p>
+                                  <p class="uppercase m-b-0"><?php if($value['title']) { echo $value['title']; } ?></p>
                                 </div>
+
+                           
                               </div>
                               <div class="col-8">
                                 <div>
-                                  <p><strong>The following item cant't be returned or exchanged.</strong></p>
-                                  <p>Because of the nature of these items, unless they arrive damaged or defective, I cant't accept returns.</p>
+                                
+                              
+                                    <?php if($value['description']) { echo $value['description']; } ?>
+                                  
                                 </div>
                               </div>
                             </div>
+<?php } ?>
+              
                           </div>
 
+            <?php } ?>
+
+
+
+
+ 
+            
 
 
                         </div>
@@ -229,7 +242,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
 
                 <div class="product-info product-info-main-form">
-                  <div class="product-info--price m-b-15"><span>$</span><span class="m-r-5"><?php echo $product->get_price_html(); ?></span><span class="font-12">each</span></div>
+                  <div class="product-info--price m-b-15"><span class="m-r-5"><?php echo $product->get_price_html(); ?></span><span class="font-12">each</span></div>
                   <div class="product-info--datenote m-b-45">
                     <div class="d-flex align-items-center">
                       <div class="icon m-r-10">﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">

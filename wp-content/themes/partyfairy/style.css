@@ -87,6 +87,10 @@ div#customer_shipping {
     width: 30px;
 }
 
+a.icon.icon-md.m-l-20.add_to_wishlist svg {
+    width: 30px;
+}
+
 
 a.icon.icon-md.m-l-20 {
     text-decoration: none;

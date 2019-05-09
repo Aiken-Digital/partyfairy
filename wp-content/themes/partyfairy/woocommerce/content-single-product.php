@@ -79,12 +79,12 @@ if ( post_password_required() ) {
 
 while ( $product_image->have_posts() ) : $product_image->the_post(); 
   global $product; 
-
+  $product = wc_get_product( get_the_ID());
   ?>
 
                             <div class="tiles-box p-l-15 p-r-15"><a class="tiles--single" href="<?php the_permalink() ?> ?>">
                                 <div class="tiles--single--img border-line"><img class="img-fluid" src="<?php if ( has_post_thumbnail() ) {the_post_thumbnail_url('full'); } else { echo get_template_directory_uri().'/images/broken/img-not-available-landscape.png'; } ?>"></div><a class="tiles--single--achor font-12" href=""><?php the_title() ?></a></a>
-                              <div class="tiles--quatity font-normal">FROM S$210</div>
+                              <div class="tiles--quatity font-normal"><?php $price = $product->get_price();  if($price){ echo 'FROM $'.$price; } ?></div>
                             </div>
                 
 <?php endwhile; wp_reset_postdata(); else :?> 
