@@ -786,6 +786,25 @@ if( function_exists('acf_add_local_field_group') ):
 					),
 				),
 			),
+			array(
+				'key' => 'field_5cd51c6691d6e',
+				'label' => 'Delivery Take',
+				'name' => 'delivery_take',
+				'type' => 'text',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'maxlength' => '',
+			),
 		),
 		'location' => array(
 			array(
@@ -1358,5 +1377,5 @@ if( function_exists('acf_add_local_field_group') ):
 	));
 	
 	endif;
-
-	?>
+	
+?>

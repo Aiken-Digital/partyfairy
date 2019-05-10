@@ -57,21 +57,31 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
                           <?php the_content() ?>
   
 
-
+<?php  $detail = get_field('detail', get_option('page_for_posts')); 
+       $policies = get_field('policies', get_option('page_for_posts')); ?>
 
 
                  <div class="pf-product--btm">
 
                         <ul class="nav nav-pills m-b-30" id="pills-tab" role="tablist">
+                          
+                  <?php if($detail or $policies != ""){ ?>
                           <li class="nav-item">
                             <a class="nav-link active" data-toggle="pill" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Select Options</a>
                           </li>
+
+<?php } if($detail) { ?>
+
                           <li class="nav-item">
                             <a class="nav-link" data-toggle="pill" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">Details</a>
                           </li>
+
+  <?php } if($policies){ ?>
                           <li class="nav-item">
                             <a class="nav-link" data-toggle="pill" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">Policies</a>
                           </li>
+
+  <?php } ?>
                         </ul>
 
                         <div class="tab-content m-b-15">
@@ -127,8 +137,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
                                 </div>
                               </div>
                             </div>
-
-
+                     
                            	<div  class="row m-b-30">
                            		<div class="col-12">
 									<center>
@@ -141,7 +150,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
                           </div>
 
 
-                          <?php $detail = get_field('detail', get_option('page_for_posts')); 
+                          <?php 
             if($detail) {  ?>
 
                           <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab">
@@ -177,7 +186,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
 
 
-            <?php $policies = get_field('policies', get_option('page_for_posts')); 
+            <?php 
             if($policies) {  ?>
 
 <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3-tab">
@@ -243,13 +252,19 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
                 <div class="product-info product-info-main-form">
                   <div class="product-info--price m-b-15"><span class="m-r-5"><?php echo $product->get_price_html(); ?></span><span class="font-12">each</span></div>
+                  <div id="product-cp"><?php do_action( 'woocommerce_single_variation' );?></div>
+              
                   <div class="product-info--datenote m-b-45">
                     <div class="d-flex align-items-center">
+                    <?php $dt = get_field('delivery_take',get_option('page_for_posts')) ;
+                    
+                    if ($dt !="") { ?>
                       <div class="icon m-r-10">﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
     <path style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans" d="M 1 3 L 1 4 L 1 14 L 1 15 L 2 15 L 3 15 L 3 47 L 3 48 L 4 48 L 46 48 L 47 48 L 47 47 L 47 15 L 48 15 L 49 15 L 49 14 L 49 4 L 49 3 L 48 3 L 2 3 L 1 3 z M 3 5 L 47 5 L 47 13 L 3 13 L 3 5 z M 5 15 L 45 15 L 45 46 L 5 46 L 5 15 z M 17.5 19 C 15.578812 19 14 20.578812 14 22.5 C 14 24.421188 15.578812 26 17.5 26 L 32.5 26 C 34.421188 26 36 24.421188 36 22.5 C 36 20.578812 34.421188 19 32.5 19 L 17.5 19 z M 17.5 21 L 32.5 21 C 33.340812 21 34 21.659188 34 22.5 C 34 23.340812 33.340812 24 32.5 24 L 17.5 24 C 16.659188 24 16 23.340812 16 22.5 C 16 21.659188 16.659188 21 17.5 21 z" overflow="visible" enable-background="accumulate" font-family="Bitstream Vera Sans"/>
 </svg>
                       </div>
-                      <p class="m-b-0">Delivery will be take place in 4 to 6 working days.</p>
+                      <p class="m-b-0"><?php echo $dt;?></p>
+                    <?php } ?>
                     </div>
                   </div>
 
@@ -373,13 +388,12 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
         
 <?php do_action( 'woocommerce_after_single_variation' ); ?>      
 
-<!-- 
-		<div class="single_variation_wrap"> -->
+		<!-- <div class="single_variation_wrap">  -->
 			<?php
 				/**
 				 * Hook: woocommerce_before_single_variation.
 				 */
-			///do_action( 'woocommerce_before_single_variation' );
+			//do_action( 'woocommerce_before_single_variation' );
 
 				/**
 				 * Hook: woocommerce_single_variation. Used to output the cart button and placeholder for variation data.
@@ -395,7 +409,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 				 */
 				//do_action( 'woocommerce_after_single_variation' );
 			?>
-	<!-- 	</div> -->
+ 	<!-- </div>  -->
 
 
 

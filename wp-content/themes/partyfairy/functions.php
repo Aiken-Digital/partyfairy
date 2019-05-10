@@ -197,3 +197,15 @@ function iconic_add_engraving_text_to_order_items( $item, $cart_item_key, $value
 }
 
 add_action( 'woocommerce_checkout_create_order_line_item', 'iconic_add_engraving_text_to_order_items', 10, 4 );
+
+
+// define the woocommerce_single_variation callback 
+function action_woocommerce_single_variation(  ) { 
+  // make action magic happen here...
+  
+remove_action('woocommerce_single_variation', 'woocommerce_single_variation_add_to_cart_button', 20); // REMOVING ADD TO CART BUTTON FROM VARIATIONS
+
+}; 
+       
+// add the action 
+add_action( 'woocommerce_single_variation', 'action_woocommerce_single_variation', 10, 0 ); 

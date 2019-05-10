@@ -50,7 +50,11 @@ if ( post_password_required() ) {
             ?>
 
 
-  <?php do_action('woocommerce_variable_add_to_cart'); ?>
+  <?php 
+  do_action('woocommerce_variable_add_to_cart');
+   
+  
+  ?>
 
 
 
