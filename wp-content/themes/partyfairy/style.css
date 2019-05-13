@@ -175,3 +175,7 @@ nav.woocommerce-MyAccount-navigation ul li a {
 li.woocommerce-MyAccount-navigation-link.is-active a:hover {
     color: black;
 }
+
+nav.woocommerce-MyAccount-navigation ul li a:hover {
+    color: #ebe9eb;
+}
