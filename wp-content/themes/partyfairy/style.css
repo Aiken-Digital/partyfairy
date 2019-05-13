@@ -160,3 +160,7 @@ nav.woocommerce-MyAccount-navigation ul {
     margin-left: auto;
     margin-right: auto;
 }
+
+.woocommerce-MyAccount-content {
+    margin-bottom: 30px;
+}
