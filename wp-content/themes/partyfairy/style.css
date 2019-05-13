@@ -149,7 +149,7 @@ li.woocommerce-MyAccount-navigation-link.is-active {
     background-color: #62bdf0;
 }
 
-li.woocommerce-MyAccount-navigation-link.woocommerce-MyAccount-navigation-link--orders.is-active a {
+li.woocommerce-MyAccount-navigation-link.is-active a {
     color: white;
     padding-left: 5px;
     padding-right: 5px;
