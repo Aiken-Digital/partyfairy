@@ -162,6 +162,16 @@ nav.woocommerce-MyAccount-navigation ul {
     margin-right: auto;
 }
 
+nav.woocommerce-MyAccount-navigation ul li a {
+    text-decoration: none;
+}
+
+
 .woocommerce-MyAccount-content {
     margin-bottom: 30px;
+}
+
+
+li.woocommerce-MyAccount-navigation-link.is-active a:hover {
+    color: black;
 }
