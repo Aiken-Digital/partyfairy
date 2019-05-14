@@ -1,5 +1,4 @@
 <?php
-
 if( function_exists('acf_add_local_field_group') ):
 
 	acf_add_local_field_group(array(
@@ -788,7 +787,7 @@ if( function_exists('acf_add_local_field_group') ):
 			),
 			array(
 				'key' => 'field_5cd51c6691d6e',
-				'label' => 'Delivery Take',
+				'label' => 'Delivery Notes',
 				'name' => 'delivery_take',
 				'type' => 'text',
 				'instructions' => '',
@@ -1377,5 +1376,5 @@ if( function_exists('acf_add_local_field_group') ):
 	));
 	
 	endif;
-	
-?>
+
+	?>
