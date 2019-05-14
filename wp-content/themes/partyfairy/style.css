@@ -185,3 +185,8 @@ li#trial {
     padding: 10px;
     width: 100%;
 }
+
+.wcfm_membership_thankyou_content {
+    padding: 10px !important;
+    background-color: #eaf3ff;
+}
