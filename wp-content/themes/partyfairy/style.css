@@ -215,3 +215,7 @@ img.stripe-icon {
     width: 40px;
     height: 25px;
 }
+
+p.form-row.woocommerce-SavedPaymentMethods-saveNew.woocommerce-validated label {
+    padding-left: 30px;
+}
