@@ -195,3 +195,18 @@ li#trial {
 #wcfm-main-contentainer .wcfm_membership_thankyou_content_wrapper {
     background-color: transparent !important;
 }
+
+.wcfmmp_become_vendor_link {
+    text-align: center;
+    background-color: #5fbcf0;
+    width: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2px;
+    border-radius: 6px;
+}
+
+.wcfmmp_become_vendor_link a {
+    color: white;
+    text-decoration: none;
+}
