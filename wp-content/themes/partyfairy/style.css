@@ -207,6 +207,6 @@ li#trial {
 }
 
 .wcfmmp_become_vendor_link a {
-    color: white;
+    color: white !important;
     text-decoration: none;
 }
