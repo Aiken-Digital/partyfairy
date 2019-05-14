@@ -65,6 +65,8 @@ class WCFM_Enquiry_Tab_Controller {
 	  	if( isset( $wcfm_enquiry_tab_form_data['vendor_id'] ) && !empty( $wcfm_enquiry_tab_form_data['vendor_id'] ) ) {
 	  		$vendor_id = absint( $wcfm_enquiry_tab_form_data['vendor_id'] );
 	  		$author_id = $vendor_id;
+	  	} elseif( wcfm_is_vendor( $author_id ) ) {
+	  		$vendor_id = $author_id;
 	  	}
 	  	
 	  	if( !is_user_logged_in() ) {

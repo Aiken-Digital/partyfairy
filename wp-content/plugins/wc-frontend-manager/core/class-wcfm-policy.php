@@ -187,7 +187,7 @@ class WCFM_Policy {
 				} else {
 					$wpeditor = 'textarea';
 				}
-				$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_settings_fields_policies', array(
+				$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_vendor_settings_fields_policies', array(
 					                                                                        "wcfm_policy_tab_title" => array('label' => __('Policy Tab Label', 'wc-frontend-manager') , 'type' => 'text', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $_wcfm_vendor_policy_tab_title ),
 																																									"wcfm_shipping_policy" => array('label' => __('Shipping Policy', 'wc-frontend-manager'), 'type' => $wpeditor, 'class' => 'wcfm-textarea wcfm_ele wcfm_full_ele wcfm_custom_field_editor ' . $rich_editor, 'label_class' => 'wcfm_title wcfm_full_title', 'value' => $_wcfm_vendor_shipping_policy ),
 																																									"wcfm_refund_policy" => array('label' => __('Refund Policy', 'wc-frontend-manager'), 'type' => $wpeditor, 'class' => 'wcfm-textarea wcfm_ele wcfm_full_ele wcfm_custom_field_editor ' . $rich_editor, 'label_class' => 'wcfm_title wcfm_full_title', 'value' => $_wcfm_vendor_refund_policy ),
@@ -331,7 +331,7 @@ class WCFM_Policy {
 				} else {
 					$wpeditor = 'textarea';
 				}
-				$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'product_manage_fields_policies', array(  
+				$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_product_manage_fields_policies', array(  
 																																														"wcfm_policy_tab_title" => array('label' => __('Policy Tab Label', 'wc-frontend-manager') , 'type' => 'text', 'class' => 'wcfm-text wcfm_ele simple variable external grouped booking', 'label_class' => 'wcfm_title wcfm_ele simple variable external grouped booking', 'value' => $_wcfm_product_policy_tab_title ),
 																																														"wcfm_shipping_policy" => array('label' => __('Shipping Policy', 'wc-frontend-manager'), 'type' => $wpeditor, 'class' => 'wcfm-textarea wcfm_ele simple variable external grouped booking wcfm_full_ele wcfm_custom_field_editor ' . $rich_editor, 'label_class' => 'wcfm_title wcfm_full_ele', 'value' => $_wcfm_product_shipping_policy ),
 																																														"wcfm_refund_policy" => array('label' => __('Refund Policy', 'wc-frontend-manager'), 'type' => $wpeditor, 'class' => 'wcfm-textarea wcfm_ele simple variable external grouped booking wcfm_full_ele wcfm_custom_field_editor ' . $rich_editor, 'label_class' => 'wcfm_title wcfm_full_ele', 'value' => $_wcfm_product_refund_policy ),

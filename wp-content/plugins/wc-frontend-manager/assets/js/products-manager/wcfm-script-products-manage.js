@@ -661,6 +661,10 @@ jQuery( document ).ready( function( $ ) {
 		return false;
 	});
 	
+	if($('.wcfm_category_attributes_mapping_msg').length > 0) {
+		$('#attributes').append($('.wcfm_category_attributes_mapping_msg'));
+		//$('.wcfm_category_attributes_mapping_msg').remove();
+	}
 	if($('.wcfm_select_attributes').length > 0) {
 		$('.wcfm_select_attributes').each(function() {
 			$('#attributes').append($(this).html());

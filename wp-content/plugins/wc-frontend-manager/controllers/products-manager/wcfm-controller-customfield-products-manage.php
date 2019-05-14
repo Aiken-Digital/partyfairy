@@ -25,7 +25,7 @@ class WCFM_Custom_Field_Products_Manage_Controller {
 		global $WCFM;
 		
 		// Product Custom Fields
-		$wcfm_product_custom_fields = (array) get_option( 'wcfm_product_custom_fields' );
+		$wcfm_product_custom_fields = get_option( 'wcfm_product_custom_fields', array() );
 		if( $wcfm_product_custom_fields && is_array( $wcfm_product_custom_fields ) && !empty( $wcfm_product_custom_fields ) ) {
 			foreach( $wcfm_product_custom_fields as $wcfm_product_custom_field ) {
 				$is_group = !empty( $wcfm_product_custom_field['group_name'] ) ? 'yes' : 'no';

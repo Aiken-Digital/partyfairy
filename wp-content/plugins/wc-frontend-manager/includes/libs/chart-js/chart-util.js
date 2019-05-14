@@ -20,6 +20,8 @@ window.chartColors = {
 	purple: 'rgb(153, 102, 255)',
 	grey: 'rgb(201, 203, 207)',
 	refund: 'rgb(232, 62, 140)',
+	withdrawal: 'rgb(77, 189, 116)',
+	tax: 'rgb(115, 129, 143)',
 	shipping: 'rgb(111, 66, 193)'
 };
 

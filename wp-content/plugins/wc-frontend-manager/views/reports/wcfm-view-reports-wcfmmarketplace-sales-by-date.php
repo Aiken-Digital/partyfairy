@@ -60,12 +60,13 @@ $ranges = array(
 );
 
 $wcfm_report_sales_by_date->chart_colors = apply_filters( 'wcfm_vendor_sales_by_date_chart_colors', array(
-			'average'          => '#95a5a6',
-			'order_count'      => '#f8cb00',
-			'item_count'       => '#ffc107',
-			'shipping_amount'  => '#20a8d8',
-			'earned'           => '#20a8d8',
-			'commission'       => '#20c997',
+			'average'            => '#95a5a6',
+			'order_count'        => '#f8cb00',
+			'item_count'         => '#ffc107',
+			'tax_amount'         => '#73818f',
+			'shipping_amount'    => '#6f42c1',
+			'earned'             => '#20a8d8',
+			'commission'         => '#20c997',
 			'gross_sales_amount' => '#3498db',
 			'refund'             => '#e83e8c',
 		) );

@@ -103,7 +103,8 @@ class WCFM_Vendors_Controller {
 				if( WCFM_Dependencies::wcfmu_plugin_active_check() ) {
 					if( apply_filters( 'wcfm_is_pref_vendor_verification', true ) ) {
 						global $WCFMu;
-						$verification_label .= $WCFMu->wcfmu_vendor_support->wcfm_show_verified_seller_badge( $wcfm_vendors_id, '', 'get' );
+						//$verification_label .= $WCFMu->wcfmu_vendor_support->wcfm_show_verified_seller_badge( $wcfm_vendors_id, '', 'get' );
+						$verification_label .= $WCFMu->vendor_verification->show_verified_seller_badge( $wcfm_vendors_id, '', 'get' );
 					}
 				}
 				$wcfm_vendors_json_arr[$index][] =  $verification_label;

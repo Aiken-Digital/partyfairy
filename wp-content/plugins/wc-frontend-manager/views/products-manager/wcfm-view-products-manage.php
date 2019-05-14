@@ -465,6 +465,8 @@ if( count( $product_types ) == 0 ) {
 			<div class="wcfm-container simple variable external grouped booking">
 				<div id="wcfm_products_manage_form_general_expander" class="wcfm-content">
 				  <div class="wcfm_product_manager_general_fields">
+				    <?php do_action( 'wcfm_product_manager_left_panel_before', $product_id ); ?>
+				    
 						<?php
 							$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_product_manage_fields_general', array(
 																																																"product_type" => array('type' => 'select', 'options' => $product_types, 'class' => 'wcfm-select wcfm_ele wcfm_product_type simple variable external grouped booking ' . $product_type_class, 'label_class' => 'wcfm_title wcfm_ele simple variable external grouped booking', 'value' => $product_type ),
@@ -565,9 +567,11 @@ if( count( $product_types ) == 0 ) {
 								}
 							}
 							?>
+							
+							<?php do_action( 'after_wcfm_products_manage_taxonomies', $product_id ); ?>
 						<?php } ?>
 						
-						<?php do_action( 'after_wcfm_products_manage_taxonomies', $product_id ); ?>
+						
 						
 						<?php if( apply_filters( 'wcfm_is_category_checklist', true ) ) { ?>
 							<div class="wcfm_clearfix"></div><br />
@@ -586,10 +590,14 @@ if( count( $product_types ) == 0 ) {
 																																																			"pro_id" => array('type' => 'hidden', 'value' => $product_id)
 																																															), $product_id, $product_type ) );
 								?>
+								
+								<?php do_action( 'wcfm_product_manager_left_panel_after', $product_id ); ?>
 							</div>
 						<?php } ?>
 					</div>
 					<div class="wcfm_product_manager_gallery_fields">
+					  <?php do_action( 'wcfm_product_manager_right_panel_before', $product_id ); ?>
+					  
 					  <?php
 					  if( $wcfm_is_allow_featured = apply_filters( 'wcfm_is_allow_featured', true ) ) {
 					  	$gallerylimit = apply_filters( 'wcfm_gallerylimit', -1 );
@@ -754,9 +762,11 @@ if( count( $product_types ) == 0 ) {
 									}
 								}
 							?>
+							
+							<?php do_action( 'after_wcfm_products_manage_taxonomies', $product_id ); ?>
 						<?php } ?>
 						
-						<?php do_action( 'wcfm_product_manager_gallery_fields_end', $product_id ); ?>
+						<?php do_action( 'wcfm_product_manager_right_panel_after', $product_id ); ?>
 					</div>
 				</div>
 				
@@ -777,6 +787,8 @@ if( count( $product_types ) == 0 ) {
 																																																		"pro_id" => array('type' => 'hidden', 'value' => $product_id)
 																																														), $product_id, $product_type ) );
 							?>
+							
+							<?php do_action( 'wcfm_product_manager_left_panel_after', $product_id ); ?>
 						</div>
 					</div>
 				<?php } ?>

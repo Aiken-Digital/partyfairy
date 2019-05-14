@@ -1509,27 +1509,33 @@ class WCFM_Library {
 		global $WCFM;
 		
 		foreach ( $product_taxonomies as $cat ) {
+			
 			if( apply_filters( 'wcfm_is_allow_hide_uncatorized', false ) && ( $cat->slug == 'uncategorized' ) ) continue;
+			
 			$checklis_label_class = '';
+			$cat_group_class = '';
+			
 			if( !$is_children ) {
 				$super_parent = 0;
 				$wcfm_allowed_taxonomies = apply_filters( 'wcfm_allowed_taxonomies', true, $taxonomy, $cat->term_id );
 				if( !$wcfm_allowed_taxonomies ) continue; //$checklis_label_class = 'product_cats_checklist_item_hide_by_cap';
 			}
+			
+			if( !$super_parent ) $super_parent = $cat->term_id;
+			$cat_group_class = 'wcfm_cat_option_' . $super_parent;
+				
 			if( $is_checklist ) {
 				echo '<li class="product_cats_checklist_item checklist_item_' . esc_attr( $cat->term_id ) . '" data-item="' . esc_attr( $cat->term_id ) . '">';
 				if( !$nbsp ) echo '<span class="wcfmfa fa-arrow-circle-right sub_checklist_toggler"></span>';
 				if( $is_custom ) {
 					$ptax_custom_arrtibutes = apply_filters( 'wcfm_taxonomy_custom_attributes', array(), $taxonomy );
-					echo '<label class="selectit">' . $nbsp . '<input type="checkbox" class="wcfm-checkbox ' . $checklis_label_class . '" name="product_custom_taxonomies[' . $taxonomy . '][]" value="' . esc_attr( $cat->term_id ) . '"' . checked( in_array( $cat->term_id, $selected_taxonomies ), true, false ) . ' ' . implode( ' ', $ptax_custom_arrtibutes ) . '/>' . __( esc_html( $cat->name ), 'wc-frontend-manager' ) . '</label>';
+					echo '<label class="selectit ' . $cat_group_class . '">' . $nbsp . '<input type="checkbox" data-super_parent="' . $super_parent . '" class="wcfm-checkbox checklist_type_' . $taxonomy . ' ' . $checklis_label_class . '" name="product_custom_taxonomies[' . $taxonomy . '][]" value="' . esc_attr( $cat->term_id ) . '"' . checked( in_array( $cat->term_id, $selected_taxonomies ), true, false ) . ' ' . implode( ' ', $ptax_custom_arrtibutes ) . '/>' . __( esc_html( $cat->name ), 'wc-frontend-manager' ) . '</label>';
 				} else {
 					$ptax_custom_arrtibutes = apply_filters( 'wcfm_taxonomy_custom_attributes', array(), $taxonomy );
-					echo '<label class="selectit">' . $nbsp . '<input type="checkbox" class="wcfm-checkbox ' . $checklis_label_class . '" name="product_cats[]" value="' . esc_attr( $cat->term_id ) . '"' . checked( in_array( $cat->term_id, $selected_taxonomies ), true, false ) . ' ' . implode( ' ', $ptax_custom_arrtibutes ) . '/><span>' . __( esc_html( $cat->name ), 'wc-frontend-manager' ) . '</span></label>';
+					echo '<label class="selectit ' . $cat_group_class . '">' . $nbsp . '<input type="checkbox" data-super_parent="' . $super_parent . '" class="wcfm-checkbox checklist_type_' . $taxonomy . ' ' . $checklis_label_class . '" name="product_cats[]" value="' . esc_attr( $cat->term_id ) . '"' . checked( in_array( $cat->term_id, $selected_taxonomies ), true, false ) . ' ' . implode( ' ', $ptax_custom_arrtibutes ) . '/><span>' . __( esc_html( $cat->name ), 'wc-frontend-manager' ) . '</span></label>';
 				}
 			} else {
-				if( !$super_parent ) $super_parent = $cat->term_id;
-				$cat_group_class = 'wcfm_cat_option_' . $super_parent;
-				echo '<option class=" ' . $cat_group_class . ' " value="' . esc_attr( $cat->term_id ) . '"' . selected( in_array( $cat->term_id, $selected_taxonomies ), true, false ) . '>' . $nbsp . __( esc_html( $cat->name ), 'wc-frontend-manager' ) . '</option>';
+				echo '<option class=" ' . $cat_group_class . '" data-super_parent="' . $super_parent . '" value="' . esc_attr( $cat->term_id ) . '"' . selected( in_array( $cat->term_id, $selected_taxonomies ), true, false ) . '>' . $nbsp . __( esc_html( $cat->name ), 'wc-frontend-manager' ) . '</option>';
 			}
 			
 			$is_hierarchical = apply_filters( 'wcfm_is_allow_taxonomy_hierarchy', $is_hierarchical, $taxonomy, $cat->term_id );

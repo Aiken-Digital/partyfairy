@@ -263,6 +263,14 @@ class WCFM_Marketplace_Report_Sales_By_Date extends WC_Admin_Report {
 			'color'            => $this->chart_colors['item_count'],
 			'highlight_series' => 1
 		);
+		
+		if( $WCFMmp->wcfmmp_vendor->is_vendor_get_tax( $vendor_id ) && apply_filters( 'wcfm_sales_report_is_allow_tax', true ) ) {
+			$legend[] = array(
+				'title'            => sprintf( __( '%s total tax', 'wc-frontend-manager' ), '<strong>' . wc_price( $data->total_tax ) . '</strong>' ),
+				'color'            => $this->chart_colors['tax_amount'],
+				'highlight_series' => 1
+			);
+		}
 
 		if( $WCFMmp->wcfmmp_vendor->is_vendor_get_shipping( $vendor_id ) && apply_filters( 'wcfm_sales_report_is_allow_shipping', true ) ) {
 			$legend[] = array(
@@ -271,7 +279,7 @@ class WCFM_Marketplace_Report_Sales_By_Date extends WC_Admin_Report {
 				'highlight_series' => 1
 			);
 		}
-
+		
 		return apply_filters( 'wcfm_wcmarketplace_sales_report_legends', $legend );
 	}
 
@@ -291,8 +299,9 @@ class WCFM_Marketplace_Report_Sales_By_Date extends WC_Admin_Report {
 			'average'             => '#95a5a6',
 			'order_count'         => '#dbe1e3',
 			'item_count'          => '#ecf0f1',
-			'shipping_amount'     => '#20a8d8',
-			'earned'              => '#4bc0c0',
+			'shipping_amount'     => '#6f42c1',
+			'tax_amount'          => '#73818f',
+			'earned'              => '#4dbd74',
 			'commission'          => '#b1d4ea',
 			'gross_sales_amount'  => '#3498db',
 			'refund'              => '#e83e8c',
@@ -499,6 +508,7 @@ class WCFM_Marketplace_Report_Sales_By_Date extends WC_Admin_Report {
 		$chart_data = '{'
 			. '  "order_counts"             : ' . $WCFM->wcfm_prepare_chart_data( $order_counts )
 			. ', "order_item_counts"        : ' . $WCFM->wcfm_prepare_chart_data( $order_item_counts )
+			. ', "tax_amounts"              : ' . $WCFM->wcfm_prepare_chart_data( $tax_amounts )
 			. ', "shipping_amounts"         : ' . $WCFM->wcfm_prepare_chart_data( $shipping_amounts )
 			. ', "total_earned_commission"  : ' . $WCFM->wcfm_prepare_chart_data( $total_earned_commission )
 			. ', "total_paid_commission"    : ' . $WCFM->wcfm_prepare_chart_data( $total_paid_commission )
@@ -554,8 +564,8 @@ class WCFM_Marketplace_Report_Sales_By_Date extends WC_Admin_Report {
 											{
 												type: 'bar',
 												label: "<?php if( $admin_fee_mode ) { _e( 'Paid Fees', 'wc-frontend-manager' ); } else { _e( 'Withdrawal', 'wc-frontend-manager' ); } ?>",
-												backgroundColor: color(window.chartColors.grey).alpha(0.2).rgbString(),
-												borderColor: window.chartColors.grey,
+												backgroundColor: color(window.chartColors.withdrawal).alpha(0.2).rgbString(),
+												borderColor: window.chartColors.withdrawal,
 												borderWidth: 2,
 												data: sales_data.total_paid_commission.datas,
 											},
@@ -568,6 +578,17 @@ class WCFM_Marketplace_Report_Sales_By_Date extends WC_Admin_Report {
 												borderColor: window.chartColors.refund,
 												borderWidth: 2,
 												data: sales_data.total_refund.datas,
+											},
+											<?php } ?>
+											<?php if( $WCFMmp->wcfmmp_vendor->is_vendor_get_tax( $vendor_id ) && apply_filters( 'wcfm_sales_report_is_allow_tax', true ) ) { ?>
+											{
+												type: 'line',
+												label: "<?php _e( 'Tax Amounts', 'wc-frontend-manager' ); ?>",
+												backgroundColor: color(window.chartColors.tax).alpha(0.2).rgbString(),
+												borderColor: window.chartColors.tax,
+												borderWidth: 2,
+												fill: true,
+												data: sales_data.tax_amounts.datas,
 											},
 											<?php } ?>
 											<?php if( $WCFMmp->wcfmmp_vendor->is_vendor_get_shipping( $vendor_id ) && apply_filters( 'wcfm_sales_report_is_allow_shipping', true ) ) { ?>

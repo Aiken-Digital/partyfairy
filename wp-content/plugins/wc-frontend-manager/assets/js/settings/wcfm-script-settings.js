@@ -66,6 +66,12 @@ jQuery(document).ready( function($) {
 		});
 	}
 	
+	if( $(".wcfm_category_attributes_mapping").length > 0 ) {
+		$(".wcfm_category_attributes_mapping").select2({
+			placeholder: wcfm_dashboard_messages.category_attribute_mapping + ' ...'
+		});
+	}
+	
 	if( $(".wcfm_product_type_toolset_fields").length > 0 ) {
 		$(".wcfm_product_type_toolset_fields").select2({
 			placeholder: wcfm_dashboard_messages.choose_select2 + ' ...'

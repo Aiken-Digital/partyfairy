@@ -1073,7 +1073,9 @@ class WCFM_Fields {
     
     if(!empty($field['options'])) {
       for($blockCount = 0; $blockCount < $eleCount; $blockCount++) {
-        printf('<div class="multi_input_block ' . $has_dummy_class . '">');
+      	$wrapper_class = '';
+      	$wrapper_class = isset($field['value'][$blockCount]['wrapper_class']) ? $field['value'][$blockCount]['wrapper_class'] : '';
+        printf('<div class="multi_input_block ' . $wrapper_class . ' ' . $has_dummy_class . '">');
         foreach($field['options'] as $optionKey => $optionField) {
           $optionField = $this->check_field_id_name($optionKey, $optionField);
           if($optionField['type'] == 'checkbox') {

@@ -751,6 +751,10 @@ class WCFM_Frontend {
 			$wcfm_attributes = get_post_meta( $product_id, '_product_attributes', true );
 		}
 		
+		if( apply_filters( 'wcfm_is_force_category_attributes_mapping', false ) ) {
+			echo '<p class="wcfm_category_attributes_mapping_msg description instruction">' . __( 'First choose product category to get associated attributes.', 'wc-frontend-manageer' ) . '</p>';
+		}
+		
 		$attribute_taxonomies = wc_get_attribute_taxonomies();
 		$attributes = array();
 		$acnt = 0;
@@ -766,6 +770,7 @@ class WCFM_Frontend {
 					$attributes[$acnt]['attribute_taxonomy'] = $attribute_taxonomy;
 					$attributes[$acnt]['tax_name'] = $att_taxonomy;
 					$attributes[$acnt]['is_taxonomy'] = 1;
+					$attributes[$acnt]['wrapper_class'] = 'wcfm_attributes_blocks wcfm_attributes_block_'.$att_taxonomy;
 				
 					$args = array(
 												'orderby'    => 'name',

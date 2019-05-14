@@ -986,6 +986,7 @@ if(!function_exists('get_wcfm_dashboard_messages')) {
 											"everywhere"                         => __( "Everywhere Else", "wc-frontend-manager" ),
 											"required_message"                   => __( "This field is required.", 'wc-frontend-manager' ),
 											"choose_select2"                     => __( "Choose ", "wc-frontend-manager" ),
+											"category_attribute_mapping"         => __( "All Attributes", "wc-frontend-manager" ),
 											"search_attribute_select2"           => __( "Search for a attribute ...", "wc-frontend-manager" ),
 											"search_product_select2"             => __( "Search for a product ...", "wc-frontend-manager" ),
 											"search_taxonomy_select2"            => __( "Search for a category ...", "wc-frontend-manager" ),
