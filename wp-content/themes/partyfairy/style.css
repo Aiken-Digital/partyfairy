@@ -183,4 +183,5 @@ nav.woocommerce-MyAccount-navigation ul li a:hover {
 li#trial {
     text-align: center;
     padding: 10px;
+    width: 100%;
 }
