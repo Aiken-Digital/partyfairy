@@ -189,4 +189,9 @@ li#trial {
 .wcfm_membership_thankyou_content {
     padding: 10px !important;
     background-color: #eaf3ff;
+    border-radius:6px;
+}
+
+#wcfm-main-contentainer .wcfm_membership_thankyou_content_wrapper {
+    background-color: transparent;
 }
