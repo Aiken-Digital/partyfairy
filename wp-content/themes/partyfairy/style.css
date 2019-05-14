@@ -193,5 +193,5 @@ li#trial {
 }
 
 #wcfm-main-contentainer .wcfm_membership_thankyou_content_wrapper {
-    background-color: transparent;
+    background-color: transparent !important;
 }
