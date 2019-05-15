@@ -219,10 +219,16 @@ img.stripe-icon {
 p.form-row.woocommerce-SavedPaymentMethods-saveNew.woocommerce-validated label {
     padding-left: 30px;
 }
+.newsletter-subscribe {
 
+color: darkgray;
+
+}
 .newsletter-subscribe input {
     height: 35px;
     width: 80%;
     font-size: 14px;
+    padding: 10px;
+    color: darkgray;
 }
 
