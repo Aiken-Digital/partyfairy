@@ -3,16 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><?php the_title() ?></title>
+ <!--    <title><?php //the_title() ?></title> -->
+    <title>Party Supplies Singapore</title>
     <meta name="language" content="en">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-    <!-- <link rel="stylesheet" href="assets/css/app.css"> -->
-    <?php wp_head(); ?>
+    <meta name="description" content="One-stop multi-brand shop for parties. With over 14,500 products from cakes to decor, balloons, entertainers and toy rentals. Shop online and have everything delivered to your doorstep, easy-peasy! " />
+    <meta name="keywords" content="Party supplies, cakes, balloons, goodie bags, bouncy castles, birthday cakes, party decor, entertainers" />
+    <meta name="robots" content="NOINDEX,NOFOLLOW" />
+<?php wp_head(); ?>
   </head>
   <body>
     <header>
-      <div class="pf-header"><a class="pf-logo" href="#">
+      <div class="pf-header"><a class="pf-logo" href="<?php echo home_url() ?>">
           <div class="pf-logo--fairy"><img class="img-fluid" src="<?php the_field('header_icon', 'option'); ?>"></div>
           <div class="pf-logo--txtform d-none d-lg-block"> <img class="img-fluid" src="<?php the_field('header_text_icon', 'option'); ?>"></div></a>
     <?php   
