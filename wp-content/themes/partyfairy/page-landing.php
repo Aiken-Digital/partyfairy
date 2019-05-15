@@ -138,7 +138,7 @@ foreach ($q as $key => $value) {
 ?>                
 
                 <h2 class="m-b-10"><?php echo $value['title']; ?></h2>
-                <p class="font-12"><?php echo $value['description']; ?></p>
+               <div id="dc-p"><?php echo $value['description']; ?></div>
 
 <?php } } ?>
 
