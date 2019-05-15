@@ -401,8 +401,7 @@ if ($wcatTerms) :
             </span>
             <span class="categories -m-expand">
                 <span class="d-inline-block d-lg-none">
-                   <!-- <img class="img-fluild" src="" alt="" />                </span> -->
-            Get Inspired 
+            <img class="img-fluild" src="<?php echo get_template_directory_uri(); ?>/mic-icon.png" alt="Get Inspired" />            </span>             Get Inspired 
           </span>
 
           <span class="plusminus"></span>
