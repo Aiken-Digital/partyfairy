@@ -258,5 +258,5 @@ div#dc-p {
 
 
 a.get-inspired {
-    text-decoration: none;
+    text-decoration:  none !important;
 }
