@@ -65,7 +65,7 @@ foreach ($footer_menu as $key => $value) {
                 </div>
                 <div class="col-lg-4 m-b-10">
                   <div class="footer-btm-title">
-                    <h6 class="font-12"><?php the_field('payment_partner_title', 'option'); ?></h6>
+                    <h6 class="font-12"><?php the_field('security_certification_title', 'option'); ?></h6>
 
                     <?php $secure = get_field('security_certification', 'option'); 
 
