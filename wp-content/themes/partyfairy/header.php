@@ -396,12 +396,12 @@ if ($wcatTerms) :
 
         <li  class="pf-navigation--group--list">
                     <span class="categories-img">
-          <img class="d-none d-lg-inline-block img-fluid" src="" alt="" />
+          <img class="d-none d-lg-inline-block img-fluid" src="<?php echo get_template_directory_uri(); ?>//mic-icon.png" alt="Get Inspired" />
 
             </span>
             <span class="categories -m-expand">
                 <span class="d-inline-block d-lg-none">
-                   <img class="img-fluild" src="" alt="" />                </span>
+                   <!-- <img class="img-fluild" src="" alt="" />                </span> -->
             Get Inspired 
           </span>
 
