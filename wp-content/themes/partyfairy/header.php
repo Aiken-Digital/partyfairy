@@ -335,6 +335,8 @@ if ($wcatTerms) :
 
   	?>
             <li class="pf-navigation--group--list">
+
+            <a href="http://blog.partyfairy.com/" title="<?php echo $wcatTerm->name; ?>" class="get-inspired" rel="nofollow">
           	<span class="categories-img">
           			<?php
 						    if ( $image ) {
@@ -353,7 +355,7 @@ if ($wcatTerms) :
           		</span>
           	<?php echo $wcatTerm->name; ?>
           </span>
-
+            </a>
           <span class="plusminus"></span>
             
             <div class="board">
@@ -387,6 +389,7 @@ if ($wcatTerms) :
       ?>
     			</ul>
  			</div>
+
       	</li>
    <?php endif;
         endforeach ;
@@ -396,7 +399,7 @@ if ($wcatTerms) :
 
         <li  class="pf-navigation--group--list">
 
-            <a href="http://blog.partyfairy.com/" title="Get Inspired" class="get-inspired">
+            <a href="http://blog.partyfairy.com/" title="Get Inspired" class="get-inspired" rel="nofollow">
                     <span class="categories-img">
           <img class="d-none d-lg-inline-block img-fluid" src="<?php echo get_template_directory_uri(); ?>/assets/imgs/icons8-fantasy.png" alt="Get Inspired" />
 
