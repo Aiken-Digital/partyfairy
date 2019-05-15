@@ -361,7 +361,7 @@ if ($wcatTerms) :
 
      <?php 
   $wcatTerms1 = get_terms('product_cat', array('hide_empty' => 0, 'parent' =>$wcatTerm->term_id)); 
-  if($wcatTerms1 == 1) :
+  if($wcatTerms1) :
   foreach($wcatTerms1 as $subkey => $wcatTerm1) :
      
      ?>
