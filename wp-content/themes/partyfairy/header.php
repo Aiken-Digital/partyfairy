@@ -398,12 +398,12 @@ if ($wcatTerms) :
 
             <a href="http://blog.partyfairy.com/" title="Get Inspired" class="get-inspired">
                     <span class="categories-img">
-          <img class="d-none d-lg-inline-block img-fluid" src="<?php echo get_template_directory_uri(); ?>/assets/imgs/mic-icon.png" alt="Get Inspired" />
+          <img class="d-none d-lg-inline-block img-fluid" src="<?php echo get_template_directory_uri(); ?>/assets/imgs/icons8-fantasy.png" alt="Get Inspired" />
 
             </span>
             <span class="categories -m-expand">
                 <span class="d-inline-block d-lg-none">
-            <img class="img-fluild" src="<?php echo get_template_directory_uri(); ?>/assets/imgs/mic-icon.png" alt="Get Inspired" />            </span>             Get Inspired 
+            <img class="img-fluild" src="<?php echo get_template_directory_uri(); ?>/assets/imgs/icons8-fantasy.png" alt="Get Inspired" />            </span>             Get Inspired 
           </span>
 
           <span class="plusminus"></span>
