@@ -396,7 +396,7 @@ if ($wcatTerms) :
 
         <li  class="pf-navigation--group--list">
                     <span class="categories-img">
-          <img class="d-none d-lg-inline-block img-fluid" src="<?php echo get_template_directory_uri(); ?>//mic-icon.png" alt="Get Inspired" />
+          <img class="d-none d-lg-inline-block img-fluid" src="<?php echo get_template_directory_uri(); ?>/mic-icon.png" alt="Get Inspired" />
 
             </span>
             <span class="categories -m-expand">
