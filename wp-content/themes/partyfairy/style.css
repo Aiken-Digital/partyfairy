@@ -251,3 +251,7 @@ div#sticky {
     border-style: solid;
     border-color: #5fbcf0;
 }
+
+div#dc-p {
+    font-size: 11.5px;
+}
