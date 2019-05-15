@@ -241,3 +241,13 @@ color: darkgray;
     color: white;
     font-size: 14px;
 }
+
+div#sticky {
+    position: sticky !important;
+    bottom: 0;
+    padding: 10px;
+    text-align: center;
+    background-color: #eaf3ff;
+    border-style: solid;
+    border-color: #5fbcf0;
+}
