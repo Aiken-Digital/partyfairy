@@ -15,7 +15,7 @@
   </head>
   <body>
     <header>
-      <div class="pf-header"><a class="pf-logo" href="<?php echo home_url() ?>">
+      <div class="pf-header"><a class="pf-logo" href="http://partyfairy.com">
           <div class="pf-logo--fairy"><img class="img-fluid" src="<?php the_field('header_icon', 'option'); ?>"></div>
           <div class="pf-logo--txtform d-none d-lg-block"> <img class="img-fluid" src="<?php the_field('header_text_icon', 'option'); ?>"></div></a>
     <?php   
