@@ -395,6 +395,8 @@ if ($wcatTerms) :
 
 
         <li  class="pf-navigation--group--list">
+
+            <a href="http://blog.partyfairy.com/" title="Get Inspired">
                     <span class="categories-img">
           <img class="d-none d-lg-inline-block img-fluid" src="<?php echo get_template_directory_uri(); ?>/assets/imgs/mic-icon.png" alt="Get Inspired" />
 
@@ -406,6 +408,7 @@ if ($wcatTerms) :
 
           <span class="plusminus"></span>
 
+            </a>
         </li>
 
         </ul>
