@@ -394,7 +394,20 @@ if ($wcatTerms) :
 
 
 
+        <li  class="pf-navigation--group--list">
+                    <span class="categories-img">
+          <img class="d-none d-lg-inline-block img-fluid" src="" alt="" />
 
+            </span>
+            <span class="categories -m-expand">
+                <span class="d-inline-block d-lg-none">
+                   <img class="img-fluild" src="" alt="" />                </span>
+            Get Inspired 
+          </span>
+
+          <span class="plusminus"></span>
+
+        </li>
 
         </ul>
       </div>
