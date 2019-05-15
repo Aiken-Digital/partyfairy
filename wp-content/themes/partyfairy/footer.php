@@ -118,8 +118,11 @@ foreach ($footer_menu as $key => $value) {
           </div>
         </div>
       </div>
-      <div id="sticky"><strong>LOOKING FOR SOMETHING?</strong> <br /> The site is down for planned maintenance but you'll be able to ring/drop her a message at +65 9896 4800, or email us at <a href="mailto:customercare@partyfairy.com">customercare@partyfairy.com</a></div>
+
     </footer>
+
+          <div id="sticky"><strong>LOOKING FOR SOMETHING?</strong> <br /> The site is down for planned maintenance but you'll be able to ring/drop her a message at +65 9896 4800, or email us at <a href="mailto:customercare@partyfairy.com">customercare@partyfairy.com</a></div>
+          
  <?php wp_footer() ?>
 
 
