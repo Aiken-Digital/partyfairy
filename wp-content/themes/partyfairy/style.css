@@ -260,3 +260,10 @@ div#dc-p {
 a.get-inspired {
     text-decoration:  none !important;
 }
+
+
+@media (min-width: 992px)
+.pf-navigation--group--list .board-first .board-first-sub-link {
+
+    margin-right: 250px  !important ;
+}
