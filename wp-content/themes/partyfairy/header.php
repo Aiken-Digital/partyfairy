@@ -336,7 +336,7 @@ if ($wcatTerms) :
   	?>
             <li class="pf-navigation--group--list">
 
-            <a href="http://blog.partyfairy.com/" title="<?php echo $wcatTerm->name; ?>" class="get-inspired" rel="nofollow">
+            <a href="https://info.partyfairy.com/contactus" title="<?php echo $wcatTerm->name; ?>" class="get-inspired" rel="nofollow">
           	<span class="categories-img">
           			<?php
 						    if ( $image ) {
