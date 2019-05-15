@@ -127,7 +127,7 @@ foreach ($f as $key => $value) {
 
           <div class="container m-t-45 m-b-45">
             <div class="row">
-              <div class="col-lg">
+              <div class="col-lg" id="dc-p">
  
 
 <?php $q = get_field('list', get_option('page_for_posts')); 
@@ -138,7 +138,7 @@ foreach ($q as $key => $value) {
 ?>                
 
                 <h2 class="m-b-10"><?php echo $value['title']; ?></h2>
-               <div id="dc-p"><?php echo $value['description']; ?></div>
+               <?php echo $value['description']; ?>
 
 <?php } } ?>
 
