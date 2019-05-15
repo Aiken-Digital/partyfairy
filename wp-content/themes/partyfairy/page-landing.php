@@ -109,7 +109,7 @@ foreach ($f as $key => $value) {
 
           <div class="container">
             <div class="row justify-content-center">
-              <div class="col-lg-8">
+              <div class="col-lg-12">
                 <div class="hero-banner hero-banner--darker hero-banner--standard -my-paroller" style="background: url(<?php the_field('background_image_gt', get_option('page_for_posts')); ?>) center -68px / cover no-repeat; ">
                   <div class="hero-banner--text">
                     <div class="row">
