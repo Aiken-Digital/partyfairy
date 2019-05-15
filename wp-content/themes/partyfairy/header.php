@@ -368,7 +368,7 @@ if ($wcatTerms) :
 
 
 
-                <li class="board-first-link"><a href="<?php echo get_term_link( $wcatTerm1->slug, $wcatTerm1->taxonomy ); ?>"><?php echo $wcatTerm1->name; ?></a><span class="-opener"></span>
+                <li class="board-first-link"><a href="https://info.partyfairy.com/contactus•<?php //echo get_term_link( $wcatTerm1->slug, $wcatTerm1->taxonomy ); ?>"><?php echo $wcatTerm1->name; ?></a><span class="-opener"></span>
                   <div class="board-first-sub">
                     <ul>
 
@@ -377,7 +377,7 @@ if ($wcatTerms) :
   foreach($wcatTerms2 as $subkey => $wcatTerm2) :
      
      ?>
-                                            <li class="board-first-sub-link"><a href="<?php echo get_term_link( $wcatTerm2->slug, $wcatTerm2->taxonomy ); ?>"><?php echo $wcatTerm2->name; ?></a></li>
+                                            <li class="board-first-sub-link"><a href="https://info.partyfairy.com/contactus•<?php //echo get_term_link( $wcatTerm2->slug, $wcatTerm2->taxonomy ); ?>"><?php echo $wcatTerm2->name; ?></a></li>
                  <?php endforeach ;  ?>
                     </ul>
                   </div>
