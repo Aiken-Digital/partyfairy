@@ -84,7 +84,7 @@ foreach ($f as $key => $value) {
           <div class="testimonial-area">
             <div class="container">
               <div class="row justify-content-center">
-                <div class="col-lg-6">
+                <div class="col-lg-8">
                   <div class="-carousel-testimonial p-t-45">
 
                           <?php $s = get_field('they_say', get_option('page_for_posts')); 
