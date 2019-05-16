@@ -156,12 +156,13 @@ class WCFM_Customer {
     
 	  switch( $end_point ) {
 	  	case 'wcfm-customers':
+	  		$WCFM->library->load_select2_lib();
       	$WCFM->library->load_datatable_lib();
       	$WCFM->library->load_datatable_download_lib();
 	    	wp_enqueue_script( 'wcfm_customers_js', $WCFM->library->js_lib_url . 'customers/wcfm-script-customers.js', array('jquery', 'dataTables_js'), $WCFM->version, true );
 	    	
 	    	// Screen manager
-	    	$wcfm_screen_manager = (array) get_option( 'wcfm_screen_manager' );
+	    	$wcfm_screen_manager = get_option( 'wcfm_screen_manager', array() );
 	    	$wcfm_screen_manager_data = array();
 	    	if( isset( $wcfm_screen_manager['customer'] ) ) $wcfm_screen_manager_data = $wcfm_screen_manager['customer'];
 	    	if( !isset( $wcfm_screen_manager_data['admin'] ) ) {
@@ -173,13 +174,16 @@ class WCFM_Customer {
 				} else {
 					$wcfm_screen_manager_data = $wcfm_screen_manager_data['admin'];
 				}
+				if( !$WCFM->is_marketplace || wcfm_is_vendor() ) {
+	    		$wcfm_screen_manager_data[2] = 'yes';
+	    	}
 				if( !apply_filters( 'wcfm_allow_order_customer_details', true ) ) {
-					$wcfm_screen_manager_data[2] = 'yes';
+					$wcfm_screen_manager_data[3] = 'yes';
 				}
-				$wcfm_screen_manager_data[5] = 'yes';
 				$wcfm_screen_manager_data[6] = 'yes';
+				$wcfm_screen_manager_data[7] = 'yes';
 				if( apply_filters( 'wcfm_customers_additonal_data_hidden', true ) ) {
-					$wcfm_screen_manager_data[9] = 'yes';
+					$wcfm_screen_manager_data[10] = 'yes';
 				}
 	    	wp_localize_script( 'wcfm_customers_js', 'wcfm_customers_screen_manage', $wcfm_screen_manager_data );
       break;

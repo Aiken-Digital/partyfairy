@@ -85,14 +85,17 @@ jQuery(document).ready(function($) {
        
       
       multi_input_blockEle.children('.remove_multi_input_block').off('click').on('click', function() {
-      	var remove_ele_parent = $(this).parent().parent();
-				var addEle = remove_ele_parent.children('.multi_input_block').children('.add_multi_input_block').clone(true);
-				$(this).parent().remove();
-				remove_ele_parent.children('.multi_input_block').children('.add_multi_input_block').remove();
-				remove_ele_parent.children('.multi_input_block:last').append(addEle);
-				if( remove_ele_parent.children('.multi_input_block').length == multi_input_limit ) remove_ele_parent.find('.add_multi_input_block').hide();
-				else remove_ele_parent.find('.add_multi_input_block').show();
-				if(remove_ele_parent.children('.multi_input_block').length == 1) remove_ele_parent.children('.multi_input_block').children('.remove_multi_input_block').css('display', 'none');
+      	var rconfirm = confirm(wcfm_dashboard_messages.multiblock_delete_confirm);
+				if(rconfirm) {
+					var remove_ele_parent = $(this).parent().parent();
+					var addEle = remove_ele_parent.children('.multi_input_block').children('.add_multi_input_block').clone(true);
+					$(this).parent().remove();
+					remove_ele_parent.children('.multi_input_block').children('.add_multi_input_block').remove();
+					remove_ele_parent.children('.multi_input_block:last').append(addEle);
+					if( remove_ele_parent.children('.multi_input_block').length == multi_input_limit ) remove_ele_parent.find('.add_multi_input_block').hide();
+					else remove_ele_parent.find('.add_multi_input_block').show();
+					if(remove_ele_parent.children('.multi_input_block').length == 1) remove_ele_parent.children('.multi_input_block').children('.remove_multi_input_block').css('display', 'none');
+				}
 			});
       
       multi_input_blockEle.children('.add_multi_input_block').remove();
@@ -154,14 +157,17 @@ jQuery(document).ready(function($) {
 		}
     
     multi_input_holder.children('.multi_input_block').children('.remove_multi_input_block').off('click').on('click', function() {
-    	var remove_ele_parent = $(this).parent().parent();
-      var addEle = remove_ele_parent.children('.multi_input_block').children('.add_multi_input_block').clone(true);
-      $(this).parent().remove();
-      remove_ele_parent.children('.multi_input_block').children('.add_multi_input_block').remove();
-      remove_ele_parent.children('.multi_input_block:last').append(addEle);
-      if(remove_ele_parent.children('.multi_input_block').length == 1) remove_ele_parent.children('.multi_input_block').children('.remove_multi_input_block').css('display', 'none');
-      if( remove_ele_parent.children('.multi_input_block').length == multi_input_limit ) remove_ele_parent.find('.add_multi_input_block').hide();
-      else remove_ele_parent.find('.add_multi_input_block').show();
+    	var rconfirm = confirm(wcfm_dashboard_messages.multiblock_delete_confirm);
+			if(rconfirm) {
+				var remove_ele_parent = $(this).parent().parent();
+				var addEle = remove_ele_parent.children('.multi_input_block').children('.add_multi_input_block').clone(true);
+				$(this).parent().remove();
+				remove_ele_parent.children('.multi_input_block').children('.add_multi_input_block').remove();
+				remove_ele_parent.children('.multi_input_block:last').append(addEle);
+				if(remove_ele_parent.children('.multi_input_block').length == 1) remove_ele_parent.children('.multi_input_block').children('.remove_multi_input_block').css('display', 'none');
+				if( remove_ele_parent.children('.multi_input_block').length == multi_input_limit ) remove_ele_parent.find('.add_multi_input_block').hide();
+				else remove_ele_parent.find('.add_multi_input_block').show();
+			}
     });
     
     // Fields Type Property

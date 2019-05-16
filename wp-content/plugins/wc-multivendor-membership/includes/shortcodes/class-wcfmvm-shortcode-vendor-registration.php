@@ -29,7 +29,7 @@ class WCFM_Vendor_Registration_Shortcode {
 		echo '<div id="wcfm-main-contentainer"> <div id="wcfm-content"><div class="wcfm-membership-wrapper"> ';
 		
 		if ( isset( $wp->query_vars['page'] ) || is_wcfm_registration_page() ) {
-			echo "<h2>" . __( "Vendor Registration", "wc-multivendor-membership" ) . "</h2>";
+			echo "<h2>" . __( "Registration", "wc-multivendor-membership" ) . "</h2>";
 			if( !wcfm_is_vendor() && ( wcfm_is_allowed_membership() || current_user_can( 'administrator' ) || current_user_can( 'shop_manager' ) ) ) {
 				$application_status = '';
 				if( is_user_logged_in() ) {

@@ -34,7 +34,7 @@ class WCFMmp_Rewrites {
 		add_filter( 'woocommerce_get_filtered_term_product_counts_query', array( &$this, 'wcfmmp_product_counts_query' ) );
 		
 		// WC Filter Price Query Store Filter
-		add_filter( 'woocommerce_price_filter_sql', array( &$this, 'wcfmmp_price_filter_sql' ) );
+		add_filter( 'woocommerce_price_filter_sql', array( &$this, 'wcfmmp_price_filter_sql' ), 500, 3 );
 		
 		add_filter( 'post_type_archive_link', array( $this, 'store_archive_link' ) );
 		
@@ -477,6 +477,11 @@ class WCFMmp_Rewrites {
 					}
 				}
 				
+				if( defined( 'ELEMENTOR_VERSION' ) ) {
+					$query->is_archive              = false;
+					$query->is_post_type_archive    = false;
+				}
+				
 				//print_r($query);
 				
 				add_filter( 'woocommerce_page_title', array( $this, 'store_page_title' ) );
@@ -489,11 +494,12 @@ class WCFMmp_Rewrites {
 	 */
 	function wcfmmp_product_counts_query( $query ) {
 		global $wpdb;
-		if (  wcfm_is_store_page() ) {
+		if (  wcfm_is_store_page() && !$WCFMmp->store_query_filtered ) {
 			$author      = get_query_var( $this->wcfm_store_url );
 			$seller_info = get_user_by( 'slug', $author );
 			if( $seller_info && $seller_info->data->ID ) {
 		    $query['where'] .= " AND {$wpdb->posts}.post_author = {$seller_info->data->ID}";
+		    $WCFMmp->store_query_filtered = true;
 		  }
 		}
 		return $query;
@@ -502,13 +508,29 @@ class WCFMmp_Rewrites {
 	/**
 	 * Store Page WC Product Price Filter Query
 	 */
-	function wcfmmp_price_filter_sql( $query ) {
+	function wcfmmp_price_filter_sql( $query, $meta_query_sql, $tax_query_sql ) {
 		global $wpdb;
-		if (  wcfm_is_store_page() ) {
+		if (  wcfm_is_store_page() && !$WCFMmp->store_query_filtered ) {
 			$author      = get_query_var( $this->wcfm_store_url );
 			$seller_info = get_user_by( 'slug', $author );
 			if( $seller_info && $seller_info->data->ID ) {
-		    $query .= " AND {$wpdb->posts}.post_author = {$seller_info->data->ID}";
+		    //$query .= " AND {$wpdb->posts}.post_author = {$seller_info->data->ID}";
+		    
+		    $search     = WC_Query::get_main_search_query_sql();
+		    $search_query_sql = $search ? ' AND ' . $search : '';
+		    $query = "
+								SELECT min( min_price ) as min_price, MAX( max_price ) as max_price
+								FROM {$wpdb->wc_product_meta_lookup}
+								WHERE product_id IN (
+									SELECT ID FROM {$wpdb->posts}
+									" . $tax_query_sql['join'] . $meta_query_sql['join'] . "
+									WHERE {$wpdb->posts}.post_type IN ('" . implode( "','", array_map( 'esc_sql', apply_filters( 'woocommerce_price_filter_post_type', array( 'product' ) ) ) ) . "')
+									AND {$wpdb->posts}.post_status = 'publish'
+									AND {$wpdb->posts}.post_author = {$seller_info->data->ID}
+									" . $tax_query_sql['where'] . $meta_query_sql['where'] . $search_query_sql . '
+								)';
+		    
+		    $WCFMmp->store_query_filtered = true;
 		  }
 		}
 		return $query;

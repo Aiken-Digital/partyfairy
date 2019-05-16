@@ -36,11 +36,13 @@ class WCFMvm_Frontend {
 		
 		// Vendor Details Page
 		if( !wcfm_is_vendor() && apply_filters( 'wcfm_is_allow_manage_groups', true ) ) {
+			add_action( 'after_wcfm_vendors_manage_form', array( &$this, 'wcfmvm_vendor_manage_profile_additional_info' ), 12 );
+			add_action( 'after_wcfm_vendors_manage_membership_details', array( &$this, 'wcfmvm_vendor_manage_profile_additional_info' ), 12 );
 			add_action( 'wcfm_vendor_manage_membrship_details', array( &$this, 'wcfmvm_vendor_manage_membrship_details' ), 12 );
 		}
 		
 		// Membership Details in Profile 
-		if( wcfm_is_vendor() ) {
+		if( wcfm_is_vendor() && apply_filters( 'wcfm_is_allow_vendor_membership', true ) ) {
 			add_action( 'wcfm_dashboard_after_username', array( &$this, 'wcfmvm_vendor_dashboard_username' ), 12 );
 			//add_action( 'end_wcfm_vendor_settings', array( &$this, 'wcfmvm_vendor_membership_user_setting_block' ), 12 );
 			add_action( 'wcfm_vendor_setting_header_after', array( &$this, 'wcfmvm_vendor_membership_user_setting_header' ), 12 );
@@ -83,8 +85,8 @@ class WCFMvm_Frontend {
  	 */
 	function wcfm_membership_template( $page_template ) {
 		global $WCFM;
-		if ( wc_post_content_has_shortcode( 'wcfm_vendor_membership' ) ) {
-			$wcfm_options = get_option('wcfm_options');
+		if ( wc_post_content_has_shortcode( 'wcfm_vendor_membership' ) && apply_filters( 'wcfm_is_allow_membership_empty_template', true )  ) {
+			$wcfm_options = get_option( 'wcfm_options', array() );
 			$is_dashboard_full_view_disabled = isset( $wcfm_options['dashboard_full_view_disabled'] ) ? $wcfm_options['dashboard_full_view_disabled'] : 'no';
 			$is_dashboard_theme_header_disabled = isset( $wcfm_options['dashboard_theme_header_disabled'] ) ? $wcfm_options['dashboard_theme_header_disabled'] : 'no';
 			if( $is_dashboard_full_view_disabled != 'yes' ) {
@@ -102,7 +104,7 @@ class WCFMvm_Frontend {
    * WCFM Membership Query Var
    */
   function wcfmvm_vendor_membership_wcfm_query_vars( $query_vars ) {
-  	$wcfm_modified_endpoints = (array) get_option( 'wcfm_endpoints' );
+  	$wcfm_modified_endpoints = get_option( 'wcfm_endpoints', array() );
   	
 		$query_vendor_membership_vars = array(
 			'wcfm-memberships'          => ! empty( $wcfm_modified_endpoints['wcfm-memberships'] ) ? $wcfm_modified_endpoints['wcfm-memberships'] : 'memberships',
@@ -373,41 +375,7 @@ class WCFMvm_Frontend {
 			echo "</h2><div class=\"wcfm_clearfix\"></div><br />";
 		}
 		
-		$wcfmvm_registration_custom_fields = get_option( 'wcfmvm_registration_custom_fields', array() );
-		$wcfmvm_custom_infos = (array) get_user_meta( $vendor_id, 'wcfmvm_custom_infos', true );
-		
-		if( !empty( $wcfmvm_registration_custom_fields ) ) {
-			echo "<div style=\"margin-top: 30px;\"><h2>" . __( 'Additional Info', 'wc-multivendor-membership' ) . "</h2><div class=\"wcfm_clearfix\"></div>";
-			foreach( $wcfmvm_registration_custom_fields as $wcfmvm_registration_custom_field ) {
-				if( !isset( $wcfmvm_registration_custom_field['enable'] ) ) continue;
-				if( !$wcfmvm_registration_custom_field['label'] ) continue;
-				$field_value = '&ndash;';
-				$wcfmvm_registration_custom_field['name'] = sanitize_title( $wcfmvm_registration_custom_field['label'] );
-			
-				if( !empty( $wcfmvm_custom_infos ) ) {
-					if( $wcfmvm_registration_custom_field['type'] == 'checkbox' ) {
-						$field_value = isset( $wcfmvm_custom_infos[$wcfmvm_registration_custom_field['name']] ) ? $wcfmvm_custom_infos[$wcfmvm_registration_custom_field['name']] : 'no';
-					} else {
-						$field_value = isset( $wcfmvm_custom_infos[$wcfmvm_registration_custom_field['name']] ) ? $wcfmvm_custom_infos[$wcfmvm_registration_custom_field['name']] : '';
-					}
-				}
-				?>
-				<p class="store_name wcfm_ele wcfm_title"><strong><?php _e( $wcfmvm_registration_custom_field['label'], 'wc-multivendor-membership'); ?></strong></p>
-				<span class="wcfm_vendor_store_info">
-				  <?php 
-				  if( $field_value && $wcfmvm_registration_custom_field['type'] == 'upload' ) {
-				    echo '<a class="wcfm-wp-fields-uploader wcfm_linked_images" target="_blank" style="width: 32px; height: 32px;" href="' . $field_value . '"><span style="width: 32px; height: 32px; display: inline-block;" class="placeHolderDocs"></span></a>';
-				  } else {
-				  	if( !$field_value ) $field_value = '&ndash;';
-				  	echo $field_value;
-				  }
-				  ?>
-				</span>
-				<div class="wcfm_clearfix"></div>
-				<?php
-			}
-			echo "</div><div class=\"wcfm_clearfix\"></div><br />";
-		}
+		do_action( 'after_wcfm_vendors_manage_membership_details', $vendor_id );
 		
 		$wcfm_memberships_list = get_wcfm_memberships();
 		//if( !$is_recurring ) {
@@ -439,6 +407,55 @@ class WCFMvm_Frontend {
 			//	printf( __( '%sChange or Upgrade: First cancel your current subscription.%s', 'wc-multivendor-membership' ), '<span style="text-decoration: underline; margin-left: 10px;">', '</span>' );
 			//}
 		//}
+  }
+  
+  /**
+   * Vendor Profile Additional Info
+   */
+  function wcfmvm_vendor_manage_profile_additional_info( $vendor_id ) {
+  	global $WCFM, $WCFMvm;
+  	
+  	if( !$vendor_id ) return;
+  		
+  	$wcfmvm_registration_custom_fields = get_option( 'wcfmvm_registration_custom_fields', array() );
+		$wcfmvm_custom_infos = (array) get_user_meta( $vendor_id, 'wcfmvm_custom_infos', true );
+		
+		if( !empty( $wcfmvm_registration_custom_fields ) ) {
+			echo "<div style=\"margin-top: 30px;\"><h2>" . __( 'Additional Info', 'wc-multivendor-membership' ) . "</h2><div class=\"wcfm_clearfix\"></div>";
+			foreach( $wcfmvm_registration_custom_fields as $wcfmvm_registration_custom_field ) {
+				if( !isset( $wcfmvm_registration_custom_field['enable'] ) ) continue;
+				if( !$wcfmvm_registration_custom_field['label'] ) continue;
+				$field_value = '&ndash;';
+				$wcfmvm_registration_custom_field['name'] = sanitize_title( $wcfmvm_registration_custom_field['label'] );
+			
+				if( !empty( $wcfmvm_custom_infos ) ) {
+					if( $wcfmvm_registration_custom_field['type'] == 'checkbox' ) {
+						$field_value = isset( $wcfmvm_custom_infos[$wcfmvm_registration_custom_field['name']] ) ? $wcfmvm_custom_infos[$wcfmvm_registration_custom_field['name']] : 'no';
+					} elseif( $wcfmvm_registration_custom_field['type'] == 'upload' ) {
+						$field_name  = 'wcfmvm_custom_infos[' . $wcfmvm_registration_custom_field['name'] . ']';
+						$field_id    = md5( $field_name );
+						$field_value = isset( $wcfmvm_custom_infos[$field_id] ) ? $wcfmvm_custom_infos[$field_id] : '';
+					} else {
+						$field_value = isset( $wcfmvm_custom_infos[$wcfmvm_registration_custom_field['name']] ) ? $wcfmvm_custom_infos[$wcfmvm_registration_custom_field['name']] : '';
+					}
+				}
+				?>
+				<p class="store_name wcfm_ele wcfm_title"><strong><?php _e( $wcfmvm_registration_custom_field['label'], 'wc-multivendor-membership'); ?></strong></p>
+				<span class="wcfm_vendor_store_info">
+				  <?php 
+				  if( $field_value && $wcfmvm_registration_custom_field['type'] == 'upload' ) {
+				    echo '<a class="wcfm-wp-fields-uploader wcfm_linked_images" target="_blank" style="width: 32px; height: 32px;" href="' . $field_value . '"><span style="width: 32px; height: 32px; display: inline-block;" class="placeHolderDocs"></span></a>';
+				  } else {
+				  	if( !$field_value ) $field_value = '&ndash;';
+				  	echo $field_value;
+				  }
+				  ?>
+				</span>
+				<div class="wcfm_clearfix"></div>
+				<?php
+			}
+			echo "</div><div class=\"wcfm_clearfix\"></div><br />";
+		}
   }
   
   function wcfmvm_vendor_dashboard_username( $vendor_id = 0 ) {
@@ -665,6 +682,10 @@ class WCFMvm_Frontend {
 						if( !empty( $wcfmvm_custom_infos ) ) {
 							if( $wcfmvm_registration_custom_field['type'] == 'checkbox' ) {
 								$field_value = isset( $wcfmvm_custom_infos[$wcfmvm_registration_custom_field['name']] ) ? $wcfmvm_custom_infos[$wcfmvm_registration_custom_field['name']] : 'no';
+							} elseif( $wcfmvm_registration_custom_field['type'] == 'upload' ) {
+								$field_name  = 'wcfmvm_custom_infos[' . $wcfmvm_registration_custom_field['name'] . ']';
+								$field_id    = md5( $field_name );
+								$field_value = isset( $wcfmvm_custom_infos[$field_id] ) ? $wcfmvm_custom_infos[$field_id] : '';
 							} else {
 								$field_value = isset( $wcfmvm_custom_infos[$wcfmvm_registration_custom_field['name']] ) ? $wcfmvm_custom_infos[$wcfmvm_registration_custom_field['name']] : '';
 							}

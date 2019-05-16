@@ -704,20 +704,38 @@ class WCFMmp_Vendor {
 		$wcfm_store_hours_off_days = isset( $wcfm_vendor_store_hours['off_days'] ) ? $wcfm_vendor_store_hours['off_days'] : array();
 		$wcfm_store_hours_day_times = isset( $wcfm_vendor_store_hours['day_times'] ) ? $wcfm_vendor_store_hours['day_times'] : array();
 		
-		$wcfm_store_hours_mon_min_time  = isset( $wcfm_store_hours_day_times[0]['start'] ) ? $wcfm_store_hours_day_times[0]['start'] : '';
-		$wcfm_store_hours_mon_max_time  = isset( $wcfm_store_hours_day_times[0]['end'] ) ? $wcfm_store_hours_day_times[0]['end'] : '';
-		$wcfm_store_hours_thu_min_time  = isset( $wcfm_store_hours_day_times[1]['start'] ) ? $wcfm_store_hours_day_times[1]['start'] : '';
-		$wcfm_store_hours_thu_max_time  = isset( $wcfm_store_hours_day_times[1]['end'] ) ? $wcfm_store_hours_day_times[1]['end'] : '';
-		$wcfm_store_hours_wed_min_time  = isset( $wcfm_store_hours_day_times[2]['start'] ) ? $wcfm_store_hours_day_times[2]['start'] : '';
-		$wcfm_store_hours_wed_max_time  = isset( $wcfm_store_hours_day_times[2]['end'] ) ? $wcfm_store_hours_day_times[2]['end'] : '';
-		$wcfm_store_hours_thur_min_time = isset( $wcfm_store_hours_day_times[3]['start'] ) ? $wcfm_store_hours_day_times[3]['start'] : '';
-		$wcfm_store_hours_thur_max_time = isset( $wcfm_store_hours_day_times[3]['end'] ) ? $wcfm_store_hours_day_times[3]['end'] : '';
-		$wcfm_store_hours_fri_min_time  = isset( $wcfm_store_hours_day_times[4]['start'] ) ? $wcfm_store_hours_day_times[4]['start'] : '';
-		$wcfm_store_hours_fri_max_time  = isset( $wcfm_store_hours_day_times[4]['end'] ) ? $wcfm_store_hours_day_times[4]['end'] : '';
-		$wcfm_store_hours_sat_min_time  = isset( $wcfm_store_hours_day_times[5]['start'] ) ? $wcfm_store_hours_day_times[5]['start'] : '';
-		$wcfm_store_hours_sat_max_time  = isset( $wcfm_store_hours_day_times[5]['end'] ) ? $wcfm_store_hours_day_times[5]['end'] : '';
-		$wcfm_store_hours_sun_min_time  = isset( $wcfm_store_hours_day_times[6]['start'] ) ? $wcfm_store_hours_day_times[6]['start'] : '';
-		$wcfm_store_hours_sun_max_time  = isset( $wcfm_store_hours_day_times[6]['end'] ) ? $wcfm_store_hours_day_times[6]['end'] : '';
+		// Old Store Hours Migrating
+		$wcfm_vendor_store_hours_migrated = get_user_meta( $vendor_id, 'wcfm_vendor_store_hours_migrated', true );
+		if( !$wcfm_vendor_store_hours_migrated ) {
+			$wcfm_store_hours_mon_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[0]['start'] ) ? $wcfm_store_hours_day_times[0]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[0]['end'] ) ? $wcfm_store_hours_day_times[0]['end'] : '' ) );
+			$wcfm_store_hours_tue_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[1]['start'] ) ? $wcfm_store_hours_day_times[1]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[1]['end'] ) ? $wcfm_store_hours_day_times[1]['end'] : '' ) );
+			$wcfm_store_hours_wed_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[2]['start'] ) ? $wcfm_store_hours_day_times[2]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[2]['end'] ) ? $wcfm_store_hours_day_times[2]['end'] : '' ) );
+			$wcfm_store_hours_thu_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[3]['start'] ) ? $wcfm_store_hours_day_times[3]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[3]['end'] ) ? $wcfm_store_hours_day_times[3]['end'] : '' ) );
+			$wcfm_store_hours_fri_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[4]['start'] ) ? $wcfm_store_hours_day_times[4]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[4]['end'] ) ? $wcfm_store_hours_day_times[4]['end'] : '' ) );
+			$wcfm_store_hours_sat_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[5]['start'] ) ? $wcfm_store_hours_day_times[5]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[5]['end'] ) ? $wcfm_store_hours_day_times[5]['end'] : '' ) );
+			$wcfm_store_hours_sun_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[6]['start'] ) ? $wcfm_store_hours_day_times[6]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[6]['end'] ) ? $wcfm_store_hours_day_times[6]['end'] : '' ) );
+			
+			$wcfm_store_hours_day_times = array( 0 => $wcfm_store_hours_mon_times,
+																					 1 => $wcfm_store_hours_tue_times,
+																					 2 => $wcfm_store_hours_wed_times,
+																					 3 => $wcfm_store_hours_thu_times,
+																					 4 => $wcfm_store_hours_fri_times,
+																					 5 => $wcfm_store_hours_sat_times,
+																					 6 => $wcfm_store_hours_sun_times
+																					);
+			
+			$wcfm_vendor_store_hours['day_times'] = $wcfm_store_hours_day_times;
+			update_user_meta( $vendor_id, 'wcfm_vendor_store_hours', $wcfm_vendor_store_hours );
+			update_user_meta( $vendor_id, 'wcfm_vendor_store_hours_migrated', 'yes' );
+		}
+		
+		$wcfm_store_hours_mon_times = isset( $wcfm_store_hours_day_times[0] ) ? $wcfm_store_hours_day_times[0] : array();
+		$wcfm_store_hours_tue_times = isset( $wcfm_store_hours_day_times[1] ) ? $wcfm_store_hours_day_times[1] : array();
+		$wcfm_store_hours_wed_times = isset( $wcfm_store_hours_day_times[2] ) ? $wcfm_store_hours_day_times[2] : array();
+		$wcfm_store_hours_thu_times = isset( $wcfm_store_hours_day_times[3] ) ? $wcfm_store_hours_day_times[3] : array();
+		$wcfm_store_hours_fri_times = isset( $wcfm_store_hours_day_times[4] ) ? $wcfm_store_hours_day_times[4] : array();
+		$wcfm_store_hours_sat_times = isset( $wcfm_store_hours_day_times[5] ) ? $wcfm_store_hours_day_times[5] : array();
+		$wcfm_store_hours_sun_times = isset( $wcfm_store_hours_day_times[6] ) ? $wcfm_store_hours_day_times[6] : array();
 		
 		// Vacation Mode
 		$wcfm_vacation_mode = isset( $vendor_data['wcfm_vacation_mode'] ) ? $vendor_data['wcfm_vacation_mode'] : 'no';
@@ -826,40 +844,6 @@ class WCFMmp_Vendor {
 					</div>
 					
 					<div class="wcfm_clearfix"></div>
-					<div class="wcfm_vendor_settings_heading"><h3><?php _e( 'Payment Setup', 'wc-multivendor-marketplace' ); ?></h3></div>
-					<div class="store_address">
-						<?php
-						$wcfm_marketplace_withdrwal_payment_methods = get_wcfm_marketplace_active_withdrwal_payment_methods();
-						$wcfmmp_settings_fields_billing = apply_filters( 'wcfm_marketplace_settings_fields_billing', array(
-																																														"payment_mode" => array('label' => __('Prefered Payment Method', 'wc-frontend-manager'), 'name' => 'payment[method]', 'type' => 'select', 'options' => $wcfm_marketplace_withdrwal_payment_methods, 'class' => 'wcfm-select wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $payment_mode ),
-																																														"paypal" => array('label' => __('PayPal Email', 'wc-frontend-manager'), 'name' => 'payment[paypal][email]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele paymode_field paymode_paypal', 'label_class' => 'wcfm_title wcfm_ele paymode_field paymode_paypal', 'value' => $paypal ),
-																																														"skrill" => array('label' => __('Skrill Email', 'wc-frontend-manager'), 'name' => 'payment[skrill][email]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele paymode_field paymode_skrill', 'label_class' => 'wcfm_title wcfm_ele paymode_field paymode_skrill', 'value' => $skrill ),
-																																														), $vendor_id );
-						
-						$WCFM->wcfm_fields->wcfm_generate_form_field( $wcfmmp_settings_fields_billing );
-						?>
-					</div>
-					
-					<?php if( in_array( 'bank_transfer', array_keys( $wcfm_marketplace_withdrwal_payment_methods ) ) ) { ?>
-						<div class="wcfm_clearfix"></div>
-						<div class="wcfm_vendor_settings_heading wcfm_marketplace_bank paymode_field paymode_bank_transfer"><h3><?php _e( 'Bank Details', 'wc-frontend-manager' ); ?></h3></div>
-						<div class="store_address">
-							<?php
-								$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_marketplace_settings_fields_billing_bank', array(
-																																		"ac_name" => array('label' => __('Account Name', 'wc-frontend-manager'), 'placeholder' => __('Your bank account name', 'wc-frontend-manager'), 'name' => 'payment[bank][ac_name]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele paymode_field paymode_bank_transfer', 'label_class' => 'wcfm_title wcfm_ele paymode_field paymode_bank_transfer', 'value' => $ac_name ),
-																																		"ac_number" => array('label' => __('Account Number', 'wc-frontend-manager'), 'placeholder' => __('Your bank account number', 'wc-frontend-manager'), 'name' => 'payment[bank][ac_number]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele paymode_field paymode_bank_transfer', 'label_class' => 'wcfm_title wcfm_ele paymode_field paymode_bank_transfer', 'value' => $ac_number ),
-																																		"bank_name" => array('label' => __('Bank Name', 'wc-frontend-manager'), 'placeholder' => __('Name of bank', 'wc-frontend-manager'), 'name' => 'payment[bank][bank_name]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele paymode_field paymode_bank_transfer', 'label_class' => 'wcfm_title wcfm_ele paymode_field paymode_bank_transfer', 'value' => $bank_name ),
-																																		"bank_addr" => array('label' => __('Bank Address', 'wc-frontend-manager'), 'placeholder' => __('Address of your bank', 'wc-frontend-manager'), 'name' => 'payment[bank][bank_addr]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele paymode_field paymode_bank_transfer', 'label_class' => 'wcfm_title wcfm_ele paymode_field paymode_bank_transfer', 'value' => $bank_addr ),
-																																		"routing_number" => array('label' => __('Routing Number', 'wc-frontend-manager'), 'placeholder' => __( 'Routing number', 'wc-frontend-manager' ), 'name' => 'payment[bank][routing_number]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele paymode_field paymode_bank_transfer', 'label_class' => 'wcfm_title wcfm_ele paymode_field paymode_bank_transfer', 'value' => $routing_number ),
-																																		"iban" => array('label' => __('IBAN', 'wc-frontend-manager'), 'placeholder' => __('IBAN', 'wc-frontend-manager'), 'name' => 'payment[bank][iban]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele paymode_field paymode_bank_transfer', 'label_class' => 'wcfm_title wcfm_ele paymode_field paymode_bank_transfer', 'value' => $iban ),
-																																		"swift" => array('label' => __('Swift Code', 'wc-frontend-manager'), 'placeholder' => __('Swift code', 'wc-frontend-manager'), 'name' => 'payment[bank][swift]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele paymode_field paymode_bank_transfer', 'label_class' => 'wcfm_title wcfm_ele paymode_field paymode_bank_transfer', 'value' => $swift ),
-																																		"ifsc" => array('label' => __('IFSC Code', 'wc-frontend-manager'), 'placeholder' => __('Swift code', 'wc-frontend-manager'), 'name' => 'payment[bank][ifsc]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele paymode_field paymode_bank_transfer', 'label_class' => 'wcfm_title wcfm_ele paymode_field paymode_bank_transfer', 'value' => $ifsc ),
-																																		), $vendor_id ) );
-							?>
-						</div>
-					<?php } ?>
-					
-					<div class="wcfm_clearfix"></div>
 					<div class="wcfm_vendor_settings_heading"><h3><?php _e( 'Commission Setup', 'wc-frontend-manager' ); ?></h3></div>
 					<div class="store_address">
 						<?php
@@ -928,6 +912,40 @@ class WCFMmp_Vendor {
 						?>
 					</div>
 					
+					<div class="wcfm_clearfix"></div>
+					<div class="wcfm_vendor_settings_heading"><h3><?php _e( 'Payment Setup', 'wc-multivendor-marketplace' ); ?></h3></div>
+					<div class="store_address">
+						<?php
+						$wcfm_marketplace_withdrwal_payment_methods = get_wcfm_marketplace_active_withdrwal_payment_methods();
+						$wcfmmp_settings_fields_billing = apply_filters( 'wcfm_marketplace_settings_fields_billing', array(
+																																														"payment_mode" => array('label' => __('Prefered Payment Method', 'wc-frontend-manager'), 'name' => 'payment[method]', 'type' => 'select', 'options' => $wcfm_marketplace_withdrwal_payment_methods, 'class' => 'wcfm-select wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $payment_mode ),
+																																														"paypal" => array('label' => __('PayPal Email', 'wc-frontend-manager'), 'name' => 'payment[paypal][email]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele paymode_field paymode_paypal', 'label_class' => 'wcfm_title wcfm_ele paymode_field paymode_paypal', 'value' => $paypal ),
+																																														"skrill" => array('label' => __('Skrill Email', 'wc-frontend-manager'), 'name' => 'payment[skrill][email]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele paymode_field paymode_skrill', 'label_class' => 'wcfm_title wcfm_ele paymode_field paymode_skrill', 'value' => $skrill ),
+																																														), $vendor_id );
+						
+						$WCFM->wcfm_fields->wcfm_generate_form_field( $wcfmmp_settings_fields_billing );
+						?>
+					</div>
+					
+					<?php if( in_array( 'bank_transfer', array_keys( $wcfm_marketplace_withdrwal_payment_methods ) ) ) { ?>
+						<div class="wcfm_clearfix"></div>
+						<div class="wcfm_vendor_settings_heading wcfm_marketplace_bank paymode_field paymode_bank_transfer"><h3><?php _e( 'Bank Details', 'wc-frontend-manager' ); ?></h3></div>
+						<div class="store_address">
+							<?php
+								$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_marketplace_settings_fields_billing_bank', array(
+																																		"ac_name" => array('label' => __('Account Name', 'wc-frontend-manager'), 'placeholder' => __('Your bank account name', 'wc-frontend-manager'), 'name' => 'payment[bank][ac_name]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele paymode_field paymode_bank_transfer', 'label_class' => 'wcfm_title wcfm_ele paymode_field paymode_bank_transfer', 'value' => $ac_name ),
+																																		"ac_number" => array('label' => __('Account Number', 'wc-frontend-manager'), 'placeholder' => __('Your bank account number', 'wc-frontend-manager'), 'name' => 'payment[bank][ac_number]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele paymode_field paymode_bank_transfer', 'label_class' => 'wcfm_title wcfm_ele paymode_field paymode_bank_transfer', 'value' => $ac_number ),
+																																		"bank_name" => array('label' => __('Bank Name', 'wc-frontend-manager'), 'placeholder' => __('Name of bank', 'wc-frontend-manager'), 'name' => 'payment[bank][bank_name]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele paymode_field paymode_bank_transfer', 'label_class' => 'wcfm_title wcfm_ele paymode_field paymode_bank_transfer', 'value' => $bank_name ),
+																																		"bank_addr" => array('label' => __('Bank Address', 'wc-frontend-manager'), 'placeholder' => __('Address of your bank', 'wc-frontend-manager'), 'name' => 'payment[bank][bank_addr]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele paymode_field paymode_bank_transfer', 'label_class' => 'wcfm_title wcfm_ele paymode_field paymode_bank_transfer', 'value' => $bank_addr ),
+																																		"routing_number" => array('label' => __('Routing Number', 'wc-frontend-manager'), 'placeholder' => __( 'Routing number', 'wc-frontend-manager' ), 'name' => 'payment[bank][routing_number]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele paymode_field paymode_bank_transfer', 'label_class' => 'wcfm_title wcfm_ele paymode_field paymode_bank_transfer', 'value' => $routing_number ),
+																																		"iban" => array('label' => __('IBAN', 'wc-frontend-manager'), 'placeholder' => __('IBAN', 'wc-frontend-manager'), 'name' => 'payment[bank][iban]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele paymode_field paymode_bank_transfer', 'label_class' => 'wcfm_title wcfm_ele paymode_field paymode_bank_transfer', 'value' => $iban ),
+																																		"swift" => array('label' => __('Swift Code', 'wc-frontend-manager'), 'placeholder' => __('Swift code', 'wc-frontend-manager'), 'name' => 'payment[bank][swift]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele paymode_field paymode_bank_transfer', 'label_class' => 'wcfm_title wcfm_ele paymode_field paymode_bank_transfer', 'value' => $swift ),
+																																		"ifsc" => array('label' => __('IFSC Code', 'wc-frontend-manager'), 'placeholder' => __('Swift code', 'wc-frontend-manager'), 'name' => 'payment[bank][ifsc]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele paymode_field paymode_bank_transfer', 'label_class' => 'wcfm_title wcfm_ele paymode_field paymode_bank_transfer', 'value' => $ifsc ),
+																																		), $vendor_id ) );
+							?>
+						</div>
+					<?php } ?>
+					
 					<?php do_action( 'wcfmmp_admin_wcfm_vendor_settings_after', $vendor_id ); ?> 
 					
 					<?php if( apply_filters( 'wcfm_is_allow_store_hours', true ) ) { ?>
@@ -945,22 +963,42 @@ class WCFMmp_Vendor {
 							<div class="wcfm_vendor_settings_heading"><h3><?php _e( 'Daily Basis Opening & Closing Hours', 'wc-multivendor-marketplace' ); ?></h3></div>
 							
 							<?php
-							$WCFM->wcfm_fields->wcfm_generate_form_field( array( 
-								"wcfm_store_hours_mon_min_time" => array( 'name' => 'wcfm_store_hours[day_times][0][start]', 'label' => __('Monday', 'wc-multivendor-marketplace'), 'placeholder' => __('Opening Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field wcfm_store_hours_fields wcfm_store_hours_fields_0', 'label_class' => 'wcfm_title wcfm_store_hours_label  wcfm_store_hours_fields wcfm_store_hours_fields_0', 'value' => $wcfm_store_hours_mon_min_time ),
-								"wcfm_store_hours_mon_max_time" => array( 'name' => 'wcfm_store_hours[day_times][0][end]', 'placeholder' => __('Closing Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_0', 'value' => $wcfm_store_hours_mon_max_time ),
-								"wcfm_store_hours_thu_min_time" => array( 'name' => 'wcfm_store_hours[day_times][1][start]', 'label' => __('Tuesday', 'wc-multivendor-marketplace'), 'placeholder' => __('Opening Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_1', 'label_class' => 'wcfm_title wcfm_store_hours_label  wcfm_store_hours_fields wcfm_store_hours_fields_1', 'value' => $wcfm_store_hours_thu_min_time ),
-								"wcfm_store_hours_thu_max_time" => array( 'name' => 'wcfm_store_hours[day_times][1][end]', 'placeholder' => __('Closing Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_1', 'value' => $wcfm_store_hours_thu_max_time ),
-								"wcfm_store_hours_wed_min_time" => array( 'name' => 'wcfm_store_hours[day_times][2][start]', 'label' => __('Wednesday', 'wc-multivendor-marketplace'), 'placeholder' => __('Opening Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_2', 'label_class' => 'wcfm_title wcfm_store_hours_label  wcfm_store_hours_fields wcfm_store_hours_fields_2', 'value' => $wcfm_store_hours_wed_min_time ),
-								"wcfm_store_hours_wed_max_time" => array( 'name' => 'wcfm_store_hours[day_times][2][end]', 'placeholder' => __('Closing Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_2', 'value' => $wcfm_store_hours_wed_max_time ),
-								"wcfm_store_hours_thur_min_time" => array( 'name' => 'wcfm_store_hours[day_times][3][start]', 'label' => __('Thursday', 'wc-multivendor-marketplace'), 'placeholder' => __('Opening Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_3', 'label_class' => 'wcfm_title wcfm_store_hours_label  wcfm_store_hours_fields wcfm_store_hours_fields_3', 'value' => $wcfm_store_hours_thur_min_time ),
-								"wcfm_store_hours_thur_max_time" => array( 'name' => 'wcfm_store_hours[day_times][3][end]', 'placeholder' => __('Closing Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_3', 'value' => $wcfm_store_hours_thur_max_time ),
-								"wcfm_store_hours_fri_min_time" => array( 'name' => 'wcfm_store_hours[day_times][4][start]', 'label' => __('Friday', 'wc-multivendor-marketplace'), 'placeholder' => __('Opening Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_4', 'label_class' => 'wcfm_title wcfm_store_hours_label  wcfm_store_hours_fields wcfm_store_hours_fields_4', 'value' => $wcfm_store_hours_fri_min_time ),
-								"wcfm_store_hours_fri_max_time" => array( 'name' => 'wcfm_store_hours[day_times][4][end]', 'placeholder' => __('Closing Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_4', 'value' => $wcfm_store_hours_fri_max_time ),
-								"wcfm_store_hours_sat_min_time" => array( 'name' => 'wcfm_store_hours[day_times][5][start]', 'label' => __('Saturday', 'wc-multivendor-marketplace'), 'placeholder' => __('Opening Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_5', 'label_class' => 'wcfm_title wcfm_store_hours_label  wcfm_store_hours_fields wcfm_store_hours_fields_5', 'value' => $wcfm_store_hours_sat_min_time ),
-								"wcfm_store_hours_sat_max_time" => array( 'name' => 'wcfm_store_hours[day_times][5][end]', 'placeholder' => __('Closing Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_5', 'value' => $wcfm_store_hours_sat_max_time ),
-								"wcfm_store_hours_sun_min_time" => array( 'name' => 'wcfm_store_hours[day_times][6][start]', 'label' => __('Sunday', 'wc-multivendor-marketplace'), 'placeholder' => __('Opening Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_6', 'label_class' => 'wcfm_title wcfm_store_hours_label  wcfm_store_hours_fields wcfm_store_hours_fields_6', 'value' => $wcfm_store_hours_sun_min_time ),
-								"wcfm_store_hours_sun_max_time" => array( 'name' => 'wcfm_store_hours[day_times][6][end]', 'placeholder' => __('Closing Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_6', 'value' => $wcfm_store_hours_sun_max_time ),
-								));
+							$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_vendors_settings_fields_store_hours_time_slots', array( 
+									"wcfm_store_hours_mon_times" => array( 'label' => __('Monday Time Slots', 'wc-multivendor-marketplace'), 'name' => 'wcfm_store_hours[day_times][0]', 'type' => 'multiinput', 'class' => 'wcfm_store_hours_fields wcfm_store_hours_fields_0', 'label_class' => 'wcfm_title wcfm_store_hours_fields wcfm_store_hours_fields_0', 'value' => $wcfm_store_hours_mon_times, 'options' => array(
+										"start" => array( 'label' => __('Opening', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+										"end" => array( 'label' => __('Closing', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+									) ),
+									
+									"wcfm_store_hours_tue_times" => array( 'label' => __('Tuesday Time Slots', 'wc-multivendor-marketplace'), 'name' => 'wcfm_store_hours[day_times][1]', 'type' => 'multiinput', 'class' => 'wcfm_store_hours_fields wcfm_store_hours_fields_1', 'label_class' => 'wcfm_title wcfm_store_hours_fields wcfm_store_hours_fields_1', 'value' => $wcfm_store_hours_tue_times, 'options' => array(
+										"start" => array( 'label' => __('Opening', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+										"end" => array( 'label' => __('Closing', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+									) ),
+									
+									"wcfm_store_hours_wed_times" => array( 'label' => __('Wednesday Time Slots', 'wc-multivendor-marketplace'), 'name' => 'wcfm_store_hours[day_times][2]', 'type' => 'multiinput', 'class' => 'wcfm_store_hours_fields wcfm_store_hours_fields_2', 'label_class' => 'wcfm_title wcfm_store_hours_fields wcfm_store_hours_fields_2', 'value' => $wcfm_store_hours_wed_times, 'options' => array(
+										"start" => array( 'label' => __('Opening', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+										"end" => array( 'label' => __('Closing', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+									) ),
+									
+									"wcfm_store_hours_thu_times" => array( 'label' => __('Thursday Time Slots', 'wc-multivendor-marketplace'), 'name' => 'wcfm_store_hours[day_times][3]', 'type' => 'multiinput', 'class' => 'wcfm_store_hours_fields wcfm_store_hours_fields_3', 'label_class' => 'wcfm_title wcfm_store_hours_fields wcfm_store_hours_fields_3', 'value' => $wcfm_store_hours_thu_times, 'options' => array(
+										"start" => array( 'label' => __('Opening', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+										"end" => array( 'label' => __('Closing', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+									) ),
+									
+									"wcfm_store_hours_fri_times" => array( 'label' => __('Friday Time Slots', 'wc-multivendor-marketplace'), 'name' => 'wcfm_store_hours[day_times][4]', 'type' => 'multiinput', 'class' => 'wcfm_store_hours_fields wcfm_store_hours_fields_4', 'label_class' => 'wcfm_title wcfm_store_hours_fields wcfm_store_hours_fields_4', 'value' => $wcfm_store_hours_fri_times, 'options' => array(
+										"start" => array( 'label' => __('Opening', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+										"end" => array( 'label' => __('Closing', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+									) ),
+									
+									"wcfm_store_hours_sat_times" => array( 'label' => __('Saturday Time Slots', 'wc-multivendor-marketplace'), 'name' => 'wcfm_store_hours[day_times][5]', 'type' => 'multiinput', 'class' => 'wcfm_store_hours_fields wcfm_store_hours_fields_5', 'label_class' => 'wcfm_title wcfm_store_hours_fields wcfm_store_hours_fields_5', 'value' => $wcfm_store_hours_sat_times, 'options' => array(
+										"start" => array( 'label' => __('Opening', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+										"end" => array( 'label' => __('Closing', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+									) ),
+									
+									"wcfm_store_hours_sun_times" => array( 'label' => __('Sunday Time Slots', 'wc-multivendor-marketplace'), 'name' => 'wcfm_store_hours[day_times][6]', 'type' => 'multiinput', 'class' => 'wcfm_store_hours_fields wcfm_store_hours_fields_6', 'label_class' => 'wcfm_title wcfm_store_hours_fields wcfm_store_hours_fields_6', 'value' => $wcfm_store_hours_sun_times, 'options' => array(
+										"start" => array( 'label' => __('Opening', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+										"end" => array( 'label' => __('Closing', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+									) ),
+								), $vendor_id ) );
 							?>
 						</div>
 					<?php } ?>
@@ -1243,10 +1281,14 @@ class WCFMmp_Vendor {
 						$wcfmvm_registration_custom_field['name'] = sanitize_title( $wcfmvm_registration_custom_field['label'] );
 						$field_name = 'wcfmmp_additional_infos[' . $wcfmvm_registration_custom_field['name'] . ']';
 						$field_id   = md5( $field_name );
+						$ufield_id  = '';
 					
 						if( !empty( $wcfmvm_custom_infos ) ) {
 							if( $wcfmvm_registration_custom_field['type'] == 'checkbox' ) {
 								$field_value = isset( $wcfmvm_custom_infos[$wcfmvm_registration_custom_field['name']] ) ? $wcfmvm_custom_infos[$wcfmvm_registration_custom_field['name']] : 'no';
+							} elseif( $wcfmvm_registration_custom_field['type'] == 'upload' ) {
+								$ufield_id = md5( 'wcfmvm_custom_infos[' . sanitize_title( $wcfmvm_registration_custom_field['label'] ) . ']' );
+								$field_value = isset( $wcfmvm_custom_infos[$ufield_id] ) ? $wcfmvm_custom_infos[$ufield_id] : '';
 							} else {
 								$field_value = isset( $wcfmvm_custom_infos[$wcfmvm_registration_custom_field['name']] ) ? $wcfmvm_custom_infos[$wcfmvm_registration_custom_field['name']] : '';
 							}
@@ -1282,7 +1324,7 @@ class WCFMmp_Vendor {
 							break;
 							
 							case 'upload':
-								$WCFM->wcfm_fields->wcfm_generate_form_field(  array( $field_id => array( 'label' => __($wcfmvm_registration_custom_field['label'], 'wc-multivendor-membership') , 'name' => $field_name, 'custom_attributes' => $custom_attributes, 'type' => 'upload', 'class' => 'wcfm_ele', 'label_class' => 'wcfm_title', 'value' => $field_value, 'hints' => __($wcfmvm_registration_custom_field['help_text'], 'wc-multivendor-membership') ) ) );
+								$WCFM->wcfm_fields->wcfm_generate_form_field(  array( $field_id => array( 'label' => __($wcfmvm_registration_custom_field['label'], 'wc-multivendor-membership') , 'name' => 'wcfmmp_additional_infos['.$ufield_id.']', 'custom_attributes' => $custom_attributes, 'type' => 'upload', 'class' => 'wcfm_ele', 'label_class' => 'wcfm_title', 'value' => $field_value, 'hints' => __($wcfmvm_registration_custom_field['help_text'], 'wc-multivendor-membership') ) ) );
 							break;
 							
 							case 'select':
@@ -2139,7 +2181,7 @@ class WCFMmp_Vendor {
 		if( !empty( $search_data ) ) {
 			foreach( $search_data as $search_key => $search_value ) {
 				if( !$search_value ) continue;
-				if( in_array( $search_key, array( 'search_term', 'wcfmmp_store_search', 'wcfmmp_store_category', 'wcfmmp_radius_addr', 'wcfmmp_radius_lat', 'wcfmmp_radius_lng', 'wcfmmp_radius_range', 'pagination_base', 'wcfm_paged', 'paged', 'per_row', 'per_page', 'excludes', 'orderby', 'has_product', 'theme', 'nonce' ) ) ) continue;
+				if( in_array( $search_key, array( 'v', 'search_term', 'wcfmmp_store_search', 'wcfmmp_store_category', 'wcfmmp_radius_addr', 'wcfmmp_radius_lat', 'wcfmmp_radius_lng', 'wcfmmp_radius_range', 'pagination_base', 'wcfm_paged', 'paged', 'per_row', 'per_page', 'excludes', 'orderby', 'has_product', 'theme', 'nonce' ) ) ) continue;
 				if( $search ) $args['meta_query']['relation'] = 'AND';
 				$args['meta_query'][] = array(
 					                             'relation' => 'OR',

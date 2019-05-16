@@ -97,7 +97,7 @@ class WCFM_Marketplace {
 			
   }
   
-  // WCFM Dokan Store Logo
+  // WCFM Marketplace Store Logo
   function wcfmmp_store_logo( $store_logo ) {
   	$user_id = $this->vendor_id;
   	$vendor_data = get_user_meta( $user_id, 'wcfmmp_profile_settings', true );
@@ -114,7 +114,7 @@ class WCFM_Marketplace {
   	return $store_logo;
   }
   
-  // WCFM Dokan Store Name
+  // WCFM Marketplace Store Name
   function wcfmmp_store_name( $store_name ) {
   	$user_id = $this->vendor_id;
   	
@@ -139,14 +139,14 @@ class WCFM_Marketplace {
   	return $args;
   }
   
-  // Dokan Listing args
+  // WCFM Marketplace Listing args
 	function wcfmmp_listing_args( $args ) {
   	$args['author'] = $this->vendor_id;
   	return $args;
   }
   
   /**
-   * Dokan filter customers
+   * WCFM Marketplace filter customers
    */
   function wcfmmp_filter_customers( $args ) {
   	global $WCFM, $wpdb;
@@ -861,7 +861,7 @@ class WCFM_Marketplace {
   	return $order_status;
   }
   
-  // Dokanendor dashboard top seller query
+  // WCFM Marketplace dashboard top seller query
   function wcfmmp_dashboard_status_widget_top_seller_query( $query, $limit = 5 ) {
   	global $WCFM, $wpdb, $_POST;
   	

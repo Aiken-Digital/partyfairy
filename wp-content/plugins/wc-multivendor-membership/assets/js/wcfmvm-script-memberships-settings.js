@@ -52,23 +52,25 @@ jQuery(document).ready( function($) {
 	  }
 	}).change();
 	
-	$('.payment_fields').addClass( 'wcfm_ele_hide' );
+	$('.payment_fields').addClass( 'wcfm_custom_hide' );
 	$('.payment_options').each(function() {
 	  $(this).change(function() {
 	  	$pay_option = $(this).val();
 	  	if($(this).is(':checked')) {
-				$('.'+$pay_option+'_payment_field').removeClass('wcfm_ele_hide');
+				$('.'+$pay_option+'_payment_field').removeClass('wcfm_custom_hide');
 			} else {
-				$('.'+$pay_option+'_payment_field').addClass('wcfm_ele_hide');
+				$('.'+$pay_option+'_payment_field').addClass('wcfm_custom_hide');
 			}
 	  }).change();
 	});
 	
 	$('#paypal_sandbox').change(function() {
 	  if($(this).is(':checked')) {
+	  	$(this).parent().find('.live_payment_field').addClass('wcfm_ele_hide');
 	  	$(this).parent().find('.test_payment_field').removeClass('wcfm_ele_hide');
 	  } else {
 	  	$(this).parent().find('.test_payment_field').addClass('wcfm_ele_hide');
+	  	$(this).parent().find('.live_payment_field').removeClass('wcfm_ele_hide');
 	  }
 	}).change();
 	

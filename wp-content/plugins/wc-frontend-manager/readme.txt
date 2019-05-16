@@ -5,9 +5,9 @@ Donate link: https://www.paypal.me/wclovers/25usd
 Requires at least: 4.4
 Tested up to: 5.2
 WC requires at least: 3.0
-WC tested up to: 3.5.0
+WC tested up to: 3.6.0
 Requires PHP: 5.6
-Stable tag: 6.1.0
+Stable tag: 6.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -278,6 +278,22 @@ Fully compatible with all major multi-vendor marketplace plugins - <strong>WC Ma
 25. WCFM Dashboard - Mobile view
 
 == Changelog ==
+
+= 6.1.1 =
+*Updated - 15/05/2019*
+
+* Feature - FooEvents Tickets listing added (WCFM Ultmate require)
+* Enhance - Vendor coupon "Include Products" option added
+* Enhance - "Add Article" disable due to "low space" capability checking added 
+* Enhance - Admin customers list store filter added
+* Enhance - Admin vendors list store orders section quick reference link added
+* Enhance - Vednor profile additional information added under Admin Vendor Manager -> Profile Section
+* Enhance - Multi-input block remove confirmation added
+* Enhance - Listings "Mark Fill" inside WCFM dashboard option added
+* Enhance - Article new category add option added
+* Tweak   - Booking date range filter work with booking start date, previously worked with booking created date
+* Tweak   - Apponitment date range filter work with appointment start date, previously worked with booking created date
+* Fixed   - Product page custom field display issue resolved
 
 = 6.1.0 =
 *Updated - 07/05/2019*
@@ -1956,9 +1972,16 @@ Fully compatible with all major multi-vendor marketplace plugins - <strong>WC Ma
 
 == Upgrade Notice ==
 
-= 6.1.0 =
-* Feature - Category wise Attributes mapping option added (WCFM Ultimate require) - [Documentation](https://docs.wclovers.com/attributes/#category-attributes-mapping)
-* Enhance - WCFM Marketplace vendor's sales report "tax" added 
-* Fixed   - Product Manager Catalog visibility twice display issue resolved
-* Fixed   - Dashboard vendors list page not loading issue resolved
-* Fixed   - WCFM Marketplace store list search result verified badge not display issue resolved 
+= 6.1.1 =
+* Feature - FooEvents Tickets listing added (WCFM Ultmate require)
+* Enhance - Vendor coupon "Include Products" option added
+* Enhance - "Add Article" disable due to "low space" capability checking added 
+* Enhance - Admin customers list store filter added
+* Enhance - Admin vendors list store orders section quick reference link added
+* Enhance - Vednor profile additional information added under Admin Vendor Manager -> Profile Section
+* Enhance - Multi-input block remove confirmation added
+* Enhance - Listings "Mark Fill" inside WCFM dashboard option added
+* Enhance - Article new category add option added
+* Tweak   - Booking date range filter work with booking start date, previously worked with booking created date
+* Tweak   - Apponitment date range filter work with appointment start date, previously worked with booking created date
+* Fixed   - Product page custom field display issue resolved

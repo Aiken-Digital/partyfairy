@@ -502,11 +502,11 @@ $is_marketplace = wcfm_is_marketplace();
 				<!-- collapsible -->
 				<div class="page_collapsible" id="wcfm_settings_form_enquiry_head">
 					<label class="wcfmfa fa-question-circle"></label>
-					<?php _e('Inquiry Settings', 'wc-frontend-manager'); ?><span></span>
+					<?php _e('Enquiry Settings', 'wc-frontend-manager'); ?><span></span>
 				</div>
 				<div class="wcfm-container">
 					<div id="wcfm_settings_form_enquiry_expander" class="wcfm-content">
-					  <h2><?php _e('Inquiry Module', 'wc-frontend-manager'); ?></h2>
+					  <h2><?php _e('Enquiry Module', 'wc-frontend-manager'); ?></h2>
 						<?php wcfm_video_tutorial( 'https://www.youtube.com/embed/JeIvHgcVuGU' ); ?>
 						<div class="wcfm_clearfix"></div>
 						<?php

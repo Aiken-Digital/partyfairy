@@ -75,6 +75,31 @@ class WCFMmp_Store_Hours_Widget extends WP_Widget {
 		$wcfm_store_hours_day_times = isset( $wcfm_vendor_store_hours['day_times'] ) ? $wcfm_vendor_store_hours['day_times'] : array();
 		if( empty( $wcfm_store_hours_day_times ) ) return;
 		
+		// Old Store Hours Migrating
+		$wcfm_vendor_store_hours_migrated = get_user_meta( $store_id, 'wcfm_vendor_store_hours_migrated', true );
+		if( !$wcfm_vendor_store_hours_migrated ) {
+			$wcfm_store_hours_mon_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[0]['start'] ) ? $wcfm_store_hours_day_times[0]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[0]['end'] ) ? $wcfm_store_hours_day_times[0]['end'] : '' ) );
+			$wcfm_store_hours_tue_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[1]['start'] ) ? $wcfm_store_hours_day_times[1]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[1]['end'] ) ? $wcfm_store_hours_day_times[1]['end'] : '' ) );
+			$wcfm_store_hours_wed_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[2]['start'] ) ? $wcfm_store_hours_day_times[2]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[2]['end'] ) ? $wcfm_store_hours_day_times[2]['end'] : '' ) );
+			$wcfm_store_hours_thu_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[3]['start'] ) ? $wcfm_store_hours_day_times[3]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[3]['end'] ) ? $wcfm_store_hours_day_times[3]['end'] : '' ) );
+			$wcfm_store_hours_fri_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[4]['start'] ) ? $wcfm_store_hours_day_times[4]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[4]['end'] ) ? $wcfm_store_hours_day_times[4]['end'] : '' ) );
+			$wcfm_store_hours_sat_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[5]['start'] ) ? $wcfm_store_hours_day_times[5]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[5]['end'] ) ? $wcfm_store_hours_day_times[5]['end'] : '' ) );
+			$wcfm_store_hours_sun_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[6]['start'] ) ? $wcfm_store_hours_day_times[6]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[6]['end'] ) ? $wcfm_store_hours_day_times[6]['end'] : '' ) );
+			
+			$wcfm_store_hours_day_times = array( 0 => $wcfm_store_hours_mon_times,
+																					 1 => $wcfm_store_hours_tue_times,
+																					 2 => $wcfm_store_hours_wed_times,
+																					 3 => $wcfm_store_hours_thu_times,
+																					 4 => $wcfm_store_hours_fri_times,
+																					 5 => $wcfm_store_hours_sat_times,
+																					 6 => $wcfm_store_hours_sun_times
+																					);
+			
+			$wcfm_vendor_store_hours['day_times'] = $wcfm_store_hours_day_times;
+			update_user_meta( $store_id, 'wcfm_vendor_store_hours', $wcfm_vendor_store_hours );
+			update_user_meta( $store_id, 'wcfm_vendor_store_hours_migrated', 'yes' );
+		}
+		
 		$weekdays = array( 0 => __( 'Monday', 'wc-multivendor-marketplace' ), 1 => __( 'Tuesday', 'wc-multivendor-marketplace' ), 2 => __( 'Wednesday', 'wc-multivendor-marketplace' ), 3 => __( 'Thursday', 'wc-multivendor-marketplace' ), 4 => __( 'Friday', 'wc-multivendor-marketplace' ), 5 => __( 'Saturday', 'wc-multivendor-marketplace' ), 6 => __( 'Sunday', 'wc-multivendor-marketplace') );
 		
 		echo $before_widget;

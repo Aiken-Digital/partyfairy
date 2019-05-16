@@ -1,4 +1,5 @@
 $wcfm_shop_customers_table = '';
+$customer_vendor = '';
 
 jQuery(document).ready(function($) {
 		
@@ -34,13 +35,14 @@ jQuery(document).ready(function($) {
 										{ responsivePriority: 1 },
 										{ responsivePriority: 6 },
 										{ responsivePriority: 4 },
+										{ responsivePriority: 7 },
 										{ responsivePriority: 5 },
 										{ responsivePriority: 4 },
 										{ responsivePriority: 3 },
 										{ responsivePriority: 4 },
 										{ responsivePriority: 4 },
 										{ responsivePriority: 2 },
-										{ responsivePriority: 7 },
+										{ responsivePriority: 8 },
 										{ responsivePriority: 1 }
 								],
 		"columnDefs": [ { "targets": 0, "orderable" : false }, 
@@ -54,13 +56,15 @@ jQuery(document).ready(function($) {
 										{ "targets": 8, "orderable" : false },
 										{ "targets": 9, "orderable" : false },
 										{ "targets": 10, "orderable" : false },
+										{ "targets": 11, "orderable" : false },
 									],
 		'ajax': {
 			"type"   : "POST",
 			"url"    : wcfm_params.ajax_url,
 			"data"   : function( d ) {
-				d.action       = 'wcfm_ajax_controller',
-				d.controller   = 'wcfm-customers'
+				d.action          = 'wcfm_ajax_controller',
+				d.controller      = 'wcfm-customers',
+				d.customer_vendor = $customer_vendor
 			},
 			"complete" : function () {
 				initiateTip();
@@ -70,6 +74,13 @@ jQuery(document).ready(function($) {
 			}
 		}
 	} );
+	
+	if( $('#dropdown_vendor').length > 0 ) {
+		$('#dropdown_vendor').on('change', function() {
+			$customer_vendor = $('#dropdown_vendor').val();
+			$wcfm_shop_customers_table.ajax.reload();
+		}).select2( $wcfm_vendor_select_args );
+	}
 	
 	// Delete Customer
 	$( document.body ).on( 'updated_wcfm_shop_customers', function() {
@@ -104,6 +115,12 @@ jQuery(document).ready(function($) {
 				jQuery('#wcfm-shop-customers_wrapper').unblock();
 			}
 		});
+	}
+	
+	// Dashboard FIlter
+	if( $('.wcfm_filters_wrap').length > 0 ) {
+		$('.dataTable').before( $('.wcfm_filters_wrap') );
+		$('.wcfm_filters_wrap').css( 'display', 'inline-block' );
 	}
 	
 	// Screen Manager

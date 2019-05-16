@@ -23,8 +23,14 @@ class WCFMmp_Store_Hours {
 		// Store Hours Checking
 		add_filter( 'woocommerce_is_purchasable', array( &$this, 'wcfmmp_store_product_is_purchasable' ), 500, 2 );
 		
-		// Store CLose Message Show
+		// Product Loop Add to Cart Disable by Store Hours
+		add_action( 'woocommerce_after_shop_loop_item', array( &$this, 'wcfmmp_store_product_after_shop_loop_item' ), 9 );
+		
+		// Store Close Message Show
 		add_action( 'woocommerce_single_product_summary', array( &$this, 'wcfmmp_store_close_message' ), 30 );
+		
+		// Store Page Close Message
+		add_action( 'wcfmmp_before_store_product', array( &$this, 'wcfmmp_store_close_message' ), 25 );
 	}
 	
 	function wcfm_store_hours_vendor_settings( $vendor_id ) {
@@ -39,20 +45,39 @@ class WCFMmp_Store_Hours {
 		$wcfm_store_hours_off_days = isset( $wcfm_vendor_store_hours['off_days'] ) ? $wcfm_vendor_store_hours['off_days'] : array();
 		$wcfm_store_hours_day_times = isset( $wcfm_vendor_store_hours['day_times'] ) ? $wcfm_vendor_store_hours['day_times'] : array();
 		
-		$wcfm_store_hours_mon_min_time  = isset( $wcfm_store_hours_day_times[0]['start'] ) ? $wcfm_store_hours_day_times[0]['start'] : '';
-		$wcfm_store_hours_mon_max_time  = isset( $wcfm_store_hours_day_times[0]['end'] ) ? $wcfm_store_hours_day_times[0]['end'] : '';
-		$wcfm_store_hours_thu_min_time  = isset( $wcfm_store_hours_day_times[1]['start'] ) ? $wcfm_store_hours_day_times[1]['start'] : '';
-		$wcfm_store_hours_thu_max_time  = isset( $wcfm_store_hours_day_times[1]['end'] ) ? $wcfm_store_hours_day_times[1]['end'] : '';
-		$wcfm_store_hours_wed_min_time  = isset( $wcfm_store_hours_day_times[2]['start'] ) ? $wcfm_store_hours_day_times[2]['start'] : '';
-		$wcfm_store_hours_wed_max_time  = isset( $wcfm_store_hours_day_times[2]['end'] ) ? $wcfm_store_hours_day_times[2]['end'] : '';
-		$wcfm_store_hours_thur_min_time = isset( $wcfm_store_hours_day_times[3]['start'] ) ? $wcfm_store_hours_day_times[3]['start'] : '';
-		$wcfm_store_hours_thur_max_time = isset( $wcfm_store_hours_day_times[3]['end'] ) ? $wcfm_store_hours_day_times[3]['end'] : '';
-		$wcfm_store_hours_fri_min_time  = isset( $wcfm_store_hours_day_times[4]['start'] ) ? $wcfm_store_hours_day_times[4]['start'] : '';
-		$wcfm_store_hours_fri_max_time  = isset( $wcfm_store_hours_day_times[4]['end'] ) ? $wcfm_store_hours_day_times[4]['end'] : '';
-		$wcfm_store_hours_sat_min_time  = isset( $wcfm_store_hours_day_times[5]['start'] ) ? $wcfm_store_hours_day_times[5]['start'] : '';
-		$wcfm_store_hours_sat_max_time  = isset( $wcfm_store_hours_day_times[5]['end'] ) ? $wcfm_store_hours_day_times[5]['end'] : '';
-		$wcfm_store_hours_sun_min_time  = isset( $wcfm_store_hours_day_times[6]['start'] ) ? $wcfm_store_hours_day_times[6]['start'] : '';
-		$wcfm_store_hours_sun_max_time  = isset( $wcfm_store_hours_day_times[6]['end'] ) ? $wcfm_store_hours_day_times[6]['end'] : '';
+		// Old Store Hours Migrating
+		$wcfm_vendor_store_hours_migrated = get_user_meta( $vendor_id, 'wcfm_vendor_store_hours_migrated', true );
+		if( !$wcfm_vendor_store_hours_migrated ) {
+			$wcfm_store_hours_mon_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[0]['start'] ) ? $wcfm_store_hours_day_times[0]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[0]['end'] ) ? $wcfm_store_hours_day_times[0]['end'] : '' ) );
+			$wcfm_store_hours_tue_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[1]['start'] ) ? $wcfm_store_hours_day_times[1]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[1]['end'] ) ? $wcfm_store_hours_day_times[1]['end'] : '' ) );
+			$wcfm_store_hours_wed_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[2]['start'] ) ? $wcfm_store_hours_day_times[2]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[2]['end'] ) ? $wcfm_store_hours_day_times[2]['end'] : '' ) );
+			$wcfm_store_hours_thu_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[3]['start'] ) ? $wcfm_store_hours_day_times[3]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[3]['end'] ) ? $wcfm_store_hours_day_times[3]['end'] : '' ) );
+			$wcfm_store_hours_fri_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[4]['start'] ) ? $wcfm_store_hours_day_times[4]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[4]['end'] ) ? $wcfm_store_hours_day_times[4]['end'] : '' ) );
+			$wcfm_store_hours_sat_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[5]['start'] ) ? $wcfm_store_hours_day_times[5]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[5]['end'] ) ? $wcfm_store_hours_day_times[5]['end'] : '' ) );
+			$wcfm_store_hours_sun_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[6]['start'] ) ? $wcfm_store_hours_day_times[6]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[6]['end'] ) ? $wcfm_store_hours_day_times[6]['end'] : '' ) );
+			
+			$wcfm_store_hours_day_times = array( 0 => $wcfm_store_hours_mon_times,
+																					 1 => $wcfm_store_hours_tue_times,
+																					 2 => $wcfm_store_hours_wed_times,
+																					 3 => $wcfm_store_hours_thu_times,
+																					 4 => $wcfm_store_hours_fri_times,
+																					 5 => $wcfm_store_hours_sat_times,
+																					 6 => $wcfm_store_hours_sun_times
+																					);
+			
+			$wcfm_vendor_store_hours['day_times'] = $wcfm_store_hours_day_times;
+			update_user_meta( $vendor_id, 'wcfm_vendor_store_hours', $wcfm_vendor_store_hours );
+			update_user_meta( $vendor_id, 'wcfm_vendor_store_hours_migrated', 'yes' );
+		}
+		
+		$wcfm_store_hours_mon_times = isset( $wcfm_store_hours_day_times[0] ) ? $wcfm_store_hours_day_times[0] : array();
+		$wcfm_store_hours_tue_times = isset( $wcfm_store_hours_day_times[1] ) ? $wcfm_store_hours_day_times[1] : array();
+		$wcfm_store_hours_wed_times = isset( $wcfm_store_hours_day_times[2] ) ? $wcfm_store_hours_day_times[2] : array();
+		$wcfm_store_hours_thu_times = isset( $wcfm_store_hours_day_times[3] ) ? $wcfm_store_hours_day_times[3] : array();
+		$wcfm_store_hours_fri_times = isset( $wcfm_store_hours_day_times[4] ) ? $wcfm_store_hours_day_times[4] : array();
+		$wcfm_store_hours_sat_times = isset( $wcfm_store_hours_day_times[5] ) ? $wcfm_store_hours_day_times[5] : array();
+		$wcfm_store_hours_sun_times = isset( $wcfm_store_hours_day_times[6] ) ? $wcfm_store_hours_day_times[6] : array();
+				
 		?>
 		<!-- collapsible -->
 		<div class="page_collapsible" id="wcfm_settings_form_store_hours_head">
@@ -74,22 +99,42 @@ class WCFMmp_Store_Hours {
 				
 				<h2><?php _e( 'Daily Basis Opening & Closing Hours', 'wc-multivendor-marketplace' ); ?></h2><div class="wcfm_clearfix"></div>
 				<?php
-				$WCFM->wcfm_fields->wcfm_generate_form_field( array( 
-					"wcfm_store_hours_mon_min_time" => array( 'name' => 'wcfm_store_hours[day_times][0][start]', 'label' => __('Monday', 'wc-multivendor-marketplace'), 'placeholder' => __('Opening Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field wcfm_store_hours_fields wcfm_store_hours_fields_0', 'label_class' => 'wcfm_title wcfm_store_hours_label  wcfm_store_hours_fields wcfm_store_hours_fields_0', 'value' => $wcfm_store_hours_mon_min_time ),
-					"wcfm_store_hours_mon_max_time" => array( 'name' => 'wcfm_store_hours[day_times][0][end]', 'placeholder' => __('Closing Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_0', 'value' => $wcfm_store_hours_mon_max_time ),
-					"wcfm_store_hours_thu_min_time" => array( 'name' => 'wcfm_store_hours[day_times][1][start]', 'label' => __('Tuesday', 'wc-multivendor-marketplace'), 'placeholder' => __('Opening Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_1', 'label_class' => 'wcfm_title wcfm_store_hours_label  wcfm_store_hours_fields wcfm_store_hours_fields_1', 'value' => $wcfm_store_hours_thu_min_time ),
-					"wcfm_store_hours_thu_max_time" => array( 'name' => 'wcfm_store_hours[day_times][1][end]', 'placeholder' => __('Closing Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_1', 'value' => $wcfm_store_hours_thu_max_time ),
-					"wcfm_store_hours_wed_min_time" => array( 'name' => 'wcfm_store_hours[day_times][2][start]', 'label' => __('Wednesday', 'wc-multivendor-marketplace'), 'placeholder' => __('Opening Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_2', 'label_class' => 'wcfm_title wcfm_store_hours_label  wcfm_store_hours_fields wcfm_store_hours_fields_2', 'value' => $wcfm_store_hours_wed_min_time ),
-					"wcfm_store_hours_wed_max_time" => array( 'name' => 'wcfm_store_hours[day_times][2][end]', 'placeholder' => __('Closing Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_2', 'value' => $wcfm_store_hours_wed_max_time ),
-					"wcfm_store_hours_thur_min_time" => array( 'name' => 'wcfm_store_hours[day_times][3][start]', 'label' => __('Thursday', 'wc-multivendor-marketplace'), 'placeholder' => __('Opening Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_3', 'label_class' => 'wcfm_title wcfm_store_hours_label  wcfm_store_hours_fields wcfm_store_hours_fields_3', 'value' => $wcfm_store_hours_thur_min_time ),
-					"wcfm_store_hours_thur_max_time" => array( 'name' => 'wcfm_store_hours[day_times][3][end]', 'placeholder' => __('Closing Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_3', 'value' => $wcfm_store_hours_thur_max_time ),
-					"wcfm_store_hours_fri_min_time" => array( 'name' => 'wcfm_store_hours[day_times][4][start]', 'label' => __('Friday', 'wc-multivendor-marketplace'), 'placeholder' => __('Opening Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_4', 'label_class' => 'wcfm_title wcfm_store_hours_label  wcfm_store_hours_fields wcfm_store_hours_fields_4', 'value' => $wcfm_store_hours_fri_min_time ),
-					"wcfm_store_hours_fri_max_time" => array( 'name' => 'wcfm_store_hours[day_times][4][end]', 'placeholder' => __('Closing Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_4', 'value' => $wcfm_store_hours_fri_max_time ),
-					"wcfm_store_hours_sat_min_time" => array( 'name' => 'wcfm_store_hours[day_times][5][start]', 'label' => __('Saturday', 'wc-multivendor-marketplace'), 'placeholder' => __('Opening Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_5', 'label_class' => 'wcfm_title wcfm_store_hours_label  wcfm_store_hours_fields wcfm_store_hours_fields_5', 'value' => $wcfm_store_hours_sat_min_time ),
-					"wcfm_store_hours_sat_max_time" => array( 'name' => 'wcfm_store_hours[day_times][5][end]', 'placeholder' => __('Closing Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_5', 'value' => $wcfm_store_hours_sat_max_time ),
-					"wcfm_store_hours_sun_min_time" => array( 'name' => 'wcfm_store_hours[day_times][6][start]', 'label' => __('Sunday', 'wc-multivendor-marketplace'), 'placeholder' => __('Opening Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_6', 'label_class' => 'wcfm_title wcfm_store_hours_label  wcfm_store_hours_fields wcfm_store_hours_fields_6', 'value' => $wcfm_store_hours_sun_min_time ),
-					"wcfm_store_hours_sun_max_time" => array( 'name' => 'wcfm_store_hours[day_times][6][end]', 'placeholder' => __('Closing Hours', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_ele wcfm_store_hours_field  wcfm_store_hours_fields wcfm_store_hours_fields_6', 'value' => $wcfm_store_hours_sun_max_time ),
-					));
+				$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_vendors_settings_fields_store_hours_time_slots', array( 
+						"wcfm_store_hours_mon_times" => array( 'label' => __('Monday Time Slots', 'wc-multivendor-marketplace'), 'name' => 'wcfm_store_hours[day_times][0]', 'type' => 'multiinput', 'class' => 'wcfm_store_hours_fields wcfm_store_hours_fields_0', 'label_class' => 'wcfm_title wcfm_store_hours_fields wcfm_store_hours_fields_0', 'value' => $wcfm_store_hours_mon_times, 'options' => array(
+							"start" => array( 'label' => __('Opening', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+							"end" => array( 'label' => __('Closing', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+						) ),
+						
+						"wcfm_store_hours_tue_times" => array( 'label' => __('Tuesday Time Slots', 'wc-multivendor-marketplace'), 'name' => 'wcfm_store_hours[day_times][1]', 'type' => 'multiinput', 'class' => 'wcfm_store_hours_fields wcfm_store_hours_fields_1', 'label_class' => 'wcfm_title wcfm_store_hours_fields wcfm_store_hours_fields_1', 'value' => $wcfm_store_hours_tue_times, 'options' => array(
+							"start" => array( 'label' => __('Opening', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+							"end" => array( 'label' => __('Closing', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+						) ),
+						
+						"wcfm_store_hours_wed_times" => array( 'label' => __('Wednesday Time Slots', 'wc-multivendor-marketplace'), 'name' => 'wcfm_store_hours[day_times][2]', 'type' => 'multiinput', 'class' => 'wcfm_store_hours_fields wcfm_store_hours_fields_2', 'label_class' => 'wcfm_title wcfm_store_hours_fields wcfm_store_hours_fields_2', 'value' => $wcfm_store_hours_wed_times, 'options' => array(
+							"start" => array( 'label' => __('Opening', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+							"end" => array( 'label' => __('Closing', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+						) ),
+						
+						"wcfm_store_hours_thu_times" => array( 'label' => __('Thursday Time Slots', 'wc-multivendor-marketplace'), 'name' => 'wcfm_store_hours[day_times][3]', 'type' => 'multiinput', 'class' => 'wcfm_store_hours_fields wcfm_store_hours_fields_3', 'label_class' => 'wcfm_title wcfm_store_hours_fields wcfm_store_hours_fields_3', 'value' => $wcfm_store_hours_thu_times, 'options' => array(
+							"start" => array( 'label' => __('Opening', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+							"end" => array( 'label' => __('Closing', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+						) ),
+						
+						"wcfm_store_hours_fri_times" => array( 'label' => __('Friday Time Slots', 'wc-multivendor-marketplace'), 'name' => 'wcfm_store_hours[day_times][4]', 'type' => 'multiinput', 'class' => 'wcfm_store_hours_fields wcfm_store_hours_fields_4', 'label_class' => 'wcfm_title wcfm_store_hours_fields wcfm_store_hours_fields_4', 'value' => $wcfm_store_hours_fri_times, 'options' => array(
+							"start" => array( 'label' => __('Opening', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+							"end" => array( 'label' => __('Closing', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+						) ),
+						
+						"wcfm_store_hours_sat_times" => array( 'label' => __('Saturday Time Slots', 'wc-multivendor-marketplace'), 'name' => 'wcfm_store_hours[day_times][5]', 'type' => 'multiinput', 'class' => 'wcfm_store_hours_fields wcfm_store_hours_fields_5', 'label_class' => 'wcfm_title wcfm_store_hours_fields wcfm_store_hours_fields_5', 'value' => $wcfm_store_hours_sat_times, 'options' => array(
+							"start" => array( 'label' => __('Opening', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+							"end" => array( 'label' => __('Closing', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+						) ),
+						
+						"wcfm_store_hours_sun_times" => array( 'label' => __('Sunday Time Slots', 'wc-multivendor-marketplace'), 'name' => 'wcfm_store_hours[day_times][6]', 'type' => 'multiinput', 'class' => 'wcfm_store_hours_fields wcfm_store_hours_fields_6', 'label_class' => 'wcfm_title wcfm_store_hours_fields wcfm_store_hours_fields_6', 'value' => $wcfm_store_hours_sun_times, 'options' => array(
+							"start" => array( 'label' => __('Opening', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+							"end" => array( 'label' => __('Closing', 'wc-multivendor-marketplace'), 'type' => 'time', 'class' => 'wcfm-text wcfm_store_hours_field', 'label_class' => 'wcfm_title wcfm_store_hours_label' ),
+						) ),
+					), $vendor_id ) );
 				?>
 		  </div>
 		</div>
@@ -124,6 +169,34 @@ class WCFMmp_Store_Hours {
 	}
 	
 	/**
+	 * Product Loop Add to Cart button Disable
+	 */
+	function wcfmmp_store_product_after_shop_loop_item() {
+		global $WCFM, $WCFMmp, $product;
+		
+		$product_id = $product->get_id();
+		if( $product_id ) {
+			$vendor_id = $WCFM->wcfm_vendor_support->wcfm_get_vendor_id_from_product( $product_id );
+			
+			$is_store_close = $this->wcfmmp_is_store_close( $vendor_id );
+			if( $is_store_close ) {
+				$WCFMmp->wcfm_is_store_close = true;
+				remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
+				
+				if( !wcfm_is_store_page() && apply_filters( 'wcfm_is_allow_product_loop_store_close_message', false ) ) {
+					echo '<div class="wcfm_store_close_msg">';
+					echo apply_filters( 'wcfm_store_close_message', __( 'This store is now close!', 'wc-multivendor-marketplace' ) );
+					echo '</div>';
+				}
+		  } elseif( !has_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart') && $WCFMmp->wcfm_is_store_close ) {
+				if ( apply_filters( 'wcfm_is_allow_add_to_cart_restore', true ) && !function_exists( 'astra_header' ) && !function_exists( 'zita_post_loader' ) && !function_exists( 'oceanwp_get_sidebar' ) && !function_exists( 'martfury_content_columns' ) && !function_exists( 'x_get_stack' ) ) {
+					add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
+				}
+			}
+		}
+	}
+	
+	/**
 	 * WCFM Marketplace Store Close Message
 	 */
 	function wcfmmp_store_close_message() {
@@ -131,10 +204,24 @@ class WCFMmp_Store_Hours {
 		
 		if( !apply_filters( 'wcfm_is_allow_store_close_message', true ) ) return;
 		
-		$product_id = $product->get_id();
-		if( $product_id ) {
-			$vendor_id = $WCFM->wcfm_vendor_support->wcfm_get_vendor_id_from_product( $product_id );
-			
+		$vendor_id = '';
+		if( wcfm_is_store_page() ) {
+			$custom_store_url = get_option( 'wcfm_store_url', 'store' );
+			$store_name = get_query_var( $custom_store_url );
+			if ( !empty( $store_name ) ) {
+				$store_user = get_user_by( 'slug', $store_name );
+			}
+			if( $store_user ) {
+				$vendor_id  = $store_user->ID;
+			}
+		} elseif( $product ) {
+			$product_id = $product->get_id();
+			if( $product_id ) {
+				$vendor_id = $WCFM->wcfm_vendor_support->wcfm_get_vendor_id_from_product( $product_id );
+			}
+		}
+		
+		if( $vendor_id ) {
 			$is_store_close = $this->wcfmmp_is_store_close( $vendor_id );
 			if( $is_store_close ) {
 				echo '<div class="wcfm_store_close_msg">';
@@ -164,6 +251,31 @@ class WCFMmp_Store_Hours {
 						$wcfm_store_hours_off_days = isset( $wcfm_vendor_store_hours['off_days'] ) ? $wcfm_vendor_store_hours['off_days'] : array();
 						$wcfm_store_hours_day_times = isset( $wcfm_vendor_store_hours['day_times'] ) ? $wcfm_vendor_store_hours['day_times'] : array();
 						
+						// Old Store Hours Migrating
+						$wcfm_vendor_store_hours_migrated = get_user_meta( $vendor_id, 'wcfm_vendor_store_hours_migrated', true );
+						if( !$wcfm_vendor_store_hours_migrated ) {
+							$wcfm_store_hours_mon_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[0]['start'] ) ? $wcfm_store_hours_day_times[0]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[0]['end'] ) ? $wcfm_store_hours_day_times[0]['end'] : '' ) );
+							$wcfm_store_hours_tue_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[1]['start'] ) ? $wcfm_store_hours_day_times[1]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[1]['end'] ) ? $wcfm_store_hours_day_times[1]['end'] : '' ) );
+							$wcfm_store_hours_wed_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[2]['start'] ) ? $wcfm_store_hours_day_times[2]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[2]['end'] ) ? $wcfm_store_hours_day_times[2]['end'] : '' ) );
+							$wcfm_store_hours_thu_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[3]['start'] ) ? $wcfm_store_hours_day_times[3]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[3]['end'] ) ? $wcfm_store_hours_day_times[3]['end'] : '' ) );
+							$wcfm_store_hours_fri_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[4]['start'] ) ? $wcfm_store_hours_day_times[4]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[4]['end'] ) ? $wcfm_store_hours_day_times[4]['end'] : '' ) );
+							$wcfm_store_hours_sat_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[5]['start'] ) ? $wcfm_store_hours_day_times[5]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[5]['end'] ) ? $wcfm_store_hours_day_times[5]['end'] : '' ) );
+							$wcfm_store_hours_sun_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[6]['start'] ) ? $wcfm_store_hours_day_times[6]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[6]['end'] ) ? $wcfm_store_hours_day_times[6]['end'] : '' ) );
+							
+							$wcfm_store_hours_day_times = array( 0 => $wcfm_store_hours_mon_times,
+																									 1 => $wcfm_store_hours_tue_times,
+																									 2 => $wcfm_store_hours_wed_times,
+																									 3 => $wcfm_store_hours_thu_times,
+																									 4 => $wcfm_store_hours_fri_times,
+																									 5 => $wcfm_store_hours_sat_times,
+																									 6 => $wcfm_store_hours_sun_times
+																									);
+							
+							$wcfm_vendor_store_hours['day_times'] = $wcfm_store_hours_day_times;
+							update_user_meta( $vendor_id, 'wcfm_vendor_store_hours', $wcfm_vendor_store_hours );
+							update_user_meta( $vendor_id, 'wcfm_vendor_store_hours_migrated', 'yes' );
+						}
+						
 						$current_time = current_time( 'timestamp' );
 						
 						$today = date( 'N', $current_time );
@@ -176,11 +288,29 @@ class WCFMmp_Store_Hours {
 						
 						// Closing Hours Check
 						if( !empty( $wcfm_store_hours_day_times ) ) {
-							$open_hours  = isset( $wcfm_store_hours_day_times[$today]['start'] ) ? strtotime( $wcfm_store_hours_day_times[$today]['start'] ) : '';
-							$close_hours = isset( $wcfm_store_hours_day_times[$today]['end'] ) ? strtotime( $wcfm_store_hours_day_times[$today]['end'] ) : '';
-							
-							if( $open_hours && $close_hours ) {
-								if( ( $current_time < $open_hours ) || ( $current_time > $close_hours ) ) $is_store_close = true;
+							if( isset( $wcfm_store_hours_day_times[$today] ) ) {
+								$wcfm_store_hours_day_time_slots = $wcfm_store_hours_day_times[$today];
+								if( !empty( $wcfm_store_hours_day_time_slots ) ) {
+									if( isset( $wcfm_store_hours_day_time_slots[0] ) && isset( $wcfm_store_hours_day_time_slots[0]['start'] ) ) {
+										if( !empty( $wcfm_store_hours_day_time_slots[0]['start'] ) && !empty( $wcfm_store_hours_day_time_slots[0]['end'] ) ) {
+											$is_store_close = true;
+											foreach( $wcfm_store_hours_day_time_slots as $slot => $wcfm_store_hours_day_time_slot ) {
+												$open_hours  = isset( $wcfm_store_hours_day_time_slot['start'] ) ? strtotime( $wcfm_store_hours_day_time_slot['start'] ) : '';
+												$close_hours = isset( $wcfm_store_hours_day_time_slot['end'] ) ? strtotime( $wcfm_store_hours_day_time_slot['end'] ) : '';
+												
+												if( $open_hours && $close_hours ) {
+													if( ( $current_time > $open_hours ) && ( $current_time < $close_hours ) )  {
+														$is_store_close = false;
+														break;
+													}
+												} else {
+													$is_store_close = false;
+													break;
+												}
+											}
+										}
+									}
+								}
 							}
 						}
 					}

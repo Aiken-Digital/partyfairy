@@ -522,6 +522,9 @@ class WCFMmp_Reviews {
   	
   	if( !apply_filters( 'wcfmmp_is_allow_product_review_sync_with_store_review', true ) ) return;
   	
+  	$product_review_sync    = isset( $WCFMmp->wcfmmp_review_options['product_review_sync'] ) ? $WCFMmp->wcfmmp_review_options['product_review_sync'] : 'yes';
+  	if( $product_review_sync != 'yes' ) return;
+  	
 		$wcfm_review_categories = get_wcfm_marketplace_active_review_categories();
 	  $review_auto_approve = isset( $WCFMmp->wcfmmp_review_options['review_auto_approve'] ) ? $WCFMmp->wcfmmp_review_options['review_auto_approve'] : 'no';
 		

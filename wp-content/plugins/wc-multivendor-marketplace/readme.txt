@@ -5,9 +5,9 @@ Donate link: https://www.paypal.me/wclovers/25usd
 Requires at least: 4.4
 Tested up to: 5.2
 WC requires at least: 3.0
-WC tested up to: 3.5.0
+WC tested up to: 3.6.0
 Requires PHP: 5.6
-Stable tag: 3.0.5
+Stable tag: 3.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -221,6 +221,17 @@ NONE.
 
 
 == Changelog ==
+
+= 3.0.6 =
+*Updated - 15/05/2019* 
+
+* Feature - Store Hours multiple slots support added
+* Feature - Store Facebook page feed display shortcode added - wcfm_store_fb_feed
+* Feature - Store Twitter profile feed display shortcode added - wcfm_store_twitter_feed
+* Enahnce - Vendor's products review sync with store reviews setting option added
+* Enhance - WooCommerce price range filter store page compatibility added
+* Tweak   - Store Invoice item tax always visible, previously depend upon commission tax setting
+* Fixed   - Shipping class cost insert issue resolved
 
 = 3.0.5 =
 *Updated - 05/05/2019* 
@@ -850,14 +861,11 @@ NONE.
 
 == Upgrade Notice ==
 
-= 3.0.5 =
-* Feature - WooCommerce Min/Max Quantities compatibility added (WCFM Ultimate require)
-* Feature - WooCommerce 360 Images compatibility added (WCFM Ultimate require)
-* Feature - WooCommerce Product Badge Manager compatibility added (WCFM Ultimate require)
-* Enahnce - Single product multi-vendor "more offers" short code added - wcfm_more_offers
-* Tweak   - Store list page "category filter" options filtered by only store categories, previously all categories listed 
-* Tweak   - "Vacation Mode" message display at store header, previously visible with individual products
-* Tweak   - Store Email "woocommerce_order_details_after_order_table" hook enabled by default
-* Tweak   - Negative shipping cost input restricted
-* Fixed   - "Vacation Mode" widget product list issue rsolved
-* Fixed   - Vendor's customer not visible issue resolved
+= 3.0.6 =
+* Feature - Store Hours multiple slots support added
+* Feature - Store Facebook page feed display shortcode added - wcfm_store_fb_feed
+* Feature - Store Twitter profile feed display shortcode added - wcfm_store_twitter_feed
+* Enahnce - Vendor's products review sync with store reviews setting option added
+* Enhance - WooCommerce price range filter store page compatibility added
+* Tweak   - Store Invoice item tax always visible, previously depend upon commission tax setting
+* Fixed   - Shipping class cost insert issue resolved

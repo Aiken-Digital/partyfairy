@@ -448,7 +448,7 @@ class WCFM_Enquiry {
 			$button_class = '';
 			if( !is_user_logged_in() && apply_filters( 'wcfm_is_allow_enquiry_with_login', false ) ) { $button_class = ' wcfm_login_popup'; }
 			?>
-			<div class="lft bd_icon_box"><a class="wcfm_store_enquiry <?php echo $button_class; ?>" data-store="<?php echo $vendor_id; ?>" data-product="0" href="#"><i class="wcfmfa fa-question" aria-hidden="true"></i><span><?php _e( 'Inquiry', 'wc-frontend-manager' ); ?></span></a></div>
+			<div class="lft bd_icon_box"><a class="wcfm_store_enquiry <?php echo $button_class; ?>" data-store="<?php echo $vendor_id; ?>" data-product="0" href="#"><i class="wcfmfa fa-question" aria-hidden="true"></i><span><?php _e( 'Enquiry', 'wc-frontend-manager' ); ?></span></a></div>
 			<?php
 		}
 	}

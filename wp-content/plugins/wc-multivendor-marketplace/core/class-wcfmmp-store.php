@@ -232,7 +232,7 @@ class WCFMmp_Store {
 			}
 		}
 
-		$this->shop_data = $shop_info;
+		$this->shop_data = apply_filters( 'wcfmmp_popluate_store_data', $shop_info, $this->id );
 	}
 
 	/**

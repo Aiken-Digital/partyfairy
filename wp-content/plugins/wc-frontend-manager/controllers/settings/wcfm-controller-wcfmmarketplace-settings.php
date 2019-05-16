@@ -98,11 +98,14 @@ class WCFM_Settings_Marketplace_Controller {
 				$user_login = sanitize_title( $the_user->user_login );
 				$previous_store_slug     = $the_user->user_nicename;
 				if( $previous_store_slug != $store_slug ) {
-					if( ( ( $user_login == $store_slug ) || !username_exists( $store_slug ) )  && ( apply_filters( 'wcfm_validate_store_slug', true, $store_slug ) ) ) {
+					if( ( ( $user_login == $store_slug ) || !username_exists( $store_slug ) || !get_user_by( 'slug', $store_slug ) ) && ( apply_filters( 'wcfm_validate_store_slug', true, $store_slug ) ) ) {
 						$store_slug_user = get_user_by( 'slug', $store_slug );
 						if ( !$store_slug_user || ( $store_slug_user && ( $store_slug_user->ID == $user_id ) )  ) {
-							$wpdb->query( "UPDATE {$wpdb->prefix}users SET `user_nicename` = '{$store_slug}' WHERE ID =  $user_id" );
-							//wp_update_user( array( 'ID' => $user_id, 'user_nicename' => wc_clean( $store_slug ) ) );
+							if( apply_filters( 'wcfm_is_allow_store_slug_direct_update', true ) ) {
+								$wpdb->query( "UPDATE {$wpdb->prefix}users SET `user_nicename` = '{$store_slug}' WHERE ID =  $user_id" );
+							} else {
+								wp_update_user( array( 'ID' => $user_id, 'user_nicename' => wc_clean( $store_slug ) ) );
+							}
 							if( apply_filters( 'wcfm_is_allow_reassociate_role', false ) ) {
 								$member_user = new WP_User(absint($user_id));
 								$member_user->set_role('wcfm_vendor');

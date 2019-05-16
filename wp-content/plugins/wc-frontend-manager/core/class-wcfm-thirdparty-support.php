@@ -308,7 +308,7 @@ class WCFM_ThirdParty_Support {
 		$job_dashboard_page = get_option( 'job_manager_job_dashboard_page_id' );
 		$add_listings_page = get_option( 'job_manager_submit_job_form_page_id' );
 		$post_a_job = get_permalink ( $add_listings_page );
-		if( ( $add_listings_page && is_object( $post ) && ( $add_listings_page == $post->ID ) ) || ( $job_dashboard_page && is_object( $post ) && ( $job_dashboard_page == $post->ID ) && isset( $_GET['action'] ) && ( $_GET['action'] == 'edit' ) ) ) {
+		if( ( $add_listings_page && is_object( $post ) && ( $add_listings_page == $post->ID ) ) || ( $job_dashboard_page && is_object( $post ) && ( $job_dashboard_page == $post->ID ) && isset( $_GET['action'] ) && ( in_array( $_GET['action'], array( 'edit', 'mark_filled', 'mark_not_filled' ) ) ) ) ) {
 			ob_start();
 			echo '<div id="wcfm-main-contentainer">';
 			echo  '<div id="wcfm-content">';
@@ -323,6 +323,8 @@ class WCFM_ThirdParty_Support {
 			echo '<div class="wcfm-container wcfm-top-element-container">';
 			if( isset( $_GET['action'] ) && ( $_GET['action'] == 'edit' ) ) {
 				echo '<h2>' . __( 'Edit Listing', 'wc-frontend-manager' ) . '</h2>';
+			} else if( isset( $_GET['action'] ) && ( in_array( $_GET['action'], array( 'mark_filled', 'mark_not_filled' ) ) ) ) {
+				echo '<h2>' . __( 'Manage Listing', 'wc-frontend-manager' ) . '</h2>';
 			} else {
 				echo '<h2>' . __( 'Add Listing', 'wc-frontend-manager' ) . '</h2>';
 			}
@@ -351,7 +353,7 @@ class WCFM_ThirdParty_Support {
 		
 		$job_dashboard_page = get_option( 'job_manager_job_dashboard_page_id' );
 		$add_listings_page = get_option( 'job_manager_submit_job_form_page_id' );
-		if( ( $add_listings_page && is_object( $post ) && ( $add_listings_page == $post->ID ) ) || ( $job_dashboard_page && is_object( $post ) && ( $job_dashboard_page == $post->ID ) && isset( $_GET['action'] ) && ( $_GET['action'] == 'edit' ) ) ) {
+		if( ( $add_listings_page && is_object( $post ) && ( $add_listings_page == $post->ID ) ) || ( $job_dashboard_page && is_object( $post ) && ( $job_dashboard_page == $post->ID ) && isset( $_GET['action'] ) && ( in_array( $_GET['action'], array( 'edit', 'mark_filled', 'mark_not_filled' ) ) ) ) ) {
 			$current_endpoint = 'wcfm-listings-manage';
 		}
 		return $current_endpoint;
@@ -365,7 +367,7 @@ class WCFM_ThirdParty_Support {
 		
 		$job_dashboard_page = get_option( 'job_manager_job_dashboard_page_id' );
 		$add_listings_page = get_option( 'job_manager_submit_job_form_page_id' );
-		if( ( $add_listings_page && is_object( $post ) && ( $add_listings_page == $post->ID ) ) || ( $job_dashboard_page && is_object( $post ) && ( $job_dashboard_page == $post->ID ) && isset( $_GET['action'] ) && ( $_GET['action'] == 'edit' ) ) ) {
+		if( ( $add_listings_page && is_object( $post ) && ( $add_listings_page == $post->ID ) ) || ( $job_dashboard_page && is_object( $post ) && ( $job_dashboard_page == $post->ID ) && isset( $_GET['action'] ) && ( in_array( $_GET['action'], array( 'edit', 'mark_filled', 'mark_not_filled' ) ) ) ) ) {
 			
 			if( !WCFM_Dependencies::wcfm_products_listings_active_check() && !WCFM_Dependencies::wcfm_products_mylistings_active_check() ) {
 				$WCFM->library->load_scripts( 'wcfm-profile' );

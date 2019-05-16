@@ -1494,14 +1494,8 @@ class WCFMvm {
 					$WCFM->wcfm_notification->wcfm_send_direct_message( -1, $member_id, 1, 0, $wcfm_messages, 'membership-cancel', false );
 				}
 				
-				
-				// PayPal Subscription Profile Cacellation Trigger
-				if( $paymode && ( $paymode == 'paypal_subs' ) ) {
-					$transaction_id = get_user_meta( $member_id, 'wcfm_transaction_id', true );
-					if( $transaction_id ) {
-						
-					}
-				}
+				// Recurring Subscription Profile Cacellation Trigger
+				$this->wcfmvm_recurring_subscription_profile_cancel( $member_id, $paymode );
 				
 				// WC Subscription Cancel
 				$wc_subscription = get_user_meta( $member_id, 'wcfm_membership_subscription', true );
@@ -1606,13 +1600,8 @@ class WCFMvm {
 					$WCFM->wcfm_notification->wcfm_send_direct_message( -1, $member_id, 1, 0, $wcfm_messages, 'membership-expired', false );
 				}
 				
-				// PayPal Subscription Profile Cacellation Trigger
-				if( $paymode && ( $paymode == 'paypal_subs' ) ) {
-					$transaction_id = get_user_meta( $member_id, 'wcfm_transaction_id', true );
-					if( $transaction_id ) {
-						
-					}
-				}
+				// Recurring Subscription Profile Cacellation Trigger
+				$this->wcfmvm_recurring_subscription_profile_cancel( $member_id, $paymode );
 				
 				// WC Subscription Cancel
 				$wc_subscription = get_user_meta( $member_id, 'wcfm_membership_subscription', true );
@@ -1657,6 +1646,97 @@ class WCFMvm {
 				}
 			}
 		}
+	}
+	
+	/**
+	 * WCFMvm subscription recurring profile cancdel 
+	 */
+	function wcfmvm_recurring_subscription_profile_cancel( $member_id, $paymode ) {
+		global $WCFM, $WCFMvm;
+		
+		if( !$paymode ) return;
+		
+		$subscription_id = get_user_meta( $member_id, 'wcfm_transaction_id', true );
+		if( !$subscription_id ) return;
+		
+		$wcfm_membership_options = get_option( 'wcfm_membership_options', array() );
+		$membership_payment_settings = array();
+		if( isset( $wcfm_membership_options['membership_payment_settings'] ) ) $membership_payment_settings = $wcfm_membership_options['membership_payment_settings'];
+		$payment_sandbox = isset( $membership_payment_settings['paypal_sandbox'] ) ? 'yes' : 'no';
+		
+		
+		
+		switch( $paymode ) {
+			case 'paypal_subs':
+				$paypal_settings  = get_option( 'woocommerce_paypal_settings' );
+				$api_endpoint     = ( $paypal_settings['testmode'] == 'no' ) ? 'https://api-3t.paypal.com/nvp' : 'https://api-3t.sandbox.paypal.com/nvp';
+        $api_username     = ( isset( $paypal_settings['api_username'] ) ) ? $paypal_settings['api_username'] : '';
+        $api_password     = ( isset( $paypal_settings['api_password'] ) ) ? $paypal_settings['api_password'] : '';
+        $api_signature    = ( isset( $paypal_settings['api_signature'] ) ) ? $paypal_settings['api_signature'] : '';
+
+        if( $api_username && $api_password && $api_signature ) {
+					$request = wp_remote_post( $api_endpoint, array(
+							'timeout'   => 15,
+							'sslverify' => false,
+							'body'      => array(
+									'USER'      => $api_username,
+									'PWD'       => $api_password,
+									'SIGNATURE' => $api_signature,
+									'VERSION'   => '76.0',
+									'METHOD'    => 'ManageRecurringPaymentsProfileStatus',
+									'PROFILEID' => $subscription_id,
+									'ACTION'    => 'Cancel',
+									'NOTE'      => sprintf( __( 'Subscription cancelled at %s', 'wc-multivendor-membership' ), get_bloginfo( 'name' ) )
+									)
+							) );
+	
+					if ( is_wp_error( $request ) || $request['response']['code'] != 200 ) {
+						wcfm_log( 'PayPal Recurring Subscription Cancel - HTTP error' );
+					}
+	
+					$response = wp_remote_retrieve_body( $request );
+					parse_str( $response, $parsed_response );
+	
+					if ( isset( $parsed_response['ACK'] ) && $parsed_response['ACK'] == 'Failure' ) {
+						wcfm_log( "PayPal Recurring Subscription Cancel Error:: " . $parsed_response['L_LONGMESSAGE0'] );
+					}
+	
+					if ( isset( $parsed_response['ACK'] ) && $parsed_response['ACK'] == 'Success' ) {
+						delete_user_meta( $member_id, 'wcfm_paypal_subscription_id' );
+					
+						wcfm_log( "PayPal Recurring Subscription Cancelled:: " . $member_id . ' => ' . $subscription_id );
+					}
+				}
+			break;
+		
+			case 'stripe_subs':
+				//Include the Stripe library.
+				if( !class_exists( 'Stripe\Stripe' ) ) {
+					include( $WCFMvm->plugin_path . 'includes/libs/stripe-gateway/init.php');
+				}
+				
+				$stripe_secret_key_live = isset( $membership_payment_settings['stripe_secret_key_live'] ) ? $membership_payment_settings['stripe_secret_key_live'] : '';
+				$stripe_secret_key_test = isset( $membership_payment_settings['stripe_secret_key_test'] ) ? $membership_payment_settings['stripe_secret_key_test'] : '';
+				if ($payment_sandbox == 'yes') {
+					$secret_key = $stripe_secret_key_test;
+				} else {
+					$secret_key = $stripe_secret_key_live;
+				}
+				
+				if( $secret_key ) {
+					\Stripe\Stripe::setApiKey( $secret_key );
+					$recurring_subscription = \Stripe\Subscription::retrieve( $subscription_id );
+					$recurring_subscription->cancel();
+					
+					delete_user_meta( $member_id, 'wcfm_stripe_subscription_id' );
+					
+					wcfm_log( "Stripe Recurring Subscription Cancelled:: " . $member_id . ' => ' . $subscription_id );
+				}
+				
+			break;
+		}
+		
+		delete_user_meta( $member_id, 'wcfm_transaction_id' );
 	}
 	
 	/**

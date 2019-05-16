@@ -59,7 +59,9 @@ class WCFMmp {
 	public $wcfmmp_notification_options;
 	public $wcfmmp_store_endpoints;
 	public $head_titlse_set = false;
+	public $wcfm_is_store_close = false;
 	public $store_template_loaded = false;
+	public $store_query_filtered = false;
 	public $refund_processed = false;
 
 	public function __construct($file) {

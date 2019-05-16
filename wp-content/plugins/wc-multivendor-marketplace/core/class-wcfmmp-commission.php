@@ -23,6 +23,9 @@ class WCFMmp_Commission {
 		// Recheck Marketplace New Order after WC New Order object update
 		add_action( 'woocommerce_order_object_updated_props', array( $this, 'wcfmmp_new_order_check' ), 100, 2 );
 		
+		// WC POS Order Process
+		add_action( 'woocommerce_pos_process_payment', array( $this, 'wcfmmp_pos_order_check' ), 100, 2 );
+		
 		// Generating Marketplace Order for Subscription Renewal Order
 		add_filter( 'wcs_renewal_order_created', array(&$this, 'wcfmmp_renewal_order_processed'), 30, 2 );
 		
@@ -397,8 +400,23 @@ class WCFMmp_Commission {
 		if( defined( 'WCFM_MANUAL_ORDER' ) ) return;
 		if( defined( 'WC_BOOKINGS_VERSION' ) ) return;
 		if( defined( 'WC_APPOINTMENTS_VERSION' ) ) return;
+		if( defined( 'WC_POS_VERSION' ) ) return;
 		$order_id = $order->get_id();
 		if( $order_id ) {
+			if ( get_post_meta( $order_id, '_wcfmmp_order_processed', true ) ) return;
+			$order_posted = get_post( $order_id );
+			$this->wcfmmp_checkout_order_processed( $order_id, $order_posted, $order );
+		}
+	}
+	
+	/**
+	 * WC POS New Order Check 
+	 */
+	function wcfmmp_pos_order_check( $payment_details, $order ) {
+		if( !$order || !is_a($order , 'WC_Order') ) return;
+		$order_id = $order->get_id();
+		if( $order_id ) {
+			wcfm_log( "POS Order: #" . $order_id );
 			if ( get_post_meta( $order_id, '_wcfmmp_order_processed', true ) ) return;
 			$order_posted = get_post( $order_id );
 			$this->wcfmmp_checkout_order_processed( $order_id, $order_posted, $order );
@@ -435,6 +453,11 @@ class WCFMmp_Commission {
 		// Update Commission Order status by Main Order Status
 		if( apply_filters( 'wcfm_is_allow_status_update_by_main_order_status', true ) ) {
 			$wpdb->update("{$wpdb->prefix}wcfm_marketplace_orders", array('commission_status' => $status_to, 'order_status' => $status_to), array('order_id' => $order_id), array('%s', '%s'), array('%d'));
+		}
+		
+		// Withdrawal Threshold check by Order Completed date 
+		if( apply_filters( 'wcfm_is_allow_withdrwal_check_by_order_complete_date', false ) && ( $status_to == 'completed' ) ) {
+			$wpdb->update("{$wpdb->prefix}wcfm_marketplace_orders", array( 'created' => date( 'Y-m-d H:i:s', current_time( 'timestamp', 0 ) ) ), array('order_id' => $order_id), array('%s'), array('%d'));
 		}
 		
 		// Fetch commission ids for this order

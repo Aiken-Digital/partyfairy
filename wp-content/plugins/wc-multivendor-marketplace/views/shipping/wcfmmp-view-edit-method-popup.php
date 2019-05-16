@@ -242,8 +242,8 @@
                       $shipping_class->slug => array(
                         'label' => __('Cost of Shipping Class: "', 'wc-multivendor-marketplace') . $shipping_class->name . '"' , 
                         'name' => 'shipping_class_cost[]',
-                        'type' => 'number', 
-                        'class' => 'wcfm-text wcfm_ele wcfm_non_negative_input sc_vals', 
+                        'type' => 'text', 
+                        'class' => 'wcfm-text wcfm_ele sc_vals', 
                         'label_class' => 'wcfm_title wcfm_ele', 
                         'placeholder' => __('N/A', 'wc-multivendor-marketplace'),
                         'value' => '',

@@ -223,14 +223,14 @@ class WCFMvm_Memberships_Registration_Controller {
 				if( !$has_error && isset( $wcfm_membership_registration_form_data['store_name'] ) && !empty( $wcfm_membership_registration_form_data['store_name'] ) ) {
 					$store_slug = sanitize_title( wc_clean( $wcfm_membership_registration_form_data['store_name'] ) );
 					$store_slug = apply_filters( 'wcfm_generated_store_slug', $store_slug );
-					if( !$is_update && username_exists( $store_slug ) ) {
+					if( !$is_update && ( username_exists( $store_slug ) || get_user_by( 'slug', $store_slug ) || !apply_filters( 'wcfm_validate_store_slug', true, $store_slug ) ) ) {
 						echo '{"status": false, "message": "' . __( 'Shop Name not available.', 'wc-multivendor-membership' ) . '"}';
 						$has_error = true;
 					} elseif( $is_update && $member_id ) {
 						$the_user = get_user_by( 'id', $member_id );
 						$user_login = sanitize_title( $the_user->user_login );
 						$previous_store_slug     = $the_user->user_nicename;
-						if( ( $previous_store_slug != $store_slug ) && ( $user_login != $store_slug ) && username_exists( $store_slug ) ) {
+						if( ( ( $previous_store_slug != $store_slug ) && ( $user_login != $store_slug ) && username_exists( $store_slug ) ) || !apply_filters( 'wcfm_validate_store_slug', true, $store_slug ) ) {
 							echo '{"status": false, "message": "' . __( 'Shop Name not available.', 'wc-multivendor-membership' ) . '"}';
 							$has_error = true;
 						}
@@ -261,7 +261,11 @@ class WCFMvm_Memberships_Registration_Controller {
 						$member_id = wp_update_user( $user_data ) ;
 					} else {
 						$member_id = wp_insert_user( $user_data ) ;
-						$wpdb->query( "UPDATE {$wpdb->prefix}users SET `user_nicename` = '{$store_slug}' WHERE ID =  $member_id" );
+						if( apply_filters( 'wcfm_is_allow_store_slug_direct_update', true ) ) {
+							$wpdb->query( "UPDATE {$wpdb->prefix}users SET `user_nicename` = '{$store_slug}' WHERE ID =  $member_id" );
+						} else {
+							wp_update_user( array( 'ID' => $member_id, 'user_nicename' => wc_clean( $store_slug ) ) );
+						}
 					}
 						
 					if( !$member_id ) {
@@ -367,6 +371,7 @@ class WCFMvm_Memberships_Registration_Controller {
 						// Update Store name
 						if( isset( $wcfm_membership_registration_form_data['store_name'] ) && !empty( $wcfm_membership_registration_form_data['store_name'] ) ) {
 							update_user_meta( $member_id, 'store_name', $wcfm_membership_registration_form_data['store_name'] );
+							update_user_meta( $member_id, 'wcfmmp_store_name', $wcfm_membership_registration_form_data['store_name'] );
 						}
 						
 						// Update User Membership
@@ -408,6 +413,10 @@ class WCFMvm_Memberships_Registration_Controller {
 									if( !empty( $wcfmvm_custom_infos ) ) {
 										if( $wcfmvm_registration_custom_field['type'] == 'checkbox' ) {
 											$field_value = isset( $wcfmvm_custom_infos[$wcfmvm_registration_custom_field['name']] ) ? $wcfmvm_custom_infos[$wcfmvm_registration_custom_field['name']] : 'no';
+										} elseif( $wcfmvm_registration_custom_field['type'] == 'upload' ) {
+											$field_name  = 'wcfmvm_custom_infos[' . $wcfmvm_registration_custom_field['name'] . ']';
+											$field_id    = md5( $field_name );
+											$field_value = isset( $wcfmvm_custom_infos[$field_id] ) ? $wcfmvm_custom_infos[$field_id] : '';
 										} else {
 											$field_value = isset( $wcfmvm_custom_infos[$wcfmvm_registration_custom_field['name']] ) ? $wcfmvm_custom_infos[$wcfmvm_registration_custom_field['name']] : '';
 										}

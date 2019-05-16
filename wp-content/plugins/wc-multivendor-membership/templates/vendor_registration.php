@@ -118,7 +118,9 @@ $wcfmvm_registration_custom_fields = get_option( 'wcfmvm_registration_custom_fie
 							$sms_verified = false;
 							$user_phone   = '';
 							if( $user_id ) {
-								$user_phone = get_user_meta( $user_id, 'billing_phone', true );
+								$vendor_data  = get_user_meta( $user_id, 'wcfmmp_profile_settings', true );
+								$user_phone   = isset( $vendor_data['phone'] ) ? esc_attr( $vendor_data['phone'] ) : '';
+								if( !$user_phone ) { $user_phone   = get_user_meta( $user_id, 'billing_phone', true ); }
 								$sms_verified = get_user_meta( $user_id, '_wcfm_sms_verified', true );
 								$wcfm_sms_verified_for = get_user_meta( $user_id, '_wcfm_sms_verified_for', true );
 								if( $user_phone != $wcfm_sms_verified_for ) $sms_verified = false;

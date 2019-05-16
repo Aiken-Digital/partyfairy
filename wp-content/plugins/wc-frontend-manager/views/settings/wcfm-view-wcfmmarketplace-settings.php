@@ -403,7 +403,6 @@ $is_marketplace = wcfm_is_marketplace();
 																															"store_hide_description" => array('label' => __( 'Hide About from Store', 'wc-frontend-manager') , 'type' => 'checkbox', 'class' => 'wcfm-checkbox wcfm_ele', 'label_class' => 'wcfm_title checkbox_title wcfm_ele', 'value' => 'yes', 'dfvalue' => $store_hide_description ),
 																															"store_hide_policy" => array('label' => __( 'Hide Policy from Store', 'wc-frontend-manager') , 'type' => 'checkbox', 'class' => 'wcfm-checkbox wcfm_ele', 'label_class' => 'wcfm_title checkbox_title wcfm_ele', 'value' => 'yes', 'dfvalue' => $store_hide_policy ),
 																															), $user_id );
-									$WCFM->wcfm_fields->wcfm_generate_form_field( $settings_fields_visibility );
 									
 									if( !apply_filters( 'wcfm_is_allow_show_email', true ) ) {
 										if( isset( $settings_fields_visibility['store_hide_email'] ) ) { unset( $settings_fields_visibility['store_hide_email'] ); }
@@ -424,6 +423,8 @@ $is_marketplace = wcfm_is_marketplace();
 									if( !apply_filters( 'wcfm_is_pref_policies', true ) || !apply_filters( 'wcfm_is_allow_store_policy', true ) ) {
 										if( isset( $settings_fields_visibility['store_hide_policy'] ) ) { unset( $settings_fields_visibility['store_hide_policy'] ); }
 									}
+									
+									$WCFM->wcfm_fields->wcfm_generate_form_field( $settings_fields_visibility );
 								?>
 							</div>
 						<?php } ?>

@@ -276,6 +276,10 @@ class WCFMvm_Ajax {
 									if( !empty( $wcfmvm_custom_infos ) ) {
 										if( $wcfmvm_registration_custom_field['type'] == 'checkbox' ) {
 											$field_value = isset( $wcfmvm_custom_infos[$wcfmvm_registration_custom_field['name']] ) ? $wcfmvm_custom_infos[$wcfmvm_registration_custom_field['name']] : 'no';
+										} elseif( $wcfmvm_registration_custom_field['type'] == 'upload' ) {
+											$field_name  = 'wcfmvm_custom_infos[' . $wcfmvm_registration_custom_field['name'] . ']';
+											$field_id    = md5( $field_name );
+											$field_value = isset( $wcfmvm_custom_infos[$field_id] ) ? $wcfmvm_custom_infos[$field_id] : '';
 										} else {
 											$field_value = isset( $wcfmvm_custom_infos[$wcfmvm_registration_custom_field['name']] ) ? $wcfmvm_custom_infos[$wcfmvm_registration_custom_field['name']] : '';
 										}
@@ -705,7 +709,7 @@ class WCFMvm_Ajax {
   		$store_slug = sanitize_title( wc_clean( $store_name ) );
   		$store_slug = apply_filters( 'wcfm_generated_store_slug', $store_slug );
   		 
-			if( ( !is_user_logged_in() && username_exists( $store_slug ) ) || !apply_filters( 'wcfm_validate_store_slug', true, $store_slug ) ) {
+			if( !is_user_logged_in() && ( username_exists( $store_slug ) || get_user_by( 'slug', $store_slug )  || !apply_filters( 'wcfm_validate_store_slug', true, $store_slug ) ) ) {
 				echo '{"status": false, "message": "' . __( 'Shop Name not available.', 'wc-multivendor-membership' ) . '"}';
 			} elseif( is_user_logged_in() ) {
 				$member_id = apply_filters( 'wcfm_current_vendor_id', get_current_user_id() );

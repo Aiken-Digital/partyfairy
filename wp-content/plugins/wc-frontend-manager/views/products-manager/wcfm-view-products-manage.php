@@ -25,6 +25,9 @@ if( isset( $wp->query_vars['wcfm-products-manage'] ) && empty( $wp->query_vars['
 		wcfm_restriction_message_show( "Add Product" );
 		return;
 	}
+	if( !apply_filters( 'wcfm_is_allow_pm_add_products', true ) ) {
+		return;
+	}
 	if( !apply_filters( 'wcfm_is_allow_product_limit', true ) ) {
 		if( WCFM_Dependencies::wcfmvm_plugin_active_check() ) {
 			?>

@@ -33,6 +33,14 @@ class WCFMmp_Shortcode {
 		// WCFM Markeplace More Offers
 		add_shortcode('wcfm_more_offers', array(&$this, 'wcfmmp_more_offers_shortcode'));
 		
+		// WCFM Marketplace Store FB Widget
+		add_shortcode('wcfm_store_fb_feed', array(&$this, 'wcfmmp_store_fb_widget_shortcode'));
+		
+		// WCFM Marketplace Store Twitter Widget
+		add_shortcode('wcfm_store_twitter_feed', array(&$this, 'wcfmmp_store_twitter_widget_shortcode'));
+		
+		// WCFM Marketplace Store Instagram Widget
+		//add_shortcode('wcfm_store_instagram_feed', array(&$this, 'wcfmmp_store_instagram_widget_shortcode'));
 	}
 
 	/**
@@ -557,6 +565,31 @@ class WCFMmp_Shortcode {
 		$wcfm_store_hours_day_times = isset( $wcfm_vendor_store_hours['day_times'] ) ? $wcfm_vendor_store_hours['day_times'] : array();
 		if( empty( $wcfm_store_hours_day_times ) ) return;
 		
+		// Old Store Hours Migrating
+		$wcfm_vendor_store_hours_migrated = get_user_meta( $store_id, 'wcfm_vendor_store_hours_migrated', true );
+		if( !$wcfm_vendor_store_hours_migrated ) {
+			$wcfm_store_hours_mon_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[0]['start'] ) ? $wcfm_store_hours_day_times[0]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[0]['end'] ) ? $wcfm_store_hours_day_times[0]['end'] : '' ) );
+			$wcfm_store_hours_tue_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[1]['start'] ) ? $wcfm_store_hours_day_times[1]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[1]['end'] ) ? $wcfm_store_hours_day_times[1]['end'] : '' ) );
+			$wcfm_store_hours_wed_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[2]['start'] ) ? $wcfm_store_hours_day_times[2]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[2]['end'] ) ? $wcfm_store_hours_day_times[2]['end'] : '' ) );
+			$wcfm_store_hours_thu_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[3]['start'] ) ? $wcfm_store_hours_day_times[3]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[3]['end'] ) ? $wcfm_store_hours_day_times[3]['end'] : '' ) );
+			$wcfm_store_hours_fri_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[4]['start'] ) ? $wcfm_store_hours_day_times[4]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[4]['end'] ) ? $wcfm_store_hours_day_times[4]['end'] : '' ) );
+			$wcfm_store_hours_sat_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[5]['start'] ) ? $wcfm_store_hours_day_times[5]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[5]['end'] ) ? $wcfm_store_hours_day_times[5]['end'] : '' ) );
+			$wcfm_store_hours_sun_times = array( 0 => array( 'start' => isset( $wcfm_store_hours_day_times[6]['start'] ) ? $wcfm_store_hours_day_times[6]['start'] : '', 'end' => isset( $wcfm_store_hours_day_times[6]['end'] ) ? $wcfm_store_hours_day_times[6]['end'] : '' ) );
+			
+			$wcfm_store_hours_day_times = array( 0 => $wcfm_store_hours_mon_times,
+																					 1 => $wcfm_store_hours_tue_times,
+																					 2 => $wcfm_store_hours_wed_times,
+																					 3 => $wcfm_store_hours_thu_times,
+																					 4 => $wcfm_store_hours_fri_times,
+																					 5 => $wcfm_store_hours_sat_times,
+																					 6 => $wcfm_store_hours_sun_times
+																					);
+			
+			$wcfm_vendor_store_hours['day_times'] = $wcfm_store_hours_day_times;
+			update_user_meta( $store_id, 'wcfm_vendor_store_hours', $wcfm_vendor_store_hours );
+			update_user_meta( $store_id, 'wcfm_vendor_store_hours_migrated', 'yes' );
+		}
+		
 		$weekdays = array( 0 => __( 'Monday', 'wc-multivendor-marketplace' ), 1 => __( 'Tuesday', 'wc-multivendor-marketplace' ), 2 => __( 'Wednesday', 'wc-multivendor-marketplace' ), 3 => __( 'Thursday', 'wc-multivendor-marketplace' ), 4 => __( 'Friday', 'wc-multivendor-marketplace' ), 5 => __( 'Saturday', 'wc-multivendor-marketplace' ), 6 => __( 'Sunday', 'wc-multivendor-marketplace') );
 		
 		$content = '<div class="wcfmmp_store_hours">';
@@ -594,6 +627,168 @@ class WCFMmp_Shortcode {
 		$content .= ob_get_clean();
 		
 		//$content .= '</div>';
+		
+		return $content;
+	}
+	
+	/**
+	 * WCFM Marketplace Store FB Widget Shortcode
+	 */
+	public function wcfmmp_store_fb_widget_shortcode( $attr ) {
+		global $WCFM, $WCFMmp, $wp, $WCFM_Query, $post;
+		
+		if (  wcfm_is_store_page() ) {
+			$wcfm_store_url = get_option( 'wcfm_store_url', 'store' );
+			$store_name = get_query_var( $wcfm_store_url );
+			$store_id  = 0;
+			if ( !empty( $store_name ) ) {
+				$store_user = get_user_by( 'slug', $store_name );
+			}
+			$store_id   		= $store_user->ID;
+		}
+		
+		if( is_product() ) {
+			$store_id = $post->post_author;
+		}
+		
+		if( !$store_id ) return;
+		
+		$store_user   = wcfmmp_get_store( $store_id );
+		$store_info   = $store_user->get_shop_info();
+		
+		if( !isset( $store_info['social']['fb'] ) || empty( $store_info['social']['fb'] ) ) return;
+		
+		$facebook_url = wcfmmp_generate_social_url( $store_info['social']['fb'], 'facebook' );
+		
+		if( !$facebook_url ) return;
+		
+		$custom_css = apply_filters( 'wcfmmp_fb_widget_custom_style', '' );
+		
+		ob_start();
+		
+		echo '<div class="wcfm_store_fb_widget" style="margin-bottom:50px;">';
+		
+		echo '<div id="fb-root"></div>';
+    echo '<div class="fb-page" data-href="' . $facebook_url . '" 
+                               data-width="400" 
+                               data-height="500" 
+                               data-small-header="true" 
+                               data-adapt-container-width="true" 
+                               data-hide-cover="false" 
+                               data-show-facepile="false" 
+                               data-show-posts="true" 
+                               style="' . $custom_css . '"></div>';
+		
+		echo '</div>';
+		
+		$content .= ob_get_clean();
+		
+		wp_register_script( 'wcfm_store_fb_widget_script', $WCFMmp->library->js_lib_url_min . 'store/wcfmmp-script-fb-widget.js', array('jquery') );
+    wp_enqueue_script( 'wcfm_store_fb_widget_script' );
+    $local_variables = array( 'app_id' => '503595753002055', 'select_lng' => 'en_US' );
+    wp_localize_script( 'wcfm_store_fb_widget_script', 'wcfm_store_fb_widget_vars', $local_variables );
+		
+		return $content;
+	}
+	
+	/**
+	 * WCFM Marketplace Store Twitter Widget Shortcode
+	 */
+	public function wcfmmp_store_twitter_widget_shortcode( $attr ) {
+		global $WCFM, $WCFMmp, $wp, $WCFM_Query, $post;
+		
+		if (  wcfm_is_store_page() ) {
+			$wcfm_store_url = get_option( 'wcfm_store_url', 'store' );
+			$store_name = get_query_var( $wcfm_store_url );
+			$store_id  = 0;
+			if ( !empty( $store_name ) ) {
+				$store_user = get_user_by( 'slug', $store_name );
+			}
+			$store_id   		= $store_user->ID;
+		}
+		
+		if( is_product() ) {
+			$store_id = $post->post_author;
+		}
+		
+		if( !$store_id ) return;
+		
+		$store_user   = wcfmmp_get_store( $store_id );
+		$store_info   = $store_user->get_shop_info();
+		
+		if( !isset( $store_info['social']['twitter'] ) || empty( $store_info['social']['twitter'] ) ) return;
+		
+		$twitter_url = wcfmmp_generate_social_url( $store_info['social']['twitter'], 'twitter' );
+		
+		if( !$twitter_url ) return;
+		
+		$custom_css = apply_filters( 'wcfmmp_twitter_widget_custom_style', '' );
+		
+		$oembed_params = array( 'omit_script' => 1, 'lang' => 'en', 'maxwidth' => 300, 'maxheight' => 400, 'chrome' => '', 'url' => $twitter_url );
+		
+		$QUEUE_HANDLE = 'twitter-wjs';
+		$URI = 'https://platform.twitter.com/widgets.js';
+		$script = 'window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src=' . wp_json_encode( $URI ) . ';fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script",' . wp_json_encode( $QUEUE_HANDLE ) . '));';
+		
+		ob_start();
+		
+		echo '<div class="wcfm_store_twitter_widget" style="margin-bottom:50px;">';
+		
+    echo '<div class=" wcfmmp_twitter twitter-timeline-profile">
+          <a class="twitter-timeline" data-lang="en" 
+                                      data-width="100%" 
+                                      data-height="400" 
+                                      href="' . $twitter_url . '?ref_src=twsrc%5Etfw">Recent Tweets</a></div>';
+                                      
+		echo '<script>' . $script . '</script>';
+		
+		echo '</div>';
+		
+		$content .= ob_get_clean();
+		
+		return $content;
+	}
+	
+	/**
+	 * WCFM Marketplace Store Instagram Widget Shortcode
+	 */
+	public function wcfmmp_store_instagram_widget_shortcode( $attr ) {
+		global $WCFM, $WCFMmp, $wp, $WCFM_Query, $post;
+		
+		if (  wcfm_is_store_page() ) {
+			$wcfm_store_url = get_option( 'wcfm_store_url', 'store' );
+			$store_name = get_query_var( $wcfm_store_url );
+			$store_id  = 0;
+			if ( !empty( $store_name ) ) {
+				$store_user = get_user_by( 'slug', $store_name );
+			}
+			$store_id   		= $store_user->ID;
+		}
+		
+		if( is_product() ) {
+			$store_id = $post->post_author;
+		}
+		
+		if( !$store_id ) return;
+		
+		$store_user   = wcfmmp_get_store( $store_id );
+		$store_info   = $store_user->get_shop_info();
+		
+		if( !isset( $store_info['social']['instagram'] ) || empty( $store_info['social']['instagram'] ) ) return;
+		
+		$instagram_url = wcfmmp_generate_social_url( $store_info['social']['instagram'], 'instagram' );
+		
+		if( !$instagram_url ) return;
+		
+		ob_start();
+		
+		echo '<div class="wcfm_store_instagram_widget" style="margin-bottom:50px;">';
+		
+    
+		
+		echo '</div>';
+		
+		$content .= ob_get_clean();
 		
 		return $content;
 	}

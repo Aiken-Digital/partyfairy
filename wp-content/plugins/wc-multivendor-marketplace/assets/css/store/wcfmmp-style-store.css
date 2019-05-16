@@ -109,7 +109,7 @@ body:not(.electro-v1).wcfm-store-page .content-area{flex: 0 0 100%}
 	font-weight: normal;
 	line-height: 1;
 	vertical-align: -.125em;
-	font: normal normal normal 14px/1 FontAwesome;
+	font-family: "Font Awesome 5 Free"!important;
 	font-weight: 900;
 	line-height: inherit;
 	vertical-align: baseline;

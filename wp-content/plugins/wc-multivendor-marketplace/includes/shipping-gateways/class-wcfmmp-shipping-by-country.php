@@ -321,6 +321,8 @@ class WCFMmp_Shipping_By_Country extends WC_Shipping_Method {
 						 }
 					 } elseif ( array_key_exists( 'everywhere', $wcfmmp_state_rates[$destination_country] ) ) {
 						 $price[$vendor_id]['state_rates'] = ( isset( $wcfmmp_state_rates[$destination_country]['everywhere'] ) ) ? floatval( $wcfmmp_state_rates[$destination_country]['everywhere'] ) : 0;
+					 } elseif ( array_key_exists( $destination_country, $wcfmmp_country_rates ) ) {
+					 	 $price[$vendor_id]['state_rates'] = ( isset( $wcfmmp_country_rates[$destination_country] ) ) ? floatval( $wcfmmp_country_rates[$destination_country] ) : 0;
 					 } else {
 						 $price[$vendor_id]['state_rates'] = 0;
 					 }

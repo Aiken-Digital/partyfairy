@@ -558,6 +558,21 @@ div.wcfm_popup_wrapper h2, form.wcfm_popup_wrapper h2 {
 	margin-bottom: 5px;
 }
 
+/** WCfM Marketplace Store Close */
+.wcfm_store_close_msg {
+	width: 100%;
+	padding: .5em;
+	margin-bottom: 1em;
+	background-color: #17a2b8;
+	margin-left: 0;
+	color: #fff;
+	clear: both;
+	border-left: .618em solid rgba(0,0,0,.15);
+	border-right: .618em solid rgba(0,0,0,.15);
+	text-align: center;
+}
+
+
 /** WCfM Marketplace Dashboard Icon at My Account */
 .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--wcfm-store-manager a:before, body.storefront .woocommerce-MyAccount-navigation ul li.woocommerce-MyAccount-navigation-link--wcfm-store-manager a:before {
 	content: "\f51b";

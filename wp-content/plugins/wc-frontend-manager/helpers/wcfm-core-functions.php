@@ -962,6 +962,7 @@ if(!function_exists('get_wcfm_dashboard_messages')) {
 		
 		$messages = array(
 											"product_approve_confirm"            => __( "Are you sure and want to approve / publish this 'Product'?", "wc-frontend-manager" ),
+											"multiblock_delete_confirm"          => __( "Are you sure and want to delete this 'Block'?\nYou can't undo this action ...", "wc-frontend-manager" ),
 											"article_delete_confirm"             => __( "Are you sure and want to delete this 'Article'?\nYou can't undo this action ...", "wc-frontend-manager" ),
 											"product_delete_confirm"             => __( "Are you sure and want to delete this 'Product'?\nYou can't undo this action ...", "wc-frontend-manager" ),
 											"message_delete_confirm"             => __( "Are you sure and want to delete this 'Message'?\nYou can't undo this action ...", "wc-frontend-manager" ),

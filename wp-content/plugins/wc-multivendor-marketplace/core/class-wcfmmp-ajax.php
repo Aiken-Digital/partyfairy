@@ -75,7 +75,12 @@ class WCFMmp_Ajax {
 		if( $vendor_id ) {
 			$order = wc_get_order( $order_id );
 			$status = str_replace('wc-', '', $order_status);
-			$wpdb->update("{$wpdb->prefix}wcfm_marketplace_orders", array('commission_status' => $status), array('order_id' => $order_id, 'vendor_id' => $vendor_id), array('%s'), array('%d', '%d'));
+			$wpdb->update("{$wpdb->prefix}wcfm_marketplace_orders", array('commission_status' => $status), array('order_id' => $order_id, 'vendor_id' => $vendor_id), array('%s'), array('%d', '%d') );
+			
+			// Withdrawal Threshold check by Order Completed date 
+			if( apply_filters( 'wcfm_is_allow_withdrwal_check_by_order_complete_date', false ) && ( $status == 'completed' ) ) {
+				$wpdb->update( "{$wpdb->prefix}wcfm_marketplace_orders", array( 'created' => date( 'Y-m-d H:i:s', current_time( 'timestamp', 0 ) ) ), array( 'order_id' => $order_id, 'vendor_id' => $vendor_id ), array('%s'), array('%d', '%d') );
+			}
 			
 			
 			do_action( 'wcfmmp_vendor_order_status_updated', $order_id, $order_status, $vendor_id );

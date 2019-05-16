@@ -3,11 +3,11 @@ Contributors: wclovers
 Tags: woocommerce membership, subscription, members, multivendor marketplace, multi vendor 
 Donate link: https://www.paypal.me/wclovers/25usd
 Requires at least: 4.4
-Tested up to: 5.1
+Tested up to: 5.2
 WC requires at least: 3.0
-WC tested up to: 3.5.0
+WC tested up to: 3.6.0
 Requires PHP: 5.6
-Stable tag: 2.4.4
+Stable tag: 2.4.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -155,6 +155,14 @@ NONE.
 17. Membership Details - Cancel & Upgrade
 
 == Changelog ==
+
+= 2.4.5 =
+*Updated - 15/05/2019*
+
+* Enhance - PayPal and Stripe recurring profile auto-cancel (using API) feature added
+* Enahnce - Registration "store slug" diplicate validation check improved
+* Enhance - Vednor profile additional information added under Admin Vendor Manager -> Profile Section
+* Fixed   - Registration custom file upload field missing from vendor approve popup issue resolved
 
 = 2.4.4 =
 *Updated - 21/04/2019*
@@ -478,7 +486,8 @@ NONE.
 
 == Upgrade Notice ==
 
-= 2.4.4 =
-* Enahnce - WC 3.6 compatibility added
-* Enhance - Registration password field strength check added
-* Fixed   - Membership upgrade store address prefill with vendor's profile address resolved
+= 2.4.5 =
+* Enhance - PayPal and Stripe recurring profile auto-cancel (using API) feature added
+* Enahnce - Registration "store slug" diplicate validation check improved
+* Enhance - Vednor profile additional information added under Admin Vendor Manager -> Profile Section
+* Fixed   - Registration custom file upload field missing from vendor approve popup issue resolved

@@ -540,20 +540,18 @@ class WCFMmp_Store_Setup {
 							?>
 							<div class="clear"></div>
 							<div class="wcfmmp_stripe_connect">
-								<form action="" method="POST">
-									<table class="form-table">
-										<tbody>
-											<tr>
-												<th style="width: 35%;">
-													<label><?php _e('Stripe', 'wc-frontend-manager'); ?></label>
-												</th>
-												<td>
-													<label><?php _e('You are connected with Stripe', 'wc-frontend-manager'); ?></label>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</form>
+								<table class="form-table">
+									<tbody>
+										<tr>
+											<th style="width: 35%;">
+												<label><?php _e('Stripe', 'wc-frontend-manager'); ?></label>
+											</th>
+											<td>
+												<label><?php _e('You are connected with Stripe', 'wc-frontend-manager'); ?></label>
+											</td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 						<?php 
 							$is_stripe_connected = true;
@@ -648,7 +646,7 @@ class WCFMmp_Store_Setup {
 				<?php
 				  $rich_editor = '';
 				  $wpeditor = 'textarea';
-					$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_settings_fields_policies', array(
+					$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_vendor_settings_fields_policies', array(
 					                                                                        "wcfm_policy_tab_title" => array('label' => __('Policy Tab Label', 'wc-frontend-manager') , 'type' => 'text', 'in_table' => 'yes', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'value' => $_wcfm_vendor_policy_tab_title ),
 																																									"wcfm_shipping_policy" => array('label' => __('Shipping Policy', 'wc-frontend-manager'), 'type' => $wpeditor, 'in_table' => 'yes', 'class' => 'wcfm-textarea wcfm_ele wcfm_custom_field_editor ' . $rich_editor, 'label_class' => 'wcfm_title', 'value' => $_wcfm_vendor_shipping_policy ),
 																																									"wcfm_refund_policy" => array('label' => __('Refund Policy', 'wc-frontend-manager'), 'type' => $wpeditor, 'in_table' => 'yes', 'class' => 'wcfm-textarea wcfm_ele wcfm_custom_field_editor ' . $rich_editor, 'label_class' => 'wcfm_title', 'value' => $_wcfm_vendor_refund_policy ),

@@ -14,7 +14,7 @@ jQuery(document).ready(function($) {
 		});
 	});
 	
-	// Custom Refund
+	// Customer Refund
 	$('.wcfm-refund-action').each(function() {
 		$(this).click(function(event) {
 			event.preventDefault();
