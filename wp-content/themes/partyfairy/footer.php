@@ -110,7 +110,7 @@ foreach ($footer_menu as $key => $value) {
                  <?php the_field('subcribe_form', 'option'); ?>
 
                 </div>
-                <div class="newslethttps://wordpress.stackexchange.com/questions/247219/change-class-page-numbers-in-paginationter-wrap--footer">
+                <div class="newsletter-wrap--footer">
                   <p><?php the_field('copyright', 'option'); ?></p>
                 </div>
               </div>
