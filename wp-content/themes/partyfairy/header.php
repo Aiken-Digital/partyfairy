@@ -333,7 +333,7 @@ if ($wcatTerms) :
 
   			 $thumbnail_id = get_woocommerce_term_meta( $wcatTerm->term_id, 'thumbnail_id', true );
 	    			$image = wp_get_attachment_url( $thumbnail_id );
-
+                    $icon  = get_field('icon', 'product_cat' . '_' . $wcatTerm->term_id);
 
   	?>
             <li class="pf-navigation--group--list">
@@ -350,8 +350,8 @@ if ($wcatTerms) :
           	<span class="categories -m-expand">
           		<span class="d-inline-block d-lg-none">
           			<?php
-						    if ( $image ) {
-							    echo '<img class="img-fluild" src="' . $image . '" alt="' . $wcatTerm->name . '" />';
+						    if ( $icon ) {
+							    echo '<img class="img-fluild" src="' . $icon . '" alt="' . $wcatTerm->name . '" />';
 							}
           			?>
           		</span>
