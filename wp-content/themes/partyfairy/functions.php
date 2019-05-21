@@ -1,6 +1,6 @@
 <?php
 
-//require_once( get_template_directory() . '/acf.php' );
+require_once( get_template_directory() . '/acf.php' );
 
 
 add_filter('show_admin_bar', '__return_false');
