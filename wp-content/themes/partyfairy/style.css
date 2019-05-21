@@ -52,7 +52,7 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 # Media
 	## Captions
 	## Galleries
---------------------------------------------------------------*/
+    --------------------------------------------------------------*/
 /*
  * Chrome renders extra-wide &nbsp; characters for the Hoefler Text font.
  * This results in a jumping cursor when typing in both the Classic and block
@@ -62,7 +62,7 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
  */
 
 
-#customer_details span {
+ #customer_details span {
     width: 100% !important;
 }
 
@@ -221,7 +221,7 @@ p.form-row.woocommerce-SavedPaymentMethods-saveNew.woocommerce-validated label {
 }
 .newsletter-subscribe input::placeholder {
 
-color: darkgray;
+    color: darkgray;
 
 }
 .newsletter-subscribe input {
@@ -267,3 +267,5 @@ a.get-inspired {
 
     margin-right: 250px  !important;
 }
+
+

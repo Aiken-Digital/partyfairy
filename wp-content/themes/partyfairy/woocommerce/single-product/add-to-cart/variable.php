@@ -323,8 +323,8 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
                       <div class="home-delivery-box" id="homeDelivery">
                         <div class="calendar-ui">
                           <p class="text-center font-12 p-t-10 m-b-10">Choose Date & Time</p>
-                          <input id="calendarValuedelivery" type="hidden" value="" name="date-delivery">
-                          <input id="timerValuedelivery" type="hidden" value="" name="time-delivery">
+                          <input id="calendarValuedelivery" type="hidden" value="" name="date-delivery" required="">
+                          <input id="timerValuedelivery" type="hidden" value="" name="time-delivery" required="">
                           <div type="text" id="datepickerdelivery"></div>
                         </div>
                         <div class="form-group m-t-15 timercontrol d-flex align-items-center">
@@ -346,8 +346,8 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
                       	
                       <div class="calendar-ui">
                           <p class="text-center font-12 p-t-10 m-b-10">Choose Date & Time</p>
-                          <input id="calendarValuepickup" type="hidden" value="" name="date-pickup">
-                          <input id="timerValuepickup" type="hidden" value="" name="time-pickup">
+                          <input id="calendarValuepickup" type="hidden" value="" name="date-pickup" required="">
+                          <input id="timerValuepickup" type="hidden" value="" name="time-pickup" required="">
                           <div type="text" id="datepickerpickup"></div>
                         </div>
                         <div class="form-group m-t-15 timercontrol d-flex align-items-center">
