@@ -45,24 +45,29 @@
        </div>
      </div>
 
-   <?php   endif; ?>
-
-   <div class="card">
-    <div class="card-header">
-      <h5 class="mb-0">
-        <button class="btn btn-link font-13" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">Occasions</button>
-      </h5>
-    </div>
-    <div class="collapse" id="collapse2">
-      <div class="card-body">
-        <ul>
+   <?php   endif; 
 
 
+   $wcatTerms1 = get_terms('product_cat', array('hide_empty' => 0, 'parent' =>46)); 
+   if($wcatTerms1) :
 
-         <?php 
-         $wcatTerms1 = get_terms('product_cat', array('hide_empty' => 0, 'slug' =>'shop-by-occasions')); 
-         if($wcatTerms1) :
-          foreach($wcatTerms1 as $subkey => $wcatTerm1) :
+     ?>
+
+
+     <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">
+          <button class="btn btn-link font-13" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">Occasions</button>
+        </h5>
+      </div>
+      <div class="collapse" id="collapse2">
+        <div class="card-body">
+          <ul>
+
+
+
+           <?php 
+           foreach($wcatTerms1 as $subkey => $wcatTerm1) :
 
             ?>
 
@@ -71,15 +76,16 @@
           </label>
         </li>
 
-      <?php endforeach ;  
-    endif;
-    ?>
+      <?php endforeach ; 
+      ?>
 
 
-  </ul>
+    </ul>
+  </div>
 </div>
 </div>
-</div>
+
+<?php  endif; ?>
 <div class="card">
   <div class="card-header">
     <h5 class="mb-0">
