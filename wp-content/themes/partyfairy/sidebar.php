@@ -142,7 +142,7 @@ if($wcatTerms1) :
       <ul class="color-list">
         <?php foreach ($wcatTerms1 as $key => $value) { ?>
 
-          <li><img src="assets/imgs/multicolor.jpg" alt="<?php echo $value->name; ?>"></li>
+          <li><img src="<?php the_field('color', $value->taxonomy . '_' . $value->term_id); ?>" alt="<?php echo $value->name; ?>"></li>
 
         <?php } ?>
 
