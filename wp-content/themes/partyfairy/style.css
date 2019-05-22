@@ -280,3 +280,8 @@ form.woocommerce-checkout {
 form.woocommerce-checkout label {
     margin-left: 35px;
 }
+
+div#pf-filter input[type="checkbox"] {
+    position: inherit;
+    margin-left: 5px;
+}
