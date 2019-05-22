@@ -125,10 +125,13 @@ if($wcatTerms1) :
 </div>
 </div>
 
-<?php     endif; ?>
+<?php     endif; 
 
+$wcatTerms1 = get_terms('pa_color', array('hide_empty' => 0)); 
+if($wcatTerms1) :
+ ?>
 
-<div class="card">
+ <div class="card">
   <div class="card-header">
     <h5 class="mb-0">
       <button class="btn btn-link font-13" type="button" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">Colors</button>
@@ -137,19 +140,18 @@ if($wcatTerms1) :
   <div class="collapse" id="collapse3">
     <div class="card-body">
       <ul class="color-list">
-        <li><img src="assets/imgs/multicolor.jpg"></li>
-        <li><img src="assets/imgs/multicolor.jpg"></li>
-        <li><img src="assets/imgs/multicolor.jpg"></li>
-        <li><img src="assets/imgs/multicolor.jpg"></li>
-        <li><img src="assets/imgs/multicolor.jpg"></li>
-        <li><img src="assets/imgs/multicolor.jpg"></li>
-        <li><img src="assets/imgs/multicolor.jpg"></li>
-        <li><img src="assets/imgs/multicolor.jpg"></li>
-        <li><img src="assets/imgs/multicolor.jpg"></li>
+        <?php foreach ($wcatTerms1 as $key => $value) { ?>
+
+          <li><img src="assets/imgs/multicolor.jpg" alt="<?php echo $value->name; ?>"></li>
+
+        <?php } ?>
+
       </ul>
     </div>
   </div>
 </div>
+
+<?php endif; ?>
 <div class="card">
   <div class="card-header">
     <h5 class="mb-0">
