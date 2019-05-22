@@ -1,7 +1,7 @@
  <?php 
  $queried_object = get_queried_object();
  $term_id    = $queried_object->term_id;
- echo $term_id;
+// echo $term_id;
  ?>
  <div class="col-lg-2" id="pf-filter">
   <div class="filter-section">
@@ -48,11 +48,10 @@
    <?php   endif; 
 
 
+
    $wcatTerms1 = get_terms('product_cat', array('hide_empty' => 0, 'parent' =>46)); 
    if($wcatTerms1) :
-
      ?>
-
 
      <div class="card">
       <div class="card-header">
@@ -72,11 +71,12 @@
             ?>
 
             <label class="font-12 label-checkbox" for="occasions<?php echo $subkey ?>"><?php echo $wcatTerm1->name; ?>
-            <input id="occasions-<?php echo $subkey ?>" name="occasions[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm1->term_id?>" ><span class="checkmark"></span>
+            <input id="occasions-<?php echo $subkey ?>" name="category[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm1->term_id?>" ><span class="checkmark"></span>
           </label>
         </li>
 
-      <?php endforeach ; 
+      <?php endforeach ;  
+
       ?>
 
 
@@ -85,13 +85,13 @@
 </div>
 </div>
 
-<?php  endif; 
+<?php    
 
-$wcatTerms1 = get_terms('product_cat', array('hide_empty' => 0, 'parent' =>46)); 
+endif;
+
+$wcatTerms1 = get_terms('product_cat', array('hide_empty' => 0, 'parent' =>45)); 
 if($wcatTerms1) :
-
  ?>
-
 
  <div class="card">
   <div class="card-header">
@@ -110,12 +110,13 @@ if($wcatTerms1) :
 
         ?>
 
-        <label class="font-12 label-checkbox" for="occasions<?php echo $subkey ?>"><?php echo $wcatTerm1->name; ?>
-        <input id="occasions-<?php echo $subkey ?>" name="occasions[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm1->term_id?>" ><span class="checkmark"></span>
+        <label class="font-12 label-checkbox" for="themes<?php echo $subkey ?>"><?php echo $wcatTerm1->name; ?>
+        <input id="themes-<?php echo $subkey ?>" name="category[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm1->term_id?>" ><span class="checkmark"></span>
       </label>
     </li>
 
-  <?php endforeach ; 
+  <?php endforeach ;  
+
   ?>
 
 
@@ -124,7 +125,7 @@ if($wcatTerms1) :
 </div>
 </div>
 
-<?php  endif; ?>
+<?php     endif; ?>
 
 
 <div class="card">
