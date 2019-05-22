@@ -1,5 +1,5 @@
 <?php
-
+add_filter( 'deprecated_function_trigger_error', '__return_false' );
 require_once( get_template_directory() . '/acf.php' );
 
 

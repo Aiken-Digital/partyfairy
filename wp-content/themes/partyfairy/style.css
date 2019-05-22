@@ -268,10 +268,11 @@ a.get-inspired {
         margin-right: 250px  !important;
     }
 
-    div#pf-sg-p form {
-        margin-top: 100px;
-    }
+}
 
+
+header {
+    display: contents;
 }
 
 
