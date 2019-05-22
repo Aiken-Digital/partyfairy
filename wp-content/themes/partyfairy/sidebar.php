@@ -1,6 +1,7 @@
  <?php 
  $queried_object = get_queried_object();
  $term_id    = $queried_object->term_id;
+// echo $term_id;
  ?>
  <div class="col-lg-2" id="pf-filter">
   <div class="filter-section">
@@ -11,30 +12,23 @@
     </div>
     <div class="pf-accordion">
 
-
-      <div class="card">
-        <div class="card-header">
-          <h5 class="mb-0">
-            <button class="btn btn-link font-13" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">Category</button>
-          </h5>
-        </div>
-        <div class="collapse" id="collapse1">
-          <div class="card-body">
-            <ul>
-
-
-             <?php 
-             $wcatTerms1 = get_terms('product_cat', array('hide_empty' => 0, 'parent' =>$term_id)); 
-             if($wcatTerms1) :
-              foreach($wcatTerms1 as $subkey_x => $wcatTerm1) :
-
-               ?>
-
+      <?php  
+      $wcatTerms1 = get_terms('product_cat', array('hide_empty' => 0, 'parent' =>$term_id)); 
+      if($wcatTerms1) : ?>
+        <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0">
+              <button class="btn btn-link font-13" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">Category</button>
+            </h5>
+          </div>
+          <div class="collapse" id="collapse1">
+            <div class="card-body">
+              <ul>
 
 
                <?php 
-               $wcatTerms2 = get_terms('product_cat', array('hide_empty' => 0, 'parent' =>$wcatTerm1->term_id)); 
-               foreach($wcatTerms2 as $subkey => $wcatTerm2) :
+
+               foreach($wcatTerms1 as $subkey_x => $wcatTerm2) :
 
                  ?>
                  <li>
@@ -43,50 +37,46 @@
                  </label>
                </li>
 
-             <?php endforeach ;  ?>
-           <?php endforeach ;  
-         endif;
-         ?>
+             <?php endforeach ;  
 
-
-
-
-       </ul>
+             ?>
+           </ul>
+         </div>
+       </div>
      </div>
-   </div>
- </div>
+
+   <?php   endif; ?>
+
+   <div class="card">
+    <div class="card-header">
+      <h5 class="mb-0">
+        <button class="btn btn-link font-13" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">Occasions</button>
+      </h5>
+    </div>
+    <div class="collapse" id="collapse2">
+      <div class="card-body">
+        <ul>
 
 
- <div class="card">
-  <div class="card-header">
-    <h5 class="mb-0">
-      <button class="btn btn-link font-13" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">Occasions</button>
-    </h5>
-  </div>
-  <div class="collapse" id="collapse2">
-    <div class="card-body">
-      <ul>
+
+         <?php 
+         $wcatTerms1 = get_terms('product_cat', array('hide_empty' => 0, 'slug' =>'shop-by-occasions')); 
+         if($wcatTerms1) :
+          foreach($wcatTerms1 as $subkey => $wcatTerm1) :
+
+            ?>
+
+            <label class="font-12 label-checkbox" for="occasions<?php echo $subkey ?>"><?php echo $wcatTerm1->name; ?>
+            <input id="occasions-<?php echo $subkey ?>" name="occasions[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm1->term_id?>" ><span class="checkmark"></span>
+          </label>
+        </li>
+
+      <?php endforeach ;  
+    endif;
+    ?>
 
 
-
-       <?php 
-       $wcatTerms1 = get_terms('product_cat', array('hide_empty' => 0, 'parent' =>46)); 
-       if($wcatTerms1) :
-        foreach($wcatTerms1 as $subkey => $wcatTerm1) :
-
-          ?>
-
-          <label class="font-12 label-checkbox" for="occasions<?php echo $subkey ?>"><?php echo $wcatTerm1->name; ?>
-          <input id="occasions-<?php echo $subkey ?>" name="occasions[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm1->term_id?>" ><span class="checkmark"></span>
-        </label>
-      </li>
-
-    <?php endforeach ;  
-  endif;
-  ?>
-
-
-</ul>
+  </ul>
 </div>
 </div>
 </div>
