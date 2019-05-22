@@ -272,3 +272,11 @@ a.get-inspired {
 div#pf-sg-p {
     padding-top: 124px;
 }
+
+form.woocommerce-checkout {
+    margin-bottom: 50px;
+}
+
+form.woocommerce-checkout label {
+    margin-left: 35px;
+}
