@@ -22,7 +22,7 @@
                          <?php 
                          $wcatTerms1 = get_terms('product_cat', array('hide_empty' => 0, 'parent' =>$term_id)); 
                          if($wcatTerms1) :
-                          foreach($wcatTerms1 as $subkey => $wcatTerm1) :
+                          foreach($wcatTerms1 as $subkey_x => $wcatTerm1) :
 
                            ?>
 
@@ -33,8 +33,8 @@
                            foreach($wcatTerms2 as $subkey => $wcatTerm2) :
 
                              ?>
-                             <label class="font-12 label-checkbox" for="category-<?php echo $subkey ?>"><?php echo $wcatTerm2->name; ?>
-                             <input id="category-<?php echo $subkey ?>" name="category[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm2->term_id?>" ><span class="checkmark"></span>
+                             <label class="font-12 label-checkbox" for="category-<?php echo $subkey_x."-".$subkey ?>"><?php echo $wcatTerm2->name; ?>
+                             <input id="category-<?php echo $subkey_x."-".$subkey ?>" name="category[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm2->term_id?>" ><span class="checkmark"></span>
                            </label>
                          </li>
 
