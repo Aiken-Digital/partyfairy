@@ -1,4 +1,4 @@
-            <div class="col-lg-2">
+            <div class="col-lg-2" id="pf-filter">
               <div class="filter-section">
                 <div class="close-filter d-block d-lg-none">X</div>
                 <div class="filters-clear">
