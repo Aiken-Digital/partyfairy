@@ -37,26 +37,27 @@
                foreach($wcatTerms2 as $subkey => $wcatTerm2) :
 
                  ?>
-                 <label class="font-12 label-checkbox" for="category-<?php echo $subkey_x."-".$subkey ?>"><?php echo $wcatTerm2->name; ?>
-                 <input id="category-<?php echo $subkey_x."-".$subkey ?>" name="category[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm2->term_id?>" ><span class="checkmark"></span>
-               </label>
-             </li>
+                 <li>
+                   <label class="font-12 label-checkbox" for="category-<?php echo $subkey_x."-".$subkey ?>"><?php echo $wcatTerm2->name; ?>
+                   <input id="category-<?php echo $subkey_x."-".$subkey ?>" name="category[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm2->term_id?>" ><span class="checkmark"></span>
+                 </label>
+               </li>
 
-           <?php endforeach ;  ?>
-         <?php endforeach ;  
-       endif;
-       ?>
+             <?php endforeach ;  ?>
+           <?php endforeach ;  
+         endif;
+         ?>
 
 
 
 
-     </ul>
+       </ul>
+     </div>
    </div>
  </div>
-</div>
 
 
-<div class="card">
+ <div class="card">
   <div class="card-header">
     <h5 class="mb-0">
       <button class="btn btn-link font-13" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">Occasions</button>
