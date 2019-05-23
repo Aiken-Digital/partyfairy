@@ -310,6 +310,15 @@ function filter_category_function(){
   //   )
 	);
 
+	if( !empty( $_GET['price']) ) {
+		$args['meta_query'][] = array(
+			'key' => '_price',
+			'value' => explode(',', $_GET['price']),
+			'type' => 'numeric',
+			'compare' => 'between'
+		);
+	}
+
 
 
 
@@ -352,6 +361,17 @@ function filter_category_function(){
     'post_status'   => 'publish',
 
 );
+
+
+	if( !empty( $_GET['price']) ) {
+		$args_all['meta_query'][] = array(
+			'key' => '_price',
+			'value' => explode(',', $_GET['price']),
+			'type' => 'numeric',
+			'compare' => 'between'
+		);
+	}
+
 
 
 	if( isset( $_GET['category'] ) )
@@ -400,7 +420,6 @@ function filter_category_function(){
 			$name = do_shortcode('[wcfm_store_info id="'.$author_id.'" data="store_name"]');
 			preg_match_all('|<div[^>]*>(?<name>[^<]+)<|', $name, $result_name_vendor);
 
-			print_r($_GET['price']);
 			?>
 
 			<div class="col-lg-3 col-md-6 col-6 tiles-box text-center default-post"><a class="tiles--single" href="<?php the_permalink() ?>">
@@ -529,7 +548,7 @@ function filter_category_function(){
 
             <?php
             wp_reset_postdata();
-        else :
+        else : 
         	echo '<div class="col-sm-12 col-12 default-post hasil-ajax"><center>
         	<h2>No posts found</h2></center></div>';
 

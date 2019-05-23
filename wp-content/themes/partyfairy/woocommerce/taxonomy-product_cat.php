@@ -209,4 +209,5 @@ $count_post 	= $the_query->found_posts;
     
   }); 
 
+  
 </script>

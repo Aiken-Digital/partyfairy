@@ -169,7 +169,9 @@ if($wcatTerms1) :
       <ul class="price-drag">
         <p>
           <label for="amount"></label>
-          <input type="text" id="amount" class="autocheckbox" name="price" readonly style="border:0; color:#f6931f; font-weight:bold;">
+          <input type="text" id="amount"  readonly style="border:0; color:#f6931f; font-weight:bold;">
+
+          <input type="text" name="price" id="price" value="" style="display: none;">
         </p>
 
         <div id="slider-range"></div>
