@@ -119,7 +119,7 @@ $count_post 	= $the_query->found_posts;
 
               $link =  do_shortcode('[wcfm_store_info id="'.$author_id.'" data="store_url"]');
               preg_match_all('/<a[^>]+href=([""])(?<href>.+?)\1[^>]*>/i', $link, $result_url_vendor); 
-              print_r($link);
+              print_r($result_url_vendor);
               ?>
 
               <div class="col-lg-3 col-md-6 col-6 tiles-box text-center"><a class="tiles--single" href="<?php the_permalink() ?>">
