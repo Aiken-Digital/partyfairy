@@ -120,10 +120,12 @@ $count_post 	= $the_query->found_posts;
               $name = do_shortcode('[wcfm_store_info id="" data="store_name"]');
               preg_match_all('|<div[^>]*>(?<name>[^<]+)<|', $name, $result_name_vendor);
 
+              print_r($result_name_vendor);
+
               ?>
 
-              <div class="col-lg-3 col-md-6 col-6 tiles-box text-center"><a class="tiles--single" href="<?php the_title() ?>">
-                <div class="tiles--single--img"><img class="img-fluid" src="<?php if ( has_post_thumbnail() ) {the_post_thumbnail_url('full'); } else { echo get_template_directory_uri().'/images/broken/img-not-available-landscape.png'; } ?>"></div><a class="tiles--single--model" href=""><?php the_title() ?></a></a>
+              <div class="col-lg-3 col-md-6 col-6 tiles-box text-center"><a class="tiles--single" href="<?php the_permalink() ?>">
+                <div class="tiles--single--img"><img class="img-fluid" src="<?php if ( has_post_thumbnail() ) {the_post_thumbnail_url('full'); } else { echo get_template_directory_uri().'/images/broken/img-not-available-landscape.png'; } ?>"></div><a class="tiles--single--model" href="<?php the_permalink() ?>"><?php the_title() ?></a></a>
                 <div class="tiles--price">$130.00<span>each</span></div>
                 <div class="tiles--code">290-000626</div><a class="tiles--seller" href="<?php if (!empty($result_url_vendor)) { echo $result_url_vendor['href'][0]; } ?>"><?php if (!empty($result_name_vendor)) { echo $result_name_vendor['name'][0]; } ?></a><a class="btn btn-rounded btn-hover btn-main btn-solid p-t-10 p-b-10 p-l-20 p-r-20 font-11" href="<?php the_permalink() ?>">DETAILS</a>
               </div>
