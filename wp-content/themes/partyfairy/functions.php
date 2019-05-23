@@ -210,3 +210,280 @@ remove_action('woocommerce_single_variation', 'woocommerce_single_variation_add_
 
 // add the action 
 add_action( 'woocommerce_single_variation', 'action_woocommerce_single_variation', 10, 0 ); 
+
+
+////////////////////////////////////// FILTER
+
+
+
+function filter_category_function(){
+
+
+
+	$paged        = ( $_GET['paged'] ) ? $_GET['paged'] : 1;
+	$tampilkan    = 12;
+	$cur_page     = $paged;
+	$page        -= 1;
+	$per_page     = $tampilkan;
+	$previous_btn = true;
+	$next_btn     = true;
+	$first_btn    = false;
+	$last_btn     = false;
+	$start        = $page * $per_page;
+
+	$args = array(
+
+		'order'           => 'DESC',
+		'post_type'       => 'product',
+		'posts_per_page'  => $tampilkan,
+		'post_status'     => 'publish',
+		'paged'           => $paged,
+  //   'tax_query' => array(
+  //     'relation' => 'AND',
+  //          array(
+  //       'taxonomy'  => 'product-category-cookware',
+  //       'field'     => 'id',
+  //       'terms'     => $_GET['category'],
+  //       'operator' => 'IN',
+
+  //     ),
+  //             array(
+  //         'taxonomy' => 'product-color-cookware',
+  //         'field'    => 'id',
+  //         'terms'    => $_GET['color'],
+  //         'operator' => 'IN',
+
+  //       ),
+  //          array(
+  //         'taxonomy'  => 'product-material-cookware',
+  //         'field'     => 'id',
+  //         'terms'     => $_GET['material'],
+  //         'operator' => 'IN',
+
+  //         )   
+
+  //   )
+	);
+
+
+
+
+	if( isset( $_GET['category'] ) )
+		$args['tax_query'] = array(
+
+			array(
+				'taxonomy'  => 'product-cat',
+				'field'     => 'id',
+				'terms'     => $_GET['category'],
+
+			)
+		);
+
+	if( isset( $_GET['color'] ) )
+		$args['tax_query'] = array(
+
+			array(
+				'taxonomy' => 'pa_color',
+				'field'    => 'id',
+				'terms'    => $_GET['color'],
+
+
+			)
+		);
+
+
+
+
+
+	$query = new WP_Query( $args );
+// echo '<pre>';
+// print_r($query);
+// echo '</pre>';
+
+	$args_all = array(
+    'order'         => 'DESC', //$_POST['date'] // ASC or DESC
+    'post_type'     => 'product',
+    'posts_per_page' => 999999,
+    'post_status'   => 'publish',
+
+);
+
+
+	if( isset( $_GET['category'] ) )
+		$args_all['tax_query'] = array(
+			array(
+				'taxonomy'  => 'product_cat',
+				'field'     => 'id',
+				'terms'     => $_GET['category'],
+
+			)
+		);
+
+	if( isset( $_GET['color'] ) )
+		$args_all['tax_query'] = array(
+
+			array(
+				'taxonomy' => 'pa_color',
+				'field'    => 'id',
+				'terms'    => $_GET['color']
+			)
+		);
+
+
+
+
+
+	$query_all = new WP_Query( $args_all );
+	$jumlah = $query_all->post_count;
+	$no_of_paginations = ceil($jumlah / $per_page);
+
+	?>
+
+	<div class="row">
+
+		<?php
+		if( $query->have_posts() ) :
+			while( $query->have_posts() ): $query->the_post(); ?>
+
+
+				<div class="col-sm-4 col-6 default-post hasil-ajax">
+					<div class="item"><a class="img-box" href="<?php the_permalink() ?>">
+						<div class="img" style="background-image: url(<?php if ( has_post_thumbnail() ) {the_post_thumbnail_url('thumbnails'); } else { echo get_template_directory_uri().'/broken/no-image.png'; } ?>);"></div></a><a class="title" href="<?php the_permalink() ?>">
+							<h3><?php the_title(); ?></h3></a></div>
+						</div>
+
+
+						<?php
+					endwhile;
+					?>
+				</div>
+
+
+				<div class="page-numbers pt-6 pl-footer" <?php if($no_of_paginations == 1 ) { echo 'style="display:none"';} ?> >
+					<input type="hidden" name="paged" value="" id="INJECTPAGE">           
+					<div class="page-numbers">
+
+
+
+						<?php
+
+
+						if ($cur_page >= 7) {
+							$start_loop = $cur_page - 3;
+							if ($no_of_paginations > $cur_page + 3)
+								$end_loop = $cur_page + 3;
+							else if ($cur_page <= $no_of_paginations && $cur_page > $no_of_paginations - 6) {
+								$start_loop = $no_of_paginations - 6;
+								$end_loop = $no_of_paginations;
+							} else {
+								$end_loop = $no_of_paginations;
+							}
+						} else {
+							$start_loop = 1;
+							if ($no_of_paginations > 7)
+								$end_loop = 7;
+							else
+								$end_loop = $no_of_paginations;
+						}
+
+        // Pagination Buttons logic     
+						$pag_container .= "
+						<div class='cvf-universal-pagination'>
+						<ul>";
+
+						if ($first_btn && $cur_page > 1) {
+							$pag_container .= "<li p='1' class='active'>First</li>";
+						} else if ($first_btn) {
+							$pag_container .= "<li p='1' class='inactive'>First</li>";
+						}
+
+						if ($previous_btn && $cur_page > 1) {
+							$pre = $cur_page - 1;
+							$pag_container .= "<li p='$pre' class='active'>Previous</li>";
+						} else if ($previous_btn) {
+							$pag_container .= "<li class='inactive'>Previous</li>";
+						}
+						for ($i = $start_loop; $i <= $end_loop; $i++) {
+
+							if ($cur_page == $i)
+								$pag_container .= "<li p='$i' class = 'selected' >{$i}</li>";
+							else
+								$pag_container .= "<li p='$i' class='active'>{$i}</li>";
+						}
+
+						if ($next_btn && $cur_page < $no_of_paginations) {
+							$nex = $cur_page + 1;
+							$pag_container .= "<li p='$nex' class='active'>Next</li>";
+						} else if ($next_btn) {
+							$pag_container .= "<li class='inactive'>Next</li>";
+						}
+
+						if ($last_btn && $cur_page < $no_of_paginations) {
+							$pag_container .= "<li p='$no_of_paginations' class='active'>Last</li>";
+						} else if ($last_btn) {
+							$pag_container .= "<li p='$no_of_paginations' class='inactive'>Last</li>";
+						}
+
+						$pag_container = $pag_container . "
+						</ul>
+						</div>";
+
+        // We echo the final output
+						echo 
+
+						'<div class = "cvf-pagination-nav">' . $pag_container . '</div>';
+
+
+
+
+						?>
+
+
+					</div>
+				</div>
+
+				<script type="text/javascript">
+
+					$('li.active').click(function(e) {
+						e.preventDefault();
+						var page = $(this).attr('p');
+						$('#INJECTPAGE').val(page);
+						$('.hasil-ajax').remove();
+                    //cvf_load_all_posts(page);
+                    
+                    $('html, body').animate({
+                    	scrollTop: $("#response").offset().top
+                    }, 1000);
+
+                    var $form = $(this).closest('form');
+
+                    $form.find('input[type=submit]').click();
+
+                });
+
+            </script>
+
+
+            <?php
+            wp_reset_postdata();
+        else :
+        	echo '<div class="col-sm-12 col-12 default-post hasil-ajax"><center>
+        	<h2>No posts found</h2></center></div>';
+
+        endif;
+
+        die();
+    }
+
+
+
+
+
+    add_action('wp_ajax_filter_category', 'filter_category_function'); 
+    add_action('wp_ajax_nopriv_filter_category', 'filter_category_function');
+
+
+
+
+
+///////////////////////////////////// FILTER

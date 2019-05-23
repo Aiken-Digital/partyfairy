@@ -32,8 +32,8 @@
 
                  ?>
                  <li>
-                   <label class="font-12 label-checkbox" for="category-<?php echo $subkey_x."-".$subkey ?>"><?php echo $wcatTerm2->name; ?>
-                   <input id="category-<?php echo $subkey_x."-".$subkey ?>" name="category[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm2->term_id?>" ><span class="checkmark"></span>
+                   <label class="font-12 label-checkbox" for="category-<?php echo $subkey_x ?>"><?php echo $wcatTerm2->name; ?>
+                   <input id="category-<?php echo $subkey_x; ?>" name="category[]" class="autocheckbox" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm2->term_id?>" ><span class="checkmark"></span>
                  </label>
                </li>
 
@@ -71,7 +71,7 @@
             ?>
 
             <label class="font-12 label-checkbox" for="occasions<?php echo $subkey ?>"><?php echo $wcatTerm1->name; ?>
-            <input id="occasions-<?php echo $subkey ?>" name="category[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm1->term_id?>" ><span class="checkmark"></span>
+            <input id="occasions-<?php echo $subkey ?>" class="autocheckbox" name="category[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm1->term_id?>" ><span class="checkmark"></span>
           </label>
         </li>
 
@@ -111,7 +111,7 @@ if($wcatTerms1) :
         ?>
 
         <label class="font-12 label-checkbox" for="themes<?php echo $subkey ?>"><?php echo $wcatTerm1->name; ?>
-        <input id="themes-<?php echo $subkey ?>" name="category[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm1->term_id?>" ><span class="checkmark"></span>
+        <input id="themes-<?php echo $subkey ?>" class="autocheckbox" name="category[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm1->term_id?>" ><span class="checkmark"></span>
       </label>
     </li>
 
