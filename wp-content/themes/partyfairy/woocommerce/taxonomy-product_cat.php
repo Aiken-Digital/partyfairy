@@ -64,23 +64,24 @@ $count_post 	= $the_query->found_posts;
         </div>
 
 
-        <div class="row tiles" id="response">
+        <div id="response">
+          <div class="row tiles default-post">
 
 
-          <?php
-          $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
-          $args = [
-            'post_type'       => 'product',
-            'posts_per_page'  => 12,
-            'paged'           => $paged,
-            'tax_query'       => [
-              [
-                'taxonomy'        => 'product_cat',
-                'field'           => 'term_id',
-                'terms'           =>  $term_id
+            <?php
+            $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+            $args = [
+              'post_type'       => 'product',
+              'posts_per_page'  => 12,
+              'paged'           => $paged,
+              'tax_query'       => [
+                [
+                  'taxonomy'        => 'product_cat',
+                  'field'           => 'term_id',
+                  'terms'           =>  $term_id
+                ]
               ]
-            ]
-          ];
+            ];
 
           // if(isset($_GET['size'])){
           //   $args['tax_query'][] = array(
@@ -109,44 +110,47 @@ $count_post 	= $the_query->found_posts;
           //     )
           //   );
           // }                
-          $loop = new WP_Query($args);
-          if ( $loop->have_posts() ):
-            while ( $loop->have_posts() ) : $loop->the_post(); 
-              $author_id = $post->post_author; 
-              global $product; 
-              global $post; 
+            $loop = new WP_Query($args);
+            if ( $loop->have_posts() ):
+              while ( $loop->have_posts() ) : $loop->the_post(); 
+                $author_id = $post->post_author; 
+                global $product; 
+                global $post; 
 
 
-              $price = $product->get_price();
+                $price = $product->get_price();
 
-              $link =  do_shortcode('[wcfm_store_info id="'.$author_id.'" data="store_url"]');
-              preg_match_all('/<a[^>]+href=([""])(?<href>.+?)\1[^>]*>/i', $link, $result_url_vendor); 
-              
-
-              $name = do_shortcode('[wcfm_store_info id="'.$author_id.'" data="store_name"]');
-              preg_match_all('|<div[^>]*>(?<name>[^<]+)<|', $name, $result_name_vendor);
-
-              ?>
-
-              <div class="col-lg-3 col-md-6 col-6 tiles-box text-center default-post"><a class="tiles--single" href="<?php the_permalink() ?>">
-                <div class="tiles--single--img"><img class="img-fluid" src="<?php if ( has_post_thumbnail() ) {the_post_thumbnail_url('full'); } else { echo get_template_directory_uri().'/images/broken/img-not-available-landscape.png'; } ?>"></div><a class="tiles--single--model" href="<?php the_permalink() ?>"><?php the_title() ?></a></a>
-                
-                <?php if($price){ ?> <div class="tiles--price">$<?php echo $price ?><span>each</span></div> <?php } ?>
-                <div class="tiles--code"><?php echo $product->get_sku(); ?></div><a class="tiles--seller" href="<?php if (!empty($result_url_vendor)) { echo $result_url_vendor['href'][0]; } ?>"><?php if (!empty($result_name_vendor)) { echo $result_name_vendor['name'][0]; } ?></a><a class="btn btn-rounded btn-hover btn-main btn-solid p-t-10 p-b-10 p-l-20 p-r-20 font-11" href="<?php the_permalink() ?>">DETAILS</a>
-              </div>
+                $link =  do_shortcode('[wcfm_store_info id="'.$author_id.'" data="store_url"]');
+                preg_match_all('/<a[^>]+href=([""])(?<href>.+?)\1[^>]*>/i', $link, $result_url_vendor); 
 
 
+                $name = do_shortcode('[wcfm_store_info id="'.$author_id.'" data="store_name"]');
+                preg_match_all('|<div[^>]*>(?<name>[^<]+)<|', $name, $result_name_vendor);
 
-            <?php endwhile; ?>
+                ?>
+
+                <div class="col-lg-3 col-md-6 col-6 tiles-box text-center default-post"><a class="tiles--single" href="<?php the_permalink() ?>">
+                  <div class="tiles--single--img"><img class="img-fluid" src="<?php if ( has_post_thumbnail() ) {the_post_thumbnail_url('full'); } else { echo get_template_directory_uri().'/images/broken/img-not-available-landscape.png'; } ?>"></div><a class="tiles--single--model" href="<?php the_permalink() ?>"><?php the_title() ?></a></a>
+
+                  <?php if($price){ ?> <div class="tiles--price">$<?php echo $price ?><span>each</span></div> <?php } ?>
+                  <div class="tiles--code"><?php echo $product->get_sku(); ?></div><a class="tiles--seller" href="<?php if (!empty($result_url_vendor)) { echo $result_url_vendor['href'][0]; } ?>"><?php if (!empty($result_name_vendor)) { echo $result_name_vendor['name'][0]; } ?></a><a class="btn btn-rounded btn-hover btn-main btn-solid p-t-10 p-b-10 p-l-20 p-r-20 font-11" href="<?php the_permalink() ?>">DETAILS</a>
+                </div>
+
+
+
+              <?php endwhile; ?>
+            </div>
+
+
+
+            <div class="row pl-footer">
+             <div class="col-12 pf-paging">
+              <?php pagination_bar( $loop, $paged ); ?>
+              <?php	//do_action( 'woocommerce_after_shop_loop' ); ?>
+
+            </div>
           </div>
 
-
-          <div class="row">
-           <div class="col-12 pf-paging">
-            <?php pagination_bar( $loop, $paged ); ?>
-            <?php	//do_action( 'woocommerce_after_shop_loop' ); ?>
-
-          </div>
         </div>
 
 
@@ -209,5 +213,5 @@ $count_post 	= $the_query->found_posts;
     
   }); 
 
-  
+
 </script>
