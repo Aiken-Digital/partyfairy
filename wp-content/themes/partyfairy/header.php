@@ -11,6 +11,7 @@
     <meta name="keywords" content="Party supplies, cakes, balloons, goodie bags, bouncy castles, birthday cakes, party decor, entertainers" />
     <meta name="robots" content="NOINDEX,NOFOLLOW" />
     <?php wp_head(); ?>
+    
 </head>
 <body>
     <header>

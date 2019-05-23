@@ -143,10 +143,12 @@ if($wcatTerms1) :
         <?php foreach ($wcatTerms1 as $key => $value) { ?>
           <li>
 
-            <label class="font-12 label-checkbox" for="color-<?php echo $key ?>"><img src="<?php the_field('color', $value->taxonomy . '_' . $value->term_id); ?>" alt="<?php echo $value->name; ?>">
-              <input id="color-<?php echo $subkey ?>" class="autocheckbox" name="color[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $value->term_id?>" ><span class="checkmark"></span>
-            </label>
+            <label class="font-12 label-checkbox" for="color-<?php echo $key ?>">
 
+              <img src="<?php the_field('color', $value->taxonomy . '_' . $value->term_id); ?>" alt="<?php echo $value->name; ?>" >
+
+              <input id="color-<?php echo $key ?>" class="autocheckbox" name="color[]" type="radio" aria-label="filter checkbox" value="<?php echo $value->term_id?>" style="display: none;"><span class="checkmark"></span>
+            </label>
 
           <?php } ?>
 
@@ -165,8 +167,8 @@ if($wcatTerms1) :
   <div class="collapse" id="collapse4">
     <div class="card-body">
       <ul class="price-drag">
-        <li>price</li>
-      </ul>
+       
+       </ul>
     </div>
   </div>
 </div>

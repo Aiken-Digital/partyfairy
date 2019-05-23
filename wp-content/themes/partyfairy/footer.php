@@ -10,7 +10,7 @@
               <?php $footer_menu = get_field('footer_menu', 'option'); 
               if ($footer_menu){
                 foreach ($footer_menu as $key => $value) {
-                 
+
                   ?>
                   <div class="col-lg-3">
                     <div class="footer--title">
@@ -19,9 +19,9 @@
                     </div>
                     <ul class="footer--list">
                       <?php if($value['sub_menu']) { 
-                        
+
                         foreach ($value['sub_menu'] as $sub_key => $sub_value) {
-                          
+
                           ?>
                           
                           <li><a rel="nofollow" href="<?php echo $sub_value['sub_menu_link'] ?>" <?php if($sub_value['open_new_tab'] =='y') { echo 'target="_blank"'; } ?>><?php echo $sub_value['title_sub_menu'] ?></a></li>
@@ -49,7 +49,7 @@
                     if($payment) {
 
                       foreach ($payment as $key => $value) {
-                        
+
                         ?>
 
                         <img src="<?php echo $value['icon']?>" width="55" height="45">
@@ -72,7 +72,7 @@
                     if($secure) {
 
                       foreach ($secure as $key => $value) {
-                        
+
                         ?>
 
                         <img src="<?php echo $value['icon']?>">
@@ -106,7 +106,7 @@
                 </div>
               </div>
               <div class="newsletter-wrap--body">
-               
+
                <?php the_field('subcribe_form', 'option'); ?>
 
              </div>
@@ -123,7 +123,11 @@
 <!-- 
   <div id="sticky"><strong>LOOKING FOR SOMETHING?</strong> <br /> The site is down for planned maintenance but you'll be able to ring/drop her a message at +65 9896 4800, or email us at <a href="mailto:customercare@partyfairy.com">customercare@partyfairy.com</a></div> -->
 
-<?php wp_footer() ?>
+
+
+  <?php wp_footer() ?>
+
+
 <!-- 
 <script type='text/javascript'>
   (function (d, t) {
