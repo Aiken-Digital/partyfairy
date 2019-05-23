@@ -114,7 +114,8 @@ $count_post 	= $the_query->found_posts;
 
             while ( $loop->have_posts() ) : $loop->the_post(); 
               global $product; 
-              $author_id = $loop->post_author; 
+              global $post; 
+              $author_id = $post->post_author; 
 
 
               $link =  do_shortcode('[wcfm_store_info id="'.$author_id.'" data="store_url"]');
