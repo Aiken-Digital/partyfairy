@@ -67,26 +67,95 @@ $count_post 	= $the_query->found_posts;
         <div class="row tiles" id="response">
 
 
+          <?php
+          $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+          $args = [
+            'post_type'       => 'product',
+            'posts_per_page'  => 12,
+            'paged'           => $paged,
+            'tax_query'       => [
+              [
+                'taxonomy'        => 'product_cat',
+                'field'           => 'term_id',
+                'terms'           =>  $term_id
+              ]
+            ]
+          ];
+
+          // if(isset($_GET['size'])){
+          //   $args['tax_query'][] = array(
+          //     array(
+          //       'taxonomy' => 'pa_mattress-size',
+          //       'field' => 'id',
+          //       'terms' => $_GET['size']
+          //     )
+          //   );
+          // }
+          // elseif(isset( $_GET['type'] ) ){
+          //   $args['tax_query'][] = array(
+          //     array(
+          //       'taxonomy'  => 'product_cat',
+          //       'field'     => 'id',
+          //       'terms'     => $_GET['type']
+          //     )
+          //   );
+          // }
+          // elseif(isset( $_GET['brand'] ) ){
+          //   $args['tax_query'][] = array(
+          //     array(
+          //       'taxonomy' => 'product_brand',
+          //       'field' => 'id',
+          //       'terms' => $_GET['brand']
+          //     )
+          //   );
+          // }                
+          $loop = new WP_Query($args);
+          if ( $loop->have_posts() ):
+
+            while ( $loop->have_posts() ) : $loop->the_post(); 
+              global $product; 
+
+              $name = do_shortcode('[wcfm_store_info id="" data="store_name"]');
+              preg_match_all('|<div[^>]*>(?<name>[^<]+)<|', $name, $result_name_vendor);
+
+              ?>
+
+              <div class="col-lg-3 col-md-6 col-6 tiles-box text-center"><a class="tiles--single" href="<?php the_title() ?>">
+                <div class="tiles--single--img"><img class="img-fluid" src="?php if ( has_post_thumbnail() ) {the_post_thumbnail_url('full'); } else { echo get_template_directory_uri().'/images/broken/img-not-available-landscape.png'; } ?>"></div><a class="tiles--single--model" href=""><?php the_title() ?></a></a>
+                <div class="tiles--price">$130.00<span>each</span></div>
+                <div class="tiles--code">290-000626</div><a class="tiles--seller" href="#"><?php echo $result_name_vendor ?></a><a class="btn btn-rounded btn-hover btn-main btn-solid p-t-10 p-b-10 p-l-20 p-r-20 font-11" href="#">DETAILS</a>
+              </div>
 
 
+
+            <?php endwhile; ?>
+          </div>
+
+
+          <div class="row">
+           <div class="col-12 pf-paging">
+            <?php pagination_bar( $loop, $paged ); ?>
+            <?php	//do_action( 'woocommerce_after_shop_loop' ); ?>
+
+          </div>
         </div>
 
 
-        <div class="row">
-         <div class="col-12 pf-paging">
 
-           <?php	do_action( 'woocommerce_after_shop_loop' ); ?>
-
-         </div>
-       </div>
-
-
-     </div>
+        <?php wp_reset_postdata();
+      else:
+                ///include(get_template_directory() . '/inc/empty-product.php');
+      endif; 
+      wp_reset_query();
+      ?>
 
 
+    </div>
 
-   </div>
- </div>
+
+
+  </div>
+</div>
 </section>
 </div>
 </form>
