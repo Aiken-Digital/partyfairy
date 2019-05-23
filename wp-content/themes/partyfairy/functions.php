@@ -388,112 +388,126 @@ function filter_category_function(){
 
 		<?php
 		if( $query->have_posts() ) :
-			while( $query->have_posts() ): $query->the_post(); ?>
+			global $product; 
+			global $post; 
+
+			while( $query->have_posts() ): $query->the_post(); 
+				$author_id = $post->post_author; 
 
 
-				<div class="col-sm-4 col-6 default-post hasil-ajax">
-					<div class="item"><a class="img-box" href="<?php the_permalink() ?>">
-						<div class="img" style="background-image: url(<?php if ( has_post_thumbnail() ) {the_post_thumbnail_url('thumbnails'); } else { echo get_template_directory_uri().'/broken/no-image.png'; } ?>);"></div></a><a class="title" href="<?php the_permalink() ?>">
-							<h3><?php the_title(); ?></h3></a></div>
-						</div>
+				$link =  do_shortcode('[wcfm_store_info id="'.$author_id.'" data="store_url"]');
+				preg_match_all('/<a[^>]+href=([""])(?<href>.+?)\1[^>]*>/i', $link, $result_url_vendor); 
 
 
-						<?php
-					endwhile;
-					?>
+				$name = do_shortcode('[wcfm_store_info id="'.$author_id.'" data="store_name"]');
+				preg_match_all('|<div[^>]*>(?<name>[^<]+)<|', $name, $result_name_vendor);
+
+				?>
+
+				<div class="col-lg-3 col-md-6 col-6 tiles-box text-center"><a class="tiles--single" href="<?php the_permalink() ?>">
+					<div class="tiles--single--img"><img class="img-fluid" src="<?php if ( has_post_thumbnail() ) {the_post_thumbnail_url('full'); } else { echo get_template_directory_uri().'/images/broken/img-not-available-landscape.png'; } ?>"></div><a class="tiles--single--model" href="<?php the_permalink() ?>"><?php the_title() ?></a></a>
+					<div class="tiles--price">$<?php echo $product->get_price(); ?><span>each</span></div>
+					<div class="tiles--code"><?php echo $product->get_sku(); ?></div><a class="tiles--seller" href="<?php if (!empty($result_url_vendor)) { echo $result_url_vendor['href'][0]; } ?>"><?php if (!empty($result_name_vendor)) { echo $result_name_vendor['name'][0]; } ?></a><a class="btn btn-rounded btn-hover btn-main btn-solid p-t-10 p-b-10 p-l-20 p-r-20 font-11" href="<?php the_permalink() ?>">DETAILS</a>
 				</div>
 
 
-				<div class="page-numbers pt-6 pl-footer" <?php if($no_of_paginations == 1 ) { echo 'style="display:none"';} ?> >
-					<input type="hidden" name="paged" value="" id="INJECTPAGE">           
-					<div class="page-numbers">
+
+				<?php
+			endwhile;
+			?>
+		</div>
+
+
+		<div class="page-numbers pt-6 pl-footer" <?php if($no_of_paginations == 1 ) { echo 'style="display:none"';} ?> >
+			<input type="hidden" name="paged" value="" id="INJECTPAGE">           
+			<div class="page-numbers">
 
 
 
-						<?php
+				<?php
 
 
-						if ($cur_page >= 7) {
-							$start_loop = $cur_page - 3;
-							if ($no_of_paginations > $cur_page + 3)
-								$end_loop = $cur_page + 3;
-							else if ($cur_page <= $no_of_paginations && $cur_page > $no_of_paginations - 6) {
-								$start_loop = $no_of_paginations - 6;
-								$end_loop = $no_of_paginations;
-							} else {
-								$end_loop = $no_of_paginations;
-							}
-						} else {
-							$start_loop = 1;
-							if ($no_of_paginations > 7)
-								$end_loop = 7;
-							else
-								$end_loop = $no_of_paginations;
-						}
+				if ($cur_page >= 7) {
+					$start_loop = $cur_page - 3;
+					if ($no_of_paginations > $cur_page + 3)
+						$end_loop = $cur_page + 3;
+					else if ($cur_page <= $no_of_paginations && $cur_page > $no_of_paginations - 6) {
+						$start_loop = $no_of_paginations - 6;
+						$end_loop = $no_of_paginations;
+					} else {
+						$end_loop = $no_of_paginations;
+					}
+				} else {
+					$start_loop = 1;
+					if ($no_of_paginations > 7)
+						$end_loop = 7;
+					else
+						$end_loop = $no_of_paginations;
+				}
 
         // Pagination Buttons logic     
-						$pag_container .= "
-						<div class='cvf-universal-pagination'>
-						<ul>";
+				$pag_container .= "
+				<div class='cvf-universal-pagination'>
+				<ul>";
 
-						if ($first_btn && $cur_page > 1) {
-							$pag_container .= "<li p='1' class='active'>First</li>";
-						} else if ($first_btn) {
-							$pag_container .= "<li p='1' class='inactive'>First</li>";
-						}
+				if ($first_btn && $cur_page > 1) {
+					$pag_container .= "<li p='1' class='active'>First</li>";
+				} else if ($first_btn) {
+					$pag_container .= "<li p='1' class='inactive'>First</li>";
+				}
 
-						if ($previous_btn && $cur_page > 1) {
-							$pre = $cur_page - 1;
-							$pag_container .= "<li p='$pre' class='active'>Previous</li>";
-						} else if ($previous_btn) {
-							$pag_container .= "<li class='inactive'>Previous</li>";
-						}
-						for ($i = $start_loop; $i <= $end_loop; $i++) {
+				if ($previous_btn && $cur_page > 1) {
+					$pre = $cur_page - 1;
+					$pag_container .= "<li p='$pre' class='active'>Previous</li>";
+				} else if ($previous_btn) {
+					$pag_container .= "<li class='inactive'>Previous</li>";
+				}
+				for ($i = $start_loop; $i <= $end_loop; $i++) {
 
-							if ($cur_page == $i)
-								$pag_container .= "<li p='$i' class = 'selected' >{$i}</li>";
-							else
-								$pag_container .= "<li p='$i' class='active'>{$i}</li>";
-						}
+					if ($cur_page == $i)
+						$pag_container .= "<li p='$i' class = 'selected' >{$i}</li>";
+					else
+						$pag_container .= "<li p='$i' class='active'>{$i}</li>";
+				}
 
-						if ($next_btn && $cur_page < $no_of_paginations) {
-							$nex = $cur_page + 1;
-							$pag_container .= "<li p='$nex' class='active'>Next</li>";
-						} else if ($next_btn) {
-							$pag_container .= "<li class='inactive'>Next</li>";
-						}
+				if ($next_btn && $cur_page < $no_of_paginations) {
+					$nex = $cur_page + 1;
+					$pag_container .= "<li p='$nex' class='active'>Next</li>";
+				} else if ($next_btn) {
+					$pag_container .= "<li class='inactive'>Next</li>";
+				}
 
-						if ($last_btn && $cur_page < $no_of_paginations) {
-							$pag_container .= "<li p='$no_of_paginations' class='active'>Last</li>";
-						} else if ($last_btn) {
-							$pag_container .= "<li p='$no_of_paginations' class='inactive'>Last</li>";
-						}
+				if ($last_btn && $cur_page < $no_of_paginations) {
+					$pag_container .= "<li p='$no_of_paginations' class='active'>Last</li>";
+				} else if ($last_btn) {
+					$pag_container .= "<li p='$no_of_paginations' class='inactive'>Last</li>";
+				}
 
-						$pag_container = $pag_container . "
-						</ul>
-						</div>";
+				$pag_container = $pag_container . "
+				</ul>
+				</div>";
 
         // We echo the final output
-						echo 
+				echo 
 
-						'<div class = "cvf-pagination-nav">' . $pag_container . '</div>';
-
-
+				'<div class = "cvf-pagination-nav">' . $pag_container . '</div>';
 
 
-						?>
 
 
-					</div>
-				</div>
+				?>
 
-				<script type="text/javascript">
 
-					$('li.active').click(function(e) {
-						e.preventDefault();
-						var page = $(this).attr('p');
-						$('#INJECTPAGE').val(page);
-						$('.hasil-ajax').remove();
+			</div>
+		</div>
+
+		<script type="text/javascript">
+
+			$('li.active').click(function(e) {
+				e.preventDefault();
+				var page = $(this).attr('p');
+				$('#INJECTPAGE').val(page);
+				$('.hasil-ajax').remove();
                     //cvf_load_all_posts(page);
                     
                     $('html, body').animate({
