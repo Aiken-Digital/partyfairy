@@ -3,6 +3,51 @@ add_filter( 'deprecated_function_trigger_error', '__return_false' );
 require_once( get_template_directory() . '/acf.php' );
 
 
+
+function pagination_bar( $query_wp, $paged) 
+{
+
+	$pages = $query_wp->max_num_pages;
+
+
+    $big = 999999999; // need an unlikely integer
+    if ($pages > 1)
+    {
+    	$page_current = max(1, $paged);
+    	echo paginate_links(array(
+    		'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+    		'format' => '?paged=%#%',
+    		'current' => $page_current,
+    		'total' => $pages,
+    	));
+    }
+}
+
+
+
+function pagination_bar_ajax( $query_wp, $paged) 
+{
+
+	$pages = $query_wp;
+
+
+    $big = 999999999; // need an unlikely integer
+    if ($pages > 1)
+    {
+    	$page_current = max(1, $paged);
+    	echo paginate_links(array(
+    		'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+    		'format' => '?paged=%#%',
+    		'current' => $page_current,
+    		'total' => $pages,
+    	));
+    }
+}
+
+
+
+
+
 add_filter('show_admin_bar', '__return_false');
 
 function add_theme_scripts() {
