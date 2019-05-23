@@ -387,10 +387,11 @@ function filter_category_function(){
 	<div class="row">
 
 		<?php
-		if( $query->have_posts() ) :
-			global $product; 
-			global $post; 
+		global $product; 
+		global $post; 
 
+
+		if( $query->have_posts() ) :
 			while( $query->have_posts() ): $query->the_post(); 
 				$author_id = $post->post_author; 
 
