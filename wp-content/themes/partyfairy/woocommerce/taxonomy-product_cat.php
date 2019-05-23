@@ -117,7 +117,7 @@ $count_post 	= $the_query->found_posts;
               $author_id = $loop->post_author; 
 
 
-              $link =  do_shortcode('[wcfm_store_info id="'.get_the_ID().'" data="store_url"]');
+              $link =  do_shortcode('[wcfm_store_info id="'.$author_id.'" data="store_url"]');
               preg_match_all('/<a[^>]+href=([""])(?<href>.+?)\1[^>]*>/i', $link, $result_url_vendor); 
               print_r($link);
               ?>
