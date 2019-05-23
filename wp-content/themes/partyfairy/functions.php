@@ -400,6 +400,7 @@ function filter_category_function(){
 			$name = do_shortcode('[wcfm_store_info id="'.$author_id.'" data="store_name"]');
 			preg_match_all('|<div[^>]*>(?<name>[^<]+)<|', $name, $result_name_vendor);
 
+			print_r($_GET['price']);
 			?>
 
 			<div class="col-lg-3 col-md-6 col-6 tiles-box text-center default-post"><a class="tiles--single" href="<?php the_permalink() ?>">

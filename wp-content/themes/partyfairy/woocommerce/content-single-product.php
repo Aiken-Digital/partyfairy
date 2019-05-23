@@ -59,13 +59,30 @@ if ( post_password_required() ) {
 
 
       <?php 
-      $product_image = new WP_Query(array( 
+
+      $args = array( 
         'post_type'   => 'product', 
         'post_status' => 'publish',
         'post__not_in' => array(get_the_ID() ),
         'posts_per_page' => 10,
         'orderby'        => 'rand',
-      )); 
+      );
+
+      $args['tax_query'] = array(
+        
+        array(
+          'taxonomy' => 'pa_color',
+          'field'    => 'id',
+          'terms'    => $_GET['color'],
+
+
+        )
+      );
+
+
+      $product_image = new WP_Query($args); 
+
+
       if ( $product_image->have_posts() ) : 
 
         ?>          

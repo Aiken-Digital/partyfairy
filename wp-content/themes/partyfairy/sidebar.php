@@ -33,7 +33,7 @@
                  ?>
                  <li>
                    <label class="font-12 label-checkbox" for="category-<?php echo $subkey_x ?>"><?php echo $wcatTerm2->name; ?>
-                   <input id="category-<?php echo $subkey_x; ?>" name="category[]" class="autocheckbox" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm2->term_id?>" ><span class="checkmark"></span>
+                   <input id="category-<?php echo $subkey_x; ?>" name="category[]" class="autocheckbox" type="radio" aria-label="filter checkbox" value="<?php echo $wcatTerm2->term_id?>" ><span class="checkmark"></span>
                  </label>
                </li>
 
@@ -71,7 +71,7 @@
             ?>
             <li>
               <label class="font-12 label-checkbox" for="occasions-<?php echo $subkey ?>"><?php echo $wcatTerm1->name; ?>
-              <input id="occasions-<?php echo $subkey ?>" class="autocheckbox" name="category[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm1->term_id?>" ><span class="checkmark"></span>
+              <input id="occasions-<?php echo $subkey ?>" class="autocheckbox" name="category[]" type="radio" aria-label="filter checkbox" value="<?php echo $wcatTerm1->term_id?>" ><span class="checkmark"></span>
             </label>
           </li>
 
@@ -96,10 +96,10 @@ if($wcatTerms1) :
  <div class="card">
   <div class="card-header">
     <h5 class="mb-0">
-      <button class="btn btn-link font-13" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">Themes</button>
+      <button class="btn btn-link font-13" type="button" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">Themes</button>
     </h5>
   </div>
-  <div class="collapse" id="collapse2">
+  <div class="collapse" id="collapse3">
     <div class="card-body">
       <ul>
 
@@ -111,7 +111,7 @@ if($wcatTerms1) :
         ?>
         <li>
           <label class="font-12 label-checkbox" for="themes-<?php echo $subkey ?>"><?php echo $wcatTerm1->name; ?>
-          <input id="themes-<?php echo $subkey ?>" class="autocheckbox" name="category[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm1->term_id?>" ><span class="checkmark"></span>
+          <input id="themes-<?php echo $subkey ?>" class="autocheckbox" name="category[]" type="radio" aria-label="filter checkbox" value="<?php echo $wcatTerm1->term_id?>" ><span class="checkmark"></span>
         </label>
       </li>
 
@@ -134,10 +134,10 @@ if($wcatTerms1) :
  <div class="card">
   <div class="card-header">
     <h5 class="mb-0">
-      <button class="btn btn-link font-13" type="button" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">Colors</button>
+      <button class="btn btn-link font-13" type="button" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">Colors</button>
     </h5>
   </div>
-  <div class="collapse" id="collapse3">
+  <div class="collapse" id="collapse4">
     <div class="card-body">
       <ul class="color-list">
         <?php foreach ($wcatTerms1 as $key => $value) { ?>
@@ -161,14 +161,19 @@ if($wcatTerms1) :
 <div class="card">
   <div class="card-header">
     <h5 class="mb-0">
-      <button class="btn btn-link font-13" type="button" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">Price</button>
+      <button class="btn btn-link font-13" type="button" data-toggle="collapse" data-target="#collapse5" aria-expanded="false" aria-controls="collapse5">Price</button>
     </h5>
   </div>
-  <div class="collapse" id="collapse4">
+  <div class="collapse" id="collapse5">
     <div class="card-body">
       <ul class="price-drag">
-       
-       </ul>
+        <p>
+          <label for="amount"></label>
+          <input type="text" id="amount" class="autocheckbox" name="price" readonly style="border:0; color:#f6931f; font-weight:bold;">
+        </p>
+
+        <div id="slider-range"></div>
+      </ul>
     </div>
   </div>
 </div>
