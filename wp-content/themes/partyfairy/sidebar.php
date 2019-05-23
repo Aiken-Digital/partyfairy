@@ -69,20 +69,20 @@
            foreach($wcatTerms1 as $subkey => $wcatTerm1) :
 
             ?>
+            <li>
+              <label class="font-12 label-checkbox" for="occasions-<?php echo $subkey ?>"><?php echo $wcatTerm1->name; ?>
+              <input id="occasions-<?php echo $subkey ?>" class="autocheckbox" name="category[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm1->term_id?>" ><span class="checkmark"></span>
+            </label>
+          </li>
 
-            <label class="font-12 label-checkbox" for="occasions<?php echo $subkey ?>"><?php echo $wcatTerm1->name; ?>
-            <input id="occasions-<?php echo $subkey ?>" class="autocheckbox" name="category[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm1->term_id?>" ><span class="checkmark"></span>
-          </label>
-        </li>
+        <?php endforeach ;  
 
-      <?php endforeach ;  
-
-      ?>
+        ?>
 
 
-    </ul>
+      </ul>
+    </div>
   </div>
-</div>
 </div>
 
 <?php    
@@ -109,18 +109,18 @@ if($wcatTerms1) :
        foreach($wcatTerms1 as $subkey => $wcatTerm1) :
 
         ?>
+        <li>
+          <label class="font-12 label-checkbox" for="themes-<?php echo $subkey ?>"><?php echo $wcatTerm1->name; ?>
+          <input id="themes-<?php echo $subkey ?>" class="autocheckbox" name="category[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm1->term_id?>" ><span class="checkmark"></span>
+        </label>
+      </li>
 
-        <label class="font-12 label-checkbox" for="themes<?php echo $subkey ?>"><?php echo $wcatTerm1->name; ?>
-        <input id="themes-<?php echo $subkey ?>" class="autocheckbox" name="category[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm1->term_id?>" ><span class="checkmark"></span>
-      </label>
-    </li>
+    <?php endforeach ;  
 
-  <?php endforeach ;  
-
-  ?>
+    ?>
 
 
-</ul>
+  </ul>
 </div>
 </div>
 </div>
@@ -141,15 +141,19 @@ if($wcatTerms1) :
     <div class="card-body">
       <ul class="color-list">
         <?php foreach ($wcatTerms1 as $key => $value) { ?>
+          <li>
 
-          <li><img src="<?php the_field('color', $value->taxonomy . '_' . $value->term_id); ?>" alt="<?php echo $value->name; ?>"></li>
+            <label class="font-12 label-checkbox" for="color-<?php echo $key ?>"><img src="<?php the_field('color', $value->taxonomy . '_' . $value->term_id); ?>" alt="<?php echo $value->name; ?>">
+              <input id="color-<?php echo $subkey ?>" class="autocheckbox" name="color[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $value->term_id?>" ><span class="checkmark"></span>
+            </label>
 
-        <?php } ?>
 
-      </ul>
+          <?php } ?>
+
+        </ul>
+      </div>
     </div>
   </div>
-</div>
 
 <?php endif; ?>
 <div class="card">
