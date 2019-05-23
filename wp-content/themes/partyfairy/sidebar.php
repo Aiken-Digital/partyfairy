@@ -158,6 +158,7 @@ if($wcatTerms1) :
   </div>
 
 <?php endif; ?>
+
 <div class="card">
   <div class="card-header">
     <h5 class="mb-0">
@@ -180,10 +181,52 @@ if($wcatTerms1) :
   </div>
 </div>
 
+
+
 <div class="card">
- <?php if ( is_active_sidebar( 'partyfairy-side-bar' ) ) : ?>
-  <?php dynamic_sidebar( 'partyfairy-side-bar' ); ?>
-<?php endif; ?>
+  <div class="card-header">
+    <h5 class="mb-0">
+      <button class="btn btn-link font-13" type="button" data-toggle="collapse" data-target="#collapse6" aria-expanded="false" aria-controls="collapse6">Seller</button>
+    </h5>
+  </div>
+  <div class="collapse" id="collapse6">
+    <div class="card-body">
+      <ul>
+
+        <?php
+        $blogusers = get_users( [ 'role__in' => [ 'wcfm_vendor' ] ] );
+// Array of WP_User objects.\
+        $s=1;
+        foreach ( $blogusers as $user ) { 
+
+
+          $name = do_shortcode('[wcfm_store_info id="'.$user->ID.'" data="store_name"]');
+          preg_match_all('|<div[^>]*>(?<name>[^<]+)<|', $name, $result_name_vendor);
+
+          
+          ?>
+          <li>
+
+            <label class="font-12 label-checkbox" for="seller-<?php echo $s ?>">
+              <?php if (!empty($result_name_vendor)) { echo $result_name_vendor['name'][0]; } ?>
+
+              <input id="seller-<?php echo $s ?>" class="autocheckbox" name="seller[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $user->ID?>" ><span class="checkmark"></span>
+            </label>
+
+          </li>
+          <?php $s++; } ?>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+   <?php if ( is_active_sidebar( 'partyfairy-side-bar' ) ) : ?>
+    <?php dynamic_sidebar( 'partyfairy-side-bar' ); ?>
+  <?php endif; ?>
 </div>
 
 </div>

@@ -276,38 +276,15 @@ function filter_category_function(){
 	$last_btn     = false;
 	$start        = $page * $per_page;
 
-	$args = array(
+	if (!empty($_GET['seller'])) { $author_id = $_GET['seller']; } else { $author_id = ''; }
 
+	$args = array(
+		'author__in'         => $author_id, 
 		'order'           => 'DESC',
 		'post_type'       => 'product',
 		'posts_per_page'  => $tampilkan,
 		'post_status'     => 'publish',
 		'paged'           => $paged,
-  //   'tax_query' => array(
-  //     'relation' => 'AND',
-  //          array(
-  //       'taxonomy'  => 'product-category-cookware',
-  //       'field'     => 'id',
-  //       'terms'     => $_GET['category'],
-  //       'operator' => 'IN',
-
-  //     ),
-  //             array(
-  //         'taxonomy' => 'product-color-cookware',
-  //         'field'    => 'id',
-  //         'terms'    => $_GET['color'],
-  //         'operator' => 'IN',
-
-  //       ),
-  //          array(
-  //         'taxonomy'  => 'product-material-cookware',
-  //         'field'     => 'id',
-  //         'terms'     => $_GET['material'],
-  //         'operator' => 'IN',
-
-  //         )   
-
-  //   )
 	);
 
 	if( !empty( $_GET['price']) ) {
@@ -355,6 +332,7 @@ function filter_category_function(){
 // echo '</pre>';
 
 	$args_all = array(
+		'author__in'         => $author_id, 
     'order'         => 'DESC', //$_POST['date'] // ASC or DESC
     'post_type'     => 'product',
     'posts_per_page' => 999999,
@@ -409,9 +387,10 @@ function filter_category_function(){
 
 	if( $query->have_posts() ) :
 		while( $query->have_posts() ): $query->the_post(); 
-			$author_id = $post->post_author; 
+			
 			global $product; 
 			global $post; 
+			$author_id = $post->post_author; 
 			$price = $product->get_price();
 			$link =  do_shortcode('[wcfm_store_info id="'.$author_id.'" data="store_url"]');
 			preg_match_all('/<a[^>]+href=([""])(?<href>.+?)\1[^>]*>/i', $link, $result_url_vendor); 
