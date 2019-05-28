@@ -172,6 +172,7 @@ function new_loop_shop_per_page( $cols ) {
 
 
 function iconic_add_engraving_text_to_cart_item( $cart_item_data, $product_id, $variation_id ) {
+	$delivery_estimate = filter_input( INPUT_POST, 'delivery-estimate' );
 	$engraving_text = filter_input( INPUT_POST, 'personalise-text' );
 	$date_delivery  = filter_input( INPUT_POST, 'date-delivery' );
 	$time_delivery  = filter_input( INPUT_POST, 'time-delivery' );
@@ -195,6 +196,7 @@ function iconic_add_engraving_text_to_cart_item( $cart_item_data, $product_id, $
     // }
 
 	$cart_item_data['personalise-text'] = $engraving_text;
+	$cart_item_data['delivery-estimate'] = $delivery_estimate;
 	$cart_item_data['date-delivery'] = $date_delivery;
 	$cart_item_data['time-delivery'] = $time_delivery;
 	$cart_item_data['date-pickup'] = $date_pickup;
@@ -241,6 +243,12 @@ function iconic_display_engraving_text_cart( $item_data, $cart_item ) {
 	);
 
 	$item_data[] = array(
+		'key'     => __( 'Delivery Estimate', 'deliveryestimate' ),
+		'value'   => wc_clean( $cart_item['delivery-estimate'] ),
+		'display' => '',
+	);
+
+	$item_data[] = array(
 		'key'     => __( 'Delivery', 'delivery' ),
 		'value'   => wc_clean( $cart_item['date-delivery'].' / '.$cart_item['time-delivery'] ),
 		'display' => '',
@@ -272,6 +280,7 @@ function iconic_add_engraving_text_to_order_items( $item, $cart_item_key, $value
 	}
 
 	$item->add_meta_data( __( 'Personalise', 'personalisetext' ), $values['personalise-text'] );
+	$item->add_meta_data( __( 'Delivery Estimate', 'deliveryestimate' ), $values['delivery-estimate'] );
 	$item->add_meta_data( __( 'Delivery', 'deliverytext' ), $values['date-delivery'].' / '.$values['time-delivery']  );
 	$item->add_meta_data( __( 'Pickup', 'pickuptext' ),  $values['date-pickup'].' / '.$values['time-pickup'] );
 

@@ -343,6 +343,7 @@ $estimate_time = get_field('estimate_time', get_option('page_for_posts'));
 
           <?php $dv = get_term_by( 'id', $estimate_time, 'delivery-estimate' ); ?>
           Delivery will be take place in <?php echo $dv->name; ?>
+          <input type="hidden" name="delivery-estimate" value="<?php echo $dv->name; ?>">
         </div>
       </div>
     <?php }  if( $delive_product == "Y") { ?>
