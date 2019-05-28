@@ -137,6 +137,8 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
                     $dp  = get_term_by( 'id', $personalise, 'personalise' ); 
 
+                    print_r($dp);
+
                     if($dp->name == "Yes") {
                       ?>
 
