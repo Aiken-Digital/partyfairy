@@ -310,7 +310,7 @@ $estimate_time = get_field('estimate_time', get_option('page_for_posts'));
     <ul>
 
 
-      <?php if( $estimate_product == "Y") { ?>
+      <?php if( $delivery_estimate == "Y") { ?>
         <li><a class="-homedly btn-opt btn-homedelivery text-center w-100 font-12 d-flex justify-content-center align-items-center" href="#estimateDelivery">
           <div class="icon m-r-10">﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
             <path style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans" d="M 1 3 L 1 4 L 1 14 L 1 15 L 2 15 L 3 15 L 3 47 L 3 48 L 4 48 L 46 48 L 47 48 L 47 47 L 47 15 L 48 15 L 49 15 L 49 14 L 49 4 L 49 3 L 48 3 L 2 3 L 1 3 z M 3 5 L 47 5 L 47 13 L 3 13 L 3 5 z M 5 15 L 45 15 L 45 46 L 5 46 L 5 15 z M 17.5 19 C 15.578812 19 14 20.578812 14 22.5 C 14 24.421188 15.578812 26 17.5 26 L 32.5 26 C 34.421188 26 36 24.421188 36 22.5 C 36 20.578812 34.421188 19 32.5 19 L 17.5 19 z M 17.5 21 L 32.5 21 C 33.340812 21 34 21.659188 34 22.5 C 34 23.340812 33.340812 24 32.5 24 L 17.5 24 C 16.659188 24 16 23.340812 16 22.5 C 16 21.659188 16.659188 21 17.5 21 z" overflow="visible" enable-background="accumulate" font-family="Bitstream Vera Sans"/>
@@ -336,12 +336,12 @@ $estimate_time = get_field('estimate_time', get_option('page_for_posts'));
 
     </ul>
 
-    <?php if( $Estimate == "Y") { ?>
+    <?php if( $delivery_estimate == "Y") { ?>
       <div class="home-delivery-box" id="estimateDelivery">
 
         <div class="form-group m-t-15 timercontrol d-flex align-items-center">
 
-          <?php $dv = get_term_by( 'id', (int) $delivery_estimate, 'delivery_estimate' ); ?>
+          <?php $dv = get_term_by( 'id', (int) $estimate_time, 'delivery_estimate' ); ?>
           Delivery will be take place in <?php echo $dv->name; ?>
         </div>
       </div>
