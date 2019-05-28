@@ -208,7 +208,7 @@ if($delivery_estimate) {
 
             <label class="font-12 label-checkbox" for="delivery-estimate-<?php echo $s ?>">
               <?php echo $user->name;?>
-              <input id="delivery-estimate-<?php echo $s ?>" class="autocheckbox" name="delivery-estimate[]" type="radio" aria-label="filter checkbox" value="<?php echo $user->ID?>" ><span class="checkmark"></span>
+              <input id="delivery-estimate-<?php echo $s ?>" class="autocheckbox" name="delivery-estimate[]" type="radio" aria-label="filter checkbox" value="<?php echo $user->term_id?>" ><span class="checkmark"></span>
             </label>
             <?php $s++; } ?>
           </li>
