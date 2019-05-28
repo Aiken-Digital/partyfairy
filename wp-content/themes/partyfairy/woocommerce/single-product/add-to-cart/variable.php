@@ -301,6 +301,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 $delive_product = get_field('delivery_product', get_option('page_for_posts'));
 $pickup_product = get_field('pickup_product', get_option('page_for_posts'));
 $delivery_estimate = get_field('delivery_estimate', get_option('page_for_posts'));
+$estimate_time = get_field('estimate_time', get_option('page_for_posts'));
 ?>
 
 <div class="product-info--opt-delivery">
@@ -340,6 +341,8 @@ $delivery_estimate = get_field('delivery_estimate', get_option('page_for_posts')
 
         <div class="form-group m-t-15 timercontrol d-flex align-items-center">
 
+          <?php $dv = get_term_by( 'id', (int) $delivery_estimate, 'delivery_estimate' ); ?>
+          Delivery will be take place in <?php echo $dv->name; ?>
         </div>
       </div>
     <?php }  if( $delive_product == "Y") { ?>
