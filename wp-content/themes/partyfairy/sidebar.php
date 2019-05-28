@@ -182,6 +182,42 @@ if($wcatTerms1) :
 </div>
 
 
+<?php
+
+
+$delivery_estimate = get_terms('delivery-estimate', array('hide_empty' => 0)); 
+if($delivery_estimate) :
+ ?>
+
+ <div class="card">
+  <div class="card-header">
+    <h5 class="mb-0">
+      <button class="btn btn-link font-13" type="button" data-toggle="collapse" data-target="#collapse61" aria-expanded="false" aria-controls="collapse61">Delivery Time</button>
+    </h5>
+  </div>
+  <div class="collapse" id="collapse61">
+    <div class="card-body">
+      <ul>
+
+        <?php
+        $s=1;
+        foreach ( $delivery_estimate as $user ) { 
+
+          ?>
+          <li>
+
+            <label class="font-12 label-checkbox" for="delivery-estimate-<?php echo $s ?>">
+              <?php echo $user->name;?>
+              <input id="delivery-estimate-<?php echo $s ?>" class="autocheckbox" name="delivery-estimate[]" type="radio" aria-label="filter checkbox" value="<?php echo $user->ID?>" ><span class="checkmark"></span>
+            </label>
+
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+<?php } ?>
 
 <div class="card">
   <div class="card-header">
@@ -203,7 +239,7 @@ if($wcatTerms1) :
           $name = do_shortcode('[wcfm_store_info id="'.$user->ID.'" data="store_name"]');
           preg_match_all('|<div[^>]*>(?<name>[^<]+)<|', $name, $result_name_vendor);
 
-          
+
           ?>
           <li>
 

@@ -329,9 +329,21 @@ function filter_category_function(){
 			'type' => 'numeric',
 			'compare' => 'between'
 		);
-	}
+	}	
 
 
+
+
+	if( isset( $_GET['delivery-estimate'] ) )
+		$args['tax_query'] = array(
+
+			array(
+				'taxonomy'  => 'delivery-estimate',
+				'field'     => 'id',
+				'terms'     => $_GET['delivery-estimate'],
+
+			)
+		);	
 
 
 	if( isset( $_GET['category'] ) )
@@ -385,6 +397,17 @@ function filter_category_function(){
 		);
 	}
 
+
+	if( isset( $_GET['delivery-estimate'] ) )
+		$args_all['tax_query'] = array(
+
+			array(
+				'taxonomy'  => 'delivery-estimate',
+				'field'     => 'id',
+				'terms'     => $_GET['delivery-estimate'],
+
+			)
+		);
 
 
 	if( isset( $_GET['category'] ) )
