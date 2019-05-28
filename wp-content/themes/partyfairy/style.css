@@ -270,7 +270,7 @@ a.get-inspired {
 
 }
 div#pf-sg-p {
-    padding-top: 124px;
+   /* padding-top: 124px;*/
 }
 
 form.woocommerce-checkout {
@@ -287,3 +287,7 @@ div#pf-filter input[type="checkbox"] {
 }
 
 
+
+.woocommerce-notices-wrapper {
+    padding-top: 140px;
+}

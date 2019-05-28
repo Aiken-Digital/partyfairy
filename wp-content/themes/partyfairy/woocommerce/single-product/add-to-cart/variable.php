@@ -54,6 +54,8 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
           <div class="productimg--des">Images shown on this page may differ slightly from the actual product.</div>
         </div>
       </div>
+
+
       <div class="col-lg-8">
         <div class="pf-product">
           <div class="pf-product--name"><?php the_title() ?></div>
@@ -250,6 +252,8 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
         </div>
       </div>
     </div>
+
+    
   </div>
 </div>
 
@@ -265,15 +269,17 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
 <div class="col-lg-4 m-b-25">
 
- <?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
 
 
  <div class="product-info product-info-main-form">
   <div class="product-info--price m-b-15"><span class="m-r-5"><?php echo $product->get_price_html(); ?></span><span class="font-12">each</span></div>
   <div id="product-cp"><?php do_action( 'woocommerce_single_variation' );?></div>
 
+  <?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
 
 
+  <?php do_action( 'woocommerce_before_add_to_cart_quantity' );
+  ?>
 
   <div class="product-info--quantity m-b-20">
     <p class="font-12">SELECT QUANTITY</p>
@@ -287,28 +293,28 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
         font-size: 12px;
       }
     </style>
-
+    
     <input class="-minus btn" id="sub" value="-" type="button">
     <div class="form-group m-b-0 w-100">
      <?php
-     do_action( 'woocommerce_before_add_to_cart_quantity' );
-
+     
      woocommerce_quantity_input( array(
       'input_id'     => uniqid( 'qty_' ),
-      'classes'      => apply_filters( 'woocommerce_quantity_input_classes', array('form-control', 'text-center','valid'  ), $product ),
+      'classes'      => apply_filters( 'woocommerce_quantity_input_classes', array('form-control', 'text-center','valid','qty','text'  ), $product ),
       'min_value'   => apply_filters( 'woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product ),
       'max_value'   => apply_filters( 'woocommerce_quantity_input_max', $product->get_max_purchase_quantity(), $product ),
 		'input_value' => isset( $_POST['quantity'] ) ? wc_stock_amount( wp_unslash( $_POST['quantity'] ) ) : $product->get_min_purchase_quantity(), // WPCS: CSRF ok, input var ok.
 	) );
 
-     do_action( 'woocommerce_after_add_to_cart_quantity' );
-     ?>
-   </div>
-   <input class="-plus btn" id="add" value="+" type="button">
-
-
- </div>
+ ?>
 </div>
+<input class="-plus btn" id="add" value="+" type="button">
+
+</div>
+</div>
+<?php 
+do_action( 'woocommerce_after_add_to_cart_quantity' ); ?>
+
 <?php 
 $delive_product = get_field('delivery_product', get_option('page_for_posts'));
 $pickup_product = get_field('pickup_product', get_option('page_for_posts'));

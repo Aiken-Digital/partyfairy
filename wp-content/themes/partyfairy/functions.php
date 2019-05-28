@@ -336,6 +336,10 @@ remove_action('woocommerce_single_variation', 'woocommerce_single_variation_add_
 // add the action 
 add_action( 'woocommerce_single_variation', 'action_woocommerce_single_variation', 10, 0 ); 
 
+remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_images', 20 );
+
+remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
+
 
 ////////////////////////////////////// FILTER
 
