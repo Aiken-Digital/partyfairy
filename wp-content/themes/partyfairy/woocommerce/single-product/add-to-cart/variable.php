@@ -132,6 +132,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
                    <?php $personalise = get_field('personalisation', get_option('page_for_posts')); 
 
+                   print_r($personalise);
                    if($personalise) { 
 
 
