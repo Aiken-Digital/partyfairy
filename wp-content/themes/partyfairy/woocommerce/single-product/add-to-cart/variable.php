@@ -341,7 +341,7 @@ $estimate_time = get_field('estimate_time', get_option('page_for_posts'));
 
         <div class="form-group">
 
-          <?php $dv = get_term_by( 'id', (int) $estimate_time, 'delivery_estimate' ); ?>
+          <?php $dv = get_term_by( 'id', $estimate_time, 'delivery-estimate' ); ?>
           Delivery will be take place in <?php echo $dv->name; ?>
         </div>
       </div>
