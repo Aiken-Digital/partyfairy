@@ -195,12 +195,12 @@ function iconic_add_engraving_text_to_cart_item( $cart_item_data, $product_id, $
     //     return $cart_item_data;
     // }
 
-	$cart_item_data['personalise-text'] = $engraving_text;
-	$cart_item_data['delivery-estimate'] = $delivery_estimate;
-	$cart_item_data['date-delivery'] = $date_delivery;
-	$cart_item_data['time-delivery'] = $time_delivery;
-	$cart_item_data['date-pickup'] = $date_pickup;
-	$cart_item_data['time-pickup'] = $time_pickup;
+	$cart_item_data['personalise-text'] = (!isset($engraving_text) || is_null($engraving_text)) ? '-' : $engraving_text;
+	$cart_item_data['delivery-estimate'] = (!isset($delivery_estimate) || is_null($delivery_estimate)) ? '-' : $delivery_estimate;
+	$cart_item_data['date-delivery'] = (!isset($date_delivery) || is_null($date_delivery)) ? '-' : $date_delivery;
+	$cart_item_data['time-delivery'] = (!isset($time_delivery) || is_null($time_delivery)) ? '-' :  $time_delivery;
+	$cart_item_data['date-pickup'] = (!isset($date_pickup) || is_null($date_pickup)) ? '-' : $date_pickup;
+	$cart_item_data['time-pickup'] = (!isset($time_pickup) || is_null($time_pickup)) ? '-' : $time_pickup;
 
 
 	return $cart_item_data;
