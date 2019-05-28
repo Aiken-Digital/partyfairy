@@ -388,6 +388,21 @@ function filter_category_function(){
 				'terms'     => $_GET['delivery-estimate'],
 
 			)
+		);
+
+
+
+
+
+	if( isset( $_GET['personalisation'] ) )
+		$args['tax_query'] = array(
+
+			array(
+				'taxonomy'  => 'personalisation',
+				'field'     => 'id',
+				'terms'     => $_GET['personalisation'],
+
+			)
 		);	
 
 
@@ -454,6 +469,19 @@ function filter_category_function(){
 			)
 		);
 
+
+
+
+	if( isset( $_GET['personalisation'] ) )
+		$args_all['tax_query'] = array(
+
+			array(
+				'taxonomy'  => 'personalisation',
+				'field'     => 'id',
+				'terms'     => $_GET['personalisation'],
+
+			)
+		);	
 
 	if( isset( $_GET['category'] ) )
 		$args_all['tax_query'] = array(

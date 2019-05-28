@@ -219,6 +219,48 @@ if($delivery_estimate) {
 
 <?php } ?>
 
+
+
+
+<?php
+
+
+$personalisation = get_terms('personalisation', array('hide_empty' => 0)); 
+if($personalisation) {
+ ?>
+
+ <div class="card">
+  <div class="card-header">
+    <h5 class="mb-0">
+      <button class="btn btn-link font-13" type="button" data-toggle="collapse" data-target="#collapse62" aria-expanded="false" aria-controls="collapse62">Personalisation</button>
+    </h5>
+  </div>
+  <div class="collapse" id="collapse62">
+    <div class="card-body">
+      <ul>
+
+        <?php
+        $s=1;
+        foreach ( $personalisation as $user ) { 
+
+          ?>
+          <li>
+
+            <label class="font-12 label-checkbox" for="personalisation-<?php echo $s ?>">
+              <?php echo $user->name;?>
+              <input id="personalisation-<?php echo $s ?>" class="autocheckbox" name="personalisation[]" type="radio" aria-label="filter checkbox" value="<?php echo $user->term_id?>" ><span class="checkmark"></span>
+            </label>
+            <?php $s++; } ?>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+<?php } ?>
+
+
+
 <div class="card">
   <div class="card-header">
     <h5 class="mb-0">
