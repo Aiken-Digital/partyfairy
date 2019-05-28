@@ -260,130 +260,152 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
   <div class="product-info--price m-b-15"><span class="m-r-5"><?php echo $product->get_price_html(); ?></span><span class="font-12">each</span></div>
   <div id="product-cp"><?php do_action( 'woocommerce_single_variation' );?></div>
 
-  <div class="product-info--datenote m-b-45">
-    <div class="d-flex align-items-center">
-      <?php $dt = get_field('delivery_take',get_option('page_for_posts')) ;
-
-      if ($dt !="") { ?>
-        <div class="icon m-r-10">﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-          <path style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans" d="M 1 3 L 1 4 L 1 14 L 1 15 L 2 15 L 3 15 L 3 47 L 3 48 L 4 48 L 46 48 L 47 48 L 47 47 L 47 15 L 48 15 L 49 15 L 49 14 L 49 4 L 49 3 L 48 3 L 2 3 L 1 3 z M 3 5 L 47 5 L 47 13 L 3 13 L 3 5 z M 5 15 L 45 15 L 45 46 L 5 46 L 5 15 z M 17.5 19 C 15.578812 19 14 20.578812 14 22.5 C 14 24.421188 15.578812 26 17.5 26 L 32.5 26 C 34.421188 26 36 24.421188 36 22.5 C 36 20.578812 34.421188 19 32.5 19 L 17.5 19 z M 17.5 21 L 32.5 21 C 33.340812 21 34 21.659188 34 22.5 C 34 23.340812 33.340812 24 32.5 24 L 17.5 24 C 16.659188 24 16 23.340812 16 22.5 C 16 21.659188 16.659188 21 17.5 21 z" overflow="visible" enable-background="accumulate" font-family="Bitstream Vera Sans"/>
-        </svg>
-      </div>
-      <p class="m-b-0"><?php echo $dt;?></p>
-    <?php } ?>
-  </div>
-</div>
 
 
-<div class="product-info--quantity m-b-20">
-  <p class="font-12">SELECT QUANTITY</p>
-  <div class="incrementers">
 
-    <style type="text/css">
+  <div class="product-info--quantity m-b-20">
+    <p class="font-12">SELECT QUANTITY</p>
+    <div class="incrementers">
 
-     input[name="quantity"] {
-      height: 50px;
-      border-radius: 0px;
-      font-size: 12px;
-    }
-  </style>
+      <style type="text/css">
 
-  <input class="-minus btn" id="sub" value="-" type="button">
-  <div class="form-group m-b-0 w-100">
-   <?php
-   do_action( 'woocommerce_before_add_to_cart_quantity' );
+       input[name="quantity"] {
+        height: 50px;
+        border-radius: 0px;
+        font-size: 12px;
+      }
+    </style>
 
-   woocommerce_quantity_input( array(
-    'input_id'     => uniqid( 'qty_' ),
-    'classes'      => apply_filters( 'woocommerce_quantity_input_classes', array('form-control', 'text-center','valid'  ), $product ),
-    'min_value'   => apply_filters( 'woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product ),
-    'max_value'   => apply_filters( 'woocommerce_quantity_input_max', $product->get_max_purchase_quantity(), $product ),
+    <input class="-minus btn" id="sub" value="-" type="button">
+    <div class="form-group m-b-0 w-100">
+     <?php
+     do_action( 'woocommerce_before_add_to_cart_quantity' );
+
+     woocommerce_quantity_input( array(
+      'input_id'     => uniqid( 'qty_' ),
+      'classes'      => apply_filters( 'woocommerce_quantity_input_classes', array('form-control', 'text-center','valid'  ), $product ),
+      'min_value'   => apply_filters( 'woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product ),
+      'max_value'   => apply_filters( 'woocommerce_quantity_input_max', $product->get_max_purchase_quantity(), $product ),
 		'input_value' => isset( $_POST['quantity'] ) ? wc_stock_amount( wp_unslash( $_POST['quantity'] ) ) : $product->get_min_purchase_quantity(), // WPCS: CSRF ok, input var ok.
 	) );
 
-   do_action( 'woocommerce_after_add_to_cart_quantity' );
-   ?>
+     do_action( 'woocommerce_after_add_to_cart_quantity' );
+     ?>
+   </div>
+   <input class="-plus btn" id="add" value="+" type="button">
+
+
  </div>
- <input class="-plus btn" id="add" value="+" type="button">
-
-
 </div>
-</div>
-
+<?php 
+$delive_product = get_field('delivery_product', get_option('page_for_posts'));
+$pickup_product = get_field('pickup_product', get_option('page_for_posts'));
+$delivery_estimate = get_field('delivery_estimate', get_option('page_for_posts'));
+?>
 
 <div class="product-info--opt-delivery">
   <p class="font-12 m-b-30">CHOOSE DELIVERY OPTIONS</p>
   <div class="-jquery-tabs delivery-option">
     <ul>
-      <li><a class="-homedly btn-opt btn-homedelivery text-center w-100 font-12 d-flex justify-content-center align-items-center" href="#homeDelivery">
-        <div class="icon m-r-10">﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-          <path style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans" d="M 1 3 L 1 4 L 1 14 L 1 15 L 2 15 L 3 15 L 3 47 L 3 48 L 4 48 L 46 48 L 47 48 L 47 47 L 47 15 L 48 15 L 49 15 L 49 14 L 49 4 L 49 3 L 48 3 L 2 3 L 1 3 z M 3 5 L 47 5 L 47 13 L 3 13 L 3 5 z M 5 15 L 45 15 L 45 46 L 5 46 L 5 15 z M 17.5 19 C 15.578812 19 14 20.578812 14 22.5 C 14 24.421188 15.578812 26 17.5 26 L 32.5 26 C 34.421188 26 36 24.421188 36 22.5 C 36 20.578812 34.421188 19 32.5 19 L 17.5 19 z M 17.5 21 L 32.5 21 C 33.340812 21 34 21.659188 34 22.5 C 34 23.340812 33.340812 24 32.5 24 L 17.5 24 C 16.659188 24 16 23.340812 16 22.5 C 16 21.659188 16.659188 21 17.5 21 z" overflow="visible" enable-background="accumulate" font-family="Bitstream Vera Sans"/>
-        </svg>
-      </div>Home Delivery</a></li>
-      <li><a class="-pickdly btn-opt pickup text-center w-100 font-12 d-flex justify-content-center align-items-center" href="#pickUp">
-        <div class="icon m-r-10">﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-          <path style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans" d="M 1 3 L 1 4 L 1 14 L 1 15 L 2 15 L 3 15 L 3 47 L 3 48 L 4 48 L 46 48 L 47 48 L 47 47 L 47 15 L 48 15 L 49 15 L 49 14 L 49 4 L 49 3 L 48 3 L 2 3 L 1 3 z M 3 5 L 47 5 L 47 13 L 3 13 L 3 5 z M 5 15 L 45 15 L 45 46 L 5 46 L 5 15 z M 17.5 19 C 15.578812 19 14 20.578812 14 22.5 C 14 24.421188 15.578812 26 17.5 26 L 32.5 26 C 34.421188 26 36 24.421188 36 22.5 C 36 20.578812 34.421188 19 32.5 19 L 17.5 19 z M 17.5 21 L 32.5 21 C 33.340812 21 34 21.659188 34 22.5 C 34 23.340812 33.340812 24 32.5 24 L 17.5 24 C 16.659188 24 16 23.340812 16 22.5 C 16 21.659188 16.659188 21 17.5 21 z" overflow="visible" enable-background="accumulate" font-family="Bitstream Vera Sans"/>
-        </svg>
-      </div>Pick-up from store</a></li>
+
+
+      <?php if( $estimate_product == "Y") { ?>
+        <li><a class="-homedly btn-opt btn-homedelivery text-center w-100 font-12 d-flex justify-content-center align-items-center" href="#estimateDelivery">
+          <div class="icon m-r-10">﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+            <path style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans" d="M 1 3 L 1 4 L 1 14 L 1 15 L 2 15 L 3 15 L 3 47 L 3 48 L 4 48 L 46 48 L 47 48 L 47 47 L 47 15 L 48 15 L 49 15 L 49 14 L 49 4 L 49 3 L 48 3 L 2 3 L 1 3 z M 3 5 L 47 5 L 47 13 L 3 13 L 3 5 z M 5 15 L 45 15 L 45 46 L 5 46 L 5 15 z M 17.5 19 C 15.578812 19 14 20.578812 14 22.5 C 14 24.421188 15.578812 26 17.5 26 L 32.5 26 C 34.421188 26 36 24.421188 36 22.5 C 36 20.578812 34.421188 19 32.5 19 L 17.5 19 z M 17.5 21 L 32.5 21 C 33.340812 21 34 21.659188 34 22.5 C 34 23.340812 33.340812 24 32.5 24 L 17.5 24 C 16.659188 24 16 23.340812 16 22.5 C 16 21.659188 16.659188 21 17.5 21 z" overflow="visible" enable-background="accumulate" font-family="Bitstream Vera Sans"/>
+          </svg>
+        </div>Estimate Home Delivery</a></li>
+
+      <?php } if( $delive_product == "Y") { ?>
+        <li><a class="-homedly btn-opt btn-homedelivery text-center w-100 font-12 d-flex justify-content-center align-items-center" href="#homeDelivery">
+          <div class="icon m-r-10">﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+            <path style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans" d="M 1 3 L 1 4 L 1 14 L 1 15 L 2 15 L 3 15 L 3 47 L 3 48 L 4 48 L 46 48 L 47 48 L 47 47 L 47 15 L 48 15 L 49 15 L 49 14 L 49 4 L 49 3 L 48 3 L 2 3 L 1 3 z M 3 5 L 47 5 L 47 13 L 3 13 L 3 5 z M 5 15 L 45 15 L 45 46 L 5 46 L 5 15 z M 17.5 19 C 15.578812 19 14 20.578812 14 22.5 C 14 24.421188 15.578812 26 17.5 26 L 32.5 26 C 34.421188 26 36 24.421188 36 22.5 C 36 20.578812 34.421188 19 32.5 19 L 17.5 19 z M 17.5 21 L 32.5 21 C 33.340812 21 34 21.659188 34 22.5 C 34 23.340812 33.340812 24 32.5 24 L 17.5 24 C 16.659188 24 16 23.340812 16 22.5 C 16 21.659188 16.659188 21 17.5 21 z" overflow="visible" enable-background="accumulate" font-family="Bitstream Vera Sans"/>
+          </svg>
+        </div>Home Delivery</a></li>
+
+      <?php } if($pickup_product == "Y") { ?>
+
+        <li><a class="-pickdly btn-opt pickup text-center w-100 font-12 d-flex justify-content-center align-items-center" href="#pickUp">
+          <div class="icon m-r-10">﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+            <path style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans" d="M 1 3 L 1 4 L 1 14 L 1 15 L 2 15 L 3 15 L 3 47 L 3 48 L 4 48 L 46 48 L 47 48 L 47 47 L 47 15 L 48 15 L 49 15 L 49 14 L 49 4 L 49 3 L 48 3 L 2 3 L 1 3 z M 3 5 L 47 5 L 47 13 L 3 13 L 3 5 z M 5 15 L 45 15 L 45 46 L 5 46 L 5 15 z M 17.5 19 C 15.578812 19 14 20.578812 14 22.5 C 14 24.421188 15.578812 26 17.5 26 L 32.5 26 C 34.421188 26 36 24.421188 36 22.5 C 36 20.578812 34.421188 19 32.5 19 L 17.5 19 z M 17.5 21 L 32.5 21 C 33.340812 21 34 21.659188 34 22.5 C 34 23.340812 33.340812 24 32.5 24 L 17.5 24 C 16.659188 24 16 23.340812 16 22.5 C 16 21.659188 16.659188 21 17.5 21 z" overflow="visible" enable-background="accumulate" font-family="Bitstream Vera Sans"/>
+          </svg>
+        </div>Pick-up from store</a></li>
+
+      <?php } ?>
+
     </ul>
-    <div class="home-delivery-box" id="homeDelivery">
-      <div class="calendar-ui">
-        <p class="text-center font-12 p-t-10 m-b-10">Choose Date & Time</p>
-        <input id="calendarValuedelivery" type="hidden" value="" name="date-delivery" required="">
-        <input id="timerValuedelivery" type="hidden" value="" name="time-delivery" required="">
-        <div type="text" id="datepickerdelivery"></div>
+
+    <?php if( $Estimate == "Y") { ?>
+      <div class="home-delivery-box" id="estimateDelivery">
+
+        <div class="form-group m-t-15 timercontrol d-flex align-items-center">
+
+        </div>
       </div>
-      <div class="form-group m-t-15 timercontrol d-flex align-items-center">
-        <select class="form-control timerselect" onchange="myFunction(event)">
-          <option>9.00 am to 10:00 am</option>
-          <option>10.00 am to 11:00 am</option>
-          <option>11.00 am to 12:00 pm</option>
-          <option>12.00 pm to 1:00 pm</option>
-          <option>1.00 pm to 2:00 pm</option>
-          <option>2.00 pm to 3:00 pm</option>
-          <option>3.00 pm to 4:00 pm</option>
-          <option>4.00 pm to 5:00 pm</option>
-          <option>5.00 pm to 6:00 pm</option>
-          <option>6.00 pm to 7:00 pm</option>
-        </select>
+    <?php }  if( $delive_product == "Y") { ?>
+      <div class="home-delivery-box" id="homeDelivery">
+        <div class="calendar-ui">
+          <p class="text-center font-12 p-t-10 m-b-10">Choose Date & Time</p>
+          <input id="calendarValuedelivery" type="hidden" value="" name="date-delivery" required="">
+          <input id="timerValuedelivery" type="hidden" value="" name="time-delivery" required="">
+          <div type="text" id="datepickerdelivery"></div>
+        </div>
+        <div class="form-group m-t-15 timercontrol d-flex align-items-center">
+          <select class="form-control timerselect" onchange="myFunction(event)">
+            <option>9.00 am to 10:00 am</option>
+            <option>10.00 am to 11:00 am</option>
+            <option>11.00 am to 12:00 pm</option>
+            <option>12.00 pm to 1:00 pm</option>
+            <option>1.00 pm to 2:00 pm</option>
+            <option>2.00 pm to 3:00 pm</option>
+            <option>3.00 pm to 4:00 pm</option>
+            <option>4.00 pm to 5:00 pm</option>
+            <option>5.00 pm to 6:00 pm</option>
+            <option>6.00 pm to 7:00 pm</option>
+          </select>
+        </div>
       </div>
-    </div>
-    <div class="home-delivery-box" id="pickUp">
+    <?php } if($pickup_product == "Y") { ?>
 
-      <div class="calendar-ui">
-        <p class="text-center font-12 p-t-10 m-b-10">Choose Date & Time</p>
-        <input id="calendarValuepickup" type="hidden" value="" name="date-pickup" required="">
-        <input id="timerValuepickup" type="hidden" value="" name="time-pickup" required="">
-        <div type="text" id="datepickerpickup"></div>
+      <div class="home-delivery-box" id="pickUp">
+
+        <div class="calendar-ui">
+          <p class="text-center font-12 p-t-10 m-b-10">Choose Date & Time</p>
+          <input id="calendarValuepickup" type="hidden" value="" name="date-pickup" required="">
+          <input id="timerValuepickup" type="hidden" value="" name="time-pickup" required="">
+          <div type="text" id="datepickerpickup"></div>
+        </div>
+        <div class="form-group m-t-15 timercontrol d-flex align-items-center">
+          <select class="form-control timerselect" onchange="myFunctionpickup(event)">
+            <option>9.00 am to 10:00 am</option>
+            <option>10.00 am to 11:00 am</option>
+            <option>11.00 am to 12:00 pm</option>
+            <option>12.00 pm to 1:00 pm</option>
+            <option>1.00 pm to 2:00 pm</option>
+            <option>2.00 pm to 3:00 pm</option>
+            <option>3.00 pm to 4:00 pm</option>
+            <option>4.00 pm to 5:00 pm</option>
+            <option>5.00 pm to 6:00 pm</option>
+            <option>6.00 pm to 7:00 pm</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+
+          <p class="text-center font-12 p-t-10 m-b-10">Store Info</p>
+          <?php echo $name ?>
+          <?php echo $store_address ?>
+          <?php echo $store_phone ?>
+          <?php echo $store_email ?>
+
+
+        </div>
+
+
       </div>
-      <div class="form-group m-t-15 timercontrol d-flex align-items-center">
-        <select class="form-control timerselect" onchange="myFunctionpickup(event)">
-          <option>9.00 am to 10:00 am</option>
-          <option>10.00 am to 11:00 am</option>
-          <option>11.00 am to 12:00 pm</option>
-          <option>12.00 pm to 1:00 pm</option>
-          <option>1.00 pm to 2:00 pm</option>
-          <option>2.00 pm to 3:00 pm</option>
-          <option>3.00 pm to 4:00 pm</option>
-          <option>4.00 pm to 5:00 pm</option>
-          <option>5.00 pm to 6:00 pm</option>
-          <option>6.00 pm to 7:00 pm</option>
-        </select>
-      </div>
 
-      <div class="form-group">
+    <?php } ?>
 
-        <p class="text-center font-12 p-t-10 m-b-10">Store Info</p>
-        <?php echo $name ?>
-        <?php echo $store_address ?>
-        <?php echo $store_phone ?>
-        <?php echo $store_email ?>
-
-
-      </div>
-
-
-    </div>
   </div>
 </div>
 <div class="action d-flex align-items-center">

@@ -4,6 +4,41 @@ require_once( get_template_directory() . '/acf.php' );
 
 
 
+
+function product_delivery(){
+
+	$labels = array(
+		'name'              => _x( 'Delivery Estimate' , 'taxonomy general name', 'textdomain' ),
+		'singular_name'     => _x( 'Delivery Estimate', 'taxonomy singular name', 'textdomain' ),
+		'search_items'      => __( 'Search Delivery Estimate', 'textdomain' ),
+		'all_items'         => __( 'All Delivery Estimate', 'textdomain' ),
+		'parent_item'       => __( 'Parent Delivery Estimate', 'textdomain' ),
+		'parent_item_colon' => __( 'Parent Delivery Estimate', 'textdomain' ),
+		'edit_item'         => __( 'Edit Delivery Estimate', 'textdomain' ),
+		'update_item'       => __( 'Update Delivery Estimate', 'textdomain' ),
+		'add_new_item'      => __( 'Add New Delivery Estimate', 'textdomain' ),
+		'new_item_name'     => __( 'New Delivery Estimate Name', 'textdomain' ),
+		'menu_name'         => __( 'Delivery Estimate', 'textdomain' ),
+	);
+
+	$args = array(
+		'hierarchical'      => true,
+		'labels'            => $labels,
+		'show_ui'           => true,
+		'show_admin_column' => false,
+		'query_var'         => true,
+		'show_in_quick_edit'=> false,
+		'meta_box_cb'       => false,
+		'rewrite'           => array( 'slug' => 'delivery_estimate' ),
+	);
+
+	register_taxonomy( 'product-type-beds', array('product'), $args );
+}
+
+add_action( 'init', 'product_delivery');
+
+
+
 function pagination_bar( $query_wp, $paged) 
 {
 
