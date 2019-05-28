@@ -975,11 +975,11 @@ acf_add_local_field_group(array(
 				'class' => '',
 				'id' => '',
 			),
-			'taxonomy' => 'product-type-beds',
+			'taxonomy' => 'delivery-estimate',
 			'field_type' => 'radio',
 			'allow_null' => 0,
-			'add_term' => 1,
-			'save_terms' => 0,
+			'add_term' => 0,
+			'save_terms' => 1,
 			'load_terms' => 0,
 			'return_format' => 'id',
 			'multiple' => 0,
@@ -1604,5 +1604,4 @@ acf_add_local_field_group(array(
 ));
 
 endif;
-
 ?>
