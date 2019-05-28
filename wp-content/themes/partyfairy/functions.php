@@ -29,10 +29,10 @@ function product_delivery(){
 		'query_var'         => true,
 		'show_in_quick_edit'=> false,
 		'meta_box_cb'       => false,
-		'rewrite'           => array( 'slug' => 'delivery_estimate' ),
+		'rewrite'           => array( 'slug' => 'delivery-estimate' ),
 	);
 
-	register_taxonomy( 'product-type-beds', array('product'), $args );
+	register_taxonomy( 'delivery-estimate', array('product'), $args );
 }
 
 add_action( 'init', 'product_delivery');

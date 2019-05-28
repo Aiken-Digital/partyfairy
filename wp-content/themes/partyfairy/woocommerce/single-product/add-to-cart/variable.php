@@ -339,7 +339,7 @@ $estimate_time = get_field('estimate_time', get_option('page_for_posts'));
     <?php if( $delivery_estimate == "Y") { ?>
       <div class="home-delivery-box" id="estimateDelivery">
 
-        <div class="form-group m-t-15 timercontrol d-flex align-items-center">
+        <div class="form-group">
 
           <?php $dv = get_term_by( 'id', (int) $estimate_time, 'delivery_estimate' ); ?>
           Delivery will be take place in <?php echo $dv->name; ?>
