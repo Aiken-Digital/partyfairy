@@ -186,7 +186,7 @@ if($wcatTerms1) :
 
 
 $delivery_estimate = get_terms('delivery-estimate', array('hide_empty' => 0)); 
-if($delivery_estimate) :
+if($delivery_estimate) {
  ?>
 
  <div class="card">
