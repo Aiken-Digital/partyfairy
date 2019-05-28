@@ -130,55 +130,105 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
                    </div>
 
 
+                   <?php $personalise = get_field('personalise', get_option('page_for_posts')); 
+
+                   if($personalise) { 
 
 
-                   <div class="row m-b-30">
-                    <div class="col-4">
-                      <p class="uppercase m-b-5">personalise this!</p>
-                      <p>30 characters</p>
-                    </div>
-                    <div class="col-8">
-                      <div class="form-group">
-                        <input class="form-control" type="text" name="personalise-text" value="-">
+                    $dp  = get_term_by( 'id', $personalise, 'personalise' ); 
+
+                    if($dp->name == "Yes") {
+                      ?>
+
+
+                      <div class="row m-b-30">
+                        <div class="col-4">
+                          <p class="uppercase m-b-5">personalise this!</p>
+                          <p>30 characters</p>
+                        </div>
+                        <div class="col-8">
+                          <div class="form-group">
+                            <input class="form-control" type="text" name="personalise-text" value="">
+                          </div>
+                        </div>
                       </div>
+
+                    <?php }  } ?>
+
+                    <div  class="row m-b-30">
+                     <div class="col-12">
+                       <center>
+                        <?php echo end( $attribute_keys ) === $attribute_name ? wp_kses_post( apply_filters( 'woocommerce_reset_variations_link', '<a class="reset_variations" href="#">' . esc_html__( 'Clear', 'woocommerce' ) . '</a>' ) ) : ''; ?>	
+                      </center>
                     </div>
                   </div>
 
-                  <div  class="row m-b-30">
-                   <div class="col-12">
-                     <center>
-                      <?php echo end( $attribute_keys ) === $attribute_name ? wp_kses_post( apply_filters( 'woocommerce_reset_variations_link', '<a class="reset_variations" href="#">' . esc_html__( 'Clear', 'woocommerce' ) . '</a>' ) ) : ''; ?>	
-                    </center>
-                  </div>
+
                 </div>
 
 
-              </div>
+                <?php 
+                if($detail) {  ?>
+
+                  <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab">
+
+                    <?php foreach ($detail as $key => $value) { ?>
+
+                      <div class="row m-b-15">
+                        <div class="col-4">
+                          <div>
+                            <p class="uppercase"><?php if($value['title']) { echo $value['title']; } ?></p>
+                          </div>
+                        </div>
+                        <div class="col-8">
+                          <div>
+
+                            <div class="d-flex align-items-center">
+                              <div class="icon m-r-10">﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                                <path style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans" d="M 1 3 L 1 4 L 1 14 L 1 15 L 2 15 L 3 15 L 3 47 L 3 48 L 4 48 L 46 48 L 47 48 L 47 47 L 47 15 L 48 15 L 49 15 L 49 14 L 49 4 L 49 3 L 48 3 L 2 3 L 1 3 z M 3 5 L 47 5 L 47 13 L 3 13 L 3 5 z M 5 15 L 45 15 L 45 46 L 5 46 L 5 15 z M 17.5 19 C 15.578812 19 14 20.578812 14 22.5 C 14 24.421188 15.578812 26 17.5 26 L 32.5 26 C 34.421188 26 36 24.421188 36 22.5 C 36 20.578812 34.421188 19 32.5 19 L 17.5 19 z M 17.5 21 L 32.5 21 C 33.340812 21 34 21.659188 34 22.5 C 34 23.340812 33.340812 24 32.5 24 L 17.5 24 C 16.659188 24 16 23.340812 16 22.5 C 16 21.659188 16.659188 21 17.5 21 z" overflow="visible" enable-background="accumulate" font-family="Bitstream Vera Sans"/>
+                              </svg>
+                            </div>
+                            <?php if($value['description']) { echo $value['description']; } ?>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <?php } ?>
+
+                </div>
+
+              <?php } ?>
+
+
+
 
 
               <?php 
-              if($detail) {  ?>
+              if($policies) {  ?>
 
-                <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab">
+                <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3-tab">
 
-                  <?php foreach ($detail as $key => $value) { ?>
+                  <?php foreach ($policies as $key => $value) { ?>
 
                     <div class="row m-b-15">
                       <div class="col-4">
-                        <div>
-                          <p class="uppercase"><?php if($value['title']) { echo $value['title']; } ?></p>
-                        </div>
-                      </div>
-                      <div class="col-8">
-                        <div>
 
-                          <div class="d-flex align-items-center">
-                            <div class="icon m-r-10">﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                              <path style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans" d="M 1 3 L 1 4 L 1 14 L 1 15 L 2 15 L 3 15 L 3 47 L 3 48 L 4 48 L 46 48 L 47 48 L 47 47 L 47 15 L 48 15 L 49 15 L 49 14 L 49 4 L 49 3 L 48 3 L 2 3 L 1 3 z M 3 5 L 47 5 L 47 13 L 3 13 L 3 5 z M 5 15 L 45 15 L 45 46 L 5 46 L 5 15 z M 17.5 19 C 15.578812 19 14 20.578812 14 22.5 C 14 24.421188 15.578812 26 17.5 26 L 32.5 26 C 34.421188 26 36 24.421188 36 22.5 C 36 20.578812 34.421188 19 32.5 19 L 17.5 19 z M 17.5 21 L 32.5 21 C 33.340812 21 34 21.659188 34 22.5 C 34 23.340812 33.340812 24 32.5 24 L 17.5 24 C 16.659188 24 16 23.340812 16 22.5 C 16 21.659188 16.659188 21 17.5 21 z" overflow="visible" enable-background="accumulate" font-family="Bitstream Vera Sans"/>
-                            </svg>
-                          </div>
-                          <?php if($value['description']) { echo $value['description']; } ?>
+                        <div class="d-flex align-items-center">
+                          <div class="icon m-r-10">﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                            <path style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans" d="M 1 3 L 1 4 L 1 14 L 1 15 L 2 15 L 3 15 L 3 47 L 3 48 L 4 48 L 46 48 L 47 48 L 47 47 L 47 15 L 48 15 L 49 15 L 49 14 L 49 4 L 49 3 L 48 3 L 2 3 L 1 3 z M 3 5 L 47 5 L 47 13 L 3 13 L 3 5 z M 5 15 L 45 15 L 45 46 L 5 46 L 5 15 z M 17.5 19 C 15.578812 19 14 20.578812 14 22.5 C 14 24.421188 15.578812 26 17.5 26 L 32.5 26 C 34.421188 26 36 24.421188 36 22.5 C 36 20.578812 34.421188 19 32.5 19 L 17.5 19 z M 17.5 21 L 32.5 21 C 33.340812 21 34 21.659188 34 22.5 C 34 23.340812 33.340812 24 32.5 24 L 17.5 24 C 16.659188 24 16 23.340812 16 22.5 C 16 21.659188 16.659188 21 17.5 21 z" overflow="visible" enable-background="accumulate" font-family="Bitstream Vera Sans"/>
+                          </svg>
                         </div>
+                        <p class="uppercase m-b-0"><?php if($value['title']) { echo $value['title']; } ?></p>
+                      </div>
+
+
+                    </div>
+                    <div class="col-8">
+                      <div>
+
+
+                        <?php if($value['description']) { echo $value['description']; } ?>
+
                       </div>
                     </div>
                   </div>
@@ -192,53 +242,14 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
 
 
-            <?php 
-            if($policies) {  ?>
-
-              <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3-tab">
-
-                <?php foreach ($policies as $key => $value) { ?>
-
-                  <div class="row m-b-15">
-                    <div class="col-4">
-
-                      <div class="d-flex align-items-center">
-                        <div class="icon m-r-10">﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                          <path style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans" d="M 1 3 L 1 4 L 1 14 L 1 15 L 2 15 L 3 15 L 3 47 L 3 48 L 4 48 L 46 48 L 47 48 L 47 47 L 47 15 L 48 15 L 49 15 L 49 14 L 49 4 L 49 3 L 48 3 L 2 3 L 1 3 z M 3 5 L 47 5 L 47 13 L 3 13 L 3 5 z M 5 15 L 45 15 L 45 46 L 5 46 L 5 15 z M 17.5 19 C 15.578812 19 14 20.578812 14 22.5 C 14 24.421188 15.578812 26 17.5 26 L 32.5 26 C 34.421188 26 36 24.421188 36 22.5 C 36 20.578812 34.421188 19 32.5 19 L 17.5 19 z M 17.5 21 L 32.5 21 C 33.340812 21 34 21.659188 34 22.5 C 34 23.340812 33.340812 24 32.5 24 L 17.5 24 C 16.659188 24 16 23.340812 16 22.5 C 16 21.659188 16.659188 21 17.5 21 z" overflow="visible" enable-background="accumulate" font-family="Bitstream Vera Sans"/>
-                        </svg>
-                      </div>
-                      <p class="uppercase m-b-0"><?php if($value['title']) { echo $value['title']; } ?></p>
-                    </div>
-
-
-                  </div>
-                  <div class="col-8">
-                    <div>
-
-
-                      <?php if($value['description']) { echo $value['description']; } ?>
-
-                    </div>
-                  </div>
-                </div>
-              <?php } ?>
-              
-            </div>
-
-          <?php } ?>
 
 
 
-
-
-
-
-
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 
 

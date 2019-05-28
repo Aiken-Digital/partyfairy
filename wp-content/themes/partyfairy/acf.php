@@ -805,6 +805,28 @@ acf_add_local_field_group(array(
 			'endpoint' => 0,
 		),
 		array(
+			'key' => 'field_5ced00e40f113',
+			'label' => 'Personalisation',
+			'name' => 'personalisation',
+			'type' => 'taxonomy',
+			'instructions' => '',
+			'required' => 1,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'taxonomy' => 'personalisation',
+			'field_type' => 'radio',
+			'allow_null' => 0,
+			'add_term' => 0,
+			'save_terms' => 1,
+			'load_terms' => 0,
+			'return_format' => 'id',
+			'multiple' => 0,
+		),
+		array(
 			'key' => 'field_5cd3e54403585',
 			'label' => 'Detail',
 			'name' => 'detail',
@@ -1604,4 +1626,5 @@ acf_add_local_field_group(array(
 ));
 
 endif;
+
 ?>
