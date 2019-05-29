@@ -395,12 +395,17 @@ function filter_category_function(){
 
 			$args['orderby']       = array('_price' => explode('-', $_GET['sorting'])[1] );
 
-		}else {}
+		}else {
+
+
+			$args['orderby']        = 'date';
+
+			$args['order']          = 'RAND' ;
+
+		}
 
 	}
-	echo '<pre>';
-	print_r($_GET['sorting']);
-	print_r($args);
+
 
 	if( !empty( $_GET['price']) ) {
 		$args['meta_query'][] = array(
