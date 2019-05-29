@@ -363,7 +363,7 @@ function filter_category_function(){
 	if (!empty($_GET['seller'])) { $author_id = $_GET['seller']; } else { $author_id = ''; }
 
 	$args = array(
-		'author__in'         => $author_id, 
+		//'author__in'         => $author_id, 
 		'post_type'       => 'product',
 		'posts_per_page'  => $tampilkan,
 		'post_status'     => 'publish',
@@ -375,6 +375,7 @@ function filter_category_function(){
 
 		if($GET['sorting'] == 'NAME-ASC') {
 
+			echo 'NAMAASC';
 
 			$args['orderby']        = 'title';
 
