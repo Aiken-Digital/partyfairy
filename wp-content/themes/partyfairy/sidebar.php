@@ -127,7 +127,7 @@ if($wcatTerms1) :
 
 <?php     endif; 
 
-$wcatTerms1 = get_terms('pa_color', array('hide_empty' => 0)); 
+$wcatTerms1 = get_terms('pa_color', array('hide_empty' => 1)); 
 if($wcatTerms1) :
  ?>
 

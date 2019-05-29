@@ -3,6 +3,41 @@ add_filter( 'deprecated_function_trigger_error', '__return_false' );
 require_once( get_template_directory() . '/acf.php' );
 
 
+function product_popularity(){
+
+	$labels = array(
+		'name'              => _x( 'Popular' , 'taxonomy general name', 'textdomain' ),
+		'singular_name'     => _x( 'Popular', 'taxonomy singular name', 'textdomain' ),
+		'search_items'      => __( 'Search Popular', 'textdomain' ),
+		'all_items'         => __( 'All Popular', 'textdomain' ),
+		'parent_item'       => __( 'Parent Popular', 'textdomain' ),
+		'parent_item_colon' => __( 'Parent Popular', 'textdomain' ),
+		'edit_item'         => __( 'Edit Popular', 'textdomain' ),
+		'update_item'       => __( 'Update Popular', 'textdomain' ),
+		'add_new_item'      => __( 'Add New Popular', 'textdomain' ),
+		'new_item_name'     => __( 'New Popular', 'textdomain' ),
+		'menu_name'         => __( 'Popular', 'textdomain' ),
+	);
+
+	$args = array(
+		'hierarchical'      => true,
+		'labels'            => $labels,
+		'show_ui'           => true,
+		'show_admin_column' => false,
+		'query_var'         => true,
+		'show_in_quick_edit'=> false,
+		'meta_box_cb'       => false,
+		'rewrite'           => array( 'slug' => 'popular' ),
+	);
+
+	register_taxonomy( 'popular', array('product'), $args );
+}
+
+add_action( 'init', 'product_popularity');
+
+
+
+
 
 
 function product_delivery(){
@@ -398,9 +433,16 @@ function filter_category_function(){
 		}else {
 
 
-			$args['orderby']        = 'date';
+			$args['tax_query'] = array(
 
-			$args['order']          = 'RAND' ;
+				array(
+					'taxonomy'  => 'popular',
+					'field'     => 'slug',
+					'terms'     => 'yes',
+
+				)
+			);
+
 
 		}
 
