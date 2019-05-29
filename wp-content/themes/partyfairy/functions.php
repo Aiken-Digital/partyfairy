@@ -399,6 +399,7 @@ function filter_category_function(){
 
 	}
 	echo '<pre>';
+	print_r($_GET['sorting']);
 	print_r($args);
 
 	if( !empty( $_GET['price']) ) {
