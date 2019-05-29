@@ -373,26 +373,25 @@ function filter_category_function(){
 
 	if(!empty($_GET['sorting'])){
 
-		if($GET['sorting'] == 'NAME-ASC') {
+		if($GET['sorting'] == "NAME-ASC") {
 
-			echo 'NAMAASC';
 
 			$args['orderby']        = 'title';
 
 			$args['order']          = explode('-', $_GET['sorting'])[1] ;
 
-		}elseif ($GET['sorting'] == 'NAME-DESC') {
+		}elseif ($GET['sorting'] == "NAME-DESC") {
 
 			$args['orderby']        = 'title';
 
 			$args['order']          = explode('-', $_GET['sorting'])[1] ;
 
 			
-		}elseif ($_GET['sorting'] == 'PRICE-ASC') {
+		}elseif ($_GET['sorting'] == "PRICE-ASC") {
 
 			$args['orderby']       = array('_price' => explode('-', $_GET['sorting'])[1] );
 			
-		}elseif( $_GET['sorting'] == 'PRICE-DESC'){
+		}elseif( $_GET['sorting'] == "PRICE-DESC"){
 
 			$args['orderby']       = array('_price' => explode('-', $_GET['sorting'])[1] );
 
