@@ -364,12 +364,42 @@ function filter_category_function(){
 
 	$args = array(
 		'author__in'         => $author_id, 
-		'order'           => 'DESC',
 		'post_type'       => 'product',
 		'posts_per_page'  => $tampilkan,
 		'post_status'     => 'publish',
 		'paged'           => $paged,
 	);
+
+
+	if(!empty($_GET['sorting'])){
+
+		if($GET['sorting'] == 'NAME-ASC') {
+
+			
+			$args['orderby']        = 'title';
+
+			$args['order']          = explode('-', $_GET['sorting'])[1] ;
+
+		}elseif ($GET['sorting'] == 'NAME-DESC') {
+
+			$args['orderby']        = 'title';
+
+			$args['order']          = explode('-', $_GET['sorting'])[1] ;
+
+			
+		}elseif ($_GET['sorting'] == 'PRICE-ASC') {
+
+			$args['orderby']       = array('_price' => explode('-', $_GET['sorting'])[1] );
+			
+		}elseif( $_GET['sorting'] == 'PRICE-DESC'){
+
+			$args['orderby']       = array('_price' => explode('-', $_GET['sorting'])[1] );
+
+		}else {}
+
+	}
+
+
 
 	if( !empty( $_GET['price']) ) {
 		$args['meta_query'][] = array(
