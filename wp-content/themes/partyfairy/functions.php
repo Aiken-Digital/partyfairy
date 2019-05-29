@@ -373,14 +373,14 @@ function filter_category_function(){
 
 	if(!empty($_GET['sorting'])){
 
-		if($GET['sorting'] == "NAME-ASC") {
+		if($_GET['sorting'] == "NAME-ASC") {
 
 
 			$args['orderby']        = 'title';
 
 			$args['order']          = explode('-', $_GET['sorting'])[1] ;
 
-		}elseif ($GET['sorting'] == "NAME-DESC") {
+		}elseif ($_GET['sorting'] == "NAME-DESC") {
 
 			$args['orderby']        = 'title';
 
