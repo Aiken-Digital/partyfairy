@@ -375,7 +375,7 @@ function filter_category_function(){
 
 		if($GET['sorting'] == 'NAME-ASC') {
 
-			
+
 			$args['orderby']        = 'title';
 
 			$args['order']          = explode('-', $_GET['sorting'])[1] ;
@@ -398,8 +398,8 @@ function filter_category_function(){
 		}else {}
 
 	}
-
-
+	echo '<pre>';
+	print_r($args);
 
 	if( !empty( $_GET['price']) ) {
 		$args['meta_query'][] = array(
