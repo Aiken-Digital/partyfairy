@@ -48,7 +48,7 @@ $count_post 	= $the_query->found_posts;
               <h2><?php echo $queried_object->name; ?> <span class="font-12">(<?php echo $count_post ?> total)</span></h2>
               <div class="toolbar-sorter sorter d-none d-lg-block">
                 <label class="sorter-label" for="sorter">Sort By</label>
-                <select class="sorter-options" data-role="sorter" name="sorting">
+                <select class="sorter-options autocheckbox" data-role="sorter" name="sorting">
 
                   <option value="" selected="selected">Sort By</option>
                   <option value="position">Position</option>
@@ -57,8 +57,8 @@ $count_post 	= $the_query->found_posts;
                   <option value="PRICE-ASC">Low To High</option>
                   <option value="PRICE-DESC">High To Low</option>
                 </select>
-                <a class="sorter-action sort-asc" title="Set Descending Direction" href="#" data-role="direction-switcher" data-value="desc"></a>
-              </div>
+              <!--   <a class="sorter-action sort-asc" title="Set Descending Direction" href="#" data-role="direction-switcher" data-value="desc"></a>
+              -->              </div>
             </div>
           </div>
         </div>
