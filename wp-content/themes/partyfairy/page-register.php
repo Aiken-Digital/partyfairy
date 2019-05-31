@@ -3,8 +3,10 @@
  <div class="page-content">
  	<section class="m-b-60">
  		<div class="container">
- 			<h1 class="text-center">Sign In</h1>
- 			<form class="pf-form m-t-30">
+ 			<?php 
+ 			if(!is_user_logged_in()){  ?>
+ 				<h1 class="text-center">Sign In</h1>
+
  				<div class="pf-tab register-tab">
  					<ul class="pf-tab--ul">
  						<li class="pf-tab--li active" data-target="registerTab">I'm new here</li>
@@ -14,22 +16,21 @@
  				<div class="row justify-content-md-center -info-tab" id="registerTab">
  					<div class="col-lg-6">
  						<?php 
- 						if(!is_user_logged_in()){ 
 
- 							echo do_shortcode('[user_registration_form id="252"]'); 
+ 						echo do_shortcode('[user_registration_form id="252"]'); 
 
- 						} ?>
+ 						?>
 
  					</div>
  				</div>
 
  				<div class="row justify-content-md-center -info-tab" id="loginTab">
  					<div class="col-lg-6">
- 						<?php echo do_shortcode('[wp_login_form]'); ?>
+ 						<?php echo do_shortcode('[wp_login_form redirect="https://fixxstaging.com/partyfairy/my-account/"]'); ?>
 
  					</div>
  				</div>
- 			</form>
+ 			<?php } else { echo '<center>You are Logged</center>' ;} ?>
  		</div>
  	</section>
  </div>
