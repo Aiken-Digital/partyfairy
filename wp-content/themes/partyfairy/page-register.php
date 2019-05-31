@@ -13,7 +13,12 @@
  				</div>
  				<div class="row justify-content-md-center -info-tab" id="registerTab">
  					<div class="col-lg-6">
- 						<?php echo do_shortcode('[user_registration_form id="252"]'); ?>
+ 						<?php 
+ 						if(!is_user_logged_in()){ 
+
+ 							echo do_shortcode('[user_registration_form id="252"]'); 
+
+ 						} ?>
 
  					</div>
  				</div>
