@@ -766,3 +766,38 @@ function filter_category_function(){
 
 
 ///////////////////////////////////// FILTER
+
+
+    add_action( 'restrict_manage_posts', 'cancel_unpaid_orders' );
+    function cancel_unpaid_orders() {
+    	global $pagenow, $post_type;
+
+    // Enable the process to be executed daily when browsing Admin order list 
+    	if( 'shop_order' === $post_type && 'edit.php' === $pagenow 
+    		&& get_option( 'unpaid_orders_daily_process' ) < time() ) :
+
+    $days_delay = 3; // <=== SET the delay (number of days to wait before cancelation)
+
+$one_day    = 24 * 60 * 60;
+$today      = strtotime( date('Y-m-d') );
+
+    // Get unpaid orders (5 days old)
+$unpaid_orders = (array) wc_get_orders( array(
+	'limit'        => -1,
+	'status'       => 'on-hold',
+	'date_created' => '<' . ( $today - ($days_delay * $one_day) ),
+) );
+
+if ( sizeof($unpaid_orders) > 0 ) {
+	$cancelled_text = __("The order was cancelled due to no payment from customer.", "woocommerce");
+
+        // Loop through orders
+	foreach ( $unpaid_orders as $order ) {
+		$order->update_status( 'cancelled', $cancelled_text );
+	}
+}
+    // Schedule the process to the next day (executed once restriction)
+update_option( 'unpaid_orders_daily_process', $today + $one_day );
+
+endif;
+}
