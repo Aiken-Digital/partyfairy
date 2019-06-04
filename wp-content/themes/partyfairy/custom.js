@@ -17,7 +17,13 @@ $('#sub').click(function () {
 
 
 $(function() {
+
+	var disabledDates = ["2019-06-04","2019-06-05","2019-06-06"];
 	$("#datepickerdelivery").datepicker({
+		beforeShowDay: function(date){
+			var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+			return [ disabledDates.indexOf(string) == -1 ]
+		}
 		minDate: 0,
 		dayNamesMin: ["S", "M", "T", "W", "T", "F", "S"],
 		todayHighlight: !1,
