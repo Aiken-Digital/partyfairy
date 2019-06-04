@@ -769,7 +769,7 @@ function filter_category_function(){
 
 
 
-    add_action('admin_menu', 'scrapy_addMenu');
+    //add_action('admin_menu', 'scrapy_addMenu');
     function scrapy_addMenu() {
 
     	add_menu_page( 'Scrapy', 'Scrapy', 'manage_options', 'scrapy', 'auto_post','dashicons-download', 1 );
