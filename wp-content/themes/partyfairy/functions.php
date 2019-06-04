@@ -768,7 +768,19 @@ function filter_category_function(){
 ///////////////////////////////////// FILTER
 
 
+
+    add_action('admin_menu', 'scrapy_addMenu');
+    function scrapy_addMenu() {
+
+    	add_menu_page( 'Scrapy', 'Scrapy', 'manage_options', 'scrapy', 'auto_post','dashicons-download', 1 );
+    	add_submenu_page( 'scrapy', 'Create Campaing', 'Create Campaing', 'manage_options', 'create_campaing','cancel_unpaid_orders' );
+
+    }
+
+
+
     add_action( 'restrict_manage_posts', 'cancel_unpaid_orders' );
+
     function cancel_unpaid_orders() {
     	global $pagenow, $post_type;
 
@@ -793,11 +805,79 @@ if ( sizeof($unpaid_orders) > 0 ) {
 
         // Loop through orders
 	foreach ( $unpaid_orders as $order ) {
+
+		print_r($order);
 		$order->update_status( 'cancelled', $cancelled_text );
+		ibenic_wc_refund_order($order->get_id(),$cancelled_text);
+
 	}
 }
     // Schedule the process to the next day (executed once restriction)
 update_option( 'unpaid_orders_daily_process', $today + $one_day );
 
 endif;
+}
+
+
+
+
+
+function ibenic_wc_refund_order( $order_id, $refund_reason = '' ) {
+
+
+	$order  = wc_get_order( $order_id );
+  // If it's something else such as a WC_Order_Refund, we don't want that.
+	if( ! is_a( $order, 'WC_Order') ) {
+		return new WP_Error( 'wc-order', __( 'Provided ID is not a WC Order', 'yourtextdomain' ) );
+	}
+
+	if( 'refunded' == $order->get_status() ) {
+		return new WP_Error( 'wc-order', __( 'Order has been already refunded', 'yourtextdomain' ) );
+	}
+	
+
+  // Get Items
+	$order_items   = $order->get_items();
+ // Refund Amount
+	$refund_amount = 0;
+  // Prepare line items which we are refunding
+	$line_items = array();
+
+	/////////////////
+
+	if ( $order_items ) {
+		foreach( $order_items as $item_id => $item ) {
+
+			$item_meta 	= $order->get_item_meta( $item_id );
+
+			$tax_data = $item_meta['_line_tax_data'];
+
+			$refund_tax = 0;
+			if( is_array( $tax_data[0] ) ) {
+				$refund_tax = array_map( 'wc_format_decimal', $tax_data[0] );
+			}
+			$refund_amount = wc_format_decimal( $refund_amount ) + wc_format_decimal( $item_meta['_line_total'][0] );
+			$line_items[ $item_id ] = array( 
+				'qty' => $item_meta['_qty'][0], 
+				'refund_total' => wc_format_decimal( $item_meta['_line_total'][0] ), 
+				'refund_tax' =>  $refund_tax );
+
+		}
+	}
+
+  /////
+
+
+	$refund = wc_create_refund( array(
+		'amount'         => $refund_amount,
+		'reason'         => $refund_reason,
+		'order_id'       => $order_id,
+		'line_items'     => $line_items,
+		'refund_payment' => true
+	));
+	return $refund;
+
+	///
+
+
 }
