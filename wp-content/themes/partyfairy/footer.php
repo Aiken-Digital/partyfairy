@@ -148,7 +148,7 @@
     <?php if($block_date_pickup) { ?>
 
       var disabledDatesPickup = [<?php foreach ($block_date_pickup as $key => $value) {
-        echo '"'.$value['date'].'",';
+        echo '"'.$value['date_pickup'].'",';
       } ?>];
 
 
@@ -184,7 +184,7 @@
 
       var disabledDatesDelivery = [
       <?php foreach ($block_date_delivery as $key => $value) {
-        echo '"'.$value['date'].'",';
+        echo '"'.$value['date_delivery'].'",';
       } ?>];
 
     <?php }  ?>
@@ -198,7 +198,7 @@
             return [ disabledDatesDelivery.indexOf(string) == -1 ]
           },
         <?php } ?>
-        
+
         minDate: 0,
         dayNamesMin: ["S", "M", "T", "W", "T", "F", "S"],
         todayHighlight: !1,

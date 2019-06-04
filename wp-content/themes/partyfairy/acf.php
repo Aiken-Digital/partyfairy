@@ -1,5 +1,4 @@
 <?php
-
 if( function_exists('acf_add_local_field_group') ):
 
 	acf_add_local_field_group(array(
@@ -1074,7 +1073,7 @@ acf_add_local_field_group(array(
 				array(
 					'key' => 'field_5cf5f50010ffe',
 					'label' => 'Date',
-					'name' => 'date',
+					'name' => 'date_delivery',
 					'type' => 'date_picker',
 					'instructions' => '',
 					'required' => 0,
@@ -1084,7 +1083,7 @@ acf_add_local_field_group(array(
 						'class' => '',
 						'id' => '',
 					),
-					'display_format' => '',
+					'display_format' => 'd/m/Y',
 					'return_format' => 'Y-m-d',
 					'first_day' => 1,
 				),
@@ -1136,7 +1135,7 @@ acf_add_local_field_group(array(
 				array(
 					'key' => 'field_5cf5f7219beea',
 					'label' => 'Date',
-					'name' => 'date',
+					'name' => 'date_pickup',
 					'type' => 'date_picker',
 					'instructions' => '',
 					'required' => 0,
@@ -1724,5 +1723,4 @@ acf_add_local_field_group(array(
 ));
 
 endif;
-
 ?>

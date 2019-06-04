@@ -61,8 +61,32 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
  * character instead.
  */
 
+ input[type="checkbox"]{
 
- #customer_details span {
+    position: relative !important;
+}
+
+/* Target the Credit Card */
+#stripe-card-element {
+    background: #ffffff !important;
+    padding: 10px 5px !important;
+    margin: 5px 0px !important;
+}
+
+/* Target the Expiry Date */
+#stripe-exp-element {
+    background: #ffffff !important;
+    padding: 10px 5px !important;
+}
+
+/* Target the CVC Code */
+.woocommerce-checkout-review-order #stripe-cvc-element {
+    background: #ffffff !important;
+    margin: 5px 0px !important;
+    padding: 10px 5px !important;
+}
+
+#customer_details span {
     width: 100% !important;
 }
 
@@ -270,7 +294,7 @@ a.get-inspired {
 
 }
 div#pf-sg-p {
-   /* padding-top: 124px;*/
+ /* padding-top: 124px;*/
 }
 
 form.woocommerce-checkout {
