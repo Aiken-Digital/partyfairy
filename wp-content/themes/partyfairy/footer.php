@@ -137,5 +137,82 @@
    s.parentNode.insertBefore(bh, s);
  })(document, 'script');
 </script> -->
+
+<?php if(is_singular('product')) { ?>
+  <script type="text/javascript">
+
+    <?php 
+    $block_date_pickup = get_field('block_date_pickup', get_option('page_for_posts')); ?>
+
+
+    <?php if($block_date_pickup) { ?>
+
+      var disabledDatesPickup = [<?php foreach ($block_date_pickup as $key => $value) {
+        echo '"'.$value['date'].'",';
+      } ?>];
+
+
+    <?php } ?> 
+
+
+    $(function() {
+      $("#datepickerpickup").datepicker({
+        <?php if($block_date_pickup) { ?>
+
+          beforeShowDay: function(date){
+            var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+            return [ disabledDatesPickup.indexOf(string) == -1 ]
+          },
+
+        <?php } ?>
+
+        minDate: 0,
+        dayNamesMin: ["S", "M", "T", "W", "T", "F", "S"],
+        todayHighlight: !1,
+        onSelect: function(e, i) {
+          $("#calendarValuepickup").val(e)
+        }
+      })
+
+    })
+
+
+    <?php 
+    $block_date_delivery = get_field('block_date_delivery', get_option('page_for_posts')); ?>
+
+    <?php if($block_date_delivery) { ?>
+
+      var disabledDatesDelivery = [
+      <?php foreach ($block_date_delivery as $key => $value) {
+        echo '"'.$value['date'].'",';
+      } ?>];
+
+    <?php }  ?>
+
+    $(function() {
+
+      $('#datepickerdelivery').datepicker({
+        <?php if($block_date_delivery) { ?>
+          beforeShowDay: function(date){
+            var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+            return [ disabledDatesDelivery.indexOf(string) == -1 ]
+          },
+        <?php } ?>
+        
+        minDate: 0,
+        dayNamesMin: ["S", "M", "T", "W", "T", "F", "S"],
+        todayHighlight: !1,
+        onSelect: function(e, i) {
+          $("#calendarValuedelivery").val(e)
+        }
+
+      });
+
+    })
+
+
+  </script>
+
+<?php } ?>
 </body>
 </html>

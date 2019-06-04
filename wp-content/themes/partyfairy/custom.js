@@ -16,23 +16,18 @@ $('#sub').click(function () {
 
 
 
-$(function() {
+// $(function() {
+// 	$("#datepickerdelivery").datepicker({
+// 		minDate: 0,
+// 		dayNamesMin: ["S", "M", "T", "W", "T", "F", "S"],
+// 		todayHighlight: !1,
+// 		onSelect: function(e, i) {
+// 			$("#calendarValuedelivery").val(e)
+// 		}
+// 	})
 
-	var disabledDates = ["2019-06-04","2019-06-05","2019-06-06"];
-	$("#datepickerdelivery").datepicker({
-		beforeShowDay: function(date){
-			var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-			return [ disabledDates.indexOf(string) == -1 ]
-		}
-		minDate: 0,
-		dayNamesMin: ["S", "M", "T", "W", "T", "F", "S"],
-		todayHighlight: !1,
-		onSelect: function(e, i) {
-			$("#calendarValuedelivery").val(e)
-		}
-	})
+// })
 
-})
 
 function myFunction(e) {
 	$("#timerValuedelivery").val(e.target.value)
@@ -44,18 +39,17 @@ function myFunctionpickup(e) {
 
 
 
-$(function() {
-	$("#datepickerpickup").datepicker({
-		minDate: 0,
-		dayNamesMin: ["S", "M", "T", "W", "T", "F", "S"],
-		todayHighlight: !1,
-		onSelect: function(e, i) {
-			$("#calendarValuepickup").val(e)
-		}
-	})
+// $(function() {
+// 	$("#datepickerpickup").datepicker({
+// 		minDate: 0,
+// 		dayNamesMin: ["S", "M", "T", "W", "T", "F", "S"],
+// 		todayHighlight: !1,
+// 		onSelect: function(e, i) {
+// 			$("#calendarValuepickup").val(e)
+// 		}
+// 	})
 
-})
-
+// })
 
 
 $( function() {
