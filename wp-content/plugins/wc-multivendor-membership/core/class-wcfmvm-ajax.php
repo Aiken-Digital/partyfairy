@@ -107,8 +107,17 @@ class WCFMvm_Ajax {
 		
 		if( isset( $_POST['membership'] ) && !empty( $_POST['membership'] ) ) {
 			$membership = $_POST['membership'];
+			
 			// Session store
-			$_SESSION['wcfm_membership']['membership'] = $membership;
+			if( WC()->session ) {
+				do_action( 'woocommerce_set_cart_cookies', true );
+				WC()->session->set( 'wcfm_membership', $membership );
+				
+				if( WC()->session->get( 'wcfm_membership_free_registration' ) ) {
+					WC()->session->__unset( 'wcfm_membership_free_registration' );
+				}
+			}
+			//$_SESSION['wcfm_membership']['membership'] = $membership;
 			
 			do_action( 'wcfmvm_after_choosing_membership', $membership );
 			
@@ -555,14 +564,21 @@ class WCFMvm_Ajax {
   	$user_email = $_POST['user_email'];
 		
 		if( $user_email ) {
-			if( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['email_verification_code'] ) ) {
-				$verification_code = $_SESSION['wcfm_membership']['email_verification_code'];
+			if( WC()->session && WC()->session->get( 'wcfm_membership_email_verification_code' ) ) {
+				$verification_code = absint( WC()->session->get( 'wcfm_membership_email_verification_code' ) );
+			//} elseif( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['email_verification_code'] ) ) {
+				//$verification_code = $_SESSION['wcfm_membership']['email_verification_code'];
 			} else {
 				$verification_code = rand( 100000, 999999 );
 			}
 			// Session store
-			$_SESSION['wcfm_membership']['email_verification_code'] = $verification_code;
-			$_SESSION['wcfm_membership']['email_verification_for'] = $user_email;
+			if( WC()->session ) {
+				do_action( 'woocommerce_set_cart_cookies', true );
+				WC()->session->set( 'wcfm_membership_email_verification_code', $verification_code );
+				WC()->session->set( 'wcfm_membership_email_verification_for', $user_email );
+			}
+			//$_SESSION['wcfm_membership']['email_verification_code'] = $verification_code;
+			//$_SESSION['wcfm_membership']['email_verification_for']  = $user_email;
 			
 			// Sending verification code in email
 			if( !defined( 'DOING_WCFM_EMAIL' ) ) 
@@ -607,14 +623,21 @@ class WCFMvm_Ajax {
   	$user_phone = $_POST['user_phone'];
 		
 		if( $user_phone ) {
-			if( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['sms_verification_code'] ) ) {
-				$verification_code = $_SESSION['wcfm_membership']['sms_verification_code'];
+			if( WC()->session && wC()->session->get( 'wcfm_membership_sms_verification_code' ) ) {
+				$verification_code =  WC()->session->get( 'wcfm_membership_sms_verification_code' );
+			//} elseif( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['sms_verification_code'] ) ) {
+				//$verification_code = $_SESSION['wcfm_membership']['sms_verification_code'];
 			} else {
 				$verification_code = rand( 1000, 9999 );
 			}
 			// Session store
-			$_SESSION['wcfm_membership']['sms_verification_code'] = $verification_code;
-			$_SESSION['wcfm_membership']['sms_verification_for'] = $user_phone;
+			if( WC()->session ) {
+				do_action( 'woocommerce_set_cart_cookies', true );
+				$verification_code =  WC()->session->set( 'wcfm_membership_sms_verification_code', $verification_code );
+				$verification_code =  WC()->session->set( 'wcfm_membership_sms_verification_for', $user_phone );
+			} 
+			//$_SESSION['wcfm_membership']['sms_verification_code'] = $verification_code;
+			//$_SESSION['wcfm_membership']['sms_verification_for']  = $user_phone;
 			
 			//$sms_messages = $verification_code . ' - ' . __( "verification code (OPT) for registration at ", "wc-frontend-manager" ) . get_bloginfo( 'name' );
 			$sms_messages = __( "Your verification code is", "wc-multivendor-membership" ) . ' ' . $verification_code;

@@ -46,7 +46,8 @@ if( !empty( $wcfm_memberships_list ) ) {
 uasort( $wcfm_memberships_array, array( $WCFM, 'wcfm_sort_by_priority' ) );
 
 $subscription_mode = 'new';
-if( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['mode'] ) ) $subscription_mode = $_SESSION['wcfm_membership']['mode'];
+if( WC()->session && WC()->session->get( 'wcfm_membership_mode' ) ) $subscription_mode = WC()->session->get( 'wcfm_membership_mode' );
+//if( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['mode'] ) ) $subscription_mode = $_SESSION['wcfm_membership']['mode'];
 $current_plan = wcfm_get_membership();
 
 if( empty($wcfm_memberships_list) ) return;
@@ -74,7 +75,7 @@ $wcfm_membership_table_plan_count = 0;
     <?php if( $has_feature_box ) { ?>
 			<div class="wcfm_membership_box_wrraper wcfm_membership_feature_box_wrraper">
 				<div class="wcfm_membership_box wcfm_membership_feature_box">
-					<div class="wcfm_membership_box_head wcfm_membership_feature_box_head"><div class="wcfm_membership_title">&nbsp;</div></div>
+					<div class="wcfm_membership_box_head wcfm_membership_feature_box_head"><div class="wcfm_membership_title"><div class="wcfm_membership_title_text">&nbsp;</div></div></div>
 					
 					<div class="wcfm_membership_box_body wcfm_membership_feature_box_body">
 						<?php
@@ -136,7 +137,9 @@ $wcfm_membership_table_plan_count = 0;
 						</div>
 					<?php } ?>
 					<div class="wcfm_membership_title">
-						<?php _e( $wcfm_membership->post_title, 'wc-multivendor-membership' ); ?>
+					  <div class="wcfm_membership_title_text">
+						  <?php _e( $wcfm_membership->post_title, 'wc-multivendor-membership' ); ?>
+						</div>
 					</div>
 					<div class="wcfm_membership_price">
 						<?php 
@@ -157,6 +160,7 @@ $wcfm_membership_table_plan_count = 0;
 								}
 								echo '<div class="wcfm_membership_price_description">' . $price_description . '</div>';
 							}
+							wcfmvm_membership_table_tax_display();
 						}
 						?>
 					</div>
@@ -171,7 +175,7 @@ $wcfm_membership_table_plan_count = 0;
 				
 				<?php if( $has_feature_box ) { ?>
 					<div class="wcfm_membership_box wcfm_membership_feature_box wcfm_membership_feature_box_inside">
-						<div class="wcfm_membership_box_head wcfm_membership_feature_box_head"><div class="wcfm_membership_title">&nbsp;</div></div>
+						<div class="wcfm_membership_box_head wcfm_membership_feature_box_head"><div class="wcfm_membership_title"><div class="wcfm_membership_title_text">&nbsp;</div></div></div>
 						
 						<div class="wcfm_membership_box_body wcfm_membership_feature_box_body">
 							<?php
@@ -200,7 +204,9 @@ $wcfm_membership_table_plan_count = 0;
 							</div>
 						<?php } ?>
 						<div class="wcfm_membership_title">
-							<?php _e( $wcfm_membership->post_title, 'wc-multivendor-membership' ); ?>
+						  <div class="wcfm_membership_title_text">
+							  <?php _e( $wcfm_membership->post_title, 'wc-multivendor-membership' ); ?>
+							</div>
 						</div>
 						<div class="wcfm_membership_price">
 							<?php 
@@ -221,6 +227,7 @@ $wcfm_membership_table_plan_count = 0;
 									}
 									echo '<div class="wcfm_membership_price_description">' . $price_description . '</div>';
 								}
+								wcfmvm_membership_table_tax_display();
 							}
 							?>
 						</div>

@@ -35,11 +35,19 @@ if(!function_exists('wcfm_is_allowed_membership')) {
 		$allowed_membership_user_roles = wcfm_allowed_membership_user_roles();
 		$user = wp_get_current_user();
 		if ( array_intersect( $allowed_membership_user_roles, (array) $user->roles ) )  {
-			$_SESSION['wcfm_membership']['mode'] = 'new';
+			if( WC()->session ) {
+				do_action( 'woocommerce_set_cart_cookies', true );
+				WC()->session->set( 'wcfm_membership_mode', 'new' );
+			}
+			//$_SESSION['wcfm_membership']['mode'] = 'new';
 			if( !wcfm_has_membership() ) { 
 				return true;
 			} else {
-				$_SESSION['wcfm_membership']['mode'] = 'upgrade';
+				if( WC()->session ) {
+					do_action( 'woocommerce_set_cart_cookies', true );
+					WC()->session->set( 'wcfm_membership_mode', 'upgrade' );
+				}
+				//$_SESSION['wcfm_membership']['mode'] = 'upgrade';
 				return true;
 			}
 		}
@@ -203,8 +211,8 @@ if(!function_exists('wcfm_membership_registration_steps')) {
 																								);
 		
 		$membership_id = '';
-		if( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['membership'] ) && $_SESSION['wcfm_membership']['membership'] ) {
-			$membership_id = absint( $_SESSION['wcfm_membership']['membership'] );
+		if( WC()->session && WC()->session->get( 'wcfm_membership' ) ) {
+			$membership_id = absint( WC()->session->get( 'wcfm_membership' ) );
 		}
 		
 		if( apply_filters( 'wcfmvm_is_allow_registration_first', false, $membership_id ) ) {
@@ -352,6 +360,41 @@ if(!function_exists('get_wcfm_free_membership')) {
 if(!function_exists('get_wcfm_basic_membership')) {
 	function get_wcfm_basic_membership() {
 		return get_wcfm_free_membership();
+	}
+}
+
+if(!function_exists('wcfmvm_membership_table_tax_display')) {
+	function wcfmvm_membership_table_tax_display( $html_handler = 'div' ) {
+		if( !apply_filters( 'wcfm_is_allow_membership_table_tax_display', true ) ) return;
+		
+		$wcfm_membership_options = get_option( 'wcfm_membership_options', array() );
+		$membership_tax_settings = array();
+		if( isset( $wcfm_membership_options['membership_tax_settings'] ) ) $membership_tax_settings = $wcfm_membership_options['membership_tax_settings'];
+		$tax_enable  = isset( $membership_tax_settings['enable'] ) ? 'yes' : 'no';
+		$tax_name    = isset( $membership_tax_settings['name'] ) ? $membership_tax_settings['name'] : __( 'Tax', 'wc-multivendor-membership' );
+		$tax_percent = isset( $membership_tax_settings['percent'] ) ? $membership_tax_settings['percent'] : '';
+		
+		if( ( $tax_enable == 'yes' ) && $tax_percent ) {
+			$text = __( 'will be applied', 'wc-multivendor-membership' );
+			if( $html_handler == 'span' ) $text = __( 'applied', 'wc-multivendor-membership' );
+			echo '<' . $html_handler . ' class="wcfm_membership_price_description">' . $tax_percent . '% ' . $tax_name . ' ' . $text . '</' . $html_handler . '>';
+		}
+	}
+}
+
+if(!function_exists('wcfmvm_membership_tax_price')) {
+	function wcfmvm_membership_tax_price( $price ) {
+		$wcfm_membership_options = get_option( 'wcfm_membership_options', array() );
+		$membership_tax_settings = array();
+		if( isset( $wcfm_membership_options['membership_tax_settings'] ) ) $membership_tax_settings = $wcfm_membership_options['membership_tax_settings'];
+		$tax_enable  = isset( $membership_tax_settings['enable'] ) ? 'yes' : 'no';
+		$tax_name    = isset( $membership_tax_settings['name'] ) ? $membership_tax_settings['name'] : __( 'Tax', 'wc-multivendor-membership' );
+		$tax_percent = isset( $membership_tax_settings['percent'] ) ? $membership_tax_settings['percent'] : '';
+		
+		if( ( $tax_enable == 'yes' ) && $tax_percent ) {
+			$price += wc_format_decimal( $price * ($tax_percent/100) );
+		}
+		return apply_filters( 'wcfmvm_membership_tax_price', $price );
 	}
 }
 

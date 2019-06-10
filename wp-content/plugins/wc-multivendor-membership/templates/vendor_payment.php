@@ -120,16 +120,18 @@ if( ( $is_free != 'yes' ) && empty( $payment_methods ) ) {
 						
 						echo '<div class="wcfm_review_pay_non_free wcfm_review_pay_'.$payment_method.'"><input class="wcfm_subscription_paymode" name="wcfm_subscription_paymode" type="radio" value="'.$payment_method.'" />' . $wcfm_membership_payment_methods[$payment_method] .' - '; 
 						if( $subscription_type == 'one_time' ) {
-							echo wc_price($one_time_amt);
+							echo wc_price( wcfmvm_membership_tax_price( $one_time_amt ) );
+							wcfmvm_membership_table_tax_display( 'span' );
 							echo '<span class="wcfm_membership_price_description"> (' . __( 'One time payment', 'wc-multivendor-membership' ) . ')</span>';
 						} else {
-							echo wc_price($billing_amt);
+							echo wc_price( wcfmvm_membership_tax_price( $billing_amt ) );
 							$price_description = sprintf( __( 'for each %s %s', 'wc-multivendor-membership' ), $billing_period, $period_options[$billing_period_type] );
 							if( !empty( $trial_period ) && !empty( $trial_amt ) ) {
 								$price_description .= ' ' . sprintf( __( 'with %s for first %s %s', 'wc-multivendor-membership' ), get_woocommerce_currency_symbol() . $trial_amt, $trial_period, $period_options[$trial_period_type] );
 							} elseif( !empty( $trial_period ) && empty( $trial_amt ) ) {
 								$price_description .= ' ' . sprintf( __( 'with %s %s free trial', 'wc-multivendor-membership' ), $trial_period, $period_options[$trial_period_type] );
 							}
+							wcfmvm_membership_table_tax_display( 'span' );
 							echo '<span class="wcfm_membership_price_description"> (' . $price_description . ')</span>';
 						}
 						echo "</div>";

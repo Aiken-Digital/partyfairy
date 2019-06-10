@@ -59,6 +59,13 @@
 	color: #ffffff;
 	background: #2a3344;
 	margin-bottom: 10px;
+	display: table;
+	width: 100%;
+}
+
+#wcfm-main-contentainer .wcfm_membership_box_head .wcfm_membership_title .wcfm_membership_title_text {
+	display: table-cell;
+	vertical-align: middle;
 }
 
 #wcfm-main-contentainer .wcfm_membership_box_head .wcfm_membership_price .amount {

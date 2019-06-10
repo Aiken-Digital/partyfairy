@@ -49,6 +49,14 @@ $stripe_secret_key_test    = isset( $membership_payment_settings['stripe_secret_
 $bank_details              = isset( $membership_payment_settings['bank_details'] ) ? $membership_payment_settings['bank_details'] : '';
 $payment_terms             = isset( $membership_payment_settings['payment_terms'] ) ? $membership_payment_settings['payment_terms'] : '';
 
+// Membership Tax Setting
+$membership_tax_settings = array();
+if( isset( $wcfm_membership_options['membership_tax_settings'] ) ) $membership_tax_settings = $wcfm_membership_options['membership_tax_settings'];
+$tax_enable  = isset( $membership_tax_settings['enable'] ) ? 'yes' : 'no';
+$tax_name    = isset( $membership_tax_settings['name'] ) ? $membership_tax_settings['name'] : '';
+$tax_percent = isset( $membership_tax_settings['percent'] ) ? $membership_tax_settings['percent'] : '';
+
+
 $switch_admin_notication_subject = wcfm_get_option( 'wcfm_membership_switch_admin_notication_subject', '{site_name}: Vendor Membership Subscription Change' );
 $switch_admin_notication_content = wcfm_get_option( 'wcfm_membership_switch_admin_notication_content', '' );
 if( !$switch_admin_notication_content ) {
@@ -471,6 +479,25 @@ do_action( 'before_wcfm_membership_settings_manage' );
 																																					'stripe_secret_key_test' => array( 'label' => __( 'Stripe Test Secret Key', 'wc-multivendor-membership' ), 'name' => 'membership_payment_settings[stripe_secret_key_test]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele payment_fields stripe_payment_field test_payment_field', 'label_class' => 'wcfm_title payment_fields stripe_payment_field test_payment_field', 'value' => $stripe_secret_key_test ),
 																																					'bank_details' => array( 'label' => __( 'Bank Details', 'wc-multivendor-membership' ), 'name' => 'membership_payment_settings[bank_details]', 'type' => 'textarea', 'class' => 'wcfm-textarea wcfm_ele payment_fields bank_transfer_payment_field', 'label_class' => 'wcfm_title payment_fields bank_transfer_payment_field', 'value' => $bank_details ),
 																																					'payment_terms' => array( 'label' => __( 'Payment Terms', 'wc-multivendor-membership' ), 'name' => 'membership_payment_settings[payment_terms]', 'type' => 'textarea', 'class' => 'wcfm-textarea wcfm_ele', 'label_class' => 'wcfm_title', 'value' => $payment_terms ),
+																																					) ) );
+						?>
+					</div>
+				</div>
+				<div class="wcfm_clearfix"></div>
+				<!-- end collapsible -->
+				
+				<!-- collapsible -->
+				<div class="page_collapsible" id="membership_settings_form_payment_head">
+					<label class="wcfmfa fa-money-check-alt"></label>
+					<?php _e('Tax Setting', 'wc-frontend-manager'); ?><span></span>
+				</div>
+				<div class="wcfm-container">
+					<div id="membership_settings_form_payment_expander" class="wcfm-content">
+						<?php
+							$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'membership_setting_tax_fields', array(  
+																																					'enable_tax' => array( 'label' => __( 'Enable', 'wc-multivendor-membership' ), 'name' => 'membership_tax_settings[enable]', 'type' => 'checkbox', 'class' => 'wcfm-checkbox wcfm_ele', 'label_class' => 'wcfm_title checkbox_title', 'value' => 'yes', 'dfvalue' => $tax_enable, 'hints' => __( 'Enable this to apply tax on subscription costs.', 'wc-multivendor-membership' ) ),
+																																					'tax_name' => array( 'label' => __( 'Tax Label', 'wc-multivendor-membership' ), 'placeholder' => __( 'Tax', 'wc-multivendor-membership' ), 'name' => 'membership_tax_settings[name]', 'type' => 'text', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title', 'value' => $tax_name ),
+																																					'tax_percent' => array( 'label' => __( 'Tax Percent (%)', 'wc-multivendor-membership' ), 'name' => 'membership_tax_settings[percent]', 'type' => 'number', 'class' => 'wcfm-text wcfm_ele wcfm_non_negative_input', 'label_class' => 'wcfm_title', 'value' => $tax_percent ),
 																																					) ) );
 						?>
 					</div>

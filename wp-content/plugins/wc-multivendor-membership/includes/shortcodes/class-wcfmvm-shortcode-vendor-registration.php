@@ -40,15 +40,6 @@ class WCFM_Vendor_Registration_Shortcode {
 				if( $application_status && ( $application_status == 'pending' ) ) {
 					$WCFMvm->template->get_template('vendor_thankyou.php');
 				} else {
-					if( ($wcfm_free_membership = get_wcfm_free_membership()) && apply_filters( 'wcfmvm_is_allow_by_default_free_registration', true ) ) {
-						// Session store
-						$_SESSION['wcfm_membership']['membership'] = $wcfm_free_membership;
-						$_SESSION['wcfm_membership']['free_registration'] = $wcfm_free_membership;
-					} else {
-						// Session store
-						$_SESSION['wcfm_membership']['membership'] = -1;
-						$_SESSION['wcfm_membership']['free_registration'] = -1;
-					}
 					$WCFMvm->template->get_template('vendor_registration.php');
 				}
 			} else {

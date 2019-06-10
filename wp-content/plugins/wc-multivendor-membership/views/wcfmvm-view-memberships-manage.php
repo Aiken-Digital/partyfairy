@@ -363,6 +363,8 @@ do_action( 'before_wcfm_memberships_manage' );
 				</div>
 				<div class="wcfm_clearfix"></div>
 				<!-- end collapsible -->
+				
+				<?php do_action( 'wcfm_memberships_manage_form_after_commission', $membership_id ); ?>
 			
 				<!-- collapsible -->
 				<div class="page_collapsible" id="memberships_groups_manage_capability_head">
@@ -414,7 +416,7 @@ do_action( 'before_wcfm_memberships_manage' );
 				<?php } ?>
 				<!-- end collapsible -->
 			
-				<?php do_action( 'end_wcfm_memberships_manage_form' ); ?>
+				<?php do_action( 'end_wcfm_memberships_manage_form', $membership_id ); ?>
 			</div>
 			
 			<div id="wcfm_Membership_manager_submit" class="wcfm_form_simple_submit_wrapper">

@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name: WooCommerce Multivendor Membership
+ * Plugin Name: WCFM - WooCommerce Multivendor Membership
  * Plugin URI: https://wclovers.com/product/woocommerce-multivendor-membership
  * Description: A simple membership plugin for your multi-vendor marketplace.
  * Author: WC Lovers
- * Version: 2.4.5
+ * Version: 2.5.4
  * Author URI: https://wclovers.com
  *
  * Text Domain: wc-multivendor-membership

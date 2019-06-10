@@ -45,8 +45,8 @@ class WCFMvm_Memberships_Payment_Controller {
 				}
 			
 				// Reset Membership Session
-				if( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['membership'] ) && $_SESSION['wcfm_membership']['membership'] ) {
-					unset( $_SESSION['wcfm_membership'] );
+				if( WC()->session && WC()->session->get( 'wcfm_membership' ) ) {
+					WC()->session->__unset( 'wcfm_membership' );
 				}
 			
 				if(!$has_error) { echo '{"status": true, "message": "' . $wcfm_membership_payment_messages['subscription_success'] . '", "redirect": "' . apply_filters( 'wcfm_registration_thankyou_url', add_query_arg( 'vmstep', 'thankyou', get_wcfm_membership_url() ) ) . '"}'; }

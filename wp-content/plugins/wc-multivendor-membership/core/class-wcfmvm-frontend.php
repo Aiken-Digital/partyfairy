@@ -36,8 +36,8 @@ class WCFMvm_Frontend {
 		
 		// Vendor Details Page
 		if( !wcfm_is_vendor() && apply_filters( 'wcfm_is_allow_manage_groups', true ) ) {
-			add_action( 'after_wcfm_vendors_manage_form', array( &$this, 'wcfmvm_vendor_manage_profile_additional_info' ), 12 );
-			add_action( 'after_wcfm_vendors_manage_membership_details', array( &$this, 'wcfmvm_vendor_manage_profile_additional_info' ), 12 );
+			//add_action( 'after_wcfm_vendors_manage_form', array( &$this, 'wcfmvm_vendor_manage_profile_additional_info' ), 12 );
+			add_action( 'after_wcfm_vendors_manage_membership_details', array( &$this, 'wcfmvm_vendor_manage_membership_additional_info' ), 12 );
 			add_action( 'wcfm_vendor_manage_membrship_details', array( &$this, 'wcfmvm_vendor_manage_membrship_details' ), 12 );
 		}
 		
@@ -337,17 +337,19 @@ class WCFMvm_Frontend {
 						echo '<span id="wcfmvm_change_next_renewal" class="wcfmfa fa-edit tips text_tip wcfmvm_change_next_renewal" data-member="'.$vendor_id.'" data-schedule="' . $next_schedule_formt . '" data-tip="' . __( 'Set or update member next renewal date.', 'wc-multivendor-membership' ) . '"></span>';
 						echo "</div><div class=\"wcfm_clearfix\"></div><br />";
 						if( $subscription_type == 'one_time' ) {
-							echo wc_price($one_time_amt);
+							echo wc_price( wcfmvm_membership_tax_price( $one_time_amt ) );
+							wcfmvm_membership_table_tax_display( 'span' );
 							echo ' <span class="wcfm_membership_price_description">(' . __( 'One time payment', 'wc-multivendor-membership' ) . ')</span>';
 						} else {
 							$is_recurring = true;
-							echo wc_price($billing_amt);
+							echo wc_price( wcfmvm_membership_tax_price( $billing_amt ) );
 							$price_description = sprintf( __( 'for each %s %s', 'wc-multivendor-membership' ), $billing_period, $period_options[$billing_period_type] );
 							if( !empty( $trial_period ) && !empty( $trial_amt ) ) {
 								$price_description .= ' ' . sprintf( __( 'with %s for first %s %s', 'wc-multivendor-membership' ), get_woocommerce_currency_symbol() . $trial_amt, $trial_period, $period_options[$trial_period_type] );
 							} elseif( !empty( $trial_period ) && empty( $trial_amt ) ) {
 								$price_description .= ' ' . sprintf( __( 'with %s %s free trial', 'wc-multivendor-membership' ), $trial_period, $period_options[$trial_period_type] );
 							}
+							wcfmvm_membership_table_tax_display( 'span' );
 							echo ' <span class="wcfm_membership_price_description">(' . $price_description . ')</span>';
 							
 							// Show PayPal Recurring profile details
@@ -359,6 +361,7 @@ class WCFMvm_Frontend {
 								}
 							}
 						}
+						
 						echo "<div class=\"wcfm_clearfix\"></div><br />";
 						_e( 'Cancel vendor membership: ', 'wc-multivendor-membership' );
 						echo '<a href="#" style="float: none; padding: 10px !important;" data-memberid="'.$vendor_id.'" data-membershipid="'.$wcfm_membership_id.'" id="wcfm_membership_cancel_button" class="wcfm_membership_cancel_button wcfm_submit_button">' . __( 'Cancel', 'wc-multivendor-membership' ) . '</a>';
@@ -412,7 +415,7 @@ class WCFMvm_Frontend {
   /**
    * Vendor Profile Additional Info
    */
-  function wcfmvm_vendor_manage_profile_additional_info( $vendor_id ) {
+  function wcfmvm_vendor_manage_membership_additional_info( $vendor_id ) {
   	global $WCFM, $WCFMvm;
   	
   	if( !$vendor_id ) return;
@@ -629,17 +632,19 @@ class WCFMvm_Frontend {
 								}
 								echo "</div><div class=\"wcfm_clearfix\"></div><br />";
 								if( $subscription_type == 'one_time' ) {
-									echo wc_price($one_time_amt);
+									echo wc_price( wcfmvm_membership_tax_price($one_time_amt));
+									wcfmvm_membership_table_tax_display( 'span' );
 									echo ' <span class="wcfm_membership_price_description">(' . __( 'One time payment', 'wc-multivendor-membership' ) . ')</span>';
 								} else {
 									$is_recurring = true;
-									echo wc_price($billing_amt);
+									echo wc_price( wcfmvm_membership_tax_price($billing_amt) );
 									$price_description = sprintf( __( 'for each %s %s', 'wc-multivendor-membership' ), $billing_period, $period_options[$billing_period_type] );
 									if( !empty( $trial_period ) && !empty( $trial_amt ) ) {
 										$price_description .= ' ' . sprintf( __( 'with %s for first %s %s', 'wc-multivendor-membership' ), get_woocommerce_currency_symbol() . $trial_amt, $trial_period, $period_options[$trial_period_type] );
 									} elseif( !empty( $trial_period ) && empty( $trial_amt ) ) {
 										$price_description .= ' ' . sprintf( __( 'with %s %s free trial', 'wc-multivendor-membership' ), $trial_period, $period_options[$trial_period_type] );
 									}
+									wcfmvm_membership_table_tax_display( 'span' );
 									echo ' <span class="wcfm_membership_price_description">(' . $price_description . ')</span>';
 									
 									// Show PayPal Recurring profile details
@@ -760,8 +765,8 @@ class WCFMvm_Frontend {
 			foreach ( $line_items as $item_id => $item ) {
 				if( in_array( $item->get_product_id(), $wcfm_subcription_products ) ) {
 					// Reset Membership Session
-					if( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['membership'] ) && $_SESSION['wcfm_membership']['membership'] ) {
-						unset( $_SESSION['wcfm_membership'] );
+					if( WC()->session && WC()->session->get( 'wcfm_membership' ) ) {
+						WC()->session->__unset( 'wcfm_membership' );
 					}
 					wp_redirect(add_query_arg( 'vmstep', 'thankyou', get_wcfm_membership_url() ));
 					exit;
@@ -918,6 +923,8 @@ class WCFMvm_Frontend {
 			if( $wcfmvm_style_custom && file_exists( trailingslashit( $upload_dir['basedir'] ) . 'wcfm/' . $wcfmvm_style_custom ) ) {
 				wp_enqueue_style( 'wcfmvm_custom_css',  trailingslashit( $upload_dir['baseurl'] ) . 'wcfm/' . $wcfmvm_style_custom, array( 'wcfm_membership_css' ), $WCFMvm->version );
 				wp_enqueue_style( 'wcfmvm_registration_custom_css',  trailingslashit( $upload_dir['baseurl'] ) . 'wcfm/' . $wcfmvm_style_custom, array( 'wcfm_membership_registration_css' ), $WCFMvm->version );
+				wp_enqueue_style( 'wcfmvm_payment_custom_css',  trailingslashit( $upload_dir['baseurl'] ) . 'wcfm/' . $wcfmvm_style_custom, array( 'wcfm_membership_payment_css' ), $WCFMvm->version );
+				wp_enqueue_style( 'wcfmvm_thank_you_custom_css',  trailingslashit( $upload_dir['baseurl'] ) . 'wcfm/' . $wcfmvm_style_custom, array( 'wcfm_membership_thankyou_css' ), $WCFMvm->version );
 			}
 	  }
  	}
@@ -965,16 +972,16 @@ class WCFMvm_Frontend {
 			<input type="hidden" name="item_name" value="<?php echo $title . ' - ' . $description; ?>">
 			
 			<?php if( $subscription_type == 'one_time' ) { ?>
-		  	<input type="hidden" name="amount" value="<?php echo $one_time_amt; ?>" />
+		  	<input type="hidden" name="amount" value="<?php echo wcfmvm_membership_tax_price($one_time_amt); ?>" />
 		  <?php } else { ?>
 				<?php if( !empty( $trial_period ) ) { ?>
-					<input type="hidden" name="a1" value="<?php echo $trial_amt; ?>">
+					<input type="hidden" name="a1" value="<?php echo wcfmvm_membership_tax_price($trial_amt); ?>">
 					<input type="hidden" name="p1" value="<?php echo $trial_period; ?>">
 					<input type="hidden" name="t1" value="<?php echo $trial_period_type; ?>">
 				<?php } ?>
 				
 				<?php if( !empty( $billing_period ) && !empty( $billing_amt ) ) { ?>
-					<input type="hidden" name="a3" value="<?php echo $billing_amt; ?>">
+					<input type="hidden" name="a3" value="<?php echo wcfmvm_membership_tax_price($billing_amt); ?>">
 					<input type="hidden" name="p3" value="<?php echo $billing_period; ?>">
 					<input type="hidden" name="t3" value="<?php echo $billing_period_type; ?>">
 				<?php } ?>
@@ -1051,7 +1058,7 @@ class WCFMvm_Frontend {
     
     if( $subscription_type == 'one_time' ) {
     	$payment_amount = $one_time_amt;
-    	$pay_description = $one_time_amt . ' ' . $payment_currency;
+    	$pay_description = wcfmvm_membership_tax_price($one_time_amt) . ' ' . $payment_currency;
     	$notify_url = add_query_arg( 'wcfmvm_process_ipn', 'stripe_ipn', get_wcfm_membership_page() );
     } elseif( $stripe_plan_id ) {
     	// Stripe Plan Data Fetching
@@ -1074,7 +1081,7 @@ class WCFMvm_Frontend {
     	
       // Plan Pricing description
       $price_in_cents = $billing_amt * 100;
-    	$pay_description = $billing_amt . ' ' . $payment_currency;
+    	$pay_description = wcfmvm_membership_tax_price($billing_amt) . ' ' . $payment_currency;
     	if ($billing_period_count == 1) {
         $description .= ' / ' . $period_options[$billing_period_type];
 			} else {
@@ -1094,7 +1101,7 @@ class WCFMvm_Frontend {
 		  <div style="display: none !important">
 		  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="<?php echo $publishable_key; ?>"
 																																									data-panel-label="<?php _e( 'Pay', 'wc-multivendor-membership' ); ?>"
-																																									data-amount="<?php echo $price_in_cents; ?>"
+																																									data-amount="<?php echo wcfmvm_membership_tax_price($price_in_cents); ?>"
 																																									data-name="<?php echo $title; ?>"
 																																									data-description="<?php echo $pay_description; ?>"
 																																									data-label="<?php _e( 'Proceed', 'wc-multivendor-membership' ); ?>"
@@ -1103,7 +1110,7 @@ class WCFMvm_Frontend {
 																																									></script>
 			</div>
 		  
-			<input type="hidden" name="item_price" value="<?php echo $payment_amount; ?>">
+			<input type="hidden" name="item_price" value="<?php echo wcfmvm_membership_tax_price($payment_amount); ?>">
 			<input type="hidden" name="currency_code" value="<?php echo $payment_currency; ?>">
 			<input type="hidden" name="item_number" value="<?php echo $membership_id; ?>">
 			<input type="hidden" name="item_name" value="<?php echo $title . ' - ' . $pay_description; ?>">

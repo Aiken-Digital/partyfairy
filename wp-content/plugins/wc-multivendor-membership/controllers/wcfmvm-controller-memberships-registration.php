@@ -151,9 +151,12 @@ class WCFMvm_Memberships_Registration_Controller {
 							
 							if( !$is_update || !$email_verified ) {
 								$verification_code = '';
-								if( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['email_verification_code'] ) ) {
-									$verification_code = $_SESSION['wcfm_membership']['email_verification_code'];
-								}
+								if( WC()->session && WC()->session->get( 'wcfm_membership_email_verification_code' ) ) {
+									$verification_code =  WC()->session->get( 'wcfm_membership_email_verification_code' );
+								} 
+								//elseif( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['email_verification_code'] ) ) {
+									//$verification_code = $_SESSION['wcfm_membership']['email_verification_code'];
+								//}
 								$wcfm_email_verified_input = $wcfm_membership_registration_form_data['wcfm_email_verified_input'];
 								
 								if( $verification_code != $wcfm_email_verified_input ) {
@@ -163,9 +166,12 @@ class WCFMvm_Memberships_Registration_Controller {
 								
 								if( !$has_error ) {
 									$verification_email = '';
-									if( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['email_verification_for'] ) ) {
-										$verification_email = $_SESSION['wcfm_membership']['email_verification_for'];
-									}
+									if( WC()->session && WC()->session->get( 'wcfm_membership_email_verification_for' ) ) {
+										$verification_email =  WC()->session->get( 'wcfm_membership_email_verification_for' );
+									} 
+									//elseif( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['email_verification_for'] ) ) {
+										//$verification_email = $_SESSION['wcfm_membership']['email_verification_for'];
+									//}
 									$wcfm_email_verified_for = $wcfm_membership_registration_form_data['user_email'];
 									
 									if( $verification_email != $wcfm_email_verified_for ) {
@@ -190,9 +196,12 @@ class WCFMvm_Memberships_Registration_Controller {
 							
 							if( !$is_update || !$sms_verified ) {
 								$verification_code = '';
-								if( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['sms_verification_code'] ) ) {
-									$verification_code = $_SESSION['wcfm_membership']['sms_verification_code'];
-								}
+								if( WC()->session && WC()->session->get( 'wcfm_membership_sms_verification_code' ) ) {
+									$verification_code =  WC()->session->get( 'wcfm_membership_sms_verification_code' );
+								} 
+								//elseif( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['sms_verification_code'] ) ) {
+									//$verification_code = $_SESSION['wcfm_membership']['sms_verification_code'];
+								//}
 								$wcfm_sms_verified_input = $wcfm_membership_registration_form_data['wcfm_sms_verified_input'];
 								
 								if( $verification_code != $wcfm_sms_verified_input ) {
@@ -202,9 +211,12 @@ class WCFMvm_Memberships_Registration_Controller {
 								
 								if( !$has_error ) {
 									$verification_sms = '';
-									if( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['sms_verification_for'] ) ) {
-										$verification_sms = $_SESSION['wcfm_membership']['sms_verification_for'];
-									}
+									if( WC()->session && WC()->session->get( 'wcfm_membership_sms_verification_for' ) ) {
+										$verification_sms =  WC()->session->get( 'wcfm_membership_sms_verification_for' );
+									} 
+									//elseif( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['sms_verification_for'] ) ) {
+										//$verification_sms = $_SESSION['wcfm_membership']['sms_verification_for'];
+									//}
 									$wcfm_sms_verified_for = $wcfm_membership_registration_form_data['wcfmvm_static_infos']['phone'];
 									
 									if( $verification_sms != $wcfm_sms_verified_for ) {
@@ -375,9 +387,12 @@ class WCFMvm_Memberships_Registration_Controller {
 						}
 						
 						// Update User Membership
-						if( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['membership'] ) && $_SESSION['wcfm_membership']['membership'] ) {
-							$wcfm_membership = $_SESSION['wcfm_membership']['membership'];
+						if( WC()->session && WC()->session->get( 'wcfm_membership' ) ) {
+							$wcfm_membership = WC()->session->get( 'wcfm_membership' );
 							update_user_meta( $member_id, 'temp_wcfm_membership', $wcfm_membership );
+						//} elseif( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['membership'] ) && $_SESSION['wcfm_membership']['membership'] ) {
+							//$wcfm_membership = $_SESSION['wcfm_membership']['membership'];
+							//update_user_meta( $member_id, 'temp_wcfm_membership', $wcfm_membership );
 						} elseif( $wcfm_membership = get_wcfm_free_membership() ) {
 							update_user_meta( $member_id, 'temp_wcfm_membership', $wcfm_membership );
 						}
@@ -432,7 +447,11 @@ class WCFMvm_Memberships_Registration_Controller {
 							if( $email_verified ) {
 								update_user_meta( $member_id, '_wcfm_email_verified', true );
 								update_user_meta( $member_id, '_wcfm_email_verified_for', $wcfm_membership_registration_form_data['user_email'] );
-								unset( $_SESSION['wcfm_membership']['email_verification_code'] );
+								if( WC()->session && WC()->session->get( 'wcfm_membership_email_verification_code' ) ) {
+									WC()->session->__unset( 'wcfm_membership_email_verification_code' );
+									WC()->session->__unset( 'wcfm_membership_email_verification_for' );
+								}
+								//unset( $_SESSION['wcfm_membership']['email_verification_code'] );
 							}
 						}
 						update_user_meta( $member_id, 'wcemailverified', 'true' );
@@ -442,12 +461,17 @@ class WCFMvm_Memberships_Registration_Controller {
 							if( $sms_verified ) {
 								update_user_meta( $member_id, '_wcfm_sms_verified', true );
 								update_user_meta( $member_id, '_wcfm_sms_verified_for', $wcfm_membership_registration_form_data['wcfmvm_static_infos']['phone'] );
-								unset( $_SESSION['wcfm_membership']['sms_verification_code'] );
+								if( WC()->session && WC()->session->get( 'wcfm_membership_sms_verification_code' ) ) {
+									WC()->session->__unset( 'wcfm_membership_sms_verification_code' );
+									WC()->session->__unset( 'wcfm_membership_sms_verification_for' );
+								}
+								//unset( $_SESSION['wcfm_membership']['sms_verification_code'] );
 							}
 						}
 						
 						// Free Membership Registration - 1.2.0
-						if( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['free_registration'] ) && $_SESSION['wcfm_membership']['free_registration'] ) {
+						//if( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['free_registration'] ) && $_SESSION['wcfm_membership']['free_registration'] ) {
+						if( WC()->session && WC()->session->get( 'wcfm_membership_free_registration' ) ) {
 							$member_user = new WP_User(absint($member_id));
 							$shop_name = $wcfm_membership_registration_form_data['store_name'];
 							if( ( $wcfm_membership == -1 ) || ( $wcfm_membership == '-1' ) ) {
@@ -464,8 +488,10 @@ class WCFMvm_Memberships_Registration_Controller {
 							} else {
 								$WCFMvm->send_approval_reminder_admin( $member_id );
 							}
-						} elseif( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['membership'] ) && $_SESSION['wcfm_membership']['membership'] ) {
-							$wcfm_membership = absint($_SESSION['wcfm_membership']['membership']);
+						//} elseif( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['membership'] ) && $_SESSION['wcfm_membership']['membership'] ) {
+						} elseif( WC()->session && WC()->session->get( 'wcfm_membership' ) ) {
+							$wcfm_membership = absint( WC()->session->get( 'wcfm_membership' ) );
+							//$wcfm_membership = absint($_SESSION['wcfm_membership']['membership']);
 							// Set WC Cart for WC Checout Pay Mode - 1.3.0
 							$subscription = (array) get_post_meta( $wcfm_membership, 'subscription', true );
 							$subscription_pay_mode = isset( $subscription['subscription_pay_mode'] ) ? $subscription['subscription_pay_mode'] : 'by_wcfm';
@@ -492,7 +518,8 @@ class WCFMvm_Memberships_Registration_Controller {
 					if(!$has_error) {
 						if( apply_filters( 'wcfmvm_is_allow_registration_first', false, $wcfm_membership ) ) {
 						  echo '{"status": true, "message": "' . $wcfm_membership_registration_messages['registration_success'] . '", "redirect": "' . add_query_arg( 'vmstep', 'choose_membership', get_wcfm_membership_url() ) . '"}';
-						} elseif( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['free_registration'] ) && $_SESSION['wcfm_membership']['free_registration'] ) {
+						//} elseif( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['free_registration'] ) && $_SESSION['wcfm_membership']['free_registration'] ) {
+						} elseif( WC()->session && WC()->session->get( 'wcfm_membership_free_registration' ) ) {
 							echo '{"status": true, "message": "' . $wcfm_membership_registration_messages['registration_success'] . '", "redirect": "' . apply_filters( 'wcfm_registration_thankyou_url', add_query_arg( 'vmstep', 'thankyou', get_wcfm_membership_url() ) ) . '"}';
 						} elseif( $subscription_pay_mode == 'by_wc' ) {
 							echo '{"status": true, "message": "' . $wcfm_membership_registration_messages['registration_success'] . '", "redirect": "' . wc_get_checkout_url() . '"}';

@@ -1,4 +1,4 @@
-﻿=== WooCommerce Memberships for Multivendor Marketplace ===
+﻿=== WCFM Membership - WooCommerce Memberships for Multivendor Marketplace ===
 Contributors: wclovers
 Tags: woocommerce membership, subscription, members, multivendor marketplace, multi vendor 
 Donate link: https://www.paypal.me/wclovers/25usd
@@ -7,7 +7,7 @@ Tested up to: 5.2
 WC requires at least: 3.0
 WC tested up to: 3.6.0
 Requires PHP: 5.6
-Stable tag: 2.4.5
+Stable tag: 2.5.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -155,6 +155,36 @@ NONE.
 17. Membership Details - Cancel & Upgrade
 
 == Changelog ==
+
+= 2.5.4 =
+*Updated - 09/06/2019*
+
+* Tweak - PHP SESSION replace by WC SESSION
+
+= 2.5.3 =
+*Updated - 09/06/2019*
+
+* Enhance - Memebership plan table disaply improved
+* Enhance - Memebership plan table more color setting added
+
+= 2.5.2 =
+*Updated - 04/06/2019*
+
+* Enhance - Vednor profile "Additional Info" edit opton added under Admin Vendor Manager
+* Fixed   - Memebership commission reset vendor wise commission setting issue reolved
+
+= 2.5.1 =
+*Updated - 01/06/2019*
+
+* Fixed - Subscription using Stripe taxed price checking issue reolved
+* Fixed - Membership Subscription invoice generate PHP error issue resolved
+
+= 2.5.0 =
+*Updated - 24/05/2019*
+
+* Feature - Membership subscription invoice option added, attach to "Welcome Email" (WCFM Ultimate require)
+* Feature - Membership subscription cost "Tax" support added (setup Tax under WCFM Membership Setting -> Tax Setting)
+* Enahnce - WCFM Affiliate membership wise commission support added
 
 = 2.4.5 =
 *Updated - 15/05/2019*
@@ -486,8 +516,5 @@ NONE.
 
 == Upgrade Notice ==
 
-= 2.4.5 =
-* Enhance - PayPal and Stripe recurring profile auto-cancel (using API) feature added
-* Enahnce - Registration "store slug" diplicate validation check improved
-* Enhance - Vednor profile additional information added under Admin Vendor Manager -> Profile Section
-* Fixed   - Registration custom file upload field missing from vendor approve popup issue resolved
+= 2.5.4 =
+* Tweak - PHP SESSION replace by WC SESSION

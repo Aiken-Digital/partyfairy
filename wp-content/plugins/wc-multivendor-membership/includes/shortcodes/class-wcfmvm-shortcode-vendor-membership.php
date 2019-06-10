@@ -35,11 +35,17 @@ class WCFM_Vendor_Membership_Shortcode {
 				
 			if( wcfm_is_allowed_membership() || current_user_can( 'administrator' ) || current_user_can( 'shop_manager' ) ) {
 				
-				if( !isset( $_SESSION['wcfm_membership'] ) || !isset( $_SESSION['wcfm_membership']['free_registration'] ) ) {
+				if( WC()->session && ( !WC()->session->get( 'wcfm_membership' ) || !WC()->session->get( 'wcfm_membership_free_registration' ) ) ) {
+					$WCFMvm->template->get_template( 'vendor_membership_steps.php' );
+				} elseif( WC()->session && WC()->session->get( 'wcfm_membership' ) && WC()->session->get( 'wcfm_membership_free_registration' ) ) {
+					WC()->session->__unset( 'wcfm_membership_free_registration' );
+				}
+				
+				/*if( !isset( $_SESSION['wcfm_membership'] ) || !isset( $_SESSION['wcfm_membership']['free_registration'] ) ) {
 					$WCFMvm->template->get_template( 'vendor_membership_steps.php' );
 				} elseif( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['free_registration'] ) ) {
 					unset( $_SESSION['wcfm_membership']['free_registration'] );
-				}
+				}*/
 				
 				switch( $current_step ) {
 					case 'registration':

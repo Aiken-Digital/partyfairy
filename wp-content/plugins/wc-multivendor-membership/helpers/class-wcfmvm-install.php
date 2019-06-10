@@ -92,17 +92,17 @@ class WCFMvm_Install {
 	 * @return void
 	 */
 	function wcfmvm_create_pages() {
-			global $WCFM;
+		global $WCFM;
 
-			// WCFM page
-			$this->wcfmvm_create_page(esc_sql(_x('vendor-membership', 'page_slug', 'vendor-membership')), 'wcfm_vendor_membership_page_id', __('Vendor Membership', 'wc-multivendor-membership'), '[wcfm_vendor_membership]');
-			$this->wcfmvm_create_page(esc_sql(_x('vendor-register', 'page_slug', 'vendor-register')), 'wcfm_vendor_registration_page_id', __('Vendor Registration', 'wc-multivendor-membership'), '[wcfm_vendor_registration]');
-			
-			$array_pages = get_option( 'wcfm_page_options', array() );
-			$array_pages['wcfm_vendor_membership_page_id'] = get_option('wcfm_vendor_membership_page_id');
-			$array_pages['wcfm_vendor_registration_page_id'] = get_option('wcfm_vendor_registration_page_id');
+		// WCFM page
+		$this->wcfmvm_create_page(esc_sql(_x('vendor-membership', 'page_slug', 'vendor-membership')), 'wcfm_vendor_membership_page_id', __('Vendor Membership', 'wc-multivendor-membership'), '[wcfm_vendor_membership]');
+		$this->wcfmvm_create_page(esc_sql(_x('vendor-register', 'page_slug', 'vendor-register')), 'wcfm_vendor_registration_page_id', __('Vendor Registration', 'wc-multivendor-membership'), '[wcfm_vendor_registration]');
+		
+		$array_pages = get_option( 'wcfm_page_options', array() );
+		$array_pages['wcfm_vendor_membership_page_id'] = get_option('wcfm_vendor_membership_page_id');
+		$array_pages['wcfm_vendor_registration_page_id'] = get_option('wcfm_vendor_registration_page_id');
 
-			update_option('wcfm_page_options', $array_pages);
+		update_option('wcfm_page_options', $array_pages);
 	}
 	
 	/**

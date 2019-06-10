@@ -59,7 +59,7 @@ class SwpmStripeBuyNowIpnHandler {
 		$subscription = (array) get_post_meta( $membership_id, 'subscription', true );
 		
 		//Validate and verify some of the main values.
-		$true_payment_amount = isset( $subscription['one_time_amt'] ) ? $subscription['one_time_amt'] : '1';
+		$true_payment_amount = isset( $subscription['one_time_amt'] ) ? wcfmvm_membership_tax_price($subscription['one_time_amt']) : wcfmvm_membership_tax_price(1);
 		if( $payment_amount != $true_payment_amount ) {
 			//Fatal error. Payment amount may have been tampered with.
 			$error_msg = 'Fatal Error! Received payment amount ('.$payment_amount.') does not match with the original amount ('.$true_payment_amount.')';
@@ -132,8 +132,8 @@ class SwpmStripeBuyNowIpnHandler {
 		}
 		
 		// Reset Membership Session
-		if( isset( $_SESSION['wcfm_membership'] ) && isset( $_SESSION['wcfm_membership']['membership'] ) && $_SESSION['wcfm_membership']['membership'] ) {
-			unset( $_SESSION['wcfm_membership'] );
+		if( WC()->session && WC()->session->get( 'wcfm_membership' ) ) {
+			WC()->session->__unset( 'wcfm_membership' );
 		}
 		
 		wcfmvm_create_log('Transaction data saved.');

@@ -12,7 +12,16 @@ jQuery(document).ready(function($) {
 	$('.wcfm_membership_price .amount').css( 'height', wcfm_membership_price_width );
 	$('.wcfm_membership_price .amount').css( 'padding-top', (wcfm_membership_price_width-30)/2 );
 	
-	// Membership table Price description description height set
+	// Membership table Title description height set
+	var wcfm_membership_title_height = 0;
+	$('.wcfm_membership_title').each(function() {
+		if( $(this).outerHeight() > wcfm_membership_title_height ) {
+			wcfm_membership_title_height = $(this).outerHeight();
+		}
+	});
+	$('.wcfm_membership_title').css( 'height', wcfm_membership_title_height );
+	
+	// Membership table Price description height set
 	var wcfm_membership_price_description_height = 0;
 	$('.wcfm_membership_price_description').each(function() {
 		if( $(this).outerHeight() > wcfm_membership_price_description_height ) {

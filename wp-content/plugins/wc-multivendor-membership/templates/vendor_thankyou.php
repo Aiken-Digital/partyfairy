@@ -54,7 +54,7 @@ if( !$subscription_thankyou_content ) {
 
 <div id="wcfm_membership_container">
   <div class="wcfm_membership_thankyou_content_wrapper">
-		<?php if( $required_approval == 'no' ) { ?>
+		<?php if( ( $required_approval == 'no' ) && wcfm_is_vendor( $member_id ) ) { ?>
 			<div class="wcfm_membership_thankyou_content">
 				<?php echo $free_thankyou_content; ?>
 			</div>

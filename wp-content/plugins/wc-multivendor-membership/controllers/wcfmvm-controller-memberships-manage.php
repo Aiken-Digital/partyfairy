@@ -144,56 +144,60 @@ class WCFMvm_Memberships_Manage_Controller {
 				
 				// Update Membership Commission
 				if( isset( $wcfm_membership_manager_form_data['commission'] ) ) {
-					$old_commission = (array) get_post_meta( $new_membership_id, 'commission', true );
-					$old_commission_type = isset( $old_commission['type'] ) ? $old_commission['type'] : '';
-					$old_commission_value = isset( $old_commission['value'] ) ? $old_commission['value'] : '';
+					$is_marketplace = wcfm_is_marketplace();
 					
-					$commission_type = isset( $wcfm_membership_manager_form_data['commission']['type'] ) ? $wcfm_membership_manager_form_data['commission']['type'] : 'percent';
-					$commission_value = isset( $wcfm_membership_manager_form_data['commission']['value'] ) ? $wcfm_membership_manager_form_data['commission']['value'] : '';
-					
-					if( ( $commission_type != $old_commission_type ) || ( $commission_value != $old_commission_value ) ) {
-						$is_marketplace = wcfm_is_marketplace();
-						if( !empty( $membership_users ) ) {
-							foreach( $membership_users as $member_id ) {
-								if( $is_marketplace == 'wcmarketplace' ) {
-									if( $commission_type ) {
-										if( $commission_type == 'percent' ) {
-											update_user_meta( $member_id, '_vendor_commission_percentage', $commission_value );
-										} else {
-											update_user_meta( $member_id, '_vendor_commission', $commission_value );
+					// Update vendor specific commission setting by membership commission rulee, except WCFM Marketplace vendors
+					if( $is_marketplace != 'wcfmmarketplace' ) {
+						$old_commission = (array) get_post_meta( $new_membership_id, 'commission', true );
+						$old_commission_type = isset( $old_commission['type'] ) ? $old_commission['type'] : '';
+						$old_commission_value = isset( $old_commission['value'] ) ? $old_commission['value'] : '';
+						
+						$commission_type = isset( $wcfm_membership_manager_form_data['commission']['type'] ) ? $wcfm_membership_manager_form_data['commission']['type'] : 'percent';
+						$commission_value = isset( $wcfm_membership_manager_form_data['commission']['value'] ) ? $wcfm_membership_manager_form_data['commission']['value'] : '';
+						
+						if( ( $commission_type != $old_commission_type ) || ( $commission_value != $old_commission_value ) ) {
+							if( !empty( $membership_users ) ) {
+								foreach( $membership_users as $member_id ) {
+									if( $is_marketplace == 'wcmarketplace' ) {
+										if( $commission_type ) {
+											if( $commission_type == 'percent' ) {
+												update_user_meta( $member_id, '_vendor_commission_percentage', $commission_value );
+											} else {
+												update_user_meta( $member_id, '_vendor_commission', $commission_value );
+											}
 										}
-									}
-								} elseif( $is_marketplace == 'wcvendors' ) {
-									if( $commission_type ) {
-										update_user_meta( $member_id, 'pv_custom_commission_rate', $commission_value );
-										if( $commission_type == 'percent' ) {
-											update_user_meta( $member_id, '_wcv_commission_type', 'percent' );
-											update_user_meta( $member_id, '_wcv_commission_percent', $commission_value );
-										} else {
-											update_user_meta( $member_id, '_wcv_commission_type', 'fixed' );
-											update_user_meta( $member_id, '_wcv_commission_amount', $commission_value );
+									} elseif( $is_marketplace == 'wcvendors' ) {
+										if( $commission_type ) {
+											update_user_meta( $member_id, 'pv_custom_commission_rate', $commission_value );
+											if( $commission_type == 'percent' ) {
+												update_user_meta( $member_id, '_wcv_commission_type', 'percent' );
+												update_user_meta( $member_id, '_wcv_commission_percent', $commission_value );
+											} else {
+												update_user_meta( $member_id, '_wcv_commission_type', 'fixed' );
+												update_user_meta( $member_id, '_wcv_commission_amount', $commission_value );
+											}
 										}
-									}
-								} elseif( $is_marketplace == 'dokan' ) {
-									if( $commission_type ) {
-										if( $commission_type == 'percent' ) {
-											update_user_meta( $member_id, 'dokan_admin_percentage_type', 'percentage' );
-											update_user_meta( $member_id, 'dokan_admin_percentage', $commission_value );
-										} else {
-											update_user_meta( $member_id, 'dokan_admin_percentage_type', 'flat' );
-											update_user_meta( $member_id, 'dokan_admin_percentage', $commission_value );
+									} elseif( $is_marketplace == 'dokan' ) {
+										if( $commission_type ) {
+											if( $commission_type == 'percent' ) {
+												update_user_meta( $member_id, 'dokan_admin_percentage_type', 'percentage' );
+												update_user_meta( $member_id, 'dokan_admin_percentage', $commission_value );
+											} else {
+												update_user_meta( $member_id, 'dokan_admin_percentage_type', 'flat' );
+												update_user_meta( $member_id, 'dokan_admin_percentage', $commission_value );
+											}
 										}
+									} elseif( $is_marketplace == 'wcpvendors' ) {
+										$vendor_id = get_user_meta( $member_id, '_wcpv_active_vendor', true );
+										$vendor_data = get_term_meta( $vendor_id, 'vendor_data', true );
+										$vendor_data['commission_type']      = ( $commission_type == 'percent' ) ? 'percentage' : 'fixed';
+										$vendor_data['commission']           = $commission_value;
+										update_term_meta( $vendor_id, 'vendor_data', $vendor_data );
+									} elseif( $is_marketplace == 'wcfmmarketplace' ) {
+										//$wcfmmp_profile_settings = get_user_meta( $member_id, 'wcfmmp_profile_settings', true );
+										//$wcfmmp_profile_settings['commission'] = $wcfm_membership_manager_form_data['commission'];
+										//update_user_meta( $member_id, 'wcfmmp_profile_settings', $wcfmmp_profile_settings );
 									}
-								} elseif( $is_marketplace == 'wcpvendors' ) {
-									$vendor_id = get_user_meta( $member_id, '_wcpv_active_vendor', true );
-									$vendor_data = get_term_meta( $vendor_id, 'vendor_data', true );
-									$vendor_data['commission_type']      = ( $commission_type == 'percent' ) ? 'percentage' : 'fixed';
-									$vendor_data['commission']           = $commission_value;
-									update_term_meta( $vendor_id, 'vendor_data', $vendor_data );
-								} elseif( $is_marketplace == 'wcfmmarketplace' ) {
-									$wcfmmp_profile_settings = get_user_meta( $member_id, 'wcfmmp_profile_settings', true );
-									$wcfmmp_profile_settings['commission'] = $wcfm_membership_manager_form_data['commission'];
-									update_user_meta( $member_id, 'wcfmmp_profile_settings', $wcfmmp_profile_settings );
 								}
 							}
 						}

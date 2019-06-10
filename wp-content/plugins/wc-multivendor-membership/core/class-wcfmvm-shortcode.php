@@ -42,7 +42,9 @@ class WCFMvm_Shortcode {
 		if( is_admin() ) return;
 		
 		if( current_user_can( 'administrator' ) ) {
+			ob_start();
 			_e( 'Kindly logout from Admin account to have "Subscribe Now" button.', 'wc-multivendor-membership' );
+			return ob_get_clean();
 		}
 		
 		if( !wcfm_is_allowed_membership() ) return;
