@@ -188,7 +188,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
                             <div class="d-flex align-items-center">
                             <div class="icon m-r-10">﻿ 
-                              <?php if($value['icon']) { echo $value['icon']; } ?>
+                              <?php if($value['icon']) { ?> <img src="<?php echo $value['icon']; ?>" /> <?php  } ?>
                             </div>
                             <?php if($value['description']) { echo $value['description']; } ?>
                           </div>
