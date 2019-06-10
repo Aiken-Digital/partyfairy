@@ -188,7 +188,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
                             <div class="d-flex align-items-center">
                               <div class="icon m-r-10">﻿ 
-                                <?php if($value['icon']) { ?> <img src="<?php echo $value['icon']; ?>" width="10" height="10" /> <?php  } ?>
+                                <?php if($value['icon']) { ?> <img src="<?php echo $value['icon']; ?>" width="30" height="30" /> <?php  } ?>
                               </div>
                               <?php if($value['description']) { echo $value['description']; } ?>
                             </div>
@@ -252,7 +252,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
         </div>
       </div>
 
-      
+
     </div>
   </div>
 
@@ -292,11 +292,11 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
           font-size: 12px;
         }
       </style>
-      
+
       <input class="-minus btn" id="sub" value="-" type="button">
       <div class="form-group m-b-0 w-100">
        <?php
-       
+
        woocommerce_quantity_input( array(
         'input_id'     => uniqid( 'qty_' ),
         'classes'      => apply_filters( 'woocommerce_quantity_input_classes', array('form-control', 'text-center','valid','qty','text'  ), $product ),

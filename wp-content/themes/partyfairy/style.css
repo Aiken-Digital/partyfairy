@@ -61,7 +61,11 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
  * character instead.
  */
 
- input[type="checkbox"]{
+ .pf-product .tab-content .icon {
+    width: 30px !important;
+}
+
+input[type="checkbox"]{
 
     position: relative !important;
 }
@@ -294,7 +298,7 @@ a.get-inspired {
 
 }
 div#pf-sg-p {
- /* padding-top: 124px;*/
+   /* padding-top: 124px;*/
 }
 
 form.woocommerce-checkout {
