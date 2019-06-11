@@ -790,8 +790,9 @@ function filter_category_function(){
 
     $days_delay = 3; // <=== SET the delay (number of days to wait before cancelation)
 
-$one_day    = 24 * 60 * 60;
-$today      = strtotime( date('Y-m-d') );
+$one_day      = 24 * 60 * 60;
+$today        = strtotime( date('Y-m-d') );
+$cancel_time  = date(); 
 
     // Get unpaid orders (5 days old)
 $unpaid_orders = (array) wc_get_orders( array(

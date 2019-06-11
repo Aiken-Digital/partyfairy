@@ -74,7 +74,7 @@ $admin_fee_mode = apply_filters( 'wcfm_is_admin_fee_mode', false );
 			<div class="wcfm-clearfix"></div>
 		</div>
 		<div class="wcfm-clearfix"></div><br />
-
+		
 		<div class="wcfm-container">
 			<div id="wwcfm_orders_listing_expander" class="wcfm-content">
 				<table id="wcfm-orders" class="display" cellspacing="0" width="100%">
@@ -107,7 +107,7 @@ $admin_fee_mode = apply_filters( 'wcfm_is_admin_fee_mode', false );
 							<?php do_action( 'wcfm_order_columns_before' ); ?>
 							<th><?php _e( 'Date', 'wc-frontend-manager' ); ?></th>
 							<th><?php _e( 'Status', 'wc-frontend-manager' ); ?></th>
-
+							
 							<th><?php printf( apply_filters( 'wcfm_order_action_label', __( 'Actions', 'wc-frontend-manager' ) ) ); ?></th>
 						</tr>
 					</thead>
