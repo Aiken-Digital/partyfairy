@@ -388,7 +388,7 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 				// Date
 				$order_date = ( version_compare( WC_VERSION, '2.7', '<' ) ) ? $the_order->order_date : $the_order->get_date_created();
 				$wcfm_orders_json_arr[$index][] = apply_filters( 'wcfm_order_date_display', date_i18n( wc_date_format(), strtotime( $order_date ) ), $order->order_id, $order );
-				$wcfm_orders_json_arr[$index][] = 'ccc';
+				
 				// Action
 				$actions = '';
 				if( apply_filters( 'wcfm_is_allow_order_status_update', true ) && !in_array( 'requested', $refund_statuses ) && in_array( 0, $is_refundeds ) ) {

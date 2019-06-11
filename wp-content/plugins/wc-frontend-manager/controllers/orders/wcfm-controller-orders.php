@@ -258,7 +258,7 @@ class WCFM_Orders_Controller {
 				// Date
 					$order_date = ( version_compare( WC_VERSION, '2.7', '<' ) ) ? $the_order->order_date : $the_order->get_date_created();
 					$wcfm_orders_json_arr[$index][] = date_i18n( wc_date_format(), strtotime( $order_date ) );
-					$wcfm_orders_json_arr[$index][] = 'lll';
+					
 				// Action
 					$actions = '';
 					if( $wcfm_is_allow_order_status_update = apply_filters( 'wcfm_is_allow_order_status_update', true ) ) {

@@ -106,7 +106,6 @@ $admin_fee_mode = apply_filters( 'wcfm_is_admin_fee_mode', false );
 							<th><?php printf( apply_filters( 'wcfm_orders_additional_info_column_label', __( 'Additional Info', 'wc-frontend-manager' ) ) ); ?></th>
 							<?php do_action( 'wcfm_order_columns_before' ); ?>
 							<th><?php _e( 'Date', 'wc-frontend-manager' ); ?></th>
-							<th><?php _e( 'Status', 'wc-frontend-manager' ); ?></th>
 							
 							<th><?php printf( apply_filters( 'wcfm_order_action_label', __( 'Actions', 'wc-frontend-manager' ) ) ); ?></th>
 						</tr>
@@ -139,7 +138,6 @@ $admin_fee_mode = apply_filters( 'wcfm_is_admin_fee_mode', false );
 							<th><?php printf( apply_filters( 'wcfm_orders_additional_info_column_label', __( 'Additional Info', 'wc-frontend-manager' ) ) ); ?></th>
 							<?php do_action( 'wcfm_order_columns_before' ); ?>
 							<th><?php _e( 'Date', 'wc-frontend-manager' ); ?></th>
-							<th><?php _e( 'Status', 'wc-frontend-manager' ); ?></th>
 							<th><?php printf( apply_filters( 'wcfm_order_action_label', __( 'Actions', 'wc-frontend-manager' ) ) ); ?></th>
 						</tr>
 					</tfoot>
