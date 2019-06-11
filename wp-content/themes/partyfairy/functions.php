@@ -806,7 +806,6 @@ if ( sizeof($unpaid_orders) > 0 ) {
         // Loop through orders
 	foreach ( $unpaid_orders as $order ) {
 
-		print_r($order);
 		$order->update_status( 'cancelled', $cancelled_text );
 		ibenic_wc_refund_order($order->get_id(),$cancelled_text);
 
