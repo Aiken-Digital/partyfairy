@@ -12,8 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<div class="wcfm_clearfix"></div>
-<div id="wcfm-footer">
+<div class="wcfm_clearfix" style="display: none !important;"></div>
+<div id="wcfm-footer" style="display: none !important;">
 	<div class="wcfm-footer-container">
 	</div>
 </div>
