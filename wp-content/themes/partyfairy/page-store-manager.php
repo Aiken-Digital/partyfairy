@@ -1,5 +1,5 @@
  <?php /* Template Name: Page Store Manager */ ?>
- <?php wp_head(); ?>
+ <?php get_header(); ?>
  <?php echo do_shortcode('[wc_frontend_manager]') ?>
  <?php //echo do_Shortcode('[dokan-dashboard]') ?>
- <?php wp_footer() ?>
+ <?php get_footer() ?>
