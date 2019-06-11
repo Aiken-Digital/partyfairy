@@ -2,4 +2,4 @@
  <?php wp_head(); ?>
  <?php echo do_shortcode('[wc_frontend_manager]') ?>
  <?php //echo do_Shortcode('[dokan-dashboard]') ?>
- <?php //wp_footer() ?>
+ <?php wp_footer() ?>
