@@ -51,7 +51,24 @@ if ( post_password_required() ) {
 
 
       <?php 
-      do_action('woocommerce_variable_add_to_cart');
+
+      if( $product->is_type( 'simple' ) ){
+
+
+        do_action('woocommerce_simple_add_to_cart');
+
+      } elseif( $product->is_type( 'variable' ) ){
+
+
+        do_action('woocommerce_variable_add_to_cart');
+
+
+      } else {
+
+
+      }
+
+
 
 
       ?>
@@ -67,7 +84,7 @@ if ( post_password_required() ) {
         foreach ($terms as $term) {
           $output[] = $term->term_id;
         }
-        
+
 
 
 
