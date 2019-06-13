@@ -327,7 +327,7 @@ class WCFM_Orders_Controller {
 							padding: 4px;
 							color: white; margin:2px;" href="'.$complete_url.'">Ready To Ship</a>';
 
-						}
+						} //
 
 						if($delivery_product == "Y") {
 
