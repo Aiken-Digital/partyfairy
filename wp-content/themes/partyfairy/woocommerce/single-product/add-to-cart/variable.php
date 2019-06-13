@@ -184,15 +184,17 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
                           </div>
                         </div>
                         <div class="col-8">
-                          <div>
+
+                          <?php if($value['information']){
+                           foreach ($value['information'] as $skey => $svalue) { ?>
 
                             <div class="d-flex align-items-center">
                               <div class="icon m-r-10">﻿ 
-                                <?php if($value['icon']) { ?> <img src="<?php echo $value['icon']; ?>" width="30" height="30" /> <?php  } ?>
+                                <?php if($svalue['icon']) { ?> <img src="<?php echo $svalue['icon']; ?>" width="30" height="30" /> <?php  } ?>
                               </div>
-                              <?php if($value['description']) { echo $value['description']; } ?>
+                              <?php if($svalue['description']) { echo $svalue['description']; } ?>
                             </div>
-                          </div>
+                          <?php } }?>
                         </div>
                       </div>
                     <?php } ?>
