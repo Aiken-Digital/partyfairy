@@ -370,16 +370,143 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 				
 				$actions = apply_filters ( 'wcfm_orders_module_actions', $actions, $order->order_id, $the_order, $this->vendor_id );
 				
-				$wcfm_orders_json_arr[$index][] =  apply_filters ( 'wcfmmarketplace_orders_actions', $actions, $user_id, $order, $the_order, $this->vendor_id );
+				///$wcfm_orders_json_arr[$index][] =  apply_filters ( 'wcfmmarketplace_orders_actions', $actions, $user_id, $order, $the_order, $this->vendor_id );
+
 				
-				$index++;
+				if( $order_status == 'pending'){
+
+
+					$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id='.$wcfm_orders_single->ID ), 'woocommerce-mark-order-status' );
+					$complete_url_decline = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=cancelled&order_id='.$wcfm_orders_single->ID ), 'woocommerce-mark-order-status' );
+
+					$menu_pending = '<a style="background-color: #1ad40e !important;
+					padding: 4px;
+					color: white; margin:2px;" href="'.$complete_url.'">Accept</a>';
+
+					$menu_pending .='<a style="background-color: #d40e33 !important;
+					padding: 4px;
+					color: white; margin:2px;" href="'.$complete_url_decline.'">Decline</a>';
+
+					$wcfm_orders_json_arr[$index][] =  $menu_pending;
+
+				}elseif($order_status == 'processing'){
+
+					$items = $the_order->get_items();
+					foreach ( $items as $item ) {
+
+						$product_name = $item->get_name();
+						$product_id = $item->get_product_id();
+						$product_variation_id = $item->get_variation_id();
+
+					}
+
+					$delivery_estimate = get_post_meta($product_id, 'delivery_estimate', true);
+					$delivery_product  = get_post_meta($product_id, 'delivery_product', true);
+					$pickup_product    = get_post_meta($product_id, 'pickup_product', true);
+					
+					$tindakan = '';
+
+
+					$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processed&order_id='.$wcfm_orders_single->ID ), 'woocommerce-mark-order-status' );
+
+					if($delivery_estimate == "Y") {
+
+
+						$tindakan .= '<a style="background-color: #1ad40e !important;
+						padding: 4px;
+						color: white; margin:2px;" href="'.$complete_url.'">Ready To Ship</a>';
+
+						} //
+
+						if($delivery_product == "Y") {
+
+							$tindakan .= '<a style="background-color: #1ad40e !important;
+							padding: 4px;
+							color: white; margin:2px;" href="'.$complete_url.'">Ready To Ship</a>';
+
+						}
+
+						if($pickup_product == "Y") {
+
+							$tindakan .= '<a style="background-color: #1ad40e !important;
+							padding: 4px;
+							color: white; margin:2px;" href="'.$complete_url.'">Ready To Pick</a>';
+
+						}
+
+
+
+						$wcfm_orders_json_arr[$index][] = $tindakan;
+
+
+					}elseif($order_status == 'processed'){
+
+						$items = $the_order->get_items();
+						foreach ( $items as $item ) {
+
+							$product_name = $item->get_name();
+							$product_id = $item->get_product_id();
+							$product_variation_id = $item->get_variation_id();
+
+						}
+
+						$delivery_estimate = get_post_meta($product_id, 'delivery_estimate', true);
+						$delivery_product  = get_post_meta($product_id, 'delivery_product', true);
+						$pickup_product    = get_post_meta($product_id, 'pickup_product', true);
+						
+						$tindakan = '';
+
+
+						$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=completed&order_id='.$wcfm_orders_single->ID ), 'woocommerce-mark-order-status' );
+
+						if($delivery_estimate == "Y") {
+
+
+							$tindakan .= '<a style="background-color: #1ad40e !important;
+							padding: 4px;
+							color: white; margin:2px;" href="'.$complete_url.'">Track</a>';
+
+						}
+
+						if($delivery_product == "Y") {
+
+							$tindakan .= '<a style="background-color: #1ad40e !important;
+							padding: 4px;
+							color: white; margin:2px;" href="'.$complete_url.'">Track</a>';
+
+						}
+
+						if($pickup_product == "Y") {
+
+							$tindakan .= '<a style="background-color: #1ad40e !important;
+							padding: 4px;
+							color: white; margin:2px;" href="'.$complete_url.'">Picked Up</a>';
+
+						}
+
+
+
+						$wcfm_orders_json_arr[$index][] = $tindakan;
+
+
+					}else{
+
+						//$wcfm_orders_json_arr[$index][] =  apply_filters ( 'wcfm_orders_actions', $actions, $wcfm_orders_single, $the_order );
+						$wcfm_orders_json_arr[$index][] =  '';
+
+
+
+					}
+
+					
+					$index++;
+				}
 			}
-		}
-		if( !empty($wcfm_orders_json_arr) ) $wcfm_orders_json .= json_encode($wcfm_orders_json_arr);
-		else $wcfm_orders_json .= '[]';
-		$wcfm_orders_json .= '
-	}';
-	
-	echo $wcfm_orders_json;
-}
+			if( !empty($wcfm_orders_json_arr) ) $wcfm_orders_json .= json_encode($wcfm_orders_json_arr);
+			else $wcfm_orders_json .= '[]';
+			$wcfm_orders_json .= '
+		}';
+		
+		echo $wcfm_orders_json;
+	}
 }
