@@ -1,6 +1,7 @@
 <?php
 add_filter( 'deprecated_function_trigger_error', '__return_false' );
 require_once( get_template_directory() . '/acf.php' );
+require_once( get_template_directory() . '/wc.php' );
 
 
 function product_popularity(){
@@ -792,7 +793,7 @@ function filter_category_function(){
 
 $one_day      = 24 * 60 * 60;
 $today        = strtotime( date('Y-m-d') );
-$cancel_time  = date(); 
+//$cancel_time  = date(); 
 
     // Get unpaid orders (5 days old)
 $unpaid_orders = (array) wc_get_orders( array(
@@ -817,6 +818,10 @@ update_option( 'unpaid_orders_daily_process', $today + $one_day );
 
 endif;
 }
+
+
+
+
 
 
 
@@ -881,3 +886,7 @@ function ibenic_wc_refund_order( $order_id, $refund_reason = '' ) {
 
 
 }
+
+
+
+
