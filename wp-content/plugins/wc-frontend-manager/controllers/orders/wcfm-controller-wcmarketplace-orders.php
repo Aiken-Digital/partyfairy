@@ -130,102 +130,102 @@ class WCFM_Orders_WCMarketplace_Controller {
 		// Generate Products JSON
 		$wcfm_orders_json = '';
 		$wcfm_orders_json = '{
-			"draw": ' . $_POST['draw'] . ',
-			"recordsTotal": ' . $total_items . ',
-			"recordsFiltered": ' . $total_items . ',
-			"data": ';
-
-			if ( !empty( $order_summary ) ) {
-				$index = 0;
-				$totals = 0;
-				$wcfm_orders_json_arr = array();
-
-				foreach ( $order_summary as $order ) {
+														"draw": ' . $_POST['draw'] . ',
+														"recordsTotal": ' . $total_items . ',
+														"recordsFiltered": ' . $total_items . ',
+														"data": ';
+		
+		if ( !empty( $order_summary ) ) {
+			$index = 0;
+			$totals = 0;
+			$wcfm_orders_json_arr = array();
+			
+			foreach ( $order_summary as $order ) {
 				// Order exists check
-					$order_post_title = get_the_title( $order->order_id );
-					if( !$order_post_title ) continue;
-
-					$the_order = wc_get_order( $order->order_id );
-
-					if( !is_a( $the_order, 'WC_Order' ) ) continue;
-
-					if( apply_filters( 'wcfm_is_show_order_restrict_check', false, $order->order_id, $order->product_id, $order ) ) continue;
-
-					$order_currency = $the_order->get_currency();
-					$valid = array();
-					$needs_shipping = false; 
-
-					$items = $the_order->get_items();
-
-					foreach ($items as $key => $value) {
-						if( $value->get_product_id() == 0 ) {
-							$_product_id = wc_get_order_item_meta( $key, '_product_id', true );
-							$_variation_id = wc_get_order_item_meta( $key, '_variation_id', true );
-							if( ( $order->product_id == $_variation_id ) || ( $order->product_id == $_product_id ) ) {
-								$valid[] = $value;
-							}
-						} elseif( ( $order->product_id == $value->get_variation_id() ) || ( $order->product_id == $value->get_product_id() ) ) {
+				$order_post_title = get_the_title( $order->order_id );
+				if( !$order_post_title ) continue;
+				
+				$the_order = wc_get_order( $order->order_id );
+				
+				if( !is_a( $the_order, 'WC_Order' ) ) continue;
+				
+				if( apply_filters( 'wcfm_is_show_order_restrict_check', false, $order->order_id, $order->product_id, $order ) ) continue;
+				
+				$order_currency = $the_order->get_currency();
+				$valid = array();
+				$needs_shipping = false; 
+	
+				$items = $the_order->get_items();
+	
+				foreach ($items as $key => $value) {
+					if( $value->get_product_id() == 0 ) {
+						$_product_id = wc_get_order_item_meta( $key, '_product_id', true );
+						$_variation_id = wc_get_order_item_meta( $key, '_variation_id', true );
+						if( ( $order->product_id == $_variation_id ) || ( $order->product_id == $_product_id ) ) {
 							$valid[] = $value;
 						}
+					} elseif( ( $order->product_id == $value->get_variation_id() ) || ( $order->product_id == $value->get_product_id() ) ) {
+						$valid[] = $value;
 					}
-
+				}
+				
 				// Status
-					$wcfm_orders_json_arr[$index][] =  apply_filters( 'wcfm_order_status_display', '<span class="order-status tips wcicon-status-' . sanitize_title( $the_order->get_status() ) . ' text_tip" data-tip="' . wc_get_order_status_name( $the_order->get_status() ) . '"></span>', $the_order );
-
+				$wcfm_orders_json_arr[$index][] =  apply_filters( 'wcfm_order_status_display', '<span class="order-status tips wcicon-status-' . sanitize_title( $the_order->get_status() ) . ' text_tip" data-tip="' . wc_get_order_status_name( $the_order->get_status() ) . '"></span>', $the_order );
+				
 				// Custom Column Support After
-					$wcfm_orders_json_arr = apply_filters( 'wcfm_orders_custom_columns_data_after', $wcfm_orders_json_arr, $index, $order->ID, $order, $the_order );
-
+				$wcfm_orders_json_arr = apply_filters( 'wcfm_orders_custom_columns_data_after', $wcfm_orders_json_arr, $index, $order->ID, $order, $the_order );
+				
 				// Order
-					if( apply_filters( 'wcfm_allow_view_customer_name', true ) ) {
-						$user_info = array();
-						if ( $the_order->get_user_id() ) {
-							$user_info = get_userdata( $the_order->get_user_id() );
-						}
-
-						if ( ! empty( $user_info ) ) {
-
-							$username = '';
-
-							if ( $user_info->first_name || $user_info->last_name ) {
-								$username .= esc_html( sprintf( _x( '%1$s %2$s', 'full name', 'wc-frontend-manager' ), ucfirst( $user_info->first_name ), ucfirst( $user_info->last_name ) ) );
-							} else {
-								$username .= esc_html( ucfirst( $user_info->display_name ) );
-							}
-
-						} else {
-							if ( $the_order->get_billing_first_name() || $the_order->get_billing_last_name() ) {
-								$username = trim( sprintf( _x( '%1$s %2$s', 'full name', 'wc-frontend-manager' ), $the_order->get_billing_first_name(), $the_order->get_billing_last_name() ) );
-							} else if ( $the_order->get_billing_company() ) {
-								$username = trim( $the_order->get_billing_company() );
-							} else {
-								$username = __( 'Guest', 'wc-frontend-manager' );
-							}
-						}
-
-						$username = apply_filters( 'wcfm_order_by_user', $username, $the_order->get_id() );
-					} else {
-						$username = __( 'Guest', 'wc-frontend-manager' );
+				if( apply_filters( 'wcfm_allow_view_customer_name', true ) ) {
+					$user_info = array();
+					if ( $the_order->get_user_id() ) {
+						$user_info = get_userdata( $the_order->get_user_id() );
 					}
-
-					if( $can_view_orders )
-						$wcfm_orders_json_arr[$index][] =  apply_filters( 'wcfm_order_label_display', '<a href="' . get_wcfm_view_order_url($the_order->get_id(), $the_order) . '" class="wcfm_order_title">#' . esc_attr( $the_order->get_order_number() ) . '</a>' . ' ' . __( 'by', 'wc-frontend-manager' ) . ' ' . $username, $the_order->get_id(), $order->product_id, $order, $username );
-					else
-						$wcfm_orders_json_arr[$index][] =  apply_filters( 'wcfm_order_label_display', '<span class="wcfm_order_title">#' . esc_attr( $the_order->get_order_number() ) . '</span> ' . __( 'by', 'wc-frontend-manager' ) . ' ' . $username, $the_order->get_id(), $order->product_id, $order, $username );
-
+		
+					if ( ! empty( $user_info ) ) {
+		
+						$username = '';
+		
+						if ( $user_info->first_name || $user_info->last_name ) {
+							$username .= esc_html( sprintf( _x( '%1$s %2$s', 'full name', 'wc-frontend-manager' ), ucfirst( $user_info->first_name ), ucfirst( $user_info->last_name ) ) );
+						} else {
+							$username .= esc_html( ucfirst( $user_info->display_name ) );
+						}
+		
+					} else {
+						if ( $the_order->get_billing_first_name() || $the_order->get_billing_last_name() ) {
+							$username = trim( sprintf( _x( '%1$s %2$s', 'full name', 'wc-frontend-manager' ), $the_order->get_billing_first_name(), $the_order->get_billing_last_name() ) );
+						} else if ( $the_order->get_billing_company() ) {
+							$username = trim( $the_order->get_billing_company() );
+						} else {
+							$username = __( 'Guest', 'wc-frontend-manager' );
+						}
+					}
+					
+					$username = apply_filters( 'wcfm_order_by_user', $username, $the_order->get_id() );
+				} else {
+					$username = __( 'Guest', 'wc-frontend-manager' );
+				}
+	
+				if( $can_view_orders )
+					$wcfm_orders_json_arr[$index][] =  apply_filters( 'wcfm_order_label_display', '<a href="' . get_wcfm_view_order_url($the_order->get_id(), $the_order) . '" class="wcfm_order_title">#' . esc_attr( $the_order->get_order_number() ) . '</a>' . ' ' . __( 'by', 'wc-frontend-manager' ) . ' ' . $username, $the_order->get_id(), $order->product_id, $order, $username );
+				else
+					$wcfm_orders_json_arr[$index][] =  apply_filters( 'wcfm_order_label_display', '<span class="wcfm_order_title">#' . esc_attr( $the_order->get_order_number() ) . '</span> ' . __( 'by', 'wc-frontend-manager' ) . ' ' . $username, $the_order->get_id(), $order->product_id, $order, $username );
+				
 				// Purchased
-					$order_item_details = '<div class="order_items" cellspacing="0">';
-					$gross_sales = 0;
-					$item_qty = 1;
-					try {
-						$line_item = new WC_Order_Item_Product( $order->order_item_id );
-						$gross_sales += (float) sanitize_text_field( $line_item->get_total() );
-						if($WCMp->vendor_caps->vendor_payment_settings('give_tax')) {
-							$gross_sales += (float) sanitize_text_field( $line_item->get_total_tax() );
-							$gross_sales += (float) $order->shipping_tax_amount;
-						}
-						if($WCMp->vendor_caps->vendor_payment_settings('give_shipping')) {
-							$gross_sales += (float) $order->shipping;
-						}
+				$order_item_details = '<div class="order_items" cellspacing="0">';
+				$gross_sales = 0;
+				$item_qty = 1;
+				try {
+					$line_item = new WC_Order_Item_Product( $order->order_item_id );
+					$gross_sales += (float) sanitize_text_field( $line_item->get_total() );
+					if($WCMp->vendor_caps->vendor_payment_settings('give_tax')) {
+						$gross_sales += (float) sanitize_text_field( $line_item->get_total_tax() );
+						$gross_sales += (float) $order->shipping_tax_amount;
+					}
+					if($WCMp->vendor_caps->vendor_payment_settings('give_shipping')) {
+						$gross_sales += (float) $order->shipping;
+					}
 					$item_qty = $order->quantity; //$line_item->get_quantity();
 					$order_item_details .= '<div class=""><span class="qty">' . $order->quantity . 'x</span><span class="name">' . $line_item->get_name();
 					if ( ! empty( $line_item->get_variation_id() ) ) {
@@ -276,11 +276,11 @@ class WCFM_Orders_WCMarketplace_Controller {
 					if ( 'unpaid' === $order->commission_status ) {
 						$status = '<span class="wcpv-unpaid-status">' . esc_html__( 'UNPAID', 'wc-frontend-manager' ) . '</span>';
 					}
-
+	
 					if ( 'paid' === $order->commission_status ) {
 						$status = '<span class="wcpv-paid-status">' . esc_html__( 'PAID', 'wc-frontend-manager' ) . '</span>';
 					}
-
+	
 					if ( 'reversed' === $order->commission_status ) {
 						$status = '<span class="wcpv-void-status">' . esc_html__( 'REVERSED', 'wc-frontend-manager' ) . '</span>';
 					}
@@ -313,33 +313,23 @@ class WCFM_Orders_WCMarketplace_Controller {
 				$order_date = ( version_compare( WC_VERSION, '2.7', '<' ) ) ? $the_order->order_date : $the_order->get_date_created();
 				$wcfm_orders_json_arr[$index][] = apply_filters( 'wcfm_order_date_display', date_i18n( wc_date_format(), strtotime( $order_date ) ), $order->order_id, $order );
 				
-				///status
-				$wcfm_orders_json_arr[$index][]= apply_filters( 'wcfm_order_date_display', date_i18n( wc_date_format(), strtotime( $order_date ) ), $order->order_id, $order );
-
 				// Action
 				$actions = '';
 				if( $wcfm_is_allow_order_status_update = apply_filters( 'wcfm_is_allow_order_status_update', true ) ) {
 					$order_status = sanitize_title( $the_order->get_status() );
-
-					if( !in_array( $order_status, array( 'failed', 'cancelled', 'refunded', 'completed' ) ) ) 
-
-						$actions = '<a class="wcfm_order_mark_complete wcfm-action-icon" href="#" data-orderid="' . $order->order_id . '"><span class="wcfmfa fa-check-circle text_tip" data-tip="' . esc_attr__( 'Mark as Complete', 'wc-frontend-manager' ) . '"></span></a>';
-
-
+					if( !in_array( $order_status, array( 'failed', 'cancelled', 'refunded', 'completed' ) ) ) $actions = '<a class="wcfm_order_mark_complete wcfm-action-icon" href="#" data-orderid="' . $order->order_id . '"><span class="wcfmfa fa-check-circle text_tip" data-tip="' . esc_attr__( 'Mark as Complete', 'wc-frontend-manager' ) . '"></span></a>';
 				}
 				
 				if( $can_view_orders )
 					$actions .= '<a class="wcfm-action-icon" href="' . get_wcfm_view_order_url($the_order->get_id(), $the_order) . '"><span class="wcfmfa fa-eye text_tip" data-tip="' . esc_attr__( 'View Details', 'wc-frontend-manager' ) . '"></span></a>';
-
-				
-
-
+				  
+				  
 				if( !WCFM_Dependencies::wcfmu_plugin_active_check() ) {
 					if( $is_wcfmu_inactive_notice_show = apply_filters( 'is_wcfmu_inactive_notice_show', true ) ) {
 						$actions .= '<a class="wcfm_wcvendors_order_mark_shipped_dummy wcfm-action-icon" href="#" data-orderid="' . $order->order_id . '"><span class="wcfmfa fa-truck text_tip" data-tip="' . esc_attr__( 'Mark Shipped', 'wc-frontend-manager' ) . '"></span></a>';
 					}
 				}
-
+				  
 				$actions = apply_filters ( 'wcfm_orders_module_actions', $actions, $order->order_id, $the_order );
 				
 				$wcfm_orders_json_arr[$index][] =  apply_filters ( 'wcmarketplace_orders_actions', $actions, $user_id, $order, $the_order );
@@ -350,8 +340,8 @@ class WCFM_Orders_WCMarketplace_Controller {
 		if( !empty($wcfm_orders_json_arr) ) $wcfm_orders_json .= json_encode($wcfm_orders_json_arr);
 		else $wcfm_orders_json .= '[]';
 		$wcfm_orders_json .= '
-	}';
-
-	echo $wcfm_orders_json;
-}
+													}';
+													
+		echo $wcfm_orders_json;
+	}
 }

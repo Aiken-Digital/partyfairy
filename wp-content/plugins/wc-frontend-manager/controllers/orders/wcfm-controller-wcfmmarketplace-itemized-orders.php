@@ -153,102 +153,102 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 
 
 		if( defined('WCFM_REST_API_CALL') ) {
-			return $order_summary;
-		}
+      return $order_summary;
+    }
 		
 		// Generate Products JSON
 		$wcfm_orders_json = '';
 		$wcfm_orders_json = '{
-			"draw": ' . $_POST['draw'] . ',
-			"recordsTotal": ' . $total_items . ',
-			"recordsFiltered": ' . $total_items . ',
-			"data": ';
+														"draw": ' . $_POST['draw'] . ',
+														"recordsTotal": ' . $total_items . ',
+														"recordsFiltered": ' . $total_items . ',
+														"data": ';
+		
+		if ( !empty( $order_summary ) ) {
+			$index = 0;
+			$totals = 0;
+			$wcfm_orders_json_arr = array();
 			
-			if ( !empty( $order_summary ) ) {
-				$index = 0;
-				$totals = 0;
-				$wcfm_orders_json_arr = array();
-				
-				foreach ( $order_summary as $order ) {
+			foreach ( $order_summary as $order ) {
 				// Order exists check
-					$order_post_title = get_the_title( $order->order_id );
-					if( !$order_post_title ) continue;
-					
-					$the_order = wc_get_order( $order->order_id );
-					if( !is_a( $the_order, 'WC_Order' ) ) continue;
-					
-					if( apply_filters( 'wcfm_is_show_order_restrict_check', false, $order->order_id, $order->product_id, $order ) ) continue;
-					
-					$order_currency = $the_order->get_currency();
-					$needs_shipping = false; 
-					
+				$order_post_title = get_the_title( $order->order_id );
+				if( !$order_post_title ) continue;
+				
+				$the_order = wc_get_order( $order->order_id );
+				if( !is_a( $the_order, 'WC_Order' ) ) continue;
+				
+				if( apply_filters( 'wcfm_is_show_order_restrict_check', false, $order->order_id, $order->product_id, $order ) ) continue;
+				
+				$order_currency = $the_order->get_currency();
+				$needs_shipping = false; 
+	
 				// Status
-					if( $order_sync == 'yes' ) {
-						$wcfm_orders_json_arr[$index][] =  apply_filters( 'wcfm_order_status_display', '<span class="order-status tips wcicon-status-default wcicon-status-' . sanitize_title( $the_order->get_status() ) . ' text_tip" data-tip="' . wc_get_order_status_name( $the_order->get_status() ) . '"></span>', $the_order );
-					} else {
-						$wcfm_orders_json_arr[$index][] =  apply_filters( 'wcfm_order_status_display', '<span class="order-status tips wcicon-status-default wcicon-status-' . sanitize_title( $order->commission_status ) . ' text_tip" data-tip="' . $WCFMmp->wcfmmp_vendor->wcfmmp_vendor_order_status_name( $order->commission_status ) . '"></span>', $the_order );
-					}
-					
+				if( $order_sync == 'yes' ) {
+					$wcfm_orders_json_arr[$index][] =  apply_filters( 'wcfm_order_status_display', '<span class="order-status tips wcicon-status-default wcicon-status-' . sanitize_title( $the_order->get_status() ) . ' text_tip" data-tip="' . wc_get_order_status_name( $the_order->get_status() ) . '"></span>', $the_order );
+				} else {
+					$wcfm_orders_json_arr[$index][] =  apply_filters( 'wcfm_order_status_display', '<span class="order-status tips wcicon-status-default wcicon-status-' . sanitize_title( $order->commission_status ) . ' text_tip" data-tip="' . $WCFMmp->wcfmmp_vendor->wcfmmp_vendor_order_status_name( $order->commission_status ) . '"></span>', $the_order );
+				}
+				
 				// Custom Column Support After
-					$wcfm_orders_json_arr = apply_filters( 'wcfm_orders_custom_columns_data_after', $wcfm_orders_json_arr, $index, $order->ID, $order, $the_order );
-					
+				$wcfm_orders_json_arr = apply_filters( 'wcfm_orders_custom_columns_data_after', $wcfm_orders_json_arr, $index, $order->ID, $order, $the_order );
+				
 				// Order
-					if( apply_filters( 'wcfm_allow_view_customer_name', true ) ) {
-						$user_info = array();
-						if ( $the_order->get_user_id() ) {
-							$user_info = get_userdata( $the_order->get_user_id() );
-						}
-						
-						if ( ! empty( $user_info ) ) {
-							
-							$username = '';
-							
-							if ( $user_info->first_name || $user_info->last_name ) {
-								$username .= esc_html( sprintf( _x( '%1$s %2$s', 'full name', 'wc-frontend-manager' ), ucfirst( $user_info->first_name ), ucfirst( $user_info->last_name ) ) );
-							} else {
-								$username .= esc_html( ucfirst( $user_info->display_name ) );
-							}
-							
+				if( apply_filters( 'wcfm_allow_view_customer_name', true ) ) {
+					$user_info = array();
+					if ( $the_order->get_user_id() ) {
+						$user_info = get_userdata( $the_order->get_user_id() );
+					}
+		
+					if ( ! empty( $user_info ) ) {
+		
+						$username = '';
+		
+						if ( $user_info->first_name || $user_info->last_name ) {
+							$username .= esc_html( sprintf( _x( '%1$s %2$s', 'full name', 'wc-frontend-manager' ), ucfirst( $user_info->first_name ), ucfirst( $user_info->last_name ) ) );
 						} else {
-							if ( $the_order->get_billing_first_name() || $the_order->get_billing_last_name() ) {
-								$username = trim( sprintf( _x( '%1$s %2$s', 'full name', 'wc-frontend-manager' ), $the_order->get_billing_first_name(), $the_order->get_billing_last_name() ) );
-							} else if ( $the_order->get_billing_company() ) {
-								$username = trim( $the_order->get_billing_company() );
-							} else {
-								$username = __( 'Guest', 'wc-frontend-manager' );
-							}
+							$username .= esc_html( ucfirst( $user_info->display_name ) );
 						}
-						
-						$username = apply_filters( 'wcfm_order_by_user', $username, $the_order->get_id() );
+		
 					} else {
-						$username = __( 'Guest', 'wc-frontend-manager' );
+						if ( $the_order->get_billing_first_name() || $the_order->get_billing_last_name() ) {
+							$username = trim( sprintf( _x( '%1$s %2$s', 'full name', 'wc-frontend-manager' ), $the_order->get_billing_first_name(), $the_order->get_billing_last_name() ) );
+						} else if ( $the_order->get_billing_company() ) {
+							$username = trim( $the_order->get_billing_company() );
+						} else {
+							$username = __( 'Guest', 'wc-frontend-manager' );
+						}
 					}
 					
-					if( $can_view_orders )
-						$wcfm_orders_json_arr[$index][] =  apply_filters( 'wcfm_order_label_display', '<a href="' . get_wcfm_view_order_url($the_order->get_id(), $the_order) . '" class="wcfm_order_title">#' . esc_attr( $the_order->get_order_number() ) . '</a>' . ' ' . __( 'by', 'wc-frontend-manager' ) . ' ' . $username, $the_order->get_id(), $order->product_id, $order, $username );
-					else
-						$wcfm_orders_json_arr[$index][] =  apply_filters( 'wcfm_order_label_display', '<span class="wcfm_order_title">#' . esc_attr( $the_order->get_order_number() ) . '</span> ' . __( 'by', 'wc-frontend-manager' ) . ' ' . $username, $the_order->get_id(), $order->product_id, $order, $username );
-					
+					$username = apply_filters( 'wcfm_order_by_user', $username, $the_order->get_id() );
+				} else {
+					$username = __( 'Guest', 'wc-frontend-manager' );
+				}
+	
+				if( $can_view_orders )
+					$wcfm_orders_json_arr[$index][] =  apply_filters( 'wcfm_order_label_display', '<a href="' . get_wcfm_view_order_url($the_order->get_id(), $the_order) . '" class="wcfm_order_title">#' . esc_attr( $the_order->get_order_number() ) . '</a>' . ' ' . __( 'by', 'wc-frontend-manager' ) . ' ' . $username, $the_order->get_id(), $order->product_id, $order, $username );
+				else
+					$wcfm_orders_json_arr[$index][] =  apply_filters( 'wcfm_order_label_display', '<span class="wcfm_order_title">#' . esc_attr( $the_order->get_order_number() ) . '</span> ' . __( 'by', 'wc-frontend-manager' ) . ' ' . $username, $the_order->get_id(), $order->product_id, $order, $username );
+				
 				// Purchased
-					$order_item_details = '<div class="order_items" cellspacing="0">';
-					$gross_sales = 0;
-					$item_qty = 1;
-					try {
-						$line_item = new WC_Order_Item_Product( $order->item_id );
-						if( $WCFMmp->wcfmmp_vendor->is_vendor_deduct_discount( $order->vendor_id, $order->order_id ) ) {
-							$gross_sales += (float) sanitize_text_field( $order->item_total );
-						} else {
-							$gross_sales += (float) sanitize_text_field( $order->item_sub_total );
-						}
+				$order_item_details = '<div class="order_items" cellspacing="0">';
+				$gross_sales = 0;
+				$item_qty = 1;
+				try {
+					$line_item = new WC_Order_Item_Product( $order->item_id );
+					if( $WCFMmp->wcfmmp_vendor->is_vendor_deduct_discount( $order->vendor_id, $order->order_id ) ) {
+						$gross_sales += (float) sanitize_text_field( $order->item_total );
+					} else {
+						$gross_sales += (float) sanitize_text_field( $order->item_sub_total );
+					}
+					if( $this->is_vendor_get_tax ) {
+						$gross_sales += (float) $order->tax;
+					}
+					if( $this->is_vendor_get_shipping ) {
+						$gross_sales += (float) apply_filters( 'wcfmmmp_gross_sales_shipping_cost', $order->shipping, $order->vendor_id );
 						if( $this->is_vendor_get_tax ) {
-							$gross_sales += (float) $order->tax;
+							$gross_sales += (float) $order->shipping_tax_amount;
 						}
-						if( $this->is_vendor_get_shipping ) {
-							$gross_sales += (float) apply_filters( 'wcfmmmp_gross_sales_shipping_cost', $order->shipping, $order->vendor_id );
-							if( $this->is_vendor_get_tax ) {
-								$gross_sales += (float) $order->shipping_tax_amount;
-							}
-						}
+					}
 					$item_qty = $order->quantity; //$line_item->get_quantity();
 					$order_item_details .= '<div class=""><span class="qty">' . $order->quantity . 'x</span><span class="name">' . $line_item->get_name();
 					if ( ! empty( $line_item->get_variation_id() ) ) {
@@ -360,153 +360,26 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 				
 				if( $can_view_orders )
 					$actions .= '<a class="wcfm-action-icon" href="' . get_wcfm_view_order_url($the_order->get_id(), $the_order) . '"><span class="wcfmfa fa-eye text_tip" data-tip="' . esc_attr__( 'View Details', 'wc-frontend-manager' ) . '"></span></a>';
-				
-				
+				  
+				  
 				if( !WCFM_Dependencies::wcfmu_plugin_active_check() ) {
 					if( $is_wcfmu_inactive_notice_show = apply_filters( 'is_wcfmu_inactive_notice_show', true ) ) {
 						$actions .= '<a class="wcfm_wcvendors_order_mark_shipped_dummy wcfm-action-icon" href="#" data-orderid="' . $order->order_id . '"><span class="wcfmfa fa-truck text_tip" data-tip="' . esc_attr__( 'Mark Shipped', 'wc-frontend-manager' ) . '"></span></a>';
 					}
 				}
-				
+				  
 				$actions = apply_filters ( 'wcfm_orders_module_actions', $actions, $order->order_id, $the_order, $this->vendor_id );
 				
-				///$wcfm_orders_json_arr[$index][] =  apply_filters ( 'wcfmmarketplace_orders_actions', $actions, $user_id, $order, $the_order, $this->vendor_id );
-
+				$wcfm_orders_json_arr[$index][] =  apply_filters ( 'wcfmmarketplace_orders_actions', $actions, $user_id, $order, $the_order, $this->vendor_id );
 				
-				if( $order_status == 'pending'){
-
-
-					$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id='.$wcfm_orders_single->ID ), 'woocommerce-mark-order-status' );
-					$complete_url_decline = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=cancelled&order_id='.$wcfm_orders_single->ID ), 'woocommerce-mark-order-status' );
-
-					$menu_pending = '<a style="background-color: #1ad40e !important;
-					padding: 4px;
-					color: white; margin:2px;" href="'.$complete_url.'">Accept</a>';
-
-					$menu_pending .='<a style="background-color: #d40e33 !important;
-					padding: 4px;
-					color: white; margin:2px;" href="'.$complete_url_decline.'">Decline</a>';
-
-					$wcfm_orders_json_arr[$index][] =  $menu_pending;
-
-				}elseif($order_status == 'processing'){
-
-					$items = $the_order->get_items();
-					foreach ( $items as $item ) {
-
-						$product_name = $item->get_name();
-						$product_id = $item->get_product_id();
-						$product_variation_id = $item->get_variation_id();
-
-					}
-
-					$delivery_estimate = get_post_meta($product_id, 'delivery_estimate', true);
-					$delivery_product  = get_post_meta($product_id, 'delivery_product', true);
-					$pickup_product    = get_post_meta($product_id, 'pickup_product', true);
-					
-					$tindakan = '';
-
-
-					$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processed&order_id='.$wcfm_orders_single->ID ), 'woocommerce-mark-order-status' );
-
-					if($delivery_estimate == "Y") {
-
-
-						$tindakan .= '<a style="background-color: #1ad40e !important;
-						padding: 4px;
-						color: white; margin:2px;" href="'.$complete_url.'">Ready To Ship</a>';
-
-						} //
-
-						if($delivery_product == "Y") {
-
-							$tindakan .= '<a style="background-color: #1ad40e !important;
-							padding: 4px;
-							color: white; margin:2px;" href="'.$complete_url.'">Ready To Ship</a>';
-
-						}
-
-						if($pickup_product == "Y") {
-
-							$tindakan .= '<a style="background-color: #1ad40e !important;
-							padding: 4px;
-							color: white; margin:2px;" href="'.$complete_url.'">Ready To Pick</a>';
-
-						}
-
-
-
-						$wcfm_orders_json_arr[$index][] = $tindakan;
-
-
-					}elseif($order_status == 'processed'){
-
-						$items = $the_order->get_items();
-						foreach ( $items as $item ) {
-
-							$product_name = $item->get_name();
-							$product_id = $item->get_product_id();
-							$product_variation_id = $item->get_variation_id();
-
-						}
-
-						$delivery_estimate = get_post_meta($product_id, 'delivery_estimate', true);
-						$delivery_product  = get_post_meta($product_id, 'delivery_product', true);
-						$pickup_product    = get_post_meta($product_id, 'pickup_product', true);
-						
-						$tindakan = '';
-
-
-						$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=completed&order_id='.$wcfm_orders_single->ID ), 'woocommerce-mark-order-status' );
-
-						if($delivery_estimate == "Y") {
-
-
-							$tindakan .= '<a style="background-color: #1ad40e !important;
-							padding: 4px;
-							color: white; margin:2px;" href="'.$complete_url.'">Track</a>';
-
-						}
-
-						if($delivery_product == "Y") {
-
-							$tindakan .= '<a style="background-color: #1ad40e !important;
-							padding: 4px;
-							color: white; margin:2px;" href="'.$complete_url.'">Track</a>';
-
-						}
-
-						if($pickup_product == "Y") {
-
-							$tindakan .= '<a style="background-color: #1ad40e !important;
-							padding: 4px;
-							color: white; margin:2px;" href="'.$complete_url.'">Picked Up</a>';
-
-						}
-
-
-
-						$wcfm_orders_json_arr[$index][] = $tindakan;
-
-
-					}else{
-
-						//$wcfm_orders_json_arr[$index][] =  apply_filters ( 'wcfm_orders_actions', $actions, $wcfm_orders_single, $the_order );
-						$wcfm_orders_json_arr[$index][] =  '';
-
-
-
-					}
-
-					
-					$index++;
-				}
+				$index++;
 			}
-			if( !empty($wcfm_orders_json_arr) ) $wcfm_orders_json .= json_encode($wcfm_orders_json_arr);
-			else $wcfm_orders_json .= '[]';
-			$wcfm_orders_json .= '
-		}';
-		
+		}
+		if( !empty($wcfm_orders_json_arr) ) $wcfm_orders_json .= json_encode($wcfm_orders_json_arr);
+		else $wcfm_orders_json .= '[]';
+		$wcfm_orders_json .= '
+													}';
+													
 		echo $wcfm_orders_json;
 	}
 }

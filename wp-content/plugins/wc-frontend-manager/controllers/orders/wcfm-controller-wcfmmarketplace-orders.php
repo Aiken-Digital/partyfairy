@@ -398,30 +398,24 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 						$order_status = sanitize_title( $order->commission_status );
 					}
 					$allowed_order_status = apply_filters( 'wcfm_allowed_order_status', wc_get_order_statuses(), $order->order_id );
+
 					$status_update_block_statuses = apply_filters( 'wcfm_status_update_block_statuses', array( 'refunded', 'cancelled', 'failed' ), $order->order_id );
-					if( in_array( 'wc-completed', array_keys($allowed_order_status) ) && !in_array( 'completed', $status_update_block_statuse ) && !in_array( $order_status, array( 'failed', 'cancelled', 'refunded', 'completed' ) ) ) $actions = '<a class="wcfm_order_mark_complete wcfm-action-icon" href="#" data-orderid="' . $order->order_id . '"><span class="wcfmfa fa-check-circle text_tip" data-tip="' . esc_attr__( 'Mark as Complete', 'wc-frontend-manager' ) . '"></span></a>';
+
+					// if( in_array( 'wc-completed', array_keys($allowed_order_status) ) && !in_array( 'completed', $status_update_block_statuse ) && !in_array( $order_status, array( 'failed', 'cancelled', 'refunded', 'completed' ) ) ) $actions = '<a class="wcfm_order_mark_complete wcfm-action-icon" href="#" data-orderid="' . $order->order_id . '"><span class="wcfmfa fa-check-circle text_tip" data-tip="' . esc_attr__( 'Mark as Complete', 'wc-frontend-manager' ) . '"></span></a>';
 				}
 				
-				if( $can_view_orders )
-					$actions .= '<a class="wcfm-action-icon" href="' . get_wcfm_view_order_url($the_order->get_id(), $the_order) . '"><span class="wcfmfa fa-eye text_tip" data-tip="' . esc_attr__( 'View Details', 'wc-frontend-manager' ) . '"></span></a>';
-				
-				
-				if( !WCFM_Dependencies::wcfmu_plugin_active_check() ) {
-					if( $is_wcfmu_inactive_notice_show = apply_filters( 'is_wcfmu_inactive_notice_show', true ) ) {
-						$actions .= '<a class="wcfm_wcvendors_order_mark_shipped_dummy wcfm-action-icon" href="#" data-orderid="' . $order->order_id . '"><span class="wcfmfa fa-truck text_tip" data-tip="' . esc_attr__( 'Mark Shipped', 'wc-frontend-manager' ) . '"></span></a>';
-					}
-				}
-				
-				$actions = apply_filters ( 'wcfm_orders_module_actions', $actions, $order->order_id, $the_order, $this->vendor_id );
-				
+
+
+				//$actions = apply_filters ( 'wcfm_orders_module_actions', $actions, $order->order_id, $the_order, $this->vendor_id );
+
 				///$wcfm_orders_json_arr[$index][] =  apply_filters ( 'wcfmmarketplace_orders_actions', $actions, $user_id, $order, $the_order, $this->vendor_id );
 
 
 				if( $order_status == 'pending'){
 
 
-					$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id='.$wcfm_orders_single->ID ), 'woocommerce-mark-order-status' );
-					$complete_url_decline = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=cancelled&order_id='.$wcfm_orders_single->ID ), 'woocommerce-mark-order-status' );
+					$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id='.$order->order_id ), 'woocommerce-mark-order-status' );
+					$complete_url_decline = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=cancelled&order_id='.$order->order_id ), 'woocommerce-mark-order-status' );
 
 					$menu_pending = '<a style="background-color: #1ad40e !important;
 					padding: 4px;
@@ -431,7 +425,7 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 					padding: 4px;
 					color: white; margin:2px;" href="'.$complete_url_decline.'">Decline</a>';
 
-					$wcfm_orders_json_arr[$index][] =  $menu_pending;
+					$actions =  $menu_pending;
 
 				}elseif($order_status == 'processing'){
 
@@ -447,11 +441,11 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 					$delivery_estimate = get_post_meta($product_id, 'delivery_estimate', true);
 					$delivery_product  = get_post_meta($product_id, 'delivery_product', true);
 					$pickup_product    = get_post_meta($product_id, 'pickup_product', true);
-					
+
 					$tindakan = '';
 
 
-					$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processed&order_id='.$wcfm_orders_single->ID ), 'woocommerce-mark-order-status' );
+					$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processed&order_id='.$order->order_id ), 'woocommerce-mark-order-status' );
 
 					if($delivery_estimate == "Y") {
 
@@ -480,7 +474,7 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 
 
 
-						$wcfm_orders_json_arr[$index][] = $tindakan;
+						$actions = $tindakan;
 
 
 					}elseif($order_status == 'processed'){
@@ -501,7 +495,7 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 						$tindakan = '';
 
 
-						$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=completed&order_id='.$wcfm_orders_single->ID ), 'woocommerce-mark-order-status' );
+						$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=completed&order_id='.$order->order_id ), 'woocommerce-mark-order-status' );
 
 						if($delivery_estimate == "Y") {
 
@@ -530,19 +524,22 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 
 
 
-						$wcfm_orders_json_arr[$index][] = $tindakan;
+						$actions = $tindakan;
 
 
 					}else{
 
-						//$wcfm_orders_json_arr[$index][] =  apply_filters ( 'wcfm_orders_actions', $actions, $wcfm_orders_single, $the_order );
-						$wcfm_orders_json_arr[$index][] =  '';
+						$actions=  '';
 
 
 
 					}
 
 
+					
+					$wcfm_orders_json_arr[$index][] =  $actions;
+
+					//$wcfm_orders_json_arr[$index][] = $actions;
 					
 					$index++;
 				}
