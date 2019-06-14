@@ -8,7 +8,7 @@ if( function_exists('acf_add_local_field_group') ):
 		'fields' => array(
 			array(
 				'key' => 'field_5cdd166ab473d',
-				'label' => 'Icon Menu For Mobile',
+				'label' => 'Category Icon',
 				'name' => 'icon',
 				'type' => 'image',
 				'instructions' => '',
@@ -32,7 +32,7 @@ if( function_exists('acf_add_local_field_group') ):
 			),
 			array(
 				'key' => 'field_5ce3a01c4493a',
-				'label' => 'Header Image',
+				'label' => 'Big Banner',
 				'name' => 'header_image',
 				'type' => 'image',
 				'instructions' => '',
