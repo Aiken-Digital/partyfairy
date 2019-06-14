@@ -1,8 +1,37 @@
 <?php
 add_filter( 'deprecated_function_trigger_error', '__return_false' );
-require_once( get_template_directory() . '/acf.php' );
+//require_once( get_template_directory() . '/acf.php' );
 require_once( get_template_directory() . '/wc.php' );
 
+function wp_get_productcat_postcount($id) {
+
+    //return $count;
+	$args = array(
+      'post_type'     => 'product', //post type, I used 'product'
+      'post_status'   => 'publish', // just tried to find all published post
+      'posts_per_page' => -1,  //show all
+      'tax_query' => array(
+      	'relation' => 'AND',
+      	array(
+          'taxonomy' => 'product_cat',  //taxonomy name  here, I used 'product_cat'
+          'field' => 'id',
+          'terms' => array( $id )
+      )
+      )
+  );
+
+	$query = new WP_Query( $args);
+
+    /*
+    echo '<pre>';
+
+    print_r($query->post_count);
+    echo '</pre>';
+    */
+
+    return (int)$query->post_count;
+
+}
 
 function product_popularity(){
 
