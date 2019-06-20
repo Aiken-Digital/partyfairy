@@ -175,135 +175,302 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
                   <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab">
 
-                    <?php foreach ($detail as $key => $value) { ?>
+                    <?php foreach ($detail as $key => $value) {  ?>
 
-                      <div class="row m-b-15">
+
+                      <?php if($value['dietary_preference']){ ?>
+                       <div class="row m-b-15">
                         <div class="col-4">
                           <div>
-                            <p class="uppercase"><?php if($value['title']) { echo $value['title']; } ?></p>
+                            <p class="uppercase">Dietary Preference</p>
                           </div>
                         </div>
                         <div class="col-8">
-
-                          <?php if($value['information']){
-                           foreach ($value['information'] as $skey => $svalue) { ?>
-
+                          <?php 
+                          foreach($value['dietary_preference'] as $skey => $svalue) { ?>
                             <div class="d-flex align-items-center">
                               <div class="icon m-r-10">﻿ 
-                                <?php if($svalue['icon']) { ?> <img src="<?php echo $svalue['icon']; ?>" width="30" height="30" /> <?php  } ?>
+                                <?php $icon = get_field('icon', 'dietary-preference_'.$svalue->term_id); ?>
+                                <?php if($icon) { ?> <img src="<?php echo $icon; ?>" width="30" height="30" /> <?php  } ?>
                               </div>
-                              <?php if($svalue['description']) { echo $svalue['description']; } ?>
+                              <?php echo $svalue->name;  ?>
                             </div>
-                          <?php } }?>
+                          <?php } ?>
                         </div>
                       </div>
                     <?php } ?>
 
-                  </div>
-
-                <?php } ?>
-
-
-
-
-
-                <?php 
-                if($policies) {  ?>
-
-                  <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3-tab">
-
-                    <?php foreach ($policies as $key => $value) { ?>
-
-                      <div class="row m-b-15">
-                        <div class="col-4">
-
-                          <div class="d-flex align-items-center">
-                            <div class="icon m-r-10">﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                              <path style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans" d="M 1 3 L 1 4 L 1 14 L 1 15 L 2 15 L 3 15 L 3 47 L 3 48 L 4 48 L 46 48 L 47 48 L 47 47 L 47 15 L 48 15 L 49 15 L 49 14 L 49 4 L 49 3 L 48 3 L 2 3 L 1 3 z M 3 5 L 47 5 L 47 13 L 3 13 L 3 5 z M 5 15 L 45 15 L 45 46 L 5 46 L 5 15 z M 17.5 19 C 15.578812 19 14 20.578812 14 22.5 C 14 24.421188 15.578812 26 17.5 26 L 32.5 26 C 34.421188 26 36 24.421188 36 22.5 C 36 20.578812 34.421188 19 32.5 19 L 17.5 19 z M 17.5 21 L 32.5 21 C 33.340812 21 34 21.659188 34 22.5 C 34 23.340812 33.340812 24 32.5 24 L 17.5 24 C 16.659188 24 16 23.340812 16 22.5 C 16 21.659188 16.659188 21 17.5 21 z" overflow="visible" enable-background="accumulate" font-family="Bitstream Vera Sans"/>
-                            </svg>
-                          </div>
-                          <p class="uppercase m-b-0"><?php if($value['title']) { echo $value['title']; } ?></p>
+                    <?php if($value['whats_included']){ ?>
+                     <div class="row m-b-15">
+                      <div class="col-4">
+                        <div>
+                          <p class="uppercase">What’s Included</p>
                         </div>
-
-
                       </div>
                       <div class="col-8">
-                        <div>
+                        <?php 
+                        foreach($value['whats_included'] as $skey => $svalue) { ?>
+                          <div class="d-flex align-items-center">
+                            <div class="icon m-r-10">﻿ 
 
+                              <?php $icon = get_field('icon', 'Whats-included_'.$svalue->term_id); ?>
 
-                          <?php if($value['description']) { echo $value['description']; } ?>
-
+                              <?php if($icon) { ?> 
+                                <img src="<?php echo $icon; ?>" width="30" height="30" /> <?php  } ?>
+                              </div>
+                              <?php echo $svalue->name;  ?>
+                            </div>
+                          <?php } ?>
                         </div>
+                      </div>
+                    <?php } ?>
+
+
+                    <?php if($value['note']){ ?>
+                     <div class="row m-b-15">
+                      <div class="col-4">
+                        <div>
+                          <p class="uppercase">Note</p>
+                        </div>
+                      </div>
+                      <div class="col-8">
+                        <div class="d-flex align-items-center">
+                          <div class="icon m-r-10">﻿ 
+                          </div>
+                          <?php echo $value['note']  ?>
+                        </div>                      
                       </div>
                     </div>
                   <?php } ?>
 
-                </div>
+                  <?php if($value['dimension']){ ?>
+                   <div class="row m-b-15">
+                    <div class="col-4">
+                      <div>
+                        <p class="uppercase">Dimension</p>
+                      </div>
+                    </div>
+                    <div class="col-8">
+                      <div class="d-flex align-items-center">
+                        <div class="icon m-r-10">﻿ 
+                        </div>
+                        <?php echo $value['dimension']  ?>
+                      </div>                      
+                    </div>
+                  </div>
+                <?php } ?>
 
+                <?php if($value['material']){ ?>
+                 <div class="row m-b-15">
+                  <div class="col-4">
+                    <div>
+                      <p class="uppercase">Material</p>
+                    </div>
+                  </div>
+                  <div class="col-8">
+                    <?php 
+                    foreach($value['material'] as $skey => $svalue) { ?>
+                      <div class="d-flex align-items-center">
+                        <div class="icon m-r-10">﻿ 
+                        </div>
+                        <?php echo $svalue->name;  ?>
+                      </div>
+                    <?php } ?>
+                  </div>
+                </div>
               <?php } ?>
 
+              <?php if($value['if_set_up_is_included']){ ?>
+               <div class="row m-b-15">
+                <div class="col-4">
+                  <div>
+                    <p class="uppercase">If Set Up is Included</p>
+                  </div>
+                </div>
+                <div class="col-8">
+                  <div class="d-flex align-items-center">
+                    <div class="icon m-r-10">﻿ 
+                    </div>
+                    <?php echo $value['if_set_up_is_included']  ?>
+                  </div>                      
+                </div>
+              </div>
+            <?php } ?>
 
 
+            <?php if($value['serving_duration']){ ?>
+             <div class="row m-b-15">
+              <div class="col-4">
+                <div>
+                  <p class="uppercase">Serving Duration</p>
+                </div>
+              </div>
+              <div class="col-8">
+                <div class="d-flex align-items-center">
+                  <div class="icon m-r-10">﻿ 
+                  </div>
+                  <?php echo $value['serving_duration']  ?>
+                </div>                      
+              </div>
+            </div>
+          <?php } ?>
 
 
+          <?php if($value['disposable_cutlery']){ ?>
+           <div class="row m-b-15">
+            <div class="col-4">
+              <div>
+                <p class="uppercase">Disposable Cutlery Included</p>
+              </div>
+            </div>
+            <div class="col-8">
+              <?php 
+              foreach($value['disposable_cutlery'] as $skey => $svalue) { ?>
+                <div class="d-flex align-items-center">
+                  <div class="icon m-r-10">﻿ 
 
-
-
+                    <?php $icon = get_field('icon', 'disposable-cutlery-included_'.$svalue->term_id); ?>
+                    <?php if($icon) { ?> <img src="<?php echo $icon; ?>" width="30" height="30" /> <?php  } ?>
+                  </div>
+                  <?php echo $svalue->name;  ?>
+                </div>
+              <?php } ?>
             </div>
           </div>
+        <?php } ?>
+
+
+        <?php if($value['delivery_condition']){ ?>
+         <div class="row m-b-15">
+          <div class="col-4">
+            <div>
+              <p class="uppercase">Delivery Condition</p>
+            </div>
+          </div>
+          <div class="col-8">
+            <?php 
+            foreach($value['delivery_condition'] as $skey => $svalue) { ?>
+              <div class="d-flex align-items-center">
+                <div class="icon m-r-10">﻿ 
+                  <?php $icon = get_field('icon', 'delivery-condition_'.$svalue->term_id); ?>
+                  <?php if($icon) { ?> <img src="<?php echo $icon; ?>" width="30" height="30" /> <?php  } ?>
+                </div>
+                <?php echo $svalue->name;  ?>
+              </div>
+            <?php } ?>
+          </div>
         </div>
-      </div>
+      <?php } ?>
 
 
-    </div>
+
+    <?php } ?>
+
   </div>
 
+<?php } ?>
+
+
+
+
+
+<?php 
+if($policies) {  ?>
+
+  <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3-tab">
+
+    <?php foreach ($policies as $key => $value) { ?>
+
+      <div class="row m-b-15">
+        <div class="col-4">
+
+          <div class="d-flex align-items-center">
+            <div class="icon m-r-10">﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+              <path style="text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans" d="M 1 3 L 1 4 L 1 14 L 1 15 L 2 15 L 3 15 L 3 47 L 3 48 L 4 48 L 46 48 L 47 48 L 47 47 L 47 15 L 48 15 L 49 15 L 49 14 L 49 4 L 49 3 L 48 3 L 2 3 L 1 3 z M 3 5 L 47 5 L 47 13 L 3 13 L 3 5 z M 5 15 L 45 15 L 45 46 L 5 46 L 5 15 z M 17.5 19 C 15.578812 19 14 20.578812 14 22.5 C 14 24.421188 15.578812 26 17.5 26 L 32.5 26 C 34.421188 26 36 24.421188 36 22.5 C 36 20.578812 34.421188 19 32.5 19 L 17.5 19 z M 17.5 21 L 32.5 21 C 33.340812 21 34 21.659188 34 22.5 C 34 23.340812 33.340812 24 32.5 24 L 17.5 24 C 16.659188 24 16 23.340812 16 22.5 C 16 21.659188 16.659188 21 17.5 21 z" overflow="visible" enable-background="accumulate" font-family="Bitstream Vera Sans"/>
+            </svg>
+          </div>
+          <p class="uppercase m-b-0"><?php if($value['title']) { echo $value['title']; } ?></p>
+        </div>
+
+
+      </div>
+      <div class="col-8">
+        <div>
+
+
+          <?php if($value['description']) { echo $value['description']; } ?>
+
+        </div>
+      </div>
+    </div>
+  <?php } ?>
+
+</div>
+
+<?php } ?>
 
 
 
 
 
 
-  <?php do_action( 'woocommerce_before_single_variation' ); ?>
+
+
+</div>
+</div>
+</div>
+</div>
+
+
+</div>
+</div>
 
 
 
-  <div class="col-lg-4 m-b-25">
 
 
 
-   <div class="product-info product-info-main-form">
-    <div class="product-info--price m-b-15"><span class="m-r-5"><?php echo $product->get_price_html(); ?></span><span class="font-12">each</span></div>
-    <div id="product-cp"><?php do_action( 'woocommerce_single_variation' );?></div>
 
-    <?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
+<?php do_action( 'woocommerce_before_single_variation' ); ?>
 
 
-    <?php do_action( 'woocommerce_before_add_to_cart_quantity' );
-    ?>
 
-    <div class="product-info--quantity m-b-20">
-      <p class="font-12">SELECT QUANTITY</p>
-      <div class="incrementers">
+<div class="col-lg-4 m-b-25">
 
-        <style type="text/css">
 
-         input[name="quantity"] {
-          height: 50px;
-          border-radius: 0px;
-          font-size: 12px;
-        }
-      </style>
 
-      <input class="-minus btn" id="sub" value="-" type="button">
-      <div class="form-group m-b-0 w-100">
-       <?php
+ <div class="product-info product-info-main-form">
+  <div class="product-info--price m-b-15"><span class="m-r-5"><?php echo $product->get_price_html(); ?></span><span class="font-12">each</span></div>
+  <div id="product-cp"><?php do_action( 'woocommerce_single_variation' );?></div>
 
-       woocommerce_quantity_input( array(
-        'input_id'     => uniqid( 'qty_' ),
-        'classes'      => apply_filters( 'woocommerce_quantity_input_classes', array('form-control', 'text-center','valid','qty','text'  ), $product ),
-        'min_value'   => apply_filters( 'woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product ),
-        'max_value'   => apply_filters( 'woocommerce_quantity_input_max', $product->get_max_purchase_quantity(), $product ),
+  <?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
+
+
+  <?php do_action( 'woocommerce_before_add_to_cart_quantity' );
+  ?>
+
+  <div class="product-info--quantity m-b-20">
+    <p class="font-12">SELECT QUANTITY</p>
+    <div class="incrementers">
+
+      <style type="text/css">
+
+       input[name="quantity"] {
+        height: 50px;
+        border-radius: 0px;
+        font-size: 12px;
+      }
+    </style>
+
+    <input class="-minus btn" id="sub" value="-" type="button">
+    <div class="form-group m-b-0 w-100">
+     <?php
+
+     woocommerce_quantity_input( array(
+      'input_id'     => uniqid( 'qty_' ),
+      'classes'      => apply_filters( 'woocommerce_quantity_input_classes', array('form-control', 'text-center','valid','qty','text'  ), $product ),
+      'min_value'   => apply_filters( 'woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product ),
+      'max_value'   => apply_filters( 'woocommerce_quantity_input_max', $product->get_max_purchase_quantity(), $product ),
 		'input_value' => isset( $_POST['quantity'] ) ? wc_stock_amount( wp_unslash( $_POST['quantity'] ) ) : $product->get_min_purchase_quantity(), // WPCS: CSRF ok, input var ok.
 	) );
 

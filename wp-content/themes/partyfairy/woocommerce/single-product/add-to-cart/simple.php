@@ -125,38 +125,206 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 										</div>
 
 
+										
 										<?php 
 										if($detail) {  ?>
 
 											<div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab">
 
-												<?php foreach ($detail as $key => $value) { ?>
+												<?php foreach ($detail as $key => $value) {  ?>
 
-													<div class="row m-b-15">
-														<div class="col-4">
-															<div>
-																<p class="uppercase"><?php if($value['title']) { echo $value['title']; } ?></p>
+
+													<?php if($value['dietary_preference']){ ?>
+														<div class="row m-b-15">
+															<div class="col-4">
+																<div>
+																	<p class="uppercase">Dietary Preference</p>
+																</div>
 															</div>
-														</div>
-														<div class="col-8">
-															<?php if($value['information']){
-																foreach ($value['information'] as $skey => $svalue) { ?>
-
+															<div class="col-8">
+																<?php 
+																foreach($value['dietary_preference'] as $skey => $svalue) { ?>
 																	<div class="d-flex align-items-center">
 																		<div class="icon m-r-10">﻿ 
-																			<?php if($svalue['icon']) { ?> <img src="<?php echo $svalue['icon']; ?>" width="30" height="30" /> <?php  } ?>
+																			<?php $icon = get_field('icon', 'dietary-preference_'.$svalue->term_id); ?>
+																			<?php if($icon) { ?> <img src="<?php echo $icon; ?>" width="30" height="30" /> <?php  } ?>
 																		</div>
-																		<?php if($svalue['description']) { echo $svalue['description']; } ?>
+																		<?php echo $svalue->name;  ?>
 																	</div>
-																<?php } }?>
+																<?php } ?>
 															</div>
 														</div>
+													<?php } ?>
+
+													<?php if($value['whats_included']){ ?>
+														<div class="row m-b-15">
+															<div class="col-4">
+																<div>
+																	<p class="uppercase">What’s Included</p>
+																</div>
+															</div>
+															<div class="col-8">
+																<?php 
+																foreach($value['whats_included'] as $skey => $svalue) { ?>
+																	<div class="d-flex align-items-center">
+																		<div class="icon m-r-10">﻿ 
+
+																			<?php $icon = get_field('icon', 'Whats-included_'.$svalue->term_id); ?>
+
+																			<?php if($icon) { ?> 
+																				<img src="<?php echo $icon; ?>" width="30" height="30" /> <?php  } ?>
+																			</div>
+																			<?php echo $svalue->name;  ?>
+																		</div>
+																	<?php } ?>
+																</div>
+															</div>
+														<?php } ?>
+
+
+														<?php if($value['note']){ ?>
+															<div class="row m-b-15">
+																<div class="col-4">
+																	<div>
+																		<p class="uppercase">Note</p>
+																	</div>
+																</div>
+																<div class="col-8">
+																	<div class="d-flex align-items-center">
+																		<div class="icon m-r-10">﻿ 
+																		</div>
+																		<?php echo $value['note']  ?>
+																	</div>                      
+																</div>
+															</div>
+														<?php } ?>
+
+														<?php if($value['dimension']){ ?>
+															<div class="row m-b-15">
+																<div class="col-4">
+																	<div>
+																		<p class="uppercase">Dimension</p>
+																	</div>
+																</div>
+																<div class="col-8">
+																	<div class="d-flex align-items-center">
+																		<div class="icon m-r-10">﻿ 
+																		</div>
+																		<?php echo $value['dimension']  ?>
+																	</div>                      
+																</div>
+															</div>
+														<?php } ?>
+
+														<?php if($value['material']){ ?>
+															<div class="row m-b-15">
+																<div class="col-4">
+																	<div>
+																		<p class="uppercase">Material</p>
+																	</div>
+																</div>
+																<div class="col-8">
+																	<?php 
+																	foreach($value['material'] as $skey => $svalue) { ?>
+																		<div class="d-flex align-items-center">
+																			<div class="icon m-r-10">﻿ 
+																			</div>
+																			<?php echo $svalue->name;  ?>
+																		</div>
+																	<?php } ?>
+																</div>
+															</div>
+														<?php } ?>
+
+														<?php if($value['if_set_up_is_included']){ ?>
+															<div class="row m-b-15">
+																<div class="col-4">
+																	<div>
+																		<p class="uppercase">If Set Up is Included</p>
+																	</div>
+																</div>
+																<div class="col-8">
+																	<div class="d-flex align-items-center">
+																		<div class="icon m-r-10">﻿ 
+																		</div>
+																		<?php echo $value['if_set_up_is_included']  ?>
+																	</div>                      
+																</div>
+															</div>
+														<?php } ?>
+
+
+														<?php if($value['serving_duration']){ ?>
+															<div class="row m-b-15">
+																<div class="col-4">
+																	<div>
+																		<p class="uppercase">Serving Duration</p>
+																	</div>
+																</div>
+																<div class="col-8">
+																	<div class="d-flex align-items-center">
+																		<div class="icon m-r-10">﻿ 
+																		</div>
+																		<?php echo $value['serving_duration']  ?>
+																	</div>                      
+																</div>
+															</div>
+														<?php } ?>
+
+
+														<?php if($value['disposable_cutlery']){ ?>
+															<div class="row m-b-15">
+																<div class="col-4">
+																	<div>
+																		<p class="uppercase">Disposable Cutlery Included</p>
+																	</div>
+																</div>
+																<div class="col-8">
+																	<?php 
+																	foreach($value['disposable_cutlery'] as $skey => $svalue) { ?>
+																		<div class="d-flex align-items-center">
+																			<div class="icon m-r-10">﻿ 
+
+																				<?php $icon = get_field('icon', 'disposable-cutlery-included_'.$svalue->term_id); ?>
+																				<?php if($icon) { ?> <img src="<?php echo $icon; ?>" width="30" height="30" /> <?php  } ?>
+																			</div>
+																			<?php echo $svalue->name;  ?>
+																		</div>
+																	<?php } ?>
+																</div>
+															</div>
+														<?php } ?>
+
+
+														<?php if($value['delivery_condition']){ ?>
+															<div class="row m-b-15">
+																<div class="col-4">
+																	<div>
+																		<p class="uppercase">Delivery Condition</p>
+																	</div>
+																</div>
+																<div class="col-8">
+																	<?php 
+																	foreach($value['delivery_condition'] as $skey => $svalue) { ?>
+																		<div class="d-flex align-items-center">
+																			<div class="icon m-r-10">﻿ 
+																				<?php $icon = get_field('icon', 'delivery-condition_'.$svalue->term_id); ?>
+																				<?php if($icon) { ?> <img src="<?php echo $icon; ?>" width="30" height="30" /> <?php  } ?>
+																			</div>
+																			<?php echo $svalue->name;  ?>
+																		</div>
+																	<?php } ?>
+																</div>
+															</div>
+														<?php } ?>
+
+
+
 													<?php } ?>
 
 												</div>
 
 											<?php } ?>
-
 
 
 
