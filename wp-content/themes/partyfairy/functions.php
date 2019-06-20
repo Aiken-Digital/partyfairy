@@ -140,6 +140,179 @@ add_action( 'init', 'product_personalisation');
 
 
 
+
+function product_dietary_preference(){
+
+	$labels = array(
+		'name'              => _x( 'Dietary Preference' , 'taxonomy general name', 'textdomain' ),
+		'singular_name'     => _x( 'Dietary Preference', 'taxonomy singular name', 'textdomain' ),
+		'search_items'      => __( 'Search Dietary Preference', 'textdomain' ),
+		'all_items'         => __( 'All Dietary Preference', 'textdomain' ),
+		'parent_item'       => __( 'Parent Dietary Preference', 'textdomain' ),
+		'parent_item_colon' => __( 'Parent Dietary Preference', 'textdomain' ),
+		'edit_item'         => __( 'Edit Dietary Preference', 'textdomain' ),
+		'update_item'       => __( 'Update Dietary Preference', 'textdomain' ),
+		'add_new_item'      => __( 'Add New Dietary Preference', 'textdomain' ),
+		'new_item_name'     => __( 'New Dietary Preference', 'textdomain' ),
+		'menu_name'         => __( 'Dietary Preference', 'textdomain' ),
+	);
+
+	$args = array(
+		'hierarchical'      => true,
+		'labels'            => $labels,
+		'show_ui'           => true,
+		'show_admin_column' => false,
+		'query_var'         => true,
+		'show_in_quick_edit'=> false,
+		'meta_box_cb'       => false,
+		'rewrite'           => array( 'slug' => 'dietary-preference' ),
+	);
+
+	register_taxonomy( 'dietary-preference', array('product'), $args );
+}
+
+add_action( 'init', 'product_dietary_preference');
+
+
+
+function product_whats_included(){
+
+	$labels = array(
+		'name'              => _x( 'What’s Included' , 'taxonomy general name', 'textdomain' ),
+		'singular_name'     => _x( 'What’s Included', 'taxonomy singular name', 'textdomain' ),
+		'search_items'      => __( 'Search What’s Included', 'textdomain' ),
+		'all_items'         => __( 'All What’s Included', 'textdomain' ),
+		'parent_item'       => __( 'Parent What’s Included', 'textdomain' ),
+		'parent_item_colon' => __( 'Parent What’s Included', 'textdomain' ),
+		'edit_item'         => __( 'Edit What’s Included', 'textdomain' ),
+		'update_item'       => __( 'Update What’s Included', 'textdomain' ),
+		'add_new_item'      => __( 'Add New What’s Included', 'textdomain' ),
+		'new_item_name'     => __( 'New What’s Included', 'textdomain' ),
+		'menu_name'         => __( 'What’s Included', 'textdomain' ),
+	);
+
+	$args = array(
+		'hierarchical'      => true,
+		'labels'            => $labels,
+		'show_ui'           => true,
+		'show_admin_column' => false,
+		'query_var'         => true,
+		'show_in_quick_edit'=> false,
+		'meta_box_cb'       => false,
+		'rewrite'           => array( 'slug' => 'Whats-included' ),
+	);
+
+	register_taxonomy( 'Whats-included', array('product'), $args );
+}
+
+add_action( 'init', 'product_whats_included');
+
+
+
+
+function product_material(){
+
+	$labels = array(
+		'name'              => _x( 'Material' , 'taxonomy general name', 'textdomain' ),
+		'singular_name'     => _x( 'Material', 'taxonomy singular name', 'textdomain' ),
+		'search_items'      => __( 'Search Material', 'textdomain' ),
+		'all_items'         => __( 'All Material', 'textdomain' ),
+		'parent_item'       => __( 'Parent Material', 'textdomain' ),
+		'parent_item_colon' => __( 'Parent Material', 'textdomain' ),
+		'edit_item'         => __( 'Edit Material', 'textdomain' ),
+		'update_item'       => __( 'Update Material', 'textdomain' ),
+		'add_new_item'      => __( 'Add New Material', 'textdomain' ),
+		'new_item_name'     => __( 'New Material', 'textdomain' ),
+		'menu_name'         => __( 'Material', 'textdomain' ),
+	);
+
+	$args = array(
+		'hierarchical'      => true,
+		'labels'            => $labels,
+		'show_ui'           => true,
+		'show_admin_column' => false,
+		'query_var'         => true,
+		'show_in_quick_edit'=> false,
+		'meta_box_cb'       => false,
+		'rewrite'           => array( 'slug' => 'material' ),
+	);
+
+	register_taxonomy( 'material', array('product'), $args );
+}
+
+add_action( 'init', 'product_material');
+
+
+
+
+function product_disposable_cutlery_included(){
+
+	$labels = array(
+		'name'              => _x( 'Disposable Cutlery Included ' , 'taxonomy general name', 'textdomain' ),
+		'singular_name'     => _x( 'Disposable Cutlery Included ', 'taxonomy singular name', 'textdomain' ),
+		'search_items'      => __( 'Search Disposable Cutlery Included ', 'textdomain' ),
+		'all_items'         => __( 'All Disposable Cutlery Included ', 'textdomain' ),
+		'parent_item'       => __( 'Parent Disposable Cutlery Included ', 'textdomain' ),
+		'parent_item_colon' => __( 'Parent Disposable Cutlery Included ', 'textdomain' ),
+		'edit_item'         => __( 'Edit Disposable Cutlery Included ', 'textdomain' ),
+		'update_item'       => __( 'Update Disposable Cutlery Included ', 'textdomain' ),
+		'add_new_item'      => __( 'Add New Disposable Cutlery Included ', 'textdomain' ),
+		'new_item_name'     => __( 'New Disposable Cutlery Included ', 'textdomain' ),
+		'menu_name'         => __( 'Disposable Cutlery Included ', 'textdomain' ),
+	);
+
+	$args = array(
+		'hierarchical'      => true,
+		'labels'            => $labels,
+		'show_ui'           => true,
+		'show_admin_column' => false,
+		'query_var'         => true,
+		'show_in_quick_edit'=> false,
+		'meta_box_cb'       => false,
+		'rewrite'           => array( 'slug' => 'disposable-cutlery-included' ),
+	);
+
+	register_taxonomy( 'disposable-cutlery-included', array('product'), $args );
+}
+
+add_action( 'init', 'product_disposable_cutlery_included');
+
+
+
+function product_delivery_condition(){
+
+	$labels = array(
+		'name'              => _x( 'Delivery Condition' , 'taxonomy general name', 'textdomain' ),
+		'singular_name'     => _x( 'Delivery Condition', 'taxonomy singular name', 'textdomain' ),
+		'search_items'      => __( 'Search Delivery Condition', 'textdomain' ),
+		'all_items'         => __( 'All Delivery Condition', 'textdomain' ),
+		'parent_item'       => __( 'Parent Delivery Condition', 'textdomain' ),
+		'parent_item_colon' => __( 'Parent Delivery Condition', 'textdomain' ),
+		'edit_item'         => __( 'Edit Delivery Condition', 'textdomain' ),
+		'update_item'       => __( 'Update Delivery Condition', 'textdomain' ),
+		'add_new_item'      => __( 'Add New Delivery Condition', 'textdomain' ),
+		'new_item_name'     => __( 'New Delivery Condition', 'textdomain' ),
+		'menu_name'         => __( 'Delivery Condition', 'textdomain' ),
+	);
+
+	$args = array(
+		'hierarchical'      => true,
+		'labels'            => $labels,
+		'show_ui'           => true,
+		'show_admin_column' => false,
+		'query_var'         => true,
+		'show_in_quick_edit'=> false,
+		'meta_box_cb'       => false,
+		'rewrite'           => array( 'slug' => 'delivery-condition' ),
+	);
+
+	register_taxonomy( 'delivery-condition', array('product'), $args );
+}
+
+add_action( 'init', 'product_delivery_condition');
+
+
+
 function pagination_bar( $query_wp, $paged) 
 {
 
@@ -822,23 +995,28 @@ function filter_category_function(){
 
 $one_day      = 24 * 60 * 60;
 $today        = strtotime( date('Y-m-d') );
-//$cancel_time  = date(); 
+$time_now     = date('H:i') ;
 
     // Get unpaid orders (5 days old)
 $unpaid_orders = (array) wc_get_orders( array(
 	'limit'        => -1,
-	'status'       => 'on-hold',
+	'status'       => 'pending', 
 	'date_created' => '<' . ( $today - ($days_delay * $one_day) ),
 ) );
 
 if ( sizeof($unpaid_orders) > 0 ) {
 	$cancelled_text = __("The order was cancelled due to no payment from customer.", "woocommerce");
 
-        // Loop through orders
-	foreach ( $unpaid_orders as $order ) {
+	date_default_timezone_set('Asia/Singapore');
 
-		$order->update_status( 'cancelled', $cancelled_text );
-		ibenic_wc_refund_order($order->get_id(),$cancelled_text);
+	if($time_now  == '10:30') {
+        // Loop through orders
+		foreach ( $unpaid_orders as $order ) {
+
+			$order->update_status( 'cancelled', $cancelled_text );
+			ibenic_wc_refund_order($order->get_id(),$cancelled_text);
+
+		}
 
 	}
 }
