@@ -427,7 +427,7 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 
 					$actions =  $menu_pending;
 
-				}elseif($order_status == 'processing'){
+				}elseif($order_status == 'processing-cancel'){
 
 					$items = $the_order->get_items();
 					foreach ( $items as $item ) {
@@ -477,7 +477,7 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 						$actions = $tindakan;
 
 
-					}elseif($order_status == 'processed'){
+					}elseif($order_status == 'processing'){
 
 						$items = $the_order->get_items();
 						foreach ( $items as $item ) {
@@ -526,6 +526,12 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 
 						$actions = $tindakan;
 
+					}elseif($order_status == 'completed'){
+
+						$tindakan .= '<a style="background-color: #1ad40e !important;
+						padding: 4px;
+						color: white; margin:2px;" href="#">Completed</a>';
+						$actions = $tindakan;
 
 					}else{
 

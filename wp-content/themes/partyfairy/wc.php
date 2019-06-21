@@ -134,72 +134,174 @@ return $actions;
 
 
 
-add_action('init', 'register_custom_order_statuses_processed');
-function register_custom_order_statuses_processed() {
-	register_post_status('wc-processed', array(
-		'label' => __( 'Processed', 'woocommerce' ),
-		'public' => true,
-		'exclude_from_search' => false,
-		'show_in_admin_all_list' => true,
-		'show_in_admin_status_list' => true,
-		'label_count' => _n_noop('Processed <span class="count">(%s)</span>', 'Processed <span class="count">(%s)</span>')
-	));
-}
+// add_action('init', 'register_custom_order_statuses_processed');
+// function register_custom_order_statuses_processed() {
+// 	register_post_status('wc-processed', array(
+// 		'label' => __( 'Processed', 'woocommerce' ),
+// 		'public' => true,
+// 		'exclude_from_search' => false,
+// 		'show_in_admin_all_list' => true,
+// 		'show_in_admin_status_list' => true,
+// 		'label_count' => _n_noop('Processed <span class="count">(%s)</span>', 'Processed <span class="count">(%s)</span>')
+// 	));
+// }
 
 
 
 
 
-add_filter('wc_order_statuses', 'add_custom_order_statuses_processed');
-function add_custom_order_statuses_processed($order_statuses) {
-	$new_order_statuses = array();
+// add_filter('wc_order_statuses', 'add_custom_order_statuses_processed');
+// function add_custom_order_statuses_processed($order_statuses) {
+// 	$new_order_statuses = array();
 
-    // add new order status before processing
-	foreach ($order_statuses as $key => $status) {
-		$new_order_statuses[$key] = $status;
-		if ('wc-processing' === $key) {
-			$new_order_statuses['wc-processed'] = __('Processed', 'woocommerce' );
-		}
-	}
-	return $new_order_statuses;
-}
-
-
+//     // add new order status before processing
+// 	foreach ($order_statuses as $key => $status) {
+// 		$new_order_statuses[$key] = $status;
+// 		if ('wc-processing' === $key) {
+// 			$new_order_statuses['wc-processed'] = __('Processed', 'woocommerce' );
+// 		}
+// 	}
+// 	return $new_order_statuses;
+// }
 
 
-add_filter( 'bulk_actions-edit-shop_order', 'custom_dropdown_bulk_actions_shop_order_processed', 50, 1 );
-function custom_dropdown_bulk_actions_shop_order_processed( $actions ) {
-	$new_actions = array();
 
-    // add new order status before processing
-	foreach ($actions as $key => $action) {
-		if ('mark_processing' === $key)
-			$new_actions['mark_processed'] = __( 'Change status to processed', 'woocommerce' );
 
-		$new_actions[$key] = $action;
-	}
-	return $new_actions;
-}
+// add_filter( 'bulk_actions-edit-shop_order', 'custom_dropdown_bulk_actions_shop_order_processed', 50, 1 );
+// function custom_dropdown_bulk_actions_shop_order_processed( $actions ) {
+// 	$new_actions = array();
+
+//     // add new order status before processing
+// 	foreach ($actions as $key => $action) {
+// 		if ('mark_processing' === $key)
+// 			$new_actions['mark_processed'] = __( 'Change status to processed', 'woocommerce' );
+
+// 		$new_actions[$key] = $action;
+// 	}
+// 	return $new_actions;
+// }
 
 
 
 // Add a custom order status action button (for orders with "processing" status)
 add_filter( 'woocommerce_admin_order_actions', 'add_custom_order_status_processed', 100, 2 );
 function add_custom_order_status_processed( $actions, $order ) {
+
     // Display the button for all orders that have a 'processing', 'pending' or 'on-hold' status
 	if ( $order->has_status( array( 'processing' ) ) ) { //'on-hold', 'processing', 
 
         // The key slug defined for your action button
-	$action_slug = 'processed';
+	$action_slug = 'completed';
+
+
+	$items = $order->get_items();
+	foreach ( $items as $item ) {
+
+		$product_name = $item->get_name();
+		$product_id = $item->get_product_id();
+		$product_variation_id = $item->get_variation_id();
+
+	}
+
+	$delivery_estimate = get_post_meta($product_id, 'delivery_estimate', true);
+	$delivery_product  = get_post_meta($product_id, 'delivery_product', true);
+	$pickup_product    = get_post_meta($product_id, 'pickup_product', true);
+
+	$tindakan = '';
+
+
+	if($delivery_estimate == "Y") {
+
+
+		$tindakan .= 'Track';
+
+	}
+
+	if($delivery_product == "Y") {
+
+		$tindakan .= 'Track';
+
+	}
+
+	if($pickup_product == "Y") {
+
+		$tindakan .= 'Picked Up';
+
+	}
+
+
+
+	$nama_menu = $tindakan;
+
 
         // Set the action button
 	$actions[$action_slug] = array(
 		'url'       => wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status='.$action_slug.'&order_id='.$order->get_id() ), 'woocommerce-mark-order-status' ),
-		'name'      => __( 'Processed', 'woocommerce' ),
+		'name'      => __( $nama_menu, 'woocommerce' ),
 		'action'    => $action_slug,
 	);
 }
 return $actions;
+}
+
+
+/////////////
+
+add_filter( 'woocommerce_admin_order_actions', 'add_custom_order_status_actions_button_decline_selesai', 100, 2 );
+function add_custom_order_status_actions_button_decline_selesai( $actions, $order ) {
+    // Display the button for all orders that have a 'processing', 'pending' or 'on-hold' status
+	if ( $order->has_status( array(  'completed' ) ) ) {
+
+        // The key slug defined for your action button
+		$action_slug = 'completed';
+
+        // Set the action button
+		$actions[$action_slug] = array(
+			'url'       => wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status='.$action_slug.'&order_id='.$order->get_id() ), 'woocommerce-mark-order-status' ),
+			'name'      => __( 'Completed', 'woocommerce' ),
+			'action'    => $action_slug,
+		);
+	}
+	return $actions;
+}
+
+
+add_filter( 'woocommerce_admin_order_actions', 'add_custom_order_status_actions_button_decline_batal', 100, 2 );
+function add_custom_order_status_actions_button_decline_batal( $actions, $order ) {
+    // Display the button for all orders that have a 'processing', 'pending' or 'on-hold' status
+	if ( $order->has_status( array(  'cancelled' ) ) ) {
+
+        // The key slug defined for your action button
+		$action_slug = 'refunded';
+
+        // Set the action button
+		$actions[$action_slug] = array(
+			'url'       => wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status='.$action_slug.'&order_id='.$order->get_id() ), 'woocommerce-mark-order-status' ),
+			'name'      => __( 'Refund', 'woocommerce' ),
+			'action'    => $action_slug,
+		);
+	}
+	return $actions;
+}
+
+///
+
+add_filter( 'woocommerce_admin_order_actions', 'add_custom_order_status_actions_button_decline_balikan', 100, 2 );
+function add_custom_order_status_actions_button_decline_balikan( $actions, $order ) {
+    // Display the button for all orders that have a 'processing', 'pending' or 'on-hold' status
+	if ( $order->has_status( array(  'refunded' ) ) ) {
+
+        // The key slug defined for your action button
+		$action_slug = 'refunded';
+
+        // Set the action button
+		$actions[$action_slug] = array(
+			'url'       => '#', 'woocommerce-mark-order-status' ,
+			'name'      => __( 'Success Refund', 'woocommerce' ),
+			'action'    => $action_slug,
+		);
+	}
+	return $actions;
 }
 
 
@@ -247,11 +349,11 @@ function add_custom_order_status_actions_button_css() {
 
 
 
-		a.button.wc-action-button.wc-action-button-processed.processed::after {
+		a.button.wc-action-button.wc-action-button-completed.completed::after {
 			content: none !important;
 		}
 
-		a.button.wc-action-button.wc-action-button-processed.processed  {
+		a.button.wc-action-button.wc-action-button-completed.completed  {
 			background-color: #86c40d !important;
 			color: #f9f9f9 !important;
 			text-indent: inherit;
@@ -260,13 +362,29 @@ function add_custom_order_status_actions_button_css() {
 			border: none !important;
 		}
 
-
+		a.button.wc-action-button.wc-action-button-refunded.refunded {
+			width: 100px !important;
+		}
 
 		a.button.wc-action-button.wc-action-button-cancelled.cancelled::after {
 			content: none !important;
 		}
 
 		a.button.wc-action-button.wc-action-button-cancelled.cancelled  {
+			background-color: #da0943 !important;
+			color: #f9f9f9 !important;
+			text-indent: inherit;
+			width: 50px !important;
+			text-align: center;
+			border: none !important;
+		}
+
+
+		a.button.wc-action-button.wc-action-button-refunded.refunded::after {
+			content: none !important;
+		}
+
+		a.button.wc-action-button.wc-action-button-refunded.refunded  {
 			background-color: #da0943 !important;
 			color: #f9f9f9 !important;
 			text-indent: inherit;

@@ -300,7 +300,7 @@ class WCFM_Orders_Controller {
 
 						$wcfm_orders_json_arr[$index][] =  $menu_pending;
 
-					}elseif($order_status == 'processing'){
+					}elseif($order_status == 'processing-cancel'){
 
 						$items = $the_order->get_items();
 						foreach ( $items as $item ) {
@@ -350,7 +350,7 @@ class WCFM_Orders_Controller {
 						$wcfm_orders_json_arr[$index][] = $tindakan;
 
 
-					}elseif($order_status == 'processed'){
+					}elseif($order_status == 'processing'){
 
 						$items = $the_order->get_items();
 						foreach ( $items as $item ) {
@@ -399,6 +399,35 @@ class WCFM_Orders_Controller {
 
 						$wcfm_orders_json_arr[$index][] = $tindakan;
 
+
+					}elseif($order_status == 'completed'){
+
+						$tindakan .= '<a style="background-color: #1ad40e !important;
+						padding: 4px;
+						color: white; margin:2px;" href="#">Completed</a>';
+						
+						$wcfm_orders_json_arr[$index][] = $tindakan;
+
+					}elseif($order_status == 'cancelled'){
+
+						$complete_url_decline = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=refunded&order_id='.$wcfm_orders_single->ID ), 'woocommerce-mark-order-status' );
+
+
+						$menu_pending .='<a style="background-color: #d40e33 !important;
+						padding: 4px;
+						color: white; margin:2px;" href="'.$complete_url_decline.'">Refund</a>';
+
+						$wcfm_orders_json_arr[$index][] =  $menu_pending;
+
+					}elseif($order_status == 'refunded'){
+
+						
+
+						$menu_pending .='<a style="background-color: #d40e33 !important;
+						padding: 4px;
+						color: white; margin:2px;" href="#">Success Refund</a>';
+
+						$wcfm_orders_json_arr[$index][] =  $menu_pending;
 
 					}else{
 
