@@ -21,19 +21,19 @@ class WCFM_Settings_Marketplace_Controller {
 		global $WCFM, $wpdb, $_POST;
 		
 		$wcfm_settings_form_data = array();
-	  parse_str($_POST['wcfm_settings_form'], $wcfm_settings_form);
-	  
-	  $has_error = false;
-	  
-	  if( wcfm_is_vendor() ) {
-	  	$user_id = apply_filters( 'wcfm_current_vendor_id', get_current_user_id() );
-	  } else  {
-	  	$user_id = absint( $wcfm_settings_form['vendor_id'] );
-	  }
-	  
+		parse_str($_POST['wcfm_settings_form'], $wcfm_settings_form);
+		
+		$has_error = false;
+		
+		if( wcfm_is_vendor() ) {
+			$user_id = apply_filters( 'wcfm_current_vendor_id', get_current_user_id() );
+		} else  {
+			$user_id = absint( $wcfm_settings_form['vendor_id'] );
+		}
+		
 		$vendor_data = get_user_meta( $user_id, 'wcfmmp_profile_settings', true );
 		if( !is_array($vendor_data) ) $vendor_data = array();
-	  
+		
 	  // WCFM form custom validation filter
 		$custom_validation_results = apply_filters( 'wcfm_form_custom_validation', $wcfm_settings_form, 'vendor_setting_manage' );
 		if(isset($custom_validation_results['has_error']) && !empty($custom_validation_results['has_error'])) {
@@ -42,7 +42,7 @@ class WCFM_Settings_Marketplace_Controller {
 			echo '{"status": false, "message": "' . $custom_validation_error . '"}';
 			die;
 		}
-	  
+		
 	  // sanitize
 		//$wcfm_settings_form = array_map( 'sanitize_text_field', $wcfm_settings_form );
 		//$wcfm_settings_form = array_map( 'stripslashes', $wcfm_settings_form );
@@ -232,7 +232,7 @@ class WCFM_Settings_Marketplace_Controller {
 		if( !$has_error ) {
 			echo '{"status": true, "message": "' . __( 'Settings saved successfully', 'wc-frontend-manager' ) . '"}';
 		}
-		 
+		
 		die;
 	}
 }
