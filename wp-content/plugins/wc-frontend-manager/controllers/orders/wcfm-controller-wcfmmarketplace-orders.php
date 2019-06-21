@@ -414,8 +414,8 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 				if( $order_status == 'pending'){
 
 
-					$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id='.$order->order_id ), 'woocommerce-mark-order-status' );
-					$complete_url_decline = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=cancelled&order_id='.$order->order_id ), 'woocommerce-mark-order-status' );
+					$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id='.$wcfm_orders_single->ID ), 'woocommerce-mark-order-status' );
+					$complete_url_decline = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=cancelled&order_id='.$wcfm_orders_single->ID ), 'woocommerce-mark-order-status' );
 
 					$menu_pending = '<a style="background-color: #1ad40e !important;
 					padding: 4px;
@@ -425,7 +425,7 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 					padding: 4px;
 					color: white; margin:2px;" href="'.$complete_url_decline.'">Decline</a>';
 
-					$actions =  $menu_pending;
+					$wcfm_orders_json_arr[$index][] =  $menu_pending;
 
 				}elseif($order_status == 'processing-cancel'){
 
@@ -441,11 +441,11 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 					$delivery_estimate = get_post_meta($product_id, 'delivery_estimate', true);
 					$delivery_product  = get_post_meta($product_id, 'delivery_product', true);
 					$pickup_product    = get_post_meta($product_id, 'pickup_product', true);
-
+					
 					$tindakan = '';
 
 
-					$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processed&order_id='.$order->order_id ), 'woocommerce-mark-order-status' );
+					$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processed&order_id='.$wcfm_orders_single->ID ), 'woocommerce-mark-order-status' );
 
 					if($delivery_estimate == "Y") {
 
@@ -474,7 +474,7 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 
 
 
-						$actions = $tindakan;
+						$wcfm_orders_json_arr[$index][] = $tindakan;
 
 
 					}elseif($order_status == 'processing'){
@@ -495,7 +495,7 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 						$tindakan = '';
 
 
-						$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=completed&order_id='.$order->order_id ), 'woocommerce-mark-order-status' );
+						$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=completed&order_id='.$wcfm_orders_single->ID ), 'woocommerce-mark-order-status' );
 
 						if($delivery_estimate == "Y") {
 
@@ -524,29 +524,46 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 
 
 
-						$actions = $tindakan;
+						$wcfm_orders_json_arr[$index][] = $tindakan;
+
 
 					}elseif($order_status == 'completed'){
 
 						$tindakan .= '<a style="background-color: #1ad40e !important;
 						padding: 4px;
 						color: white; margin:2px;" href="#">Completed</a>';
-						$actions = $tindakan;
+						
+						$wcfm_orders_json_arr[$index][] = $tindakan;
+
+					}elseif($order_status == 'cancelled'){
+
+						$complete_url_decline = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=refunded&order_id='.$wcfm_orders_single->ID ), 'woocommerce-mark-order-status' );
+
+
+						$menu_pending .='<a style="background-color: #d40e33 !important;
+						padding: 4px;
+						color: white; margin:2px;" href="'.$complete_url_decline.'">Refund</a>';
+
+						$wcfm_orders_json_arr[$index][] =  $menu_pending;
+
+					}elseif($order_status == 'refunded'){
+
+						
+
+						$menu_pending .='<a style="background-color: #d40e33 !important;
+						padding: 4px;
+						color: white; margin:2px;" href="#">Success Refund</a>';
+
+						$wcfm_orders_json_arr[$index][] =  $menu_pending;
 
 					}else{
 
-						$actions=  '';
+						//$wcfm_orders_json_arr[$index][] =  apply_filters ( 'wcfm_orders_actions', $actions, $wcfm_orders_single, $the_order );
+						$wcfm_orders_json_arr[$index][] =  '';
 
 
 
 					}
-
-
-					
-					$wcfm_orders_json_arr[$index][] =  $actions;
-
-					//$wcfm_orders_json_arr[$index][] = $actions;
-					
 					$index++;
 				}
 			}
