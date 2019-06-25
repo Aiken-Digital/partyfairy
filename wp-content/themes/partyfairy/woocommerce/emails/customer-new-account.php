@@ -21,19 +21,112 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 
-<?php do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+	<title>New Account Created</title>
+	<style type="text/css">
+	body, p div, tr, td{
+		font-family: arial;
+		font-size: 14px;
+		color: #555;
+	}
+	p { margin: 0 0 14px 0; padding: 0; color: #555; }
+	ul li{color: #555;}
+	img{max-width: 100%;}
+	.container-table{
+		-webkit-box-shadow: 6px 4px 5px 0px rgba(0,0,0,0.1);
+		-moz-box-shadow: 6px 4px 5px 0px rgba(0,0,0,0.1);
+		box-shadow: 6px 4px 5px 0px rgba(0,0,0,0.1);
+		background-color: #F5F5F5;
+	    border-top: 5px solid #41c7ff;
+	}
+	</style>
+</head>
+<body>
 
-<?php /* translators: %s Customer username */ ?>
-<p><?php printf( esc_html__( 'Hi %s,', 'woocommerce' ), esc_html( $user_login ) ); ?></p>
-<?php /* translators: %1$s: Site title, %2$s: Username, %3$s: My account link */ ?>
-<p><?php printf( __( 'Thanks for creating an account on %1$s. Your username is %2$s. You can access your account area to view orders, change your password, and more at: %3$s', 'woocommerce' ), esc_html( $blogname ), '<strong>' . esc_html( $user_login ) . '</strong>', make_clickable( esc_url( wc_get_page_permalink( 'myaccount' ) ) ) ); ?></p><?php // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped ?>
+<table class="container-table" style="width: 600px; padding: 30px 15px;" align="center" cellpadding="0" cellspacing="0" border="0">
+	<tr style="background: #fff;">
+		<td style="padding: 15px;">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td>
+						<p>Hi <span><?php printf( esc_html__( 'Hi %s,', 'woocommerce' ), esc_html( $user_login ) ); ?></span>,</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p>Thanks for setting up an account with <a href="https://www.partyfairy.com/" target="_blank" style="text-decoration: none;"><b style="color:#41c7ff;">Party Fairy!<b></a></p>
+					</td>
+				</tr>
+			</table>
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td>
+						<p>Your login details:</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<ul>
+							<li><b>Username</b>: <?php $user = get_user_by('login', $user_login );
 
-<?php if ( 'yes' === get_option( 'woocommerce_registration_generate_password' ) && $password_generated ) : ?>
-	<?php /* translators: %s Auto generated password */ ?>
-	<p><?php printf( esc_html__( 'Your password has been automatically generated: %s', 'woocommerce' ), '<strong>' . esc_html( $user_pass ) . '</strong>' ); ?></p>
-<?php endif; ?>
+												if( $user && isset($user->user_email) ): 
 
-<p><?php esc_html_e( 'We look forward to seeing you soon.', 'woocommerce' ); ?></p>
+												echo $user->user_email;  else: 
 
-<?php
-do_action( 'woocommerce_email_footer', $email );
+												echo $user_login;
+
+												 endif; ?>
+							</li>
+							<li><b>Password</b>: ****</li>
+						</ul>
+					</td>
+				</tr>
+			</table>
+			<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top: 30px;">
+				<tr>
+					<td>
+						<p>Happy Shopping!</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p>Love,</p>
+					</td>
+				</tr>
+			</table>
+			<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top: 50px;"> <!-- //footer -->
+				<tr>
+					<td valign="top" style="width: 150px;">
+						<img src="https://fixxstaging.com/partyfairy/wp-content/uploads/2019/06/footer-logo.jpg">
+					</td>
+					<td  valign="top" style="padding-left: 20px;">
+						<table>
+							<tr><td width="428" height="40" style="color: #41c7ff; font-size: 18px; font-weight: 700;">KATY | CUSTOMER SERVICE PIXIE</td></tr>
+							<tr><td>Need to get in touch with us?</td></tr>
+							<tr>
+								<td colspan="2">
+								<a href="https://www.partyfairy.com" target="_blank" style="color:#41c7ff;text-decoration: none;">www.partyfairy.com</a>
+									|
+								<a href="https://blog.partyfairy.com" target="_blank" style="color:#41c7ff;text-decoration: none;">www.partyfairy.com</a>
+								</td>
+							</tr>
+							<tr>
+								<td height="49" colspan="2"  valign="bottom">
+								<a href="#" style="display: inline-block; width: 35px; margin-right: 5px;"><img src="https://fixxstaging.com/partyfairy/wp-content/uploads/2019/06/ig-logo.jpg"></a>
+								<a href="#" style="display: inline-block; width: 35px;"><img src="https://fixxstaging.com/partyfairy/wp-content/uploads/2019/06/fb-logo.jpg"></a>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
+</body>
+</html>
