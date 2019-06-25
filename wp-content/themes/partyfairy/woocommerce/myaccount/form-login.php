@@ -95,7 +95,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
                 <div class="social-signin m-t-15 m-b-20"><span class="btn-social btn-social--fb"><span class="svg-icon m-r-15">﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" style="fill: rgb(255, 255, 255);">
     <path d="M40,0H10C4.486,0,0,4.486,0,10v30c0,5.514,4.486,10,10,10h30c5.514,0,10-4.486,10-10V10C50,4.486,45.514,0,40,0z M39,17h-3 c-2.145,0-3,0.504-3,2v3h6l-1,6h-5v20h-7V28h-3v-6h3v-3c0-4.677,1.581-8,7-8c2.902,0,6,1,6,1V17z"/>
 </svg></span>Sign in with Facebook</span></div>
-                <div class="social-signin m-t-15"><span class="btn-social btn-social--google"><span class="svg-icon m-r-15"><?xml version="1.0" encoding="UTF-8"?>
+                <div class="social-signin m-t-15"><span class="btn-social btn-social--google"><span class="svg-icon m-r-15"><xml version="1.0" encoding="UTF-8">
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" version="1.1">
 <g id="surface1">
 <path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;" d="M 39.0625 17.1875 L 42.1875 17.1875 L 42.1875 29.6875 L 39.0625 29.6875 Z "/>
@@ -143,7 +143,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
                 <div class="social-signin m-t-15 m-b-20"><span class="btn-social btn-social--fb"><span class="svg-icon m-r-15">﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" style="fill: rgb(255, 255, 255);">
     <path d="M40,0H10C4.486,0,0,4.486,0,10v30c0,5.514,4.486,10,10,10h30c5.514,0,10-4.486,10-10V10C50,4.486,45.514,0,40,0z M39,17h-3 c-2.145,0-3,0.504-3,2v3h6l-1,6h-5v20h-7V28h-3v-6h3v-3c0-4.677,1.581-8,7-8c2.902,0,6,1,6,1V17z"/>
 </svg></span>Sign in with Facebook</span></div>
-                <div class="social-signin m-t-15"><span class="btn-social btn-social--google"><span class="svg-icon m-r-15"><?xml version="1.0" encoding="UTF-8"?>
+                <div class="social-signin m-t-15"><span class="btn-social btn-social--google"><span class="svg-icon m-r-15"><xml version="1.0" encoding="UTF-8">
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" version="1.1">
 <g id="surface1">
 <path style=" stroke:none;fill-rule:nonzero;fill:rgb(100%,100%,100%);fill-opacity:1;" d="M 39.0625 17.1875 L 42.1875 17.1875 L 42.1875 29.6875 L 39.0625 29.6875 Z "/>
