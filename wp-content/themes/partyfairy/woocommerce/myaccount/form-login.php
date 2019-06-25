@@ -77,6 +77,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
                 <div class="row">
                   <div class="col-lg-6 col-xl-4 col-md-6">
                     <div class="form-group m-t-30">
+                      <?php wp_nonce_field( 'woocommerce-register', 'woocommerce-register-nonce' ); ?>
                       <button class="btn btn-main btn-solid w-100 p-t-15 p-b-15 tocart" name="register" value="<?php esc_attr_e( 'Register', 'woocommerce' ); ?>" type="submit" id="">CREATE ACCOUNT</button>
                     </div>
                   </div>
