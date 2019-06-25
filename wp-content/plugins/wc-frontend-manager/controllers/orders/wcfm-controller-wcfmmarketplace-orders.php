@@ -414,8 +414,8 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 				if( $order_status == 'pending'){
 
 
-					$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id='.$wcfm_orders_single->ID ), 'woocommerce-mark-order-status' );
-					$complete_url_decline = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=cancelled&order_id='.$wcfm_orders_single->ID ), 'woocommerce-mark-order-status' );
+					$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id='.$order->order_id ), 'woocommerce-mark-order-status' );
+					$complete_url_decline = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=cancelled&order_id='.$order->order_id ), 'woocommerce-mark-order-status' );
 
 					$menu_pending = '<a style="background-color: #1ad40e !important;
 					padding: 4px;
@@ -445,7 +445,7 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 					$tindakan = '';
 
 
-					$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processed&order_id='.$wcfm_orders_single->ID ), 'woocommerce-mark-order-status' );
+					$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processed&order_id='.$order->order_id), 'woocommerce-mark-order-status' );
 
 					if($delivery_estimate == "Y") {
 
@@ -495,7 +495,7 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 						$tindakan = '';
 
 
-						$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=completed&order_id='.$wcfm_orders_single->ID ), 'woocommerce-mark-order-status' );
+						$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=completed&order_id='.$order->order_id ), 'woocommerce-mark-order-status' );
 
 						if($delivery_estimate == "Y") {
 
@@ -537,7 +537,7 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 
 					}elseif($order_status == 'cancelled'){
 
-						$complete_url_decline = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=refunded&order_id='.$wcfm_orders_single->ID ), 'woocommerce-mark-order-status' );
+						$complete_url_decline = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=refunded&order_id='.$order->order_id ), 'woocommerce-mark-order-status' );
 
 
 						$menu_pending .='<a style="background-color: #d40e33 !important;
