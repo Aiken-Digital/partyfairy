@@ -50,8 +50,10 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
                   <input class="form-control" type="text" placeholder="Enter Your Last Name" id="lastname" name="lastname" required>
                 </div>
                 <div class="form-group">
-                  <label for="emailadd">Email<span class="asterisk m-l-10">*</span></label>
-                  <input class="form-control" type="email" placeholder="Enter Your Email Address" id="emailadd" name="email" required>			
+                  <label for="reg_email">Email<span class="asterisk m-l-10">*</span></label>
+                  <input required placeholder="Enter Your Email Address"  type="email" class="form-control" name="email" id="reg_email" autocomplete="email" value="<?php echo ( ! empty( $_POST['email'] ) ) ? esc_attr( wp_unslash( $_POST['email'] ) ) : ''; ?>" /><?php // @codingStandardsIgnoreLine ?>
+
+
                 </div>
                 <div class="form-group">
                   <label for="userpassword">Password<span class="asterisk m-l-10">*</span></label>
