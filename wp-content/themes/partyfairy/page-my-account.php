@@ -1,48 +1,18 @@
-<?php
-/**
- * Login Form
- *
- * This template can be overridden by copying it to yourtheme/woocommerce/myaccount/form-login.php.
- *
- * HOWEVER, on occasion WooCommerce will need to update template files and you
- * (the theme developer) will need to copy the new files to your theme to
- * maintain compatibility. We try to do this as little as possible, but it does
- * happen. When this occurs the version of the template file will be bumped and
- * the readme will list any important changes.
- *
- * @see     https://docs.woocommerce.com/document/template-structure/
- * @package WooCommerce/Templates
- * @version 3.6.0
- */
+ <?php /* Template Name: Page My Account*/ ?>
+ <?php get_header() ?>
+ <div class="page-content">
+ 	<section class="m-b-60">
+ 		<div class="container">
+ 			 <h1 class="text-center">Sign In</h1>
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
-}
-
-do_action( 'woocommerce_before_customer_login_form' ); ?>
-
-<h1 class="text-center">Sign In</h1>
-
-<?php if ( 'yes' === get_option( 'woocommerce_enable_myaccount_registration' ) ) : ?>
-
-	 		<div class="pf-tab register-tab">
+ 			<div class="pf-tab register-tab">
               <ul class="pf-tab--ul">
                 <li class="pf-tab--li active" data-target="registerTab">I'm new here</li>
                 <li class="pf-tab--li" data-target="loginTab">I have an account</li>
               </ul>
             </div>
 
-
-	
-
-
- <div class="row justify-content-md-center -info-tab" id="registerTab">
-
- 		<form method="post" class="woocommerce-form woocommerce-form-register register" <?php do_action( 'woocommerce_register_form_tag' ); ?> >
-
-
-			<?php do_action( 'woocommerce_register_form_start' ); ?>
-
+                       <div class="row justify-content-md-center -info-tab" id="registerTab">
               <div class="col-lg-6">
                 <div class="form-group">
                   <label for="firstname">First Name<span class="asterisk m-l-10">*</span></label>
@@ -53,17 +23,12 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
                   <input class="form-control" type="text" placeholder="Enter Your Last Name" id="lastname" name="lastname" required>
                 </div>
                 <div class="form-group">
-                  <label for="reg_email">Email<span class="asterisk m-l-10">*</span></label>
-                  <input type="email" class="form-control" placeholder="Enter Your Email Address"  name="email" id="reg_email" autocomplete="email" value="<?php echo ( ! empty( $_POST['email'] ) ) ? esc_attr( wp_unslash( $_POST['email'] ) ) : ''; ?>" required/><?php // @codingStandardsIgnoreLine ?>
-
-
+                  <label for="emailadd">Email<span class="asterisk m-l-10">*</span></label>
+                  <input class="form-control" type="email" placeholder="Enter Your Email Address" id="emailadd" name="emailadd" required>
                 </div>
                 <div class="form-group">
-                  <label for="reg_password">Password<span class="asterisk m-l-10">*</span></label>
-               
-                  	<input type="password" class="form-control" name="password" id="reg_password" placeholder="Enter Your Password" required=/>
-
-
+                  <label for="userpassword">Password<span class="asterisk m-l-10">*</span></label>
+                  <input class="form-control" type="password" placeholder="Enter Your Password" id="userpassword" name="userpassword" required>
                   <label for="userpassword">Password Strength: No Password</label>
                 </div>
                 <div class="form-group">
@@ -83,11 +48,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
                 <div class="row">
                   <div class="col-lg-6 col-xl-4 col-md-6">
                     <div class="form-group m-t-30">
-                  <?php do_action( 'woocommerce_register_form' ); ?>
-                      	<?php wp_nonce_field( 'woocommerce-register', 'woocommerce-register-nonce' ); ?>
-				<button type="submit" class="btn btn-main btn-solid w-100 p-t-15 p-b-15 tocart" name="register" value="<?php esc_attr_e( 'Register', 'woocommerce' ); ?>"><?php esc_html_e( 'CREATE ACCOUNT', 'woocommerce' ); ?></button>
-
-
+                      <button class="btn btn-main btn-solid w-100 p-t-15 p-b-15 tocart" type="submit" id="">CREATE ACCOUNT</button>
                     </div>
                   </div>
                 </div>
@@ -105,37 +66,26 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 </svg>
 </span>Sign in with Google </span></div>
               </div>
-
-			<?php do_action( 'woocommerce_register_form_end' ); ?>
-          </form>
             </div>
 
-<?php endif; ?>
 
 
 
-		<form class="woocommerce-form woocommerce-form-login login" method="post">
-
-			<?php do_action( 'woocommerce_login_form_start' ); ?>
+                        
             <div class="row justify-content-md-center -info-tab" id="loginTab">
               <div class="col-lg-6">
                 <div class="form-group">
                   <label for="loginemailadd">Email<span class="asterisk m-l-10">*</span></label>
-                
-                  <input type="text" class="wform-control" name="username" id="username" placeholder="Enter Your Email Address"  autocomplete="username" value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; ?>"  required/><?php // @codingStandardsIgnoreLine ?>
-
+                  <input class="form-control" type="email" placeholder="Enter Your Email Address" id="loginemailadd" name="loginemailadd" required>
                 </div>
                 <div class="form-group">
                   <label for="loginuserpassword">Password<span class="asterisk m-l-10">*</span></label>
-                  <input class="form-control" type="password" placeholder="Enter Your Password" id="loginuserpassword" name="password" required>
+                  <input class="form-control" type="password" placeholder="Enter Your Password" id="loginuserpassword" name="loginuserpassword" required>
                 </div>
-                <?php do_action( 'woocommerce_login_form' ); ?>
                 <div class="row">
                   <div class="col-lg-4 col-xl-3 col-md-5">
                     <div class="form-group m-t-30">
-                      <?php wp_nonce_field( 'woocommerce-login', 'woocommerce-login-nonce' ); ?>
-				<button type="submit" class="tn btn-main btn-solid w-100 p-t-15 p-b-15 tocart" name="login" value="<?php esc_attr_e( 'Log in', 'woocommerce' ); ?>"><?php esc_html_e( 'SIGN IN', 'woocommerce' ); ?></button>
-
+                      <button class="btn btn-main btn-solid w-100 p-t-15 p-b-15 tocart" type="submit" id="">SIGN IN</button>
                     </div>
                   </div>
                 </div>
@@ -153,17 +103,11 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 </svg>
 </span>Sign in with Google</span></div>
               </div>
-              			<?php do_action( 'woocommerce_login_form_end' ); ?>
-</form>
             </div>
 
 
-
-
-
-
-
-
-
-
-<?php do_action( 'woocommerce_after_customer_login_form' ); ?>
+ 			
+ 		</div>
+ 	</section>
+ </div>
+ <?php get_footer() ?>
