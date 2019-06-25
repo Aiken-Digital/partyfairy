@@ -1,5 +1,19 @@
 <?php
 
+add_action( 'woocommerce_created_customer', 'bbloomer_save_name_fields' );
+ 
+function bbloomer_save_name_fields( $customer_id ) {
+    if ( isset( $_POST['billing_first_name'] ) ) {
+        update_user_meta( $customer_id, 'billing_first_name', sanitize_text_field( $_POST['firstname'] ) );
+        update_user_meta( $customer_id, 'first_name', sanitize_text_field($_POST['firstname']) );
+    }
+    if ( isset( $_POST['billing_last_name'] ) ) {
+        update_user_meta( $customer_id, 'billing_last_name', sanitize_text_field( $_POST['lastname'] ) );
+        update_user_meta( $customer_id, 'last_name', sanitize_text_field($_POST['lastname']) );
+    }
+ 
+}
+
 
 
 /** S

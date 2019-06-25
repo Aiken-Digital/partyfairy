@@ -5,7 +5,7 @@ if (have_posts()) : while (have_posts()) : the_post(); ?>
       <section>
       	<div class="container">
 		<?php the_content() ?>
-	    </div>
+	</div>
 		</section>
 		</div>
 <?php endwhile; else: ?>
