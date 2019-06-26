@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
-	<title>New Order for Customer</title>
+	<title>Order Update</title>
 	<style type="text/css">
 	body, p div, tr, td{
 		font-family: arial;
@@ -31,8 +31,8 @@
 			<table width="100%" cellpadding="0" cellspacing="0" border="0">
 				<tr>
 					<td align="right">
-						<p><b>Order PROSESSSS<span><?php printf(esc_html__( 'Just to let you know &mdash; we\'ve received your order #%s, and it is now being processed:', 'woocommerce' ))?></span></b></p>
-						<p><b>Customer ID: <span><?php printf( esc_html( $order->get_order_number() ) ); ?></span></b></p>
+						<p><b>Order <span><#<?php printf( esc_html( $order->get_order_number() ) ); ?></span></b></p>
+						<p><b>Customer ID: <span><?php echo get_current_user_id(); ?></span></b></p>
 
 						
 					</td>
@@ -46,14 +46,12 @@
 				</tr>
 				<tr>
 					<td>
-						<p>Thanks for your order - we hope you got all your needed for your party.</p>
-						<p>If you have opted to pick up your order from the store, please refer to the vendor's address below, and ignore the 'Delivered to' address.</p>
-						<p>Other than that, we're working on your order right now, and we'll be sure to let you know the moment your items are ready. Now go, relax!</p>
+						<p>We hate to be the bearer of bad news but is unable to fulfill your order on the items below. We feel terrible about this and we will refund you fully for these items. You will receive an email confirmation on that soon, Please note that refunds will take one to five business days to be reflected in your account.</p>
+						<p>We appreciate your patience and understanding.</p>
 					</td>
 				</tr>
 			</table>
-
-
+			
 <?php
 
 
@@ -85,10 +83,12 @@ do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_
 					</td>
 				</tr>
 			</table>
-			<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top: 50px;"> <!-- //footer -->
+
+			</table>
+					<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top: 50px;"> <!-- //footer -->
 				<tr>
 					<td valign="top" style="width: 150px;">
-						<img src="imgs/footer-logo.jpg">
+						<img src="https://fixxstaging.com/partyfairy/wp-content/uploads/2019/06/footer-logo.jpg">
 					</td>
 					<td  valign="top" style="padding-left: 20px;">
 						<table>
@@ -103,14 +103,16 @@ do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_
 							</tr>
 							<tr>
 								<td height="49" colspan="2"  valign="bottom">
-								<a href="#" style="display: inline-block; width: 35px; margin-right: 5px;"><img src="imgs/ig-logo.jpg"></a>
-								<a href="#" style="display: inline-block; width: 35px;"><img src="imgs/fb-logo.jpg"></a>
+								<a href="#" style="display: inline-block; width: 35px; margin-right: 5px;"><img src="https://fixxstaging.com/partyfairy/wp-content/uploads/2019/06/ig-logo.jpg"></a>
+								<a href="#" style="display: inline-block; width: 35px;"><img src="https://fixxstaging.com/partyfairy/wp-content/uploads/2019/06/fb-logo.jpg"></a>
 								</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
 			</table>
+
+
 		</td>
 	</tr>
 </table>
