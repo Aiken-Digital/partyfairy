@@ -46,8 +46,8 @@
 				</tr>
 				<tr>
 					<td>
-						<p>We hate to be the bearer of bad news but is unable to fulfill your order on the items below. We feel terrible about this and we will refund you fully for these items. You will receive an email confirmation on that soon, Please note that refunds will take one to five business days to be reflected in your account.</p>
-						<p>We appreciate your patience and understanding.</p>
+						<p>Thank For Order, now we are proccesing you order<p>
+				
 					</td>
 				</tr>
 			</table>
@@ -70,7 +70,7 @@ do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_
 
 
 ?>
-			
+
 			<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top: 30px;">
 				<tr>
 					<td>
