@@ -93,7 +93,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<p>
 
 
-							If for some reason the link doesn't work, just click and paste the following URL: <a href="#"><?php echo esc_url( add_query_arg( array( 'key' => $reset_key, 'id' => $user_id ), wc_get_endpoint_url( 'lost-password', '', wc_get_page_permalink( 'myaccount' ) ) ) ); ?>"</a>.</p>
+							If for some reason the link doesn't work, just click and paste the following URL: <a href="#"><?php echo esc_url( add_query_arg( array( 'key' => $reset_key, 'id' => $user_id ), wc_get_endpoint_url( 'lost-password', '', wc_get_page_permalink( 'myaccount' ) ) ) ); ?>"</a></p>
 					</td>
 				</tr>
 				<tr >
