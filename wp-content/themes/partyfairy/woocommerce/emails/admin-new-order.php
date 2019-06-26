@@ -19,14 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/*
- * @hooked WC_Emails::email_header() Output the email header
- */
-do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
-
-<?php /* translators: %s: Customer billing full name */ ?>
-<p><?php printf( __( 'You’ve received the following order from %s:', 'woocommerce' ), $order->get_formatted_billing_full_name() ); ?></p><?php // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped ?>
-<?php
 
 /*
  * @hooked WC_Emails::order_details() Shows the order details table.
@@ -87,7 +79,7 @@ do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 			<table width="100%" cellpadding="0" cellspacing="0" border="0">
 				<tr>
 					<td>
-						<p>Hi <span>Admin</span>,</p>
+						<p>Hi <span>Admin</span>, <?php printf( __( 'You’ve received the following order from %s:', 'woocommerce' ), $order->get_formatted_billing_full_name() ); ?></p>
 					</td>
 				</tr>
 				<tr>
@@ -98,9 +90,12 @@ do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
 				</tr>
 			</table>	
 
-<?php do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text, $email ); ?>
+<?php 
+do_action( 'woocommerce_email_order_details', $order, $sent_to_admin, $plain_text, $email );
 
-<?php do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_text, $email ); ?>
+do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text, $email ); 
+
+do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_text, $email ); ?>
 
 
 			<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top: 30px;">
