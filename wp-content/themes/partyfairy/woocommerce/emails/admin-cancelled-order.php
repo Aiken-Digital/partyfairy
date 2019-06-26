@@ -1,40 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+	<title>Order Update</title>
+	<style type="text/css">
+	body, p div, tr, td{
+		font-family: arial;
+		font-size: 14px;
+		color: #555;
+	}
+	p { margin: 0 0 14px 0; padding: 0; color: #555; }
+	ul li{color: #555;}
+	img{max-width: 100%;}
+	.nomargin{margin: 0;}
+	.container-table{
+		-webkit-box-shadow: 6px 4px 5px 0px rgba(0,0,0,0.1);
+		-moz-box-shadow: 6px 4px 5px 0px rgba(0,0,0,0.1);
+		box-shadow: 6px 4px 5px 0px rgba(0,0,0,0.1);
+		background-color: #F5F5F5;
+	    border-top: 5px solid #41c7ff;
+	}
+	</style>
+</head>
+<body>
+
+<table class="container-table" style="width: 600px; padding: 30px 15px;" align="center" cellpadding="0" cellspacing="0" border="0">
+	<tr style="background: #fff;">
+		<td style="padding: 15px;">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td align="right">
+				<p><b>Order <span>#<?php echo $order->get_order_number() ?></span></b></p>
+						<p><b>Customer ID: <span><?php echo get_current_user_id(); ?></span></b></p>
+
+
+						
+					</td>
+				</tr>
+			</table>
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td>
+						<p>Hi <span><?php echo $order->get_billing_first_name(); ?></span>,</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p>This email is to confirm that items within order #<span style="color: #41c7ff">#<?php echo $order->get_order_number() ?></span> has been cancelled due to lack of response. We request that vendors accept or decline all items within 48 hours of order placement so that customers can stay informed.</p>
+					</td>
+				</tr>
+			</table>
+			
 <?php
-/**
- * Admin cancelled order email
- *
- * This template can be overridden by copying it to yourtheme/woocommerce/emails/admin-cancelled-order.php.
- *
- * HOWEVER, on occasion WooCommerce will need to update template files and you
- * (the theme developer) will need to copy the new files to your theme to
- * maintain compatibility. We try to do this as little as possible, but it does
- * happen. When this occurs the version of the template file will be bumped and
- * the readme will list any important changes.
- *
- * @see https://docs.woocommerce.com/document/template-structure/
- * @package WooCommerce/Templates/Emails
- * @version 3.6.0
- */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
 
-/*
- * @hooked WC_Emails::email_header() Output the email header
-*/
-do_action( 'woocommerce_email_header', $email_heading, $email ); ?>
-
-<?php /* translators: %1$s: Order number, %2$s: Customer full name.  */ ?>
-<p><?php printf( esc_html__( 'Alas. Just to let you know &mdash; order #%1$s belonging to %2$s has been cancelled:', 'woocommerce' ), esc_html( $order->get_order_number() ), esc_html( $order->get_formatted_billing_full_name() ) ); ?></p>
-
-<?php
-
-/*
- * @hooked WC_Emails::order_details() Shows the order details table.
- * @hooked WC_Structured_Data::generate_order_data() Generates structured data.
- * @hooked WC_Structured_Data::output_structured_data() Outputs structured data.
- * @since 2.5.0
- */
 do_action( 'woocommerce_email_order_details', $order, $sent_to_admin, $plain_text, $email );
 
 /*
@@ -47,13 +67,54 @@ do_action( 'woocommerce_email_order_meta', $order, $sent_to_admin, $plain_text, 
  * @hooked WC_Emails::email_address() Shows email address
  */
 do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_text, $email );
-?>
-<p>
-<?php esc_html_e( 'Thanks for reading.', 'woocommerce' ); ?>
-</p>
-<?php
 
-/*
- * @hooked WC_Emails::email_footer() Output the email footer
- */
-do_action( 'woocommerce_email_footer', $email );
+
+?>
+			
+			<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top: 30px;">
+				<tr>
+					<td>
+						<p>Happy Shopping!</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p>Love,</p>
+					</td>
+				</tr>
+			</table>
+
+					<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top: 50px;"> <!-- //footer -->
+				<tr>
+					<td valign="top" style="width: 150px;">
+						<img src="https://fixxstaging.com/partyfairy/wp-content/uploads/2019/06/footer-logo.jpg">
+					</td>
+					<td  valign="top" style="padding-left: 20px;">
+						<table>
+							<tr><td width="428" height="40" style="color: #41c7ff; font-size: 18px; font-weight: 700;">KATY | CUSTOMER SERVICE PIXIE</td></tr>
+							<tr><td>Need to get in touch with us?</td></tr>
+							<tr>
+								<td colspan="2">
+								<a href="https://www.partyfairy.com" target="_blank" style="color:#41c7ff;text-decoration: none;">www.partyfairy.com</a>
+									|
+								<a href="https://blog.partyfairy.com" target="_blank" style="color:#41c7ff;text-decoration: none;">www.partyfairy.com</a>
+								</td>
+							</tr>
+							<tr>
+								<td height="49" colspan="2"  valign="bottom">
+								<a href="#" style="display: inline-block; width: 35px; margin-right: 5px;"><img src="https://fixxstaging.com/partyfairy/wp-content/uploads/2019/06/ig-logo.jpg"></a>
+								<a href="#" style="display: inline-block; width: 35px;"><img src="https://fixxstaging.com/partyfairy/wp-content/uploads/2019/06/fb-logo.jpg"></a>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+
+
+		</td>
+	</tr>
+</table>
+
+</body>
+</html>
