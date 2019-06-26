@@ -155,7 +155,15 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 
                     </div>
                   </div>
+                  <div class="col-lg-6 col-xl-7 col-md-5">
+                    
+                    <p class="woocommerce-LostPassword lost_password float-right">
+        <a href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php esc_html_e( 'Lost your password?', 'woocommerce' ); ?></a>
+      </p>
+                  </div>
                 </div>
+
+
                 <div class="divide m-t-30 m-b-25"><span class="divide-text">or</span></div>
             
 
