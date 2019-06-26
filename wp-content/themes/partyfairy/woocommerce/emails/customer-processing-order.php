@@ -31,7 +31,7 @@
 			<table width="100%" cellpadding="0" cellspacing="0" border="0">
 				<tr>
 					<td align="right">
-						<p><b>Order <span><?php printf(esc_html__( 'Just to let you know &mdash; we\'ve received your order #%s, and it is now being processed:', 'woocommerce' ))?></span></b></p>
+						<p><b>Order PROSESSSS<span><?php printf(esc_html__( 'Just to let you know &mdash; we\'ve received your order #%s, and it is now being processed:', 'woocommerce' ))?></span></b></p>
 						<p><b>Customer ID: <span><?php printf( esc_html( $order->get_order_number() ) ); ?></span></b></p>
 
 						
