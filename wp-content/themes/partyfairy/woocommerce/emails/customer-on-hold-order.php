@@ -85,10 +85,10 @@ do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_
 					</td>
 				</tr>
 			</table>
-			<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top: 50px;"> <!-- //footer -->
+					<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top: 50px;"> <!-- //footer -->
 				<tr>
 					<td valign="top" style="width: 150px;">
-						<img src="imgs/footer-logo.jpg">
+						<img src="https://fixxstaging.com/partyfairy/wp-content/uploads/2019/06/footer-logo.jpg">
 					</td>
 					<td  valign="top" style="padding-left: 20px;">
 						<table>
@@ -103,8 +103,8 @@ do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_
 							</tr>
 							<tr>
 								<td height="49" colspan="2"  valign="bottom">
-								<a href="#" style="display: inline-block; width: 35px; margin-right: 5px;"><img src="imgs/ig-logo.jpg"></a>
-								<a href="#" style="display: inline-block; width: 35px;"><img src="imgs/fb-logo.jpg"></a>
+								<a href="#" style="display: inline-block; width: 35px; margin-right: 5px;"><img src="https://fixxstaging.com/partyfairy/wp-content/uploads/2019/06/ig-logo.jpg"></a>
+								<a href="#" style="display: inline-block; width: 35px;"><img src="https://fixxstaging.com/partyfairy/wp-content/uploads/2019/06/fb-logo.jpg"></a>
 								</td>
 							</tr>
 						</table>
