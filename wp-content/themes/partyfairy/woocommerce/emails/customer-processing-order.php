@@ -83,8 +83,6 @@ do_action( 'woocommerce_email_customer_details', $order, $sent_to_admin, $plain_
 					</td>
 				</tr>
 			</table>
-
-			</table>
 					<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top: 50px;"> <!-- //footer -->
 				<tr>
 					<td valign="top" style="width: 150px;">
