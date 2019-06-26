@@ -31,7 +31,7 @@
 			<table width="100%" cellpadding="0" cellspacing="0" border="0">
 				<tr>
 					<td align="right">
-						<p><b>Order <span><#<?php printf( esc_html( $order->get_order_number() ) ); ?></span></b></p>
+						<p><b>Order <span>#<?php echo $order->get_order_number() ?></span></b></p>
 						<p><b>Customer ID: <span><?php echo get_current_user_id(); ?></span></b></p>
 
 						
@@ -47,7 +47,7 @@
 				<tr>
 					<td>
 						<p>Thank For Order, now we are proccesing you order<p>
-				
+
 					</td>
 				</tr>
 			</table>
