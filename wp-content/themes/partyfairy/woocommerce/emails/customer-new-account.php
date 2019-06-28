@@ -53,7 +53,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<table width="100%" cellpadding="0" cellspacing="0" border="0">
 				<tr>
 					<td>
-						<p>Hi <span><?php printf( esc_html__( 'Hi %s,', 'woocommerce' ), esc_html( $user_login ) ); ?></span>,</p>
+						<p><span><?php printf( esc_html__( 'Hi %s,', 'woocommerce' ), esc_html( $user_login ) ); ?></span></p>
 					</td>
 				</tr>
 				<tr>
