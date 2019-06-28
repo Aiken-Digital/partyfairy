@@ -61,7 +61,7 @@ if(is_user_logged_in()){
 if ( in_array( 'wcfm_vendor', (array) $current_user->roles ) ) {
     ?>
 
-    <a href="<?php echo home_url('my-account') ?>">Vendor Dashboard</a></a>
+    <a href="<?php echo home_url('store-manager') ?>">Vendor Dashboard</a></a>
     <?php
     //The user has the "author" role
 }
