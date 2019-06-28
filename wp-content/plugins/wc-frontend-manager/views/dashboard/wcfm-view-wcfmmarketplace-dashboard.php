@@ -367,41 +367,7 @@ if( $wcfm_is_allow_analytics = apply_filters( 'wcfm_is_allow_analytics', true ) 
 					<?php } ?>
 				<?php } ?>
 				
-				<?php do_action('after_wcfm_dashboard_zone_analytics'); ?>
-				
-				<?php if( $wcfm_is_allow_notice = apply_filters( 'wcfm_is_allow_notice', true ) ) { ?>
-					<div class="wcfm_dashboard_latest_topics">
-						<div class="page_collapsible" id="wcfm_dashboard_latest_topics"><span class="wcfmfa fa-bullhorn"></span><span class="dashboard_widget_head"><?php _e('Latest Topics', 'wc-frontend-manager'); ?></span></div>
-						<div class="wcfm-container">
-							<div id="wcfm_dashboard_latest_topics_expander" class="wcfm-content">
-								<?php
-								$args = array(
-									'posts_per_page'   => 5,
-									'offset'           => 0,
-									'orderby'          => 'date',
-									'order'            => 'DESC',
-									'post_type'        => 'wcfm_notice',
-									'post_parent'      => 0,
-									'post_status'      => array('draft', 'pending', 'publish'),
-									'suppress_filters' => 0 
-								);
-								$args = apply_filters( 'wcfm_notice_args', $args );
-								$wcfm_notices_array = get_posts( $args );
-								
-								$wcfm_dashboard_notice_content_length = (int) apply_filters( 'wcfm_is_allow_dashboard_notice_content_length', 80 );
-								
-								if( !empty( $wcfm_notices_array ) ) {
-									foreach($wcfm_notices_array as $wcfm_notices_single) {
-										echo '<div class="wcfm_dashboard_latest_topic"><a href="' . get_wcfm_notice_view_url($wcfm_notices_single->ID) . '" class="wcfm_dashboard_item_title"><span class="wcfmfa fa-bullhorn"></span>' . substr( $wcfm_notices_single->post_title, 0, $wcfm_dashboard_notice_content_length ) . ' ...</a></div>';
-									}
-								} else {
-									_e( 'There is no topic yet!!', 'wc-frontend-manager' );
-								}
-								?>
-							</div>
-						</div>
-					</div>
-				<?php } ?>
+		
 				
 			</div>
 			<?php do_action( 'after_wcfm_dashboard_right_col' ); ?>
