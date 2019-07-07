@@ -98,7 +98,20 @@ $count_post 	= count($sub_cat);
         </div>
 
 
+<div class="container m-t-45 m-b-45">
+            <div class="row">
+              <div class="col-lg" id="dc-p">
 
+ 
+
+ <h2 ><?php the_field('title_for_seo', $queried_object); ?></h2>
+             <div class="row m-t-60 m-b-60 justify-content-center">
+ <?php the_field('description_for_seo', $queried_object); ?></div>
+
+
+              </div>
+            </div>
+          </div>
 
 
       </div>
