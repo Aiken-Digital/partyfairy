@@ -33,7 +33,7 @@
                  ?>
                  <li>
                    <label class="font-12 label-checkbox" for="category-<?php echo $subkey_x ?>"><?php echo $wcatTerm2->name; ?>
-                   <input id="category-<?php echo $subkey_x; ?>" name="category[]" class="autocheckbox" type="radio" aria-label="filter checkbox" value="<?php echo $wcatTerm2->term_id?>" ><span class="checkmark"></span>
+                   <input id="category-<?php echo $subkey_x; ?>" name="category[]" class="autocheckbox" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm2->term_id?>" style="position: absolute !important;" ><span class="checkmark"></span>
                  </label>
                </li>
 
@@ -71,7 +71,7 @@
             ?>
             <li>
               <label class="font-12 label-checkbox" for="occasions-<?php echo $subkey ?>"><?php echo $wcatTerm1->name; ?>
-              <input id="occasions-<?php echo $subkey ?>" class="autocheckbox" name="category[]" type="radio" aria-label="filter checkbox" value="<?php echo $wcatTerm1->term_id?>" ><span class="checkmark"></span>
+              <input id="occasions-<?php echo $subkey ?>" class="autocheckbox" name="category[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm1->term_id?>" style="position: absolute !important;" ><span class="checkmark"></span>
             </label>
           </li>
 
@@ -111,7 +111,7 @@ if($wcatTerms1) :
         ?>
         <li>
           <label class="font-12 label-checkbox" for="themes-<?php echo $subkey ?>"><?php echo $wcatTerm1->name; ?>
-          <input id="themes-<?php echo $subkey ?>" class="autocheckbox" name="category[]" type="radio" aria-label="filter checkbox" value="<?php echo $wcatTerm1->term_id?>" ><span class="checkmark"></span>
+          <input id="themes-<?php echo $subkey ?>" class="autocheckbox" name="category[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm1->term_id?>" style="position: absolute !important;"><span class="checkmark"></span>
         </label>
       </li>
 
@@ -167,10 +167,30 @@ if($wcatTerms1) :
   </div>
   <div class="collapse" id="collapse5">
     <div class="card-body">
+      <div id="slider"></div>
+      <div class="price-range-handle">
+        <div class="sliderValueWrap">
+          <input class="sliderValue sliderValueMin" type="text" data-index="0" value="0" name="price[]">
+        </div><span class="btw">-</span>
+        <div class="sliderValueWrap">
+          <input class="sliderValue sliderValueMax" type="text" data-index="1" value="300" name="price[]">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<!-- 
+<div class="card">
+  <div class="card-header">
+    <h5 class="mb-0">
+      <button class="btn btn-link font-13" type="button" data-toggle="collapse" data-target="#collapse5" aria-expanded="false" aria-controls="collapse5">Price</button>
+    </h5>
+  </div>
+  <div class="collapse" id="collapse5">
+    <div class="card-body">
       <ul class="price-drag">
         <p>
-          <label for="amount"></label>
-          <input type="text" id="amount"  readonly style="border:0; color:#f6931f; font-weight:bold;">
 
           <input type="text" name="price" id="price" value="" style="display: none;">
         </p>
@@ -180,6 +200,8 @@ if($wcatTerms1) :
     </div>
   </div>
 </div>
+ -->
+
 
 
 <?php
@@ -206,9 +228,9 @@ if($delivery_estimate) {
           ?>
           <li>
 
-            <label class="font-12 label-checkbox" for="delivery-estimate-<?php echo $s ?>">
+            <label class="font-12 label-checkbox d-flex align-items-center" for="delivery-estimate-<?php echo $s ?>">
               <?php echo $user->name;?>
-              <input id="delivery-estimate-<?php echo $s ?>" class="autocheckbox" name="delivery-estimate[]" type="radio" aria-label="filter checkbox" value="<?php echo $user->term_id?>" ><span class="checkmark"></span>
+              <input id="delivery-estimate-<?php echo $s ?>" class="autocheckbox position-absolute" name="delivery-estimate[]" type="radio" aria-label="filter checkbox" value="<?php echo $user->term_id?>" ><span class="checkmark"></span>
             </label>
             <?php $s++; } ?>
           </li>
@@ -246,9 +268,9 @@ if($personalisation) {
           ?>
           <li>
 
-            <label class="font-12 label-checkbox" for="personalisation-<?php echo $s ?>">
+            <label class="font-12 label-checkbox d-flex align-items-center" for="personalisation-<?php echo $s ?>">
               <?php echo $user->name;?>
-              <input id="personalisation-<?php echo $s ?>" class="autocheckbox" name="personalisation[]" type="radio" aria-label="filter checkbox" value="<?php echo $user->term_id?>" ><span class="checkmark"></span>
+              <input id="personalisation-<?php echo $s ?>" class="autocheckbox position-absolute" name="personalisation[]" type="radio" aria-label="filter checkbox" value="<?php echo $user->term_id?>" ><span class="checkmark"></span>
             </label>
             <?php $s++; } ?>
           </li>
@@ -288,7 +310,7 @@ if($personalisation) {
             <label class="font-12 label-checkbox" for="seller-<?php echo $s ?>">
               <?php if (!empty($result_name_vendor)) { echo $result_name_vendor['name'][0]; } ?>
 
-              <input id="seller-<?php echo $s ?>" class="autocheckbox" name="seller[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $user->ID?>" ><span class="checkmark"></span>
+              <input id="seller-<?php echo $s ?>" class="autocheckbox" name="seller[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $user->ID?>" style="position: absolute !important;"><span class="checkmark"></span>
             </label>
 
           </li>

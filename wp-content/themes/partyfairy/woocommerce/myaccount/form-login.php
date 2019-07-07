@@ -19,24 +19,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-do_action( 'woocommerce_before_customer_login_form' ); ?>
+//do_action( 'woocommerce_before_customer_login_form' ); ?>
 
   <h1 class="text-center">Sign In</h1>
 
 <div class="m-t-30">
 <?php if ( 'yes' === get_option( 'woocommerce_enable_myaccount_registration' ) ) : ?>
 
-
-            <div class="pf-tab register-tab">
-              <ul class="pf-tab--ul">
-                <li class="pf-tab--li active" data-target="registerTab">I'm new here</li>
-                <li class="pf-tab--li" data-target="loginTab">I have an account</li>
-              </ul>
-            </div>
+			<div class="row justify-content-md-center">
+ 				<div class="col-lg-4">
+		            <div class="pf-tab register-tab">
+		              <ul class="pf-tab--ul">
+		                <li class="pf-tab--li active" data-target="registerTab">I'm new here</li>
+		                <li class="pf-tab--li" data-target="loginTab">I have an account</li>
+		              </ul>
+		            </div>
+            	</div>
+        	</div>
 
 
             <div class="row justify-content-md-center -info-tab" id="registerTab">
-            		<form method="post" class="pf-form col-lg-6" <?php do_action( 'woocommerce_register_form_tag' ); ?> >
+            		<form method="post" class="pf-form col-lg-4" <?php do_action( 'woocommerce_register_form_tag' ); ?> >
 
 			<?php do_action( 'woocommerce_register_form_start' ); ?>
 
@@ -126,7 +129,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
             <div class="row justify-content-md-center -info-tab" id="loginTab">
 
 
-		<form class="pf-form col-lg-6" method="post">
+		<form class="pf-form col-lg-4" method="post">
 
 
 

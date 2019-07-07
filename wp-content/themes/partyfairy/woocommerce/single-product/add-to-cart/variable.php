@@ -465,12 +465,41 @@ if($policies) {  ?>
     <input class="-minus btn" id="sub" value="-" type="button">
     <div class="form-group m-b-0 w-100">
      <?php
+$min_order = get_post_meta( get_the_ID(), '_wc_mmax_min' ,true);  
+$man_order = get_post_meta( get_the_ID(), '_wc_mmax_max' ,true);  
+
+
+$m = $product->get_min_purchase_quantity();
+
+
+if($min_order) {
+
+$m = $min_order;
+
+} else {
+
+$m = $product->get_min_purchase_quantity();
+}
+
+
+$mx = $product->get_max_purchase_quantity();
+
+if($man_order) {
+
+$mx = $man_order;
+
+} else {
+
+$mx = $product->get_max_purchase_quantity();
+}
+ 
 
      woocommerce_quantity_input( array(
       'input_id'     => uniqid( 'qty_' ),
       'classes'      => apply_filters( 'woocommerce_quantity_input_classes', array('form-control', 'text-center','valid','qty','text'  ), $product ),
-      'min_value'   => apply_filters( 'woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product ),
-      'max_value'   => apply_filters( 'woocommerce_quantity_input_max', $product->get_max_purchase_quantity(), $product ),
+      'min_value'   => apply_filters( 'woocommerce_quantity_input_min', $m, $product ),
+      'max_value'   => apply_filters( 'woocommerce_quantity_input_max', $mx, $product ),
+
 		'input_value' => isset( $_POST['quantity'] ) ? wc_stock_amount( wp_unslash( $_POST['quantity'] ) ) : $product->get_min_purchase_quantity(), // WPCS: CSRF ok, input var ok.
 	) );
 
@@ -479,7 +508,14 @@ if($policies) {  ?>
 <input class="-plus btn" id="add" value="+" type="button">
 
 </div>
+
 </div>
+<?php 
+ if($min_order) {
+ echo '<p class="font-12">This item has a minimum order quantity of '.$min_order.'</p>';
+}
+ ?>
+
 <?php 
 do_action( 'woocommerce_after_add_to_cart_quantity' ); ?>
 
@@ -488,6 +524,7 @@ $delive_product = get_field('delivery_product', get_option('page_for_posts'));
 $pickup_product = get_field('pickup_product', get_option('page_for_posts'));
 $delivery_estimate = get_field('delivery_estimate', get_option('page_for_posts'));
 $estimate_time = get_field('estimate_time', get_option('page_for_posts'));
+
 ?>
 
 <div class="product-info--opt-delivery">

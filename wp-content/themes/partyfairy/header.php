@@ -446,7 +446,7 @@ endif;  ?>
 
 
 
-<li  class="pf-navigation--group--list">
+<!-- <li  class="pf-navigation--group--list">
 
     <a href="http://blog.partyfairy.com/" title="Get Inspired" class="get-inspired" rel="nofollow">
         <span class="categories-img">
@@ -461,7 +461,7 @@ endif;  ?>
         <span></span>
 
     </a>
-</li>
+</li> -->
 </ul>
 </div>
 </header>

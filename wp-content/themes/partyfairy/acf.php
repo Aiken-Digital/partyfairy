@@ -1482,7 +1482,7 @@ acf_add_local_field_group(array(
 			'key' => 'field_5cbfe688fee0e',
 			'label' => 'Phone Number',
 			'name' => 'phone_number',
-			'type' => 'number',
+			'type' => 'text',
 			'instructions' => '',
 			'required' => 0,
 			'conditional_logic' => 0,

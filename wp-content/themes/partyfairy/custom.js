@@ -1,4 +1,4 @@
-
+ 
 var data = $("input[name='quantity']");
 
 $('#add').click(function () {
@@ -52,22 +52,24 @@ function myFunctionpickup(e) {
 // })
 
 
-$( function() {
-	$( "#slider-range" ).slider({
-		range: true,
-		min: 0,
-		max: 1000,
-		values: [ 75, 300 ],
-		slide: function( event, ui ) {
-			$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
 
-			$("#price").val(ui.values[ 0 ] + "," + ui.values[ 1 ]);
-			var $form = $(this).closest('form');
-			$form.find('input[type=submit]').click();
+// $( function() {
+// 	$( "#slider" ).slider({
+// 		range: true,
+// 		min: 0,
+// 		max: 1000,
+// 		values: [ 75, 300 ],
+// 		slide: function( event, ui ) {
+// 			console.log('s');
 			
-		}
-	});
-	$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-		" - $" + $( "#slider-range" ).slider( "values", 1 ) );
+// 			$("#price").val(ui.values[ 0 ] + "," + ui.values[ 1 ]);
+// 			var $form = $(this).closest('form');
+// 			//$form.find('input[type=submit]').click();
 
-} );
+// 			console.log('c');
+			
+// 		}
+// 	});
+
+
+//  } );

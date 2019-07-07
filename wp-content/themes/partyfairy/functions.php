@@ -655,7 +655,7 @@ function filter_category_function(){
 	if( !empty( $_GET['price']) ) {
 		$args['meta_query'][] = array(
 			'key' => '_price',
-			'value' => explode(',', $_GET['price']),
+			'value' => $_GET['price'],
 			'type' => 'numeric',
 			'compare' => 'between'
 		);
@@ -1095,6 +1095,31 @@ function ibenic_wc_refund_order( $order_id, $refund_reason = '' ) {
 }
 
 
+add_action( 'admin_init', 'bbloomer_hide_update_notifications_users' );
+ 
+function bbloomer_hide_update_notifications_users() {
+    global $menu, $submenu;
+    $user = wp_get_current_user();
+    
+    // ENTER HERE THE ONLY ALLOWED USERNAME
+    $allowed = array( 'rodolfomelogli' );
+    
+    // HIDE WP, PLUGIN, THEME NOTIFICATIONS FOR ALL OTHER USERS
+    if ( $user && isset( $user->user_login ) && ! in_array( $user->user_login, $allowed ) ) {
+        add_filter( 'pre_site_transient_update_core', 'bbloomer_disable_update_notifications' );
+        add_filter( 'pre_site_transient_update_plugins', 'bbloomer_disable_update_notifications' ); 
+        add_filter( 'pre_site_transient_update_themes', 'bbloomer_disable_update_notifications' );
+        
+        // ALSO REMOVE THE RED UPDATE COUNTERS @ SIDEBAR MENU ITEMS
+        $menu[65][0] = 'Plugins up to date';   
+        $submenu['index.php'][10][0] = 'Updates disabled';   
+    }
+}
+ 
+function bbloomer_disable_update_notifications() {
+    global $wp_version;
+    return (object) array( 'last_checked' => time(), 'version_checked' => $wp_version, );
+}
 
 
 ?>
