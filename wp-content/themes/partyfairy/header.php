@@ -21,15 +21,13 @@
       <div class="pf-header"><a class="pf-logo" href="<?php echo home_url() ?>">
           <div class="pf-logo--fairy"><img class="img-fluid" src="<?php the_field('header_icon', 'option'); ?>"></div>
           <div class="pf-logo--txtform d-none d-lg-block"> <img class="img-fluid" src="<?php the_field('header_text_icon', 'option'); ?>"></div></a>
-          <?php   
 
-    // <div class="pf-search">
-    //       <form action="#" method="get">
-    //         <input type="text" name="search" placeholder="Search entire store here">
-    //       </form>
-    //     </div>
+          <div class="pf-search">
+              <form action="#" method="get">
+                <input type="text" name="search" placeholder="Search entire store here">
+              </form>
+          </div>
 
-          ?>
           <div class="pf-rightside">
               <div class="phone-no d-none d-lg-block">
                <a href="https://wa.me/<?php the_field('phone_number', 'option'); ?>" target="_blank">
