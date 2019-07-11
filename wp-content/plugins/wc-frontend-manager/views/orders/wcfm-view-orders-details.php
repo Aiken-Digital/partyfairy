@@ -190,25 +190,25 @@ do_action( 'before_wcfm_orders_details', $order_id );
 
 						<?php
 						
-						if( !in_array( $current_order_ststus, $status_update_block_statuses ) && apply_filters( 'wcfm_is_allow_order_status_change_active', true, $order_id, $order ) ) {
+						// if( !in_array( $current_order_ststus, $status_update_block_statuses ) && apply_filters( 'wcfm_is_allow_order_status_change_active', true, $order_id, $order ) ) {
 
-							$order_status = '<select id="wcfm_order_status" name="order_status">';
-						} else {
-							$order_status = '<select id="wcfm_order_status" name="order_status" disabled>';
-						}
-						foreach ( $statuses as $status => $status_name ) {
-							$order_status .= '<option value="' . esc_attr( $status ) . '" ' . selected( $status, 'wc-' . $current_order_ststus, false ) . '>' . esc_html( $status_name ) . '</option>';
-						}
-						$order_status .= '</select>';
-						if( !in_array( $current_order_ststus, $status_update_block_statuses ) && apply_filters( 'wcfm_is_allow_order_status_change_active', true, $order_id, $order ) ) {
-							$order_status .= '<button class="wcfm_modify_order_status button" id="wcfm_modify_order_status" data-orderid="' . $order->get_id() . '">' .  __( 'Update', 'wc-frontend-manager' ) . '</button>';
-						}
+						// 	$order_status = '<select id="wcfm_order_status" name="order_status">';
+						// } else {
+						// 	$order_status = '<select id="wcfm_order_status" name="order_status" disabled>';
+						// }
+						// foreach ( $statuses as $status => $status_name ) {
+						// 	$order_status .= '<option value="' . esc_attr( $status ) . '" ' . selected( $status, 'wc-' . $current_order_ststus, false ) . '>' . esc_html( $status_name ) . '</option>';
+						// }
+						// $order_status .= '</select>';
+						// if( !in_array( $current_order_ststus, $status_update_block_statuses ) && apply_filters( 'wcfm_is_allow_order_status_change_active', true, $order_id, $order ) ) {
+						// 	$order_status .= '<button class="wcfm_modify_order_status button" id="wcfm_modify_order_status" data-orderid="' . $order->get_id() . '">' .  __( 'Update', 'wc-frontend-manager' ) . '</button>';
+						// }
 
 
-						if( $order->get_status() != 'pending') {
+						// if( $order->get_status() != 'pending') {
 							
-							echo $order_status;
-						}
+						// 	echo $order_status;
+						// }
 						?>
 
 					</p>
