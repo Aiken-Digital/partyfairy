@@ -106,13 +106,14 @@ do_action( 'woocommerce_before_cart' ); ?>
 								'input_name'   => "cart[{$cart_item_key}][qty]",
 								'input_value'  => $cart_item['quantity'],
 								'max_value'    => $_product->get_max_purchase_quantity(),
-								'min_value'    => '0',
+								'min_value'    => get_post_meta( $product_id, '_wc_mmax_min' ,true),
 								'product_name' => $_product->get_name(),
 							), $_product, false );
 						}
-
+						//echo $min_order = get_post_meta( $product_id, '_wc_mmax_min' ,true);
 						echo apply_filters( 'woocommerce_cart_item_quantity', $product_quantity, $cart_item_key, $cart_item ); // PHPCS: XSS ok.
 						?>
+
 						</td>
 
 						<td class="product-subtotal" data-title="<?php esc_attr_e( 'Total', 'woocommerce' ); ?>">
