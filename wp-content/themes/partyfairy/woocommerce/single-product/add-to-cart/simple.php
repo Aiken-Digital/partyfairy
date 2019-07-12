@@ -149,7 +149,7 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 																			<?php $icon = get_field('icon', 'dietary-preference_'.$svalue->term_id); ?>
 																			<?php if($icon) { ?> <img src="<?php echo $icon; ?>" width="30" height="30" /> <?php  } ?>
 																		</div>
-																		<?php echo $svalue->name;  ?>
+																		<?php if($svalue->slug !="i-eat-everything"){ echo $svalue->name; }  ?>
 																	</div>
 																<?php } ?>
 															</div>
