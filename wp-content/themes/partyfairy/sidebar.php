@@ -291,7 +291,7 @@ if($personalisation) {
           <button class="btn btn-link font-13" type="button" data-toggle="collapse" data-target="#collapse2x" aria-expanded="false" aria-controls="collapse2x">Dietary Preference</button>
         </h5>
       </div>
-      <div class="collapse" id="collapse2">
+      <div class="collapse" id="collapse2x">
         <div class="card-body">
           <ul>
 
