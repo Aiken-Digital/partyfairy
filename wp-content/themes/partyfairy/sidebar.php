@@ -6,10 +6,10 @@
  <div class="col-lg-2" id="pf-filter">
   <div class="filter-section">
     <div class="close-filter d-block d-lg-none">X</div>
-    <div class="filters-clear">
+<!--     <div class="filters-clear">
       <div class="filters-clear--head"><span class="font-14"><strong>Active Filters</strong> </span><span class="-clearall font-12">Clear All</span></div>
       <div><span class="font-14">Hello Kity</span></div>
-    </div>
+    </div> -->
     <div class="pf-accordion">
 
       <?php  
@@ -279,7 +279,43 @@ if($personalisation) {
     </div>
   </div>
 
-<?php } ?>
+<?php } 
+
+   $wcatTerms1 = get_terms('dietary-preference', array('hide_empty' => 0)); 
+   if($wcatTerms1) :
+     ?>
+
+     <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">
+          <button class="btn btn-link font-13" type="button" data-toggle="collapse" data-target="#collapse2x" aria-expanded="false" aria-controls="collapse2x">Dietary Preference</button>
+        </h5>
+      </div>
+      <div class="collapse" id="collapse2">
+        <div class="card-body">
+          <ul>
+
+
+
+           <?php 
+           foreach($wcatTerms1 as $subkey => $wcatTerm1) :
+
+            ?>
+            <li>
+              <label class="font-12 label-checkbox" for="dietary-preference-<?php echo $subkey ?>"><?php echo $wcatTerm1->name; ?>
+              <input id="dietary-preference-<?php echo $subkey ?>" class="autocheckbox" name="dietary[]" type="checkbox" aria-label="filter checkbox" value="<?php echo $wcatTerm1->term_id?>" style="position: absolute !important;" ><span class="checkmark"></span>
+            </label>
+          </li>
+
+        <?php endforeach ;  
+
+        ?>
+
+
+      </ul>
+    </div>
+  </div>
+</div>
 
 
 

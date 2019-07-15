@@ -716,6 +716,20 @@ function filter_category_function(){
 
 
 
+	if( isset( $_GET['dietary'] ) )
+		$args['tax_query'] = array(
+
+			array(
+				'taxonomy' => 'dietary-preference',
+				'field'    => 'id',
+				'terms'    => $_GET['dietary'],
+
+
+			)
+		);
+
+
+
 
 
 	$query = new WP_Query( $args );
