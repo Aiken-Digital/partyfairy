@@ -28,7 +28,7 @@
                    </a>
                 </div>
                 <div class="col-lg-3 text-center">
-                   <a class="center-icon-column p-t-30 p-b-30 hover--bglightblue d-inline-block" href="mailto:customercare@partyfairy.com">
+                   <a class="center-icon-column p-t-30 p-b-30 hover--bglightblue d-inline-block" href="mailto:<?php the_field('email', get_option('page_for_posts')); ?>">
                       <div class="center-icon-column--img">
                         
                          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" version="1.1" fill="#60bcf0">
@@ -37,7 +37,7 @@
                             </g>
                          </svg>
                       </div>
-                      <p class="font-12 bold m-b-5"><a href="mailto:<?php the_field('email', get_option('page_for_posts')); ?>"><?php the_field('email', get_option('page_for_posts')); ?></a></p>
+                      <p class="font-12 bold m-b-5"><?php the_field('email', get_option('page_for_posts')); ?></p>
                       <p class="font-12"><?php the_field('operation_hour_for_email', get_option('page_for_posts')); ?></p>
                    </a>
                 </div>
