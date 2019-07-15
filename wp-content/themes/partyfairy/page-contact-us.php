@@ -37,7 +37,7 @@
                             </g>
                          </svg>
                       </div>
-                      <p class="font-12 bold m-b-5"><?php the_field('email', get_option('page_for_posts')); ?></p>
+                      <p class="font-12 bold m-b-5"><a href="mailto:<?php the_field('email', get_option('page_for_posts')); ?>"><?php the_field('email', get_option('page_for_posts')); ?></a></p>
                       <p class="font-12"><?php the_field('operation_hour_for_email', get_option('page_for_posts')); ?></p>
                    </a>
                 </div>
