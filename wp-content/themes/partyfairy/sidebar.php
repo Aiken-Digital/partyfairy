@@ -316,7 +316,11 @@ if($personalisation) {
     </div>
   </div>
 </div>
+<?php 
 
+endif;
+
+?>
 
 
 <div class="card">
