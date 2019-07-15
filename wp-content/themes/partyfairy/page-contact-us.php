@@ -8,7 +8,7 @@
           <div class="container m-b-30">
              <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                   <li class="breadcrumb-item"><a href="#">Home</a></li>
+                   <li class="breadcrumb-item"><a href="<?php echo home_url() ?>">Home</a></li>
                    <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
                 </ol>
              </nav>
@@ -23,8 +23,8 @@
                             </g>
                          </svg>
                       </div>
-                      <p class="font-12 bold m-b-5">+65 9896 4800</p>
-                      <p class="font-12">Mon-Fri, 9am-6pm </p>
+                      <p class="font-12 bold m-b-5"><?php the_field('phone', get_option('page_for_posts')); ?></p>
+                      <p class="font-12"><?php the_field('operation_hour_for_phone', get_option('page_for_posts')); ?></p>
                    </a>
                 </div>
                 <div class="col-lg-3 text-center">
@@ -37,8 +37,8 @@
                             </g>
                          </svg>
                       </div>
-                      <p class="font-12 bold m-b-5">customercare@partyfairy.com</p>
-                      <p class="font-12">Mon-Sun, 24/7</p>
+                      <p class="font-12 bold m-b-5"><?php the_field('email', get_option('page_for_posts')); ?></p>
+                      <p class="font-12"><?php the_field('operation_hour_for_email', get_option('page_for_posts')); ?></p>
                    </a>
                 </div>
                 <div class="col-lg-3 text-center">
@@ -51,8 +51,8 @@
                             </g>
                          </svg>
                       </div>
-                      <p class="font-12 bold m-b-5">LIVE CHAT</p>
-                      <p class="font-12">Mon-Fri, 9am-6pm</p>
+                      <p class="font-12 bold m-b-5"><?php the_field('live_chat', get_option('page_for_posts')); ?></p>
+                      <p class="font-12"><?php the_field('operation_hour_for_live_chat', get_option('page_for_posts')); ?></p>
                    </a>
                 </div>
              </div>
