@@ -104,7 +104,6 @@ $count_post 	= count($sub_cat);
 
  
 
- <h2 ><?php the_field('title_for_seo', $queried_object); ?></h2>
              <div class="row m-t-60 m-b-60 justify-content-center">
  <?php the_field('description_for_seo', $queried_object); ?></div>
 
