@@ -260,14 +260,16 @@ class WCFM_Orders_Controller {
 					$wcfm_orders_json_arr[$index][] = date_i18n( wc_date_format(), strtotime( $order_date ) );
 					
 				// Action
-					$actions = '';
-					if( $wcfm_is_allow_order_status_update = apply_filters( 'wcfm_is_allow_order_status_update', true ) ) {
+					$actions = ''; 
+
+if( $wcfm_is_allow_order_status_update = apply_filters( 'wcfm_is_allow_order_status_update', true ) ) {
 						$order_status = sanitize_title( $the_order->get_status() );
 
 						if( !in_array( $order_status, array( 'failed', 'cancelled', 'refunded', 'completed' ) ) ) 
 
-							$actions = '<a class="wcfm_order_mark_complete wcfm-action-icon" href="#" data-orderid="' . $wcfm_orders_single->ID . '"><span class="wcfmfa fa-check-circle text_tip" data-tip="' . esc_attr__( 'Mark as Complete', 'wc-frontend-manager' ) . '"></span></a>';
+		            $actions = '<a class="wcfm_order_mark_complete wcfm-action-icon" href="#" data-orderid="' . $wcfm_orders_single->ID . '"><span class="wcfmfa fa-check-circle text_tip" data-tip="' . esc_attr__( 'Mark as Complete', 'wc-frontend-manager' ) . '"></span></a>';
 					}
+
 					
 					if( $wcfm_is_allow_order_details = apply_filters( 'wcfm_is_allow_order_details', true ) ) {
 						$actions .= '<a class="wcfm-action-icon" href="' . get_wcfm_view_order_url($wcfm_orders_single->ID, $the_order) . '"><span class="wcfmfa fa-eye text_tip" data-tip="' . esc_attr__( 'View Details', 'wc-frontend-manager' ) . '"></span></a>';
@@ -280,9 +282,9 @@ class WCFM_Orders_Controller {
 						}
 					}
 					
-					$actions = apply_filters ( 'wcfm_orders_module_actions', $actions, $wcfm_orders_single->ID, $the_order );
 					
 					
+					$custom_menu = "";
 
 					if( $order_status == 'pending'){
 
@@ -298,7 +300,7 @@ class WCFM_Orders_Controller {
 						padding: 4px;
 						color: white; margin:2px;" href="'.$complete_url_decline.'">Decline</a>';
 
-						$wcfm_orders_json_arr[$index][] =  $menu_pending;
+						$custom_menu .=  $menu_pending;
 
 					}elseif($order_status == 'processing-cancel'){
 
@@ -347,7 +349,7 @@ class WCFM_Orders_Controller {
 
 
 
-						$wcfm_orders_json_arr[$index][] = $tindakan;
+						$custom_menu .= $tindakan;
 
 
 					}elseif($order_status == 'processing'){
@@ -397,7 +399,7 @@ class WCFM_Orders_Controller {
 
 
 
-						$wcfm_orders_json_arr[$index][] = $tindakan;
+						$custom_menu .= $tindakan;
 
 
 					}elseif($order_status == 'completed'){
@@ -406,7 +408,7 @@ class WCFM_Orders_Controller {
 						padding: 4px;
 						color: white; margin:2px;" href="#">Completed</a>';
 						
-						$wcfm_orders_json_arr[$index][] = $tindakan;
+						$custom_menu .= $tindakan;
 
 					}elseif($order_status == 'cancelled'){
 
@@ -417,7 +419,7 @@ class WCFM_Orders_Controller {
 						padding: 4px;
 						color: white; margin:2px;" href="'.$complete_url_decline.'">Refund</a>';
 
-						$wcfm_orders_json_arr[$index][] =  $menu_pending;
+						$custom_menu .=  $menu_pending;
 
 					}elseif($order_status == 'refunded'){
 
@@ -427,16 +429,23 @@ class WCFM_Orders_Controller {
 						padding: 4px;
 						color: white; margin:2px;" href="#">Success Refund</a>';
 
-						$wcfm_orders_json_arr[$index][] =  $menu_pending;
+						$custom_menu .=  $menu_pending;
 
 					}else{
 
 						//$wcfm_orders_json_arr[$index][] =  apply_filters ( 'wcfm_orders_actions', $actions, $wcfm_orders_single, $the_order );
-						$wcfm_orders_json_arr[$index][] =  '';
+						$custom_menu .=  '';
 
 
 
 					}
+
+
+				$actions = apply_filters ( 'wcfm_orders_module_actions', $custom_menu, $wcfm_orders_single->ID, $the_order );
+				
+				$wcfm_orders_json_arr[$index][] =  apply_filters ( 'wcfm_orders_actions', $actions, $wcfm_orders_single, $the_order );
+
+
 
 					$index++;
 				}												

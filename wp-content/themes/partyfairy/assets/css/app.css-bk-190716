@@ -12172,39 +12172,41 @@ header {
       @media (min-width: 992px) {
         .pf-header .pf-logo--txtform {
           margin-left: 80px; } }
-  .pf-header .pf-search input[type="text"] {
-    width: 0px;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    border-width: 0px;
-    border-radius: 50%;
-    font-size: 14px;
-    background-color: white;
-    background-image: url("../svgs/search-icon.svg");
-    background-size: 25px;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    padding: 10px 20px;
-    -webkit-transition: width 0.4s ease-in-out;
-    -o-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-    font-size: 14px; }
-    .pf-header .pf-search input[type="text"]:focus {
-      width: 100%;
-      border-radius: 20px;
-      background-position: 98% 50%;
-      border: 1px solid #ddd;
-      border-width: 1px; }
-    @media (min-width: 768px) {
-      .pf-header .pf-search input[type="text"] {
-        width: 300px;
-        background-position: 96% 50%;
-        padding: 5px 20px 5px 20px;
+  .pf-header .pf-search {
+    display: none; }
+    .pf-header .pf-search input[type="text"] {
+      width: 0px;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      border-width: 0px;
+      border-radius: 50%;
+      font-size: 14px;
+      background-color: white;
+      background-image: url("../svgs/search-icon.svg");
+      background-size: 25px;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      padding: 10px 20px;
+      -webkit-transition: width 0.4s ease-in-out;
+      -o-transition: width 0.4s ease-in-out;
+      transition: width 0.4s ease-in-out;
+      font-size: 14px; }
+      .pf-header .pf-search input[type="text"]:focus {
+        width: 100%;
         border-radius: 20px;
+        background-position: 98% 50%;
         border: 1px solid #ddd;
         border-width: 1px; }
-        .pf-header .pf-search input[type="text"]:focus {
-          width: 220px; } }
+      @media (min-width: 768px) {
+        .pf-header .pf-search input[type="text"] {
+          width: 300px;
+          background-position: 96% 50%;
+          padding: 5px 20px 5px 20px;
+          border-radius: 20px;
+          border: 1px solid #ddd;
+          border-width: 1px; }
+          .pf-header .pf-search input[type="text"]:focus {
+            width: 220px; } }
   .pf-header .pf-rightside {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -14158,22 +14160,5 @@ div#sticky {
   .single-hover-tile {
     margin: 0 15px 30px 15px;
     padding: 0; } }
-
-#stripe-payment-data fieldset .form-row {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column; }
-  #stripe-payment-data fieldset .form-row label {
-    margin-left: 0px; }
-
-#stripe-payment-data .woocommerce-SavedPaymentMethods-saveNew {
-  padding: 1em; }
-  #stripe-payment-data .woocommerce-SavedPaymentMethods-saveNew label[for="wc-stripe-new-payment-method"] {
-    padding-left: 0;
-    margin-left: 0; }
 
 /*# sourceMappingURL=app.css.map */

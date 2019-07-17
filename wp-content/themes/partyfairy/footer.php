@@ -214,5 +214,23 @@
   </script>
 
 <?php } ?>
+	   
+	   <script>
+	   
+// 	   setTimeout(function(){
+//     var ccfiledform = $('#wc-stripe-cc-form');
+//     var savePaymentMethold = $('.woocommerce-SavedPaymentMethods-saveNew');
+//     $('input:radio[name="wc-stripe-payment-token"]').change(function(){
+//         if ($('#wc-stripe-payment-token-new').is(':checked')) {
+//             ccfiledform.show();
+//             savePaymentMethold.show();
+//         }else{
+//             ccfiledform.hide();
+//             savePaymentMethold.hide();
+//         }
+//     });
+// }, 333);
+// 	   
+ 	    	    	   </script>
 </body>
 </html>
