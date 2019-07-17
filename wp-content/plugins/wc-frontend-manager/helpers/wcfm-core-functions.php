@@ -41,8 +41,22 @@ if(!function_exists('wcfm_restriction_message_show')) {
 		  <div class="wcfm-container">
 			  <div class="wcfm-content">
 					<div id="wcfmu-feature-missing-message" class="wcfm-warn-message wcfm-wcfmu" style="display: block;">
-						<p><span class="wcfmfa fa-warning"></span>
-						<?php printf( __( '%s' . $feature . '%s: You don\'t have permission to access this page. Please contact your %sStore Admin%s for assistance.', 'wc-frontend-manager' ), '<strong>', '</strong>', '<strong>', '</strong>' ); ?></p>
+						<p>
+						  <span class="wcfmfa fa-warning"></span>
+							<?php
+							if( wcfm_is_vendor() ) {
+								$wcfm_vendors_id = apply_filters( 'wcfm_current_vendor_id', get_current_user_id() );
+								$wcfm_membership = get_user_meta( $wcfm_vendors_id, 'wcfm_membership', true );
+								if( $wcfm_membership && function_exists( 'wcfm_is_valid_membership' ) && wcfm_is_valid_membership( $wcfm_membership ) ) {
+								  printf( __( '%s' . $feature . '%s: Your %s membership level doesn\'t give you permission to access this page. Please upgrade your membership, or contact the %sWebsite Manager%s for assistance.', 'wc-frontend-manager' ), '<strong>', '</strong>', '<strong>' . get_the_title( $wcfm_membership ) . '</strong>', '<strong>', '</strong>' );	
+								} else {
+									printf( __( '%s' . $feature . '%s: You don\'t have permission to access this page. Please contact your %sStore Admin%s for assistance.', 'wc-frontend-manager' ), '<strong>', '</strong>', '<strong>', '</strong>' );
+								}
+							} else {
+								printf( __( '%s' . $feature . '%s: You don\'t have permission to access this page. Please contact your %sStore Admin%s for assistance.', 'wc-frontend-manager' ), '<strong>', '</strong>', '<strong>', '</strong>' );
+							}
+							?>
+						</p>
 					</div>
 				</div>
 			</div>
@@ -201,6 +215,8 @@ if( !function_exists( 'wcfm_is_vendor' ) ) {
 				if( is_user_wcmp_vendor( $vendor_id ) ) return true;
 			} elseif( 'wcpvendors' == $is_marketplace ) {
 				if( WC_Product_Vendors_Utils::is_vendor( $vendor_id ) && !WC_Product_Vendors_Utils::is_pending_vendor( $vendor_id ) ) return true;
+				$vendor_data = get_term( $vendor_id, WC_PRODUCT_VENDORS_TAXONOMY );
+				if( $vendor_data && !is_wp_error( $vendor_data ) ) {return true;}
 			} elseif( 'dokan' == $is_marketplace ) {
 				$user = get_userdata( $vendor_id );
 				if ( in_array( 'seller', (array) $user->roles ) )  return true;

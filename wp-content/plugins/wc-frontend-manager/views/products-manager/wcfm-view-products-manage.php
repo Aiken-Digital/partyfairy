@@ -199,7 +199,7 @@ if( isset( $wp->query_vars['wcfm-products-manage'] ) && !empty( $wp->query_vars[
 		
 		// Product Tags
 		$product_tag_list = wp_get_post_terms($product_id, 'product_tag', array("fields" => "names"));
-		$product_tags = implode(',', $product_tag_list);
+		$product_tags = apply_filters( 'wcfm_pm_product_tags_after_save', implode(',', $product_tag_list), $product_id );
 		
 		// Product Stock options
 		$manage_stock = $product->managing_stock() ? 'enable' : '';
@@ -460,6 +460,20 @@ if( count( $product_types ) == 0 ) {
 				}
 			}
 			
+			if( $product_id && ( $wcfm_products_single->post_status == 'publish' ) ) {
+				if( apply_filters( 'wcfm_is_allow_featured_product', true ) ) {
+					if( WCFM_Dependencies::wcfmu_plugin_active_check() ) {
+						if( has_term( 'featured', 'product_visibility', $wcfm_products_single->ID ) ) {
+							echo '<a id="wcfm_product_featured" class="wcfm_product_featured add_new_wcfm_ele_dashboard text_tip" href="#" data-featured="nofeatured" data-proid="'. $product_id .'" data-tip="' . __('No Featured', 'wc-frontend-manager') . '"><span class="wcfmfa fa-star-of-life"></span><span class="text">' . __( 'No Featured', 'wc-frontend-manager') . '</span></a>';
+						} else {
+							if( apply_filters( 'wcfm_has_featured_product_limit', true ) ) {
+								echo '<a id="wcfm_product_featured" class="wcfm_product_featured add_new_wcfm_ele_dashboard text_tip" href="#" data-featured="featured" data-proid="'. $product_id .'" data-tip="' . __('Mark Featured', 'wc-frontend-manager') . '"><span class="wcfmfa fa-star"></span><span class="text">' . __( 'Mark Featured', 'wc-frontend-manager') . '</span></a>';
+							}
+						}
+					}
+				}
+			}
+			
 			do_action( 'after_wcfm_products_manage_action' );
 			?>
 			<div class="wcfm-clearfix"></div>
@@ -595,7 +609,7 @@ if( count( $product_types ) == 0 ) {
 								}
 								$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_product_manage_fields_content', array(
 																																																			"excerpt" => array('label' => __('Short Description', 'wc-frontend-manager') , 'type' => $wpeditor, 'class' => 'wcfm-textarea wcfm_ele wcfm_full_ele simple variable external grouped booking ' . $rich_editor , 'label_class' => 'wcfm_title wcfm_full_ele ' . $rich_editor, 'rows' => 5, 'value' => $excerpt, 'teeny' => true ),
-																																																			"description" => array('label' => __('Description', 'wc-frontend-manager') , 'type' => $wpeditor, 'class' => 'wcfm-textarea wcfm_ele wcfm_full_ele simple variable external grouped booking ' . $rich_editor, 'label_class' => 'wcfm_title wcfm_full_ele ' . $rich_editor, 'value' => $description),
+																																																			"description" => array('label' => __('Description', 'wc-frontend-manager') , 'type' => $wpeditor, 'class' => 'wcfm-textarea wcfm_ele wcfm_full_ele simple variable external grouped booking ' . $rich_editor, 'label_class' => 'wcfm_title wcfm_full_ele ' . $rich_editor, 'rows' => 10, 'value' => $description),
 																																																			"pro_id" => array('type' => 'hidden', 'value' => $product_id)
 																																															), $product_id, $product_type ) );
 								?>
@@ -792,7 +806,7 @@ if( count( $product_types ) == 0 ) {
 							}
 							$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_product_manage_fields_content', array(
 																																																		"excerpt" => array('label' => __('Short Description', 'wc-frontend-manager') , 'type' => $wpeditor, 'class' => 'wcfm-textarea wcfm_ele wcfm_full_ele simple variable external grouped booking ' . $rich_editor , 'label_class' => 'wcfm_title wcfm_full_ele', 'rows' => 5, 'value' => $excerpt, 'teeny' => true),
-																																																		"description" => array('label' => __('Description', 'wc-frontend-manager') , 'type' => $wpeditor, 'class' => 'wcfm-textarea wcfm_ele wcfm_full_ele simple variable external grouped booking ' . $rich_editor, 'label_class' => 'wcfm_title wcfm_full_ele', 'value' => $description),
+																																																		"description" => array('label' => __('Description', 'wc-frontend-manager') , 'type' => $wpeditor, 'class' => 'wcfm-textarea wcfm_ele wcfm_full_ele simple variable external grouped booking ' . $rich_editor, 'label_class' => 'wcfm_title wcfm_full_ele', 'rows' => 10, 'value' => $description),
 																																																		"pro_id" => array('type' => 'hidden', 'value' => $product_id)
 																																														), $product_id, $product_type ) );
 							?>

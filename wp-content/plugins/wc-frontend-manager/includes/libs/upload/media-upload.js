@@ -38,6 +38,12 @@ function addWCFMUploaderProperty(wcfmuploader) {
     }, multiple: false });
     
     wcfmMediaUploader.on( 'edit:attachment', wcfmMediaUploader.openEditAttachmentModal, wcfmMediaUploader );
+    
+    if( button.hasClass( 'downloadable_product' ) ) {
+			wcfmMediaUploader.uploader.options.uploader.params = {
+				type: 'downloadable_product'
+			};
+		}
 
     // When a file is selected, grab the URL and set it as the text field's value
     wcfmMediaUploader.on('select', function() {
@@ -85,7 +91,6 @@ function addWCFMUploaderProperty(wcfmuploader) {
       button: {
 				text: uploads_language.choose_image
 			}, multiple: false });
-		
 		
     // When a file is selected, grab the URL and set it as the text field's value
     wcfmMediaUploader.on('select', function() {

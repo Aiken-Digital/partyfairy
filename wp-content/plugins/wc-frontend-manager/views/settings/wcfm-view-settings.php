@@ -173,12 +173,12 @@ $is_marketplace = wcfm_is_marketplace();
 				<?php do_action( 'begin_wcfm_settings_form_modules', $wcfm_options ); ?>
 				
 				<!-- collapsible -->
-				<div class="page_collapsible" id="wcfm_settings_form_analytics_head">
+				<div class="page_collapsible" id="wcfm_settings_form_module_head">
 					<label class="fab fa-modx"></label>
 					<?php _e('Modules', 'wc-frontend-manager'); ?><span></span>
 				</div>
 				<div class="wcfm-container">
-					<div id="wcfm_settings_form_analytics_expander" class="wcfm-content">
+					<div id="wcfm_settings_form_modules_expander" class="wcfm-content">
 					  <h2><?php _e('Module Controller', 'wc-frontend-manager'); ?></h2>
 						<div class="wcfm_clearfix"></div>
 						<div class="module_head_message"><?php _e( 'Configure what to hide from your dashboard', 'wc-frontend-manager' ); ?></div>
@@ -188,11 +188,14 @@ $is_marketplace = wcfm_is_marketplace();
 							$wcfm_module_options = apply_filters( 'wcfm_module_options', $wcfm_module_options );
 							foreach( $wcfm_modules as $wcfm_module => $wcfm_module_data ) {
 								$wcfm_module_value = isset( $wcfm_module_options[$wcfm_module] ) ? $wcfm_module_options[$wcfm_module] : 'no';
-								$hints = '';
-								if( isset( $wcfm_module_data['hints'] ) ) { $hints = $wcfm_module_data['hints']; }
+								$hints = $wcfm_module_data['label'];
+								if( isset( $wcfm_module_data['hints'] ) ) { $hints .= ': ' . $wcfm_module_data['hints']; }
+								$background_image = 'background-image: url(' . $WCFM->plugin_url . 'assets/images/modules/' . $wcfm_module . '.png);';
+								echo '<div class="wcfm_module_boxes"><div class="wcfm_module_box wcfm_module_' . $wcfm_module . ' text_tip" data-tip="' . $hints . '" style="' . $background_image . '">';
 								$WCFM->wcfm_fields->wcfm_generate_form_field( array(
-																																		$wcfm_module => array( 'label' => $wcfm_module_data['label'], 'name' => 'module_options[' . $wcfm_module . ']', 'type' => 'checkboxoffon', 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title module_options_title', 'dfvalue' => $wcfm_module_value, 'hints' => $hints ),
+																																		$wcfm_module => array( 'name' => 'module_options[' . $wcfm_module . ']', 'type' => 'checkboxoffon', 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title module_options_title', 'dfvalue' => $wcfm_module_value ),
 																																		) );
+								echo '<div class="wcfm-clearfix"></div></div></div>';
 								
 								if( isset( $wcfm_module_data['notice'] ) ) {
 									if( !WCFM_Dependencies::wcfmu_plugin_active_check() ) {
@@ -203,9 +206,14 @@ $is_marketplace = wcfm_is_marketplace();
 								}
 							}
 							
+							$hints = __('Analytics', 'wc-frontend-manager');
+							$background_image = 'background-image: url(' . $WCFM->plugin_url . 'assets/images/modules/analytics.png);';
+							echo '<div class="wcfm_module_boxes"><div class="wcfm_module_box wcfm_module_analytics_disabled text_tip" data-tip="' . $hints . '" style="' . $background_image . '">';
 							$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_settings_fields_analytics', array(
-																																																"analytics_disabled" => array('label' => __('Analytics', 'wc-frontend-manager') , 'name' => 'analytics_disabled','type' => 'checkboxoffon', 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title module_options_title', 'dfvalue' => $is_analytics_disabled),
+																																																"analytics_disabled" => array( 'name' => 'analytics_disabled','type' => 'checkboxoffon', 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title module_options_title', 'dfvalue' => $is_analytics_disabled),
 																																																) ) );
+							echo '<div class="wcfm-clearfix"></div></div></div>';
+							
 							if( WCFM_Dependencies::wcfma_plugin_active_check() ) {
 								do_action( 'wcfm_analytics_settings' );
 							} else {

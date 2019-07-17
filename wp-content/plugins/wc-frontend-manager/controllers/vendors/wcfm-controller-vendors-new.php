@@ -221,7 +221,7 @@ class WCFM_Vendors_New_Controller {
 							$new_account_mail_subject = "{site_name}: " . __( 'New Account Created', 'wc-frontend-manager' );
 							$new_account_mail_body = '<br/>' . __( 'Dear', 'wc-frontend-manager' ) . ' {first_name}' .
 																			 ',<br/><br/>' . 
-																			 __( 'Your account has been created as {user_role}. Follow the bellow details to log into the system', 'wc-frontend-manager' ) .
+																			 __( 'Your account has been created and your role is: {user_role}. Use the below details to log into the system.', 'wc-frontend-manager' ) .
 																			 '<br/><br/>' . 
 																			 __( 'Store Name', 'wc-frontend-manager' ) . ': {store_name}' . 
 																			 '<br/><br/>' . 

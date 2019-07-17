@@ -44,13 +44,8 @@ $wcfm_enquiry_form_heading  = apply_filters( 'wcfm_enquiry_form_heading', $wcfm_
 			
 			<form action="" method="post" id="wcfm_enquiry_form" class="enquiry-form" novalidate="">
 				<?php if( !is_user_logged_in() ) { ?>
-					<p class="comment-notes"><span id="email-notes"><?php _e( 'Your email address will not be published.', 'wc-frontend-manager' ); ?></span></p>
+					
 				<?php } ?>
-				
-				<p class="wcfm_popup_label">
-					<strong for="comment"><?php _e( 'Your enquiry', 'wc-frontend-manager' ); ?> <span class="required">*</span></strong>
-				</p>
-				<textarea id="enquiry_comment" name="enquiry" class="wcfm_popup_input wcfm_popup_textarea"></textarea>
 				
 				<?php if( !is_user_logged_in() ) { ?>
 					<p class="wcfm_popup_label">
@@ -62,7 +57,15 @@ $wcfm_enquiry_form_heading  = apply_filters( 'wcfm_enquiry_form_heading', $wcfm_
 						<strong for="email"><?php _e( 'Email', 'wc-frontend-manager' ); ?> <span class="required">*</span></strong> 
 					</p>
 					<input id="enquiry_email" name="customer_email" type="email" value="" class="wcfm_popup_input">
+					<div class="wcfm_clearfix"></div>
+					<p class="comment-notes" style="margin-left:39%;"><span id="email-notes"><?php _e( 'Your email address will not be published.', 'wc-frontend-manager' ); ?></span></p>
+					<div class="wcfm_clearfix"></div>
 				<?php } ?>
+				
+				<p class="wcfm_popup_label">
+					<strong for="comment"><?php _e( 'Your enquiry', 'wc-frontend-manager' ); ?> <span class="required">*</span></strong>
+				</p>
+				<textarea id="enquiry_comment" name="enquiry" class="wcfm_popup_input wcfm_popup_textarea"></textarea>
 				
 				<?php
 				// Enquiry Custom Field Support - 4.1.3
@@ -150,7 +153,7 @@ $wcfm_enquiry_form_heading  = apply_filters( 'wcfm_enquiry_form_heading', $wcfm_
 							$size     = anr_get_option( 'size', 'normal' );
 							$language = trim( anr_get_option( 'language' ) );
 				
-								$lang = '';
+							$lang = '';
 							if ( $language ) {
 								$lang = "&hl=$language";
 							}

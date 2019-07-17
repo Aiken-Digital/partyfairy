@@ -401,7 +401,7 @@ class WCFM_Dashboard_Setup {
 					$store_related_products   =  isset( $wcfm_marketplace_options['store_related_products'] ) ? $wcfm_marketplace_options['store_related_products'] : 'default';
 					$store_sidebar       = isset( $wcfm_marketplace_options['store_sidebar'] ) ? 'no' : 'no';
 					$order_sync          = isset( $wcfm_marketplace_options['order_sync'] ) ? 'no' : 'no';
-					$product_mulivendor  = isset( $wcfm_marketplace_options['product_mulivendor'] ) ? 'no' : 'no';
+					//$product_mulivendor  = isset( $wcfm_marketplace_options['product_mulivendor'] ) ? 'no' : 'no';
 					$wcfm_google_map_api = isset( $wcfm_marketplace_options['wcfm_google_map_api'] ) ? $wcfm_marketplace_options['wcfm_google_map_api'] : '';
 					
 					$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_marketplace_settings_fields_store', array(
@@ -418,7 +418,7 @@ class WCFM_Dashboard_Setup {
 																																											"store_related_products" => array( 'label' => __('Store Related Products', 'wc-multivendor-marketplace'), 'type' => 'select', 'in_table' => 'yes', 'options' => array( 'default' => __( 'As per WC Default Rule', 'wc-multivendor-marketplace' ), 'store' => __( 'Only same Store Products', 'wc-multivendor-marketplace' ) ), 'class' => 'wcfm-select wcfm_ele', 'label_class' => 'wcfm_title', 'value' => $store_related_products, 'desc_class' => 'wcfm_page_options_desc', 'desc' => __( 'Single product page related products rule.', 'wc-frontend-manager' ) ),
 																																											"store_ppp" => array( 'label' => __('Products per page', 'wc-multivendor-marketplace'), 'type' => 'number', 'in_table' => 'yes', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title', 'value' => $store_ppp, 'attributes' => array( 'min'=> 1, 'step' => 1 ), 'desc_class' => 'wcfm_page_options_desc', 'desc' => __( 'No of products at Store per Page.', 'wc-frontend-manager' ) ),
 																																											"order_sync" => array('label' => __('Order Sync', 'wc-multivendor-marketplace'), 'type' => 'checkboxoffon', 'in_table' => 'yes', 'class' => 'wcfm-checkbox input-checkbox wcfm_ele', 'label_class' => 'wcfm_title checkbox_title', 'value' => 'yes', 'dfvalue' => $order_sync, 'desc_class' => 'wcfm_page_options_desc', 'desc' => __( 'Enable this to sync WC main order status when vendors update their order status.', 'wc-multivendor-marketplace' ) ),
-																																											"product_mulivendor" => array('label' => __('Product Mulivendor', 'wc-multivendor-marketplace'), 'type' => 'checkboxoffon', 'in_table' => 'yes', 'class' => 'wcfm-checkbox input-checkbox wcfm_ele', 'label_class' => 'wcfm_title checkbox_title', 'value' => 'yes', 'dfvalue' => $product_mulivendor, 'desc_class' => 'wcfm_page_options_desc','desc' => __( 'Enable this to allow vendors to sell other vendor products, single product multiple seller.', 'wc-multivendor-marketplace' ) ),
+																																											//"product_mulivendor" => array('label' => __('Product Mulivendor', 'wc-multivendor-marketplace'), 'type' => 'checkboxoffon', 'in_table' => 'yes', 'class' => 'wcfm-checkbox input-checkbox wcfm_ele', 'label_class' => 'wcfm_title checkbox_title', 'value' => 'yes', 'dfvalue' => $product_mulivendor, 'desc_class' => 'wcfm_page_options_desc','desc' => __( 'Enable this to allow vendors to sell other vendor products, single product multiple seller.', 'wc-multivendor-marketplace' ) ),
 																																											"enable_marketplace_shipping" => array('label' => __('Marketplace Shipping', 'wc-multivendor-marketplace'), 'type' => 'checkboxoffon', 'in_table' => 'yes', 'class' => 'wcfm-checkbox input-checkbox wcfm_ele', 'label_class' => 'wcfm_title checkbox_title', 'value' => 'yes', 'dfvalue' => $wcfmmp_marketplace_shipping_enabled, 'desc_class' => 'wcfm_page_options_desc', 'desc' => __( 'Enable this to allow your vendors to setup their own shipping by country.', 'wc-multivendor-marketplace' ) ),
                                                                                       "enable_marketplace_shipping_by_weight" => array('label' => __('Marketplace Shipping by Weight', 'wc-multivendor-marketplace'), 'type' => 'checkboxoffon', 'in_table' => 'yes', 'class' => 'wcfm-checkbox input-checkbox wcfm_ele', 'label_class' => 'wcfm_title checkbox_title', 'value' => 'yes', 'dfvalue' => $wcfmmp_marketplace_shipping_by_weight_enabled, 'desc_class' => 'wcfm_page_options_desc', 'desc' => __( 'Enable this to allow your vendors to setup their own shipping by weight.', 'wc-multivendor-marketplace' ) ),
 																																											"wcfm_google_map_api" => array('label' => __('Google Map API Key', 'wc-multivendor-marketplace') , 'type' => 'text', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'in_table' => 'yes', 'desc_class' => 'wcfm_page_options_desc', 'value' => $wcfm_google_map_api, 'desc' => sprintf( __( '%sAPI Key%s is needed to display map on store page', 'wc-multivendor-marketplace' ), '<a target="_blank" href="https://developers.google.com/maps/documentation/javascript/">', '</a>' ) ),
@@ -722,6 +722,7 @@ class WCFM_Dashboard_Setup {
 		$wcfm_commission_types = get_wcfm_marketplace_commission_types();
 		unset( $wcfm_commission_types['by_sales'] );
 		unset( $wcfm_commission_types['by_products'] );
+		unset( $wcfm_commission_types['by_quantity'] );
 		
 		$vendor_commission_for = isset( $wcfm_commission_options['commission_for'] ) ? $wcfm_commission_options['commission_for'] : 'vendor';
 		$vendor_commission_mode = isset( $wcfm_commission_options['commission_mode'] ) ? $wcfm_commission_options['commission_mode'] : 'percent';
@@ -769,10 +770,21 @@ class WCFM_Dashboard_Setup {
 		$wcfm_marketplace_withdrawal_order_status   = get_wcfm_marketplace_withdrwal_order_status();
 		$wcfm_marketplace_disallow_order_payment_methods = get_wcfm_marketplace_disallow_order_payment_methods();
 		
-		$request_auto_approve = isset( $wcfm_withdrawal_options['request_auto_approve'] ) ? $wcfm_withdrawal_options['request_auto_approve'] : 'no';
-		$order_status = isset( $wcfm_withdrawal_options['order_status'] ) ? $wcfm_withdrawal_options['order_status'] : array( 'wc-completed', 'wc-processing' );
-		$withdrawal_limit = isset( $wcfm_withdrawal_options['withdrawal_limit'] ) ? $wcfm_withdrawal_options['withdrawal_limit'] : '';
-		$withdrawal_thresold = isset( $wcfm_withdrawal_options['withdrawal_thresold'] ) ? $wcfm_withdrawal_options['withdrawal_thresold'] : '';
+		$request_auto_approve     = isset( $wcfm_withdrawal_options['request_auto_approve'] ) ? $wcfm_withdrawal_options['request_auto_approve'] : 'no';
+		$generate_auto_withdrawal = isset( $wcfm_withdrawal_options['generate_auto_withdrawal'] ) ? $wcfm_withdrawal_options['generate_auto_withdrawal'] : 'no';
+		$auto_withdrawal_status   = isset( $wcfm_withdrawal_options['auto_withdrawal_status'] ) ? $wcfm_withdrawal_options['auto_withdrawal_status'] : 'wc-processing';
+		$order_status             = isset( $wcfm_withdrawal_options['order_status'] ) ? $wcfm_withdrawal_options['order_status'] : array( 'wc-completed', 'wc-processing' );
+		$withdrawal_schedule      = isset( $wcfm_withdrawal_options['withdrawal_schedule'] ) ? $wcfm_withdrawal_options['withdrawal_schedule'] : 'week';
+		$withdrawal_limit         = isset( $wcfm_withdrawal_options['withdrawal_limit'] ) ? $wcfm_withdrawal_options['withdrawal_limit'] : '';
+		$withdrawal_thresold      = isset( $wcfm_withdrawal_options['withdrawal_thresold'] ) ? $wcfm_withdrawal_options['withdrawal_thresold'] : '';
+		
+		if( isset( $wcfm_withdrawal_options['withdrawal_mode'] ) ) {
+			$withdrawal_mode        = isset( $wcfm_withdrawal_options['withdrawal_mode'] ) ? $wcfm_withdrawal_options['withdrawal_mode'] : '';
+		} elseif( $generate_auto_withdrawal == 'yes' ) {
+			$withdrawal_mode        = 'by_order_status';
+		} else {
+			$withdrawal_mode        = 'by_manual';
+		}
 		
 		$payment_methods = isset( $wcfm_withdrawal_options['payment_methods'] ) ? $wcfm_withdrawal_options['payment_methods'] : array( 'paypal', 'bank_transfer' );
 		$withdrawal_test_mode = isset( $wcfm_withdrawal_options['test_mode'] ) ? 'yes' : 'no';
@@ -809,17 +821,34 @@ class WCFM_Dashboard_Setup {
 				<?php
 				$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_marketplace_settings_fields_withdrawal', array(
 					                                                                        "withdrawal_request_auto_approve" => array('label' => __('Request auto-approve?', 'wc-multivendor-marketplace'), 'type' => 'checkbox', 'name' => 'wcfm_withdrawal_options[request_auto_approve]', 'class' => 'wcfm-checkbox wcfm_ele', 'label_class' => 'wcfm_title checkbox_spl_title checkbox_title', 'value' => 'yes', 'dfvalue' => $request_auto_approve, 'desc_class' => 'instructions', 'desc' => __( 'Check this to automatically disburse payments to vendors on request, no admin approval required. Auto disbursement only works for auto-payment gateways, e.g. PayPal, Stripe etc. Bank Transfer or other non-autopay mode always requires approval, as these are manual transactions.', 'wc-multivendor-membership' ) ),
+					                                                         ) ) );
+				?>
+				
+				<table class="form-table">
+				  <?php
+					$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_marketplace_settings_fields_withdrawal', array(
+																																										"withdrawal_mode"   => array( 'label' => __( 'Withdrawal Mode', 'wc-multivendor-marketplace' ), 'name' => 'wcfm_withdrawal_options[withdrawal_mode]', 'type' => 'select', 'in_table' => 'yes', 'class' => 'wcfm-select wcfm_ele withdrawal_mode', 'label_class' => 'wcfm_title withdrawal_mode', 'options' => apply_filters( 'wcfm_withdrawal_modes', array( 'by_manual' => __( 'Manual Withdrawal', 'wc-multivendor-marketplace' ), 'by_schedule' => __( 'Periodic Withdrawal', 'wc-multivendor-marketplace' ), 'by_order_status' => __( 'By Order Status', 'wc-multivendor-marketplace' ) ) ), 'value' => $withdrawal_mode  ),
+																																											
+																																										"withdrawal_auto_withdrawal_status"   => array( 'label' => __( 'Order Status', 'wc-multivendor-marketplace' ), 'name' => 'wcfm_withdrawal_options[auto_withdrawal_status]', 'type' => 'select', 'in_table' => 'yes', 'wrapper_class' => 'auto_withdrawal_order_status', 'class' => 'wcfm-select wcfm_ele auto_withdrawal_order_status', 'label_class' => 'wcfm_title auto_withdrawal_order_status', 'options' => $wcfm_marketplace_withdrawal_order_status, 'value' => $auto_withdrawal_status, 'desc_class' => 'wcfm_page_options_desc auto_withdrawal_order_status', 'desc' => __( 'Order status for generate withdrawal request automatically.', 'wc-multivendor-marketplace' ),  ),
+																																										
+																																										"withdrawal_schedule"   => array( 'label' => __( 'Schedule', 'wc-multivendor-marketplace' ), 'name' => 'wcfm_withdrawal_options[withdrawal_schedule]', 'type' => 'select', 'in_table' => 'yes', 'wrapper_class' => 'schedule_withdrawal_threshold_ele', 'class' => 'wcfm-select wcfm_ele schedule_withdrawal_threshold_ele', 'label_class' => 'wcfm_title schedule_withdrawal_threshold_ele', 'options' => apply_filters( 'wcfm_withdrawal_schedule_periods', array( 'week' => __( 'Every 7 Days', 'wc-multivendor-marketplace' ), '15days' => __( 'Every 15 Days', 'wc-multivendor-marketplace' ), 'month' => __( 'Every 30 Days', 'wc-multivendor-marketplace' ), '2months' => __( 'Every 60 Days', 'wc-multivendor-marketplace' ), 'quarter' => __( 'Every 90 Days', 'wc-multivendor-marketplace' ) ) ), 'value' => $withdrawal_schedule  ),
+																																			) ) );
+					?>
+				</table>
+				
+				<?php
+				$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_marketplace_settings_fields_withdrawal', array(
+					                                                                        "withdrawal_order_status" => array( 'label' => __( 'Order Status for Withdraw', 'wc-multivendor-marketplace' ), 'name' => 'wcfm_withdrawal_options[order_status]', 'type' => 'checklist', 'wrapper_class' => 'manual_withdrawal_ele', 'class' => 'wcfm-checkbox wcfm_ele payment_options', 'label_class' => 'wcfm_title wcfm_full_title manual_withdrawal_ele', 'options' => $wcfm_marketplace_withdrawal_order_status, 'value' => $order_status  )
+					                                                          ) ) );
 					                                                                        
-					                                                                        "withdrawal_order_status" => array( 'label' => __( 'Order Status for Withdraw', 'wc-multivendor-membership' ), 'name' => 'wcfm_withdrawal_options[order_status]', 'type' => 'checklist', 'class' => 'wcfm-checkbox wcfm_ele payment_options', 'label_class' => 'wcfm_title wcfm_full_title', 'options' => $wcfm_marketplace_withdrawal_order_status, 'value' => $order_status  ),
-					                                                                        ) ) );
 				?>
 			</div>
 			
 			<table class="form-table">
 			  <?php
 			  $WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_marketplace_settings_fields_withdrawal_rules', array(
-					                                                                        "withdrawal_limit" => array('label' => __('Minimum Withdraw Limit', 'wc-multivendor-marketplace'), 'name' => 'wcfm_withdrawal_options[withdrawal_limit]', 'type' => 'number', 'in_table' => 'yes', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title', 'desc_class'=> 'wcfm_page_options_desc', 'value' => $withdrawal_limit, 'attributes' => array( 'min' => '0.1', 'step' => '0.1'), 'desc' => __( 'Minimum balance required to make a withdraw request. Leave blank to set no minimum limits.', 'wc-multivendor-marketplace') ),
-																																									"withdrawal_thresold" => array('label' => __('Withdraw Threshold', 'wc-multivendor-marketplace'), 'name' => 'wcfm_withdrawal_options[withdrawal_thresold]', 'type' => 'number', 'in_table' => 'yes', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'desc_class' => 'wcfm_page_options_desc', 'value' => $withdrawal_thresold , 'attributes' => array( 'min' => '1', 'step' => '1'), 'desc' => __('Withdraw Threshold Days, (Make order matured to make a withdraw request). Leave empty to inactive this option.', 'wc-multivendor-marketplace') ),
+					                                                                        "withdrawal_limit" => array('label' => __('Minimum Withdraw Limit', 'wc-multivendor-marketplace'), 'name' => 'wcfm_withdrawal_options[withdrawal_limit]', 'type' => 'number', 'wrapper_class' => 'withdrawal_threshold_ele', 'in_table' => 'yes', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title', 'desc_class'=> 'wcfm_page_options_desc', 'value' => $withdrawal_limit, 'attributes' => array( 'min' => '0.1', 'step' => '0.1'), 'desc' => __( 'Minimum balance required to make a withdraw request. Leave blank to set no minimum limits.', 'wc-multivendor-marketplace') ),
+																																									"withdrawal_thresold" => array('label' => __('Withdraw Threshold', 'wc-multivendor-marketplace'), 'name' => 'wcfm_withdrawal_options[withdrawal_thresold]', 'type' => 'number', 'wrapper_class' => 'withdrawal_threshold_ele', 'in_table' => 'yes', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title wcfm_ele', 'desc_class' => 'wcfm_page_options_desc', 'value' => $withdrawal_thresold , 'attributes' => array( 'min' => '1', 'step' => '1'), 'desc' => __('Withdraw Threshold Days, (Make order matured to make a withdraw request). Leave empty to inactive this option.', 'wc-multivendor-marketplace') ),
 					                                                                        ), $wcfm_withdrawal_options ) );
 				?>
 			</table>	
@@ -885,10 +914,10 @@ class WCFM_Dashboard_Setup {
 			<div>	
 			  <?php
 				$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_marketplace_settings_fields_reverse_withdrawal', array(
-																																										"withdrawal_order_payment_methods" => array( 'label' => __( 'Reverse or No Withdrawal Payment Methods', 'wc-multivendor-marketplace' ), 'name' => 'wcfm_withdrawal_options[disallow_order_payment_methods]', 'type' => 'checklist', 'class' => 'wcfm-checkbox wcfm_ele payment_options', 'label_class' => 'wcfm_title wcfm_full_title', 'options' => $wcfm_marketplace_disallow_order_payment_methods, 'value' => $disallow_order_payment_methods, 'desc' => __( 'Order Payment Methods which are not applicable for vendor withdrawal request. e.g Order payment method COD and vendor receiving that amount directly from customers. So, no more require withdrawal request. You may also enable Reverse Withdrawal to track reverse pending payments for such payment options.', 'wc-multivendor-membership' )  ),
-																																										
 																																										"withdrawal_reverse" => array('label' => __('Reverse Withdrawal', 'wc-multivendor-marketplace'), 'type' => 'checkbox', 'name' => 'wcfm_withdrawal_options[withdrawal_reverse]', 'class' => 'wcfm-checkbox wcfm_ele', 'label_class' => 'wcfm_title checkbox_spl_title checkbox_title', 'value' => 'yes', 'dfvalue' => $withdrawal_reverse, 'desc_class' => 'instructions', 'desc' => __( 'Enable this to keep track reverse withdrawals. In case vendor receive full payment (e.g. COD) from customer then they have to reverse-pay admin commission. This is only applicable for auto-withdrawal payment methods.', 'wc-multivendor-marketplace' ) ),
-																																										"withdrawal_reverse_limit" => array('label' => __('Reverse Withdraw Limit', 'wc-multivendor-marketplace'), 'name' => 'wcfm_withdrawal_options[withdrawal_reverse_limit]', 'type' => 'number', 'class' => 'wcfm-text wcfm_ele', 'label_class' => 'wcfm_title checkbox_spl_title wcfm_ele', 'value' => $withdrawal_reverse_limit, 'desc_class' => 'wcfm_page_options_desc', 'attributes' => array( 'min' => '1', 'step' => '1'), 'desc' => __('Set reverse withdrawal threshold limit, if reverse-pay balance reach this limit then vendor will not allow to withdrawal anymore. Leave empty to inactive this option.', 'wc-multivendor-marketplace') ),
+																																										"withdrawal_order_payment_methods" => array( 'label' => __( 'Reverse or No Withdrawal Payment Methods', 'wc-multivendor-marketplace' ), 'name' => 'wcfm_withdrawal_options[disallow_order_payment_methods]', 'type' => 'checklist', 'wrapper_class' => 'reverse_withdrawal_ele',  'class' => 'wcfm-checkbox wcfm_ele payment_options reverse_withdrawal_ele', 'label_class' => 'wcfm_title wcfm_full_title reverse_withdrawal_ele', 'options' => $wcfm_marketplace_disallow_order_payment_methods, 'value' => $disallow_order_payment_methods, 'desc_class' => 'reverse_withdrawal_ele', 'desc' => __( 'Order Payment Methods which are not applicable for vendor withdrawal request. e.g Order payment method COD and vendor receiving that amount directly from customers. So, no more require withdrawal request. You may also enable Reverse Withdrawal to track reverse pending payments for such payment options.', 'wc-multivendor-membership' )  ),
+																																										
+																																										"withdrawal_reverse_limit" => array('label' => __('Reverse Withdraw Limit', 'wc-multivendor-marketplace'), 'name' => 'wcfm_withdrawal_options[withdrawal_reverse_limit]', 'type' => 'number', 'class' => 'wcfm-text wcfm_ele reverse_withdrawal_ele', 'label_class' => 'wcfm_title checkbox_spl_title wcfm_ele reverse_withdrawal_ele', 'value' => $withdrawal_reverse_limit, 'desc_class' => 'wcfm_page_options_desc', 'attributes' => array( 'min' => '1', 'step' => '1'), 'desc_class' => 'reverse_withdrawal_ele', 'desc' => __('Set reverse withdrawal threshold limit, if reverse-pay balance reach this limit then vendor will not allow to withdrawal anymore. Leave empty to inactive this option.', 'wc-multivendor-marketplace') ),
 																																										), $wcfm_withdrawal_options ) );
 				?>
 			</div>
@@ -1120,7 +1149,7 @@ class WCFM_Dashboard_Setup {
 		$store_related_products = filter_input(INPUT_POST, 'store_related_products');
 		$store_ppp           = filter_input(INPUT_POST, 'store_ppp');
 		$order_sync          = filter_input(INPUT_POST, 'order_sync');
-		$product_mulivendor  = filter_input(INPUT_POST, 'product_mulivendor');
+		//$product_mulivendor  = filter_input(INPUT_POST, 'product_mulivendor');
 		$enable_marketplace_shipping = filter_input(INPUT_POST, 'enable_marketplace_shipping');
     $enable_marketplace_shipping_by_weight = filter_input(INPUT_POST, 'enable_marketplace_shipping_by_weight');
 		$wcfm_google_map_api = filter_input(INPUT_POST, 'wcfm_google_map_api');
@@ -1147,8 +1176,8 @@ class WCFM_Dashboard_Setup {
 		if( !$store_sidebar ) $wcfm_marketplace_options['store_sidebar'] = 'yes';
 		else $wcfm_marketplace_options['store_sidebar'] = 'no';
 		
-		if( !$product_mulivendor ) $wcfm_marketplace_options['product_mulivendor'] = 'yes';
-		else $wcfm_marketplace_options['product_mulivendor'] = 'no';
+		//if( !$product_mulivendor ) $wcfm_marketplace_options['product_mulivendor'] = 'yes';
+		$wcfm_marketplace_options['product_mulivendor'] = 'no';
 		
 		if( !$order_sync ) $wcfm_marketplace_options['order_sync'] = 'yes';
 		else $wcfm_marketplace_options['order_sync'] = 'no';
@@ -1163,9 +1192,17 @@ class WCFM_Dashboard_Setup {
     if( !$enable_marketplace_shipping_by_weight ) $enable_marketplace_shipping_by_weight = 'yes';
 		else $enable_marketplace_shipping_by_weight = 'no';
 		
-		$wcfmmp_marketplace_shipping_options = get_option( 'woocommerce_wcfmmp_product_shipping_by_country_settings', array() );
-    $wcfmmp_marketplace_shipping_options['enabled'] = $enable_marketplace_shipping;
-    update_option( 'woocommerce_wcfmmp_product_shipping_by_country_settings', $wcfmmp_marketplace_shipping_options );
+		$wcfm_shipping_options = get_option( 'wcfm_shipping_options', array() );
+		$wcfm_shipping_options['enable_store_shipping'] = $enable_marketplace_shipping;
+    update_option( 'wcfm_shipping_options', $wcfm_shipping_options );
+		
+		$woocommerce_wcfmmp_product_shipping_by_zone_settings = get_option( 'woocommerce_wcfmmp_product_shipping_by_zone_settings', array() );
+    $woocommerce_wcfmmp_product_shipping_by_zone_settings['enabled'] = $enable_marketplace_shipping;
+    update_option( 'woocommerce_wcfmmp_product_shipping_by_zone_settings', $woocommerce_wcfmmp_product_shipping_by_zone_settings );
+		
+		$woocommerce_wcfmmp_product_shipping_by_country_settings = get_option( 'woocommerce_wcfmmp_product_shipping_by_country_settings', array() );
+    $woocommerce_wcfmmp_product_shipping_by_country_settings['enabled'] = $enable_marketplace_shipping;
+    update_option( 'woocommerce_wcfmmp_product_shipping_by_country_settings', $woocommerce_wcfmmp_product_shipping_by_country_settings );
     
     $wcfmmp_marketplace_by_weight_shipping_options = get_option( 'woocommerce_wcfmmp_product_shipping_by_weight_settings', array() );
     $wcfmmp_marketplace_by_weight_shipping_options['enabled'] = $enable_marketplace_shipping_by_weight;

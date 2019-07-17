@@ -108,6 +108,182 @@ jQuery(document).ready(function($) {
 		}
 	});
 	
+	if( $(".country_select").length > 0 ) {
+		$(".country_select").select2({
+			placeholder: wcfm_dashboard_messages.choose_select2 + ' ...'
+		});
+	}
+	
+	var wcfm_customer_billing_address_select = {
+			init: function () {
+				$('#wcfm_customer_address_expander').on( 'change', 'select#bcountry', this.state_select );
+				jQuery('select#bcountry').change();
+			},
+			state_select: function () {
+					var states_json = wc_country_select_params.countries.replace( /&quot;/g, '"' ),
+							states = $.parseJSON( states_json ),
+							$statebox = $( '#bstate' ),
+							value = $statebox.val(),
+							country = $( this ).val(),
+							$state_required = $statebox.data('required');
+
+					if ( states[ country ] ) {
+
+							if ( $.isEmptyObject( states[ country ] ) ) {
+
+								if ( $statebox.is( 'select' ) ) {
+									if( typeof $state_required != 'undefined') {
+										$( 'select#bstate' ).replaceWith( '<input type="text" class="wcfm-text wcfm_ele" name="bstate" id="bstate" data-required="1" data-required_message="State/County: This field is required." />' );
+									} else {
+										$( 'select#bstate' ).replaceWith( '<input type="text" class="wcfm-text wcfm_ele" name="bstate" id="bstate" />' );
+									}
+								}
+
+								if( value ) {
+									$( '#bstate' ).val( value );
+								} else {
+									$( '#bstate' ).val( 'N/A' );
+								}
+
+							} else {
+									input_selected_state = '';
+
+									var options = '',
+											state = states[ country ];
+
+									for ( var index in state ) {
+											if ( state.hasOwnProperty( index ) ) {
+													if ( selected_bstate ) {
+															if ( selected_bstate == index ) {
+																	var selected_value = 'selected="selected"';
+															} else {
+																	var selected_value = '';
+															}
+													}
+													options = options + '<option value="' + index + '"' + selected_value + '>' + state[ index ] + '</option>';
+											}
+									}
+
+									if ( $statebox.is( 'select' ) ) {
+											$( 'select#bstate' ).html( '<option value="">' + wc_country_select_params.i18n_select_state_text + '</option>' + options );
+									}
+									if ( $statebox.is( 'input' ) ) {
+										if( typeof $state_required != 'undefined') {
+											$( 'input#bstate' ).replaceWith( '<select class="wcfm-select wcfm_ele" name="bstate" id="bstate" data-required="1" data-required_message="State/County: This field is required."></select>' );
+										} else {
+											$( 'input#bstate' ).replaceWith( '<select class="wcfm-select wcfm_ele" name="bstate" id="bstate"></select>' );
+										}
+										$( 'select#bstate' ).html( '<option value="">' + wc_country_select_params.i18n_select_state_text + '</option>' + options );
+									}
+									//$( '#wcmarketplace_address_state' ).removeClass( 'wcmarketplace-hide' );
+									//$( 'div#wcmarketplace-states-box' ).slideDown();
+
+							}
+					} else {
+						if ( $statebox.is( 'select' ) ) {
+							if( typeof $state_required != 'undefined') {
+								$( 'select#bstate' ).replaceWith( '<input type="text" class="wcfm-text wcfm_ele" name="bstate" id="bstate" data-required="1" data-required_message="State/County: This field is required." />' );
+							} else {
+								$( 'select#bstate' ).replaceWith( '<input type="text" class="wcfm-text wcfm_ele" name="bstate" id="bstate" />' );
+							}
+						}
+						$( '#bstate' ).val(input_selected_bstate);
+
+						if ( $( '#bstate' ).val() == 'N/A' ){
+							$( '#bstate' ).val('');
+						}
+						//$( '#wcmarketplace_address_state' ).removeClass( 'wcmarketplace-hide' );
+						//$( 'div#wcmarketplace-states-box' ).slideDown();
+					}
+			}
+	}
+	
+	wcfm_customer_billing_address_select.init();
+	
+	var wcfm_customer_shipping_address_select = {
+			init: function () {
+				$('#wcfm_customer_address_expander').on( 'change', 'select#scountry', this.state_select );
+				jQuery('select#scountry').change();
+			},
+			state_select: function () {
+					var states_json = wc_country_select_params.countries.replace( /&quot;/g, '"' ),
+							states = $.parseJSON( states_json ),
+							$statebox = $( '#sstate' ),
+							value = $statebox.val(),
+							country = $( this ).val(),
+							$state_required = $statebox.data('required');
+
+					if ( states[ country ] ) {
+
+							if ( $.isEmptyObject( states[ country ] ) ) {
+
+								if ( $statebox.is( 'select' ) ) {
+									if( typeof $state_required != 'undefined') {
+										$( 'select#sstate' ).replaceWith( '<input type="text" class="wcfm-text wcfm_ele same_as_billing_ele" name="sstate" id="sstate" data-required="1" data-required_message="State/County: This field is required." />' );
+									} else {
+										$( 'select#sstate' ).replaceWith( '<input type="text" class="wcfm-text wcfm_ele same_as_billing_ele" name="sstate" id="sstate" />' );
+									}
+								}
+
+								if( value ) {
+									$( '#sstate' ).val( value );
+								} else {
+									$( '#sstate' ).val( 'N/A' );
+								}
+
+							} else {
+									input_selected_state = '';
+
+									var options = '',
+											state = states[ country ];
+
+									for ( var index in state ) {
+											if ( state.hasOwnProperty( index ) ) {
+													if ( selected_sstate ) {
+															if ( selected_sstate == index ) {
+																	var selected_value = 'selected="selected"';
+															} else {
+																	var selected_value = '';
+															}
+													}
+													options = options + '<option value="' + index + '"' + selected_value + '>' + state[ index ] + '</option>';
+											}
+									}
+
+									if ( $statebox.is( 'select' ) ) {
+											$( 'select#sstate' ).html( '<option value="">' + wc_country_select_params.i18n_select_state_text + '</option>' + options );
+									}
+									if ( $statebox.is( 'input' ) ) {
+										if( typeof $state_required != 'undefined') {
+											$( 'input#sstate' ).replaceWith( '<select class="wcfm-select wcfm_ele same_as_billing_ele" name="sstate" id="sstate" data-required="1" data-required_message="State/County: This field is required."></select>' );
+										} else {
+											$( 'input#sstate' ).replaceWith( '<select class="wcfm-select wcfm_ele same_as_billing_ele" name="sstate" id="sstate"></select>' );
+										}
+										$( 'select#sstate' ).html( '<option value="">' + wc_country_select_params.i18n_select_state_text + '</option>' + options );
+									}
+									//$( '#wcmarketplace_address_state' ).removeClass( 'wcmarketplace-hide' );
+									//$( 'div#wcmarketplace-states-box' ).slideDown();
+
+							}
+					} else {
+						if ( $statebox.is( 'select' ) ) {
+							if( typeof $state_required != 'undefined') {
+								$( 'select#sstate' ).replaceWith( '<input type="text" class="wcfm-text wcfm_ele same_as_billing_ele" name="sstate" id="sstate" data-required="1" data-required_message="State/County: This field is required." />' );
+							} else {
+								$( 'select#sstate' ).replaceWith( '<input type="text" class="wcfm-text wcfm_ele same_as_billing_ele" name="sstate" id="sstate" />' );
+							}
+						}
+						$( '#bstate' ).val(input_selected_sstate);
+
+						if ( $( '#bstate' ).val() == 'N/A' ){
+							$( '#bstate' ).val('');
+						}
+					}
+			}
+	}
+	
+	wcfm_customer_shipping_address_select.init();
+	
 	$('#same_as_billing').change(function() {
 	  if( $('#same_as_billing').is(':checked') ) {
 	  	$('.same_as_billing_ele').addClass('wcfm_ele_hide');

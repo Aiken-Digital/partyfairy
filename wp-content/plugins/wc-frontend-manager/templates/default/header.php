@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if( !apply_filters( 'wcfm_is_allow_template_header', true ) ) return;
 ?>
-<div id="wcfm-header" class="left-logo" style="display: none !important;">
+<div id="wcfm-header" class="left-logo">
 	<div class="wcfm-header-container">
 		<div class="wcfm-header-content">
 			<?php
@@ -27,4 +27,4 @@ if( !apply_filters( 'wcfm_is_allow_template_header', true ) ) return;
 		</div>
 	</div>
 </div>
-<div class="wcfm_clearfix" style="display: none !important;"></div>
+<div class="wcfm_clearfix"></div>

@@ -98,7 +98,7 @@ class Dokan_Report_Sales_By_Date extends WC_Admin_Report {
 				array(
 					'meta_key'      => '_dokan_vendor_id',
 					'meta_value'    => $this->vendor_id,
-					'operator' => '=',
+					'operator'      => '=',
 				),
 			),
 			'group_by'            => $this->group_by_query,

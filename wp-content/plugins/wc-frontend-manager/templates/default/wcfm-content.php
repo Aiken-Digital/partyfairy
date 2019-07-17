@@ -25,27 +25,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 </head>
 
 <body <?php body_class(); ?>>
-	<?php
-	global $WCFM;
-	$default_path = $WCFM->plugin_path . 'templates/default/';
-	include_once( $default_path . 'header.php' );
-	while ( have_posts() ) : the_post(); ?>
-		<div id="wcfm-main-content" style="padding-top: 0px !important" class="<?php echo ''; ?>">
-			<div class="wcfm-content-container">
-				<div class="wcfm-main-content-wrap">
-					<?php do_action( 'before_wcfm_dashboard' ); ?>
-					<?php the_content(); ?>
-					<?php do_action( 'after_wcfm_dashboard' ); ?>
-				</div>
+<?php
+global $WCFM;
+$default_path = $WCFM->plugin_path . 'templates/default/';
+include_once( $default_path . 'header.php' );
+while ( have_posts() ) : the_post(); ?>
+	<div id="wcfm-main-content" class="<?php echo ''; ?>">
+		<div class="wcfm-content-container">
+			<div class="wcfm-main-content-wrap">
+				<?php do_action( 'before_wcfm_dashboard' ); ?>
+				<?php the_content(); ?>
+				<?php do_action( 'after_wcfm_dashboard' ); ?>
 			</div>
 		</div>
+	</div>
 
-		<?php
-	endwhile;
-	wp_reset_query();
+	<?php
+endwhile;
+wp_reset_query();
 
-	include_once( $default_path . 'footer.php' );
-	?>
+include_once( $default_path . 'footer.php' );
+?>
 </body>
 
 <?php

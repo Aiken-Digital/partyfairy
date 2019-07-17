@@ -46,10 +46,13 @@ class WCFM_Frontend {
     // WCFM Dashboard Page Body Class
 		add_filter( 'body_class', array( &$this, 'wcfm_dashboard_body_classes' ) );	
     
-		//enqueue scripts
+		// Enqueue scripts
 		add_action( 'wp_enqueue_scripts', array( &$this, 'wcfm_scripts' ), 15 );
 		
-		//enqueue styles
+		// WCFM scripts Fix
+		add_action( 'wp_enqueue_scripts', array( &$this, 'wcfm_scripts_fix' ), 10000 );
+		
+		// Enqueue styles
 		add_action( 'wp_enqueue_scripts', array( &$this, 'wcfm_styles' ), 15 );
 		
 		// Set User Locale
@@ -752,7 +755,7 @@ class WCFM_Frontend {
 		}
 		
 		if( apply_filters( 'wcfm_is_force_category_attributes_mapping', false ) ) {
-			echo '<p class="wcfm_category_attributes_mapping_msg description instruction">' . __( 'First choose product category to get associated attributes.', 'wc-frontend-manageer' ) . '</p>';
+			echo '<p class="wcfm_category_attributes_mapping_msg description instruction">' . __( 'First choose product category to get associated attributes.', 'wc-frontend-manager' ) . '</p>';
 		}
 		
 		$attribute_taxonomies = wc_get_attribute_taxonomies();
@@ -930,6 +933,16 @@ class WCFM_Frontend {
 					$WCFM->library->load_scripts( 'wcfm-dashboard' );
 				}
 			}
+		}
+ 	}
+ 	
+ 	/**
+ 	 * WCFM Script Fix
+ 	 */
+ 	function wcfm_scripts_fix() {
+ 		if( is_wcfm_page() ) {
+ 			// WilCity Theme Char JS error fix - 6.2.2
+			wp_dequeue_script('chartjs');
 		}
  	}
  	

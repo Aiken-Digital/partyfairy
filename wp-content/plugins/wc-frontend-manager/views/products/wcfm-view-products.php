@@ -83,7 +83,7 @@ foreach( $count_products as $count_product ) {
 				<?php
 			}
 			
-			if( $is_allow_products_import = apply_filters( 'wcfm_is_allow_products_import', true ) ) {
+			if( apply_filters( 'wcfm_is_pref_products_import', true ) && apply_filters( 'wcfm_is_allow_products_import', true ) ) {
 				if( !WCFM_Dependencies::wcfmu_plugin_active_check() ) {
 					if( $is_wcfmu_inactive_notice_show = apply_filters( 'is_wcfmu_inactive_notice_show', true ) ) {
 						?>
@@ -97,7 +97,7 @@ foreach( $count_products as $count_product ) {
 				}
 			}
 			
-			if( apply_filters( 'wcfm_is_allow_inventory', true ) && apply_filters( 'wcfm_is_allow_stock_manager', true ) ) {
+			if( apply_filters( 'wcfm_is_pref_bulk_stock_manager', true ) && apply_filters( 'wcfm_is_allow_inventory', true ) && apply_filters( 'wcfm_is_allow_stock_manager', true ) ) {
 				if( !WCFM_Dependencies::wcfmu_plugin_active_check() ) {
 					if( $is_wcfmu_inactive_notice_show = apply_filters( 'is_wcfmu_inactive_notice_show', true ) ) {
 						?>

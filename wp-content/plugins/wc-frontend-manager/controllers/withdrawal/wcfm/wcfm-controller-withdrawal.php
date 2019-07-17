@@ -24,6 +24,15 @@ class WCFM_Withdrawal_Controller {
 	public function processing() {
 		global $WCFM, $wpdb, $_POST, $WCFMmp;
 		
+		$generate_auto_withdrawal = isset( $WCFMmp->wcfmmp_withdrawal_options['generate_auto_withdrawal'] ) ? $WCFMmp->wcfmmp_withdrawal_options['generate_auto_withdrawal'] : 'no';
+		if( isset( $WCFMmp->wcfmmp_withdrawal_options['withdrawal_mode'] ) ) {
+			$withdrawal_mode = isset( $WCFMmp->wcfmmp_withdrawal_options['withdrawal_mode'] ) ? $WCFMmp->wcfmmp_withdrawal_options['withdrawal_mode'] : '';
+		} elseif( $generate_auto_withdrawal == 'yes' ) {
+			$withdrawal_mode = 'by_order_status';
+		} else {
+			$withdrawal_mode = 'by_manual';
+		}
+		
 		$length = $_POST['length'];
 		$offset = $_POST['start'];
 		
@@ -74,7 +83,11 @@ class WCFM_Withdrawal_Controller {
 				if( apply_filters( 'wcfm_is_show_commission_restrict_check', false, $order_id, $wcfm_withdrawals_single ) ) continue;
 				
 				// Status
-				$wcfm_withdrawals_json_arr[$index][] =  '<input name="commissions[]" value="' . $wcfm_withdrawals_single->ID . '" class="wcfm-checkbox select_withdrawal" type="checkbox" >';
+				if( $withdrawal_mode == 'by_manual' ) {
+					$wcfm_withdrawals_json_arr[$index][] =  '<input name="commissions[]" value="' . $wcfm_withdrawals_single->ID . '" class="wcfm-checkbox select_withdrawal" type="checkbox" >';
+				} else {
+					$wcfm_withdrawals_json_arr[$index][] =  '&ndash;';
+				}
 				
 				// Order ID
 				$wcfm_withdrawals_json_arr[$index][] = apply_filters( 'wcfm_commission_order_label_display', '<a class="wcfm_dashboard_item_title withdrawal_order_ids" target="_blank" href="'. get_wcfm_view_order_url( $order_id ) .'"># ' . $order_id . '</a>', $order_id, $wcfm_withdrawals_single );

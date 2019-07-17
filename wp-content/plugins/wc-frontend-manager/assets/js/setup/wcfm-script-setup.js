@@ -11,6 +11,34 @@ jQuery(document).ready(function($) {
 		$('.commission_mode_'+$vendor_commission_mode).removeClass('wcfm_ele_hide');
 	}).change();
 	
+	$('#withdrawal_mode').change(function() {
+		$withdrawal_mode = $(this).val();
+		if( $withdrawal_mode == 'by_order_status' ) {
+			$('.auto_withdrawal_order_status').removeClass('wcfm_custom_hide');
+			$('.manual_withdrawal_ele').addClass('wcfm_custom_hide');
+			$('.withdrawal_threshold_ele').addClass('wcfm_custom_hide');
+			$('.schedule_withdrawal_threshold_ele').addClass('wcfm_custom_hide');
+		} else if( $withdrawal_mode == 'by_manual' ) {
+			$('.auto_withdrawal_order_status').addClass('wcfm_custom_hide');
+			$('.schedule_withdrawal_threshold_ele').addClass('wcfm_custom_hide');
+			$('.manual_withdrawal_ele').removeClass('wcfm_custom_hide');
+			$('.withdrawal_threshold_ele').removeClass('wcfm_custom_hide');
+		} else if( $withdrawal_mode == 'by_schedule' ) {
+			$('.auto_withdrawal_order_status').addClass('wcfm_custom_hide');
+			$('.manual_withdrawal_ele').removeClass('wcfm_custom_hide');
+			$('.schedule_withdrawal_threshold_ele').removeClass('wcfm_custom_hide');
+			$('.withdrawal_threshold_ele').removeClass('wcfm_custom_hide');
+		}
+	}).change();
+	
+	$('#withdrawal_reverse').change(function() {
+		if( $(this).is(':checked') ) {
+			$('.reverse_withdrawal_ele').removeClass('wcfm_custom_hide');
+		} else {
+			$('.reverse_withdrawal_ele').addClass('wcfm_custom_hide');
+		}
+	}).change();
+	
 	$('#withdrawal_payment_methods').find('.payment_options').each(function() {
 		$(this).change(function() {
 			$payment_option = $(this).val();

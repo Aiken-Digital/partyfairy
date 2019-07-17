@@ -304,20 +304,22 @@ class WCFM_Products_Controller {
 				}
 				
 				// Custom Taxonomies
-				$product_taxonomies = get_object_taxonomies( 'product', 'objects' );
-				if( !empty( $product_taxonomies ) ) {
-					foreach( $product_taxonomies as $product_taxonomy ) {
-						if( !in_array( $product_taxonomy->name, array( 'product_cat', 'product_tag', 'wcpv_product_vendors' ) ) ) {
-							if( $product_taxonomy->public && $product_taxonomy->show_ui && $product_taxonomy->meta_box_cb && $product_taxonomy->hierarchical ) {
-								// Fetching Saved Values
-								$taxonomy_values = get_the_terms( $the_product->get_id(), $product_taxonomy->name );
-								if( !empty($taxonomy_values) ) {
-									$taxonomies .= "<br /><strong>" . __( $product_taxonomy->label, 'wc-frontend-manager' ) . '</strong>: ';
-									$is_first = true;
-									foreach($taxonomy_values as $pkey => $ptaxonomy) {
-										if( !$is_first ) $taxonomies .= ', ';
-										$is_first = false;
-										$taxonomies .= '<a style="color: #dd4b39;" href="' . get_term_link( $ptaxonomy->term_id ) . '" target="_blank">' . $ptaxonomy->name . '</a>';
+				if( apply_filters( 'wcfm_is_allow_custom_taxonomy', true ) ) {
+					$product_taxonomies = get_object_taxonomies( 'product', 'objects' );
+					if( !empty( $product_taxonomies ) ) {
+						foreach( $product_taxonomies as $product_taxonomy ) {
+							if( !in_array( $product_taxonomy->name, array( 'product_cat', 'product_tag', 'wcpv_product_vendors' ) ) ) {
+								if( $product_taxonomy->public && $product_taxonomy->show_ui && $product_taxonomy->meta_box_cb && $product_taxonomy->hierarchical ) {
+									// Fetching Saved Values
+									$taxonomy_values = get_the_terms( $the_product->get_id(), $product_taxonomy->name );
+									if( !empty($taxonomy_values) ) {
+										$taxonomies .= "<br /><strong>" . __( $product_taxonomy->label, 'wc-frontend-manager' ) . '</strong>: ';
+										$is_first = true;
+										foreach($taxonomy_values as $pkey => $ptaxonomy) {
+											if( !$is_first ) $taxonomies .= ', ';
+											$is_first = false;
+											$taxonomies .= '<a style="color: #dd4b39;" href="' . get_term_link( $ptaxonomy->term_id ) . '" target="_blank">' . $ptaxonomy->name . '</a>';
+										}
 									}
 								}
 							}
@@ -382,7 +384,7 @@ class WCFM_Products_Controller {
 				$wcfm_products_json_arr[$index][] =  '<span class="view_count">' . (int) get_post_meta( $wcfm_products_single->ID, '_wcfm_product_views', true ) . '</span>';
 				
 				// Date
-				$wcfm_products_json_arr[$index][] =  date_i18n( wc_date_format(), strtotime($wcfm_products_single->post_date) );
+				$wcfm_products_json_arr[$index][] =  apply_filters( 'wcfm_products_date_display', date_i18n( wc_date_format(), strtotime($wcfm_products_single->post_date) ), $wcfm_products_single->ID, $the_product );
 				
 				// Vendor
 				$vendor_name = '&ndash;';
@@ -418,7 +420,7 @@ class WCFM_Products_Controller {
 					if( apply_filters( 'wcfm_is_allow_featured_product', true ) ) {
 						if( WCFM_Dependencies::wcfmu_plugin_active_check() ) {
 							if( has_term( 'featured', 'product_visibility', $wcfm_products_single->ID ) ) {
-								$actions .= '<br/><a class="wcfm_product_featured wcfm-action-icon" href="#" data-featured="nofeatured" data-proid="' . $wcfm_products_single->ID . '"><span class="wcfmfa fa-star text_tip" style="font-weight:900;" data-tip="' . esc_attr__( 'No Featured', 'wc-frontend-manager' ) . '"></span></a>';
+								$actions .= '<br/><a class="wcfm_product_featured wcfm-action-icon" href="#" data-featured="nofeatured" data-proid="' . $wcfm_products_single->ID . '"><span class="wcfmfa fa-star-of-life text_tip" data-tip="' . esc_attr__( 'No Featured', 'wc-frontend-manager' ) . '"></span></a>';
 							} else {
 								if( apply_filters( 'wcfm_has_featured_product_limit', true ) ) {
 									$actions .= '<br/><a class="wcfm_product_featured wcfm-action-icon" href="#" data-featured="featured" data-proid="' . $wcfm_products_single->ID . '"><span class="wcfmfa fa-star text_tip" data-tip="' . esc_attr__( 'Mark Featured', 'wc-frontend-manager' ) . '"></span></a>';

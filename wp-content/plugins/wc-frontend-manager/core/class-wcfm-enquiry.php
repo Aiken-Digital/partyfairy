@@ -88,6 +88,9 @@ class WCFM_Enquiry {
 			add_action( 'woocommerce_single_product_summary',	array( &$this, 'wcfm_enquiry_button' ), 35 );
 		}
 		
+		// YiTh Quick View Inquiry Button
+		//add_action( 'yith_wcqv_product_summary',	array( &$this, 'wcfm_enquiry_button' ), 35 );
+		
 		// WCFM Marketplace Store enquiry button
 		add_action( 'wcfmmp_store_enquiry',	array( &$this, 'wcfmmp_store_enquiry_button' ), 35 );
 		
@@ -549,7 +552,7 @@ class WCFM_Enquiry {
 								$counter++;
 							}
 							if( count( $wcfm_enquirys_array ) > 5 ) {
-								echo '<div class="wcfm_dashboard_enquiry_show_all"><a class="wcfm_submit_button" href="' . get_wcfm_enquiry_url() . '">' . __( 'Show All', 'wc-frontend-manager' ) . ' >></a></div>';
+								echo '<div class="wcfm_dashboard_enquiry_show_all"><a class="wcfm_submit_button" href="' . get_wcfm_enquiry_url() . '">' . __( 'Show All', 'wc-frontend-manager' ) . '</a></div>';
 							}
 						} else {
 							_e( 'There is no enquiry yet!!', 'wc-frontend-manager' );

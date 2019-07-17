@@ -217,7 +217,7 @@ class WCFM_Notification {
 								$counter++;
 							}
 							if( count( $wcfm_messages ) > 5 ) {
-								echo '<div class="wcfm_dashboard_notifications_show_all"><a class="wcfm_submit_button" href="' . get_wcfm_messages_url() . '">' . __( 'Show All', 'wc-frontend-manager' ) . ' >></a></div><div class="wcfm-clearfix"></div>';
+								echo '<div class="wcfm_dashboard_notifications_show_all"><a class="wcfm_submit_button" href="' . get_wcfm_messages_url() . '">' . __( 'Show All', 'wc-frontend-manager' ) . '</a></div><div class="wcfm-clearfix"></div>';
 							}
 						} else {
 							_e( 'There is no notification yet!!', 'wc-frontend-manager' );
@@ -328,7 +328,9 @@ class WCFM_Notification {
 	public function wcfm_send_direct_message( $author_id, $message_to, $author_is_admin, $author_is_vendor, $wcfm_messages, $wcfm_messages_type = 'direct', $email_notification = true ) {
 		global $WCFM, $wpdb;
 		
-		if( !apply_filters( 'wcfm_is_allow_notification_message', true, $wcfm_messages_type, $message_to ) ) return;
+		if( !apply_filters( 'wcfm_is_pref_notification', true ) ) return;
+		
+		//if( !apply_filters( 'wcfm_is_allow_notification_message', true, $wcfm_messages_type, $message_to ) ) return;
 		
 		$is_notice = 0;
 		$is_direct_message = 1;

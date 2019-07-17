@@ -6,7 +6,7 @@ $delivery_boy = '';
 var orderTableRefrsherTime = '';
 
 jQuery(document).ready(function($) {
-	
+		
 	// Dummy Mark Complete Dummy
 	$( document.body ).on( 'updated_wcfm-orders', function() {
 		$('.wcfm_order_mark_complete_dummy').each(function() {
@@ -53,21 +53,21 @@ jQuery(document).ready(function($) {
 	
 	if( dataTables_config.is_allow_hidden_export ) {
 		$wcfm_datatable_button_args = [
-		{
-			extend: 'print',
-		},
-		{
-			extend: 'pdfHtml5',
-			orientation: 'landscape',
-			pageSize: 'LEGAL',
-		},
-		{
-			extend: 'excelHtml5',
-		}, 
-		{
-			extend: 'csv',
-		}
-		];
+																		{
+																			extend: 'print',
+																		},
+																		{
+																			extend: 'pdfHtml5',
+																			orientation: 'landscape',
+																			pageSize: 'LEGAL',
+																		},
+																		{
+																			extend: 'excelHtml5',
+																		}, 
+																		{
+																			extend: 'csv',
+																		}
+																	];
 	}
 	
 	$wcfm_orders_table = $('#wcfm-orders').DataTable( {
@@ -77,7 +77,7 @@ jQuery(document).ready(function($) {
 		"pageLength": parseInt(dataTables_config.pageLength),
 		"dom"       : 'Bfrtip',
 		"language"  : $.parseJSON(dataTables_language),
-		"buttons"   : $wcfm_datatable_button_args,
+    "buttons"   : $wcfm_datatable_button_args,
 		"columns"   : $.parseJSON(wcfm_datatable_columns.priority),
 		"columnDefs": $.parseJSON(wcfm_datatable_columns.defs),
 		'ajax': {
@@ -179,14 +179,14 @@ jQuery(document).ready(function($) {
 	// Screen Manager
 	$( document.body ).on( 'updated_wcfm-orders', function() {
 		$.each(wcfm_orders_screen_manage, function( column, column_val ) {
-			$wcfm_orders_table.column(column).visible( false );
+		  $wcfm_orders_table.column(column).visible( false );
 		} );
 	});
 	
 	// Hidden Column
 	$( document.body ).on( 'updated_wcfm-orders', function() {
 		$.each(wcfm_orders_screen_manage_hidden, function( column, column_val ) {
-			$wcfm_orders_table.column(column).visible( false );
+		  $wcfm_orders_table.column(column).visible( false );
 		} );
 	});
 	

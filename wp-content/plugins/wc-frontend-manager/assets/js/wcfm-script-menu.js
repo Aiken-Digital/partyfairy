@@ -354,6 +354,9 @@ jQuery( document ).ready( function( $ ) {
 	
 	function restrictNonNegativeInput() {
 	  $('.wcfm_non_negative_input').each(function() {
+	  	$(this).on("contextmenu",function(){
+				 return false;
+			}); 
 	    $(this).on('change, keypress', function() {
 	    	$nval = $(this).val();
 	    	if( $nval < 0 ) $(this).val(0);
@@ -377,6 +380,29 @@ jQuery( document ).ready( function( $ ) {
 	  setTimeout( function() {  restrictNonNegativeInput(); }, 500 );
 	}
 	
+	function restrictSlugInput() {
+	  $('.wcfm_slug_input').each(function() {
+	  	$(this).on("contextmenu",function(){
+				 return false;
+			}); 
+	    $(this).on('keydown', function(e) {
+	    	//console.log(e.keyCode);
+				if( !( ( e.keyCode > 95 && e.keyCode < 106 )
+								|| ( e.keyCode > 47 && e.keyCode < 58 ) 
+							  || ( e.keyCode > 64 && e.keyCode < 91 ) 
+								|| e.keyCode == 8
+								|| e.keyCode == 9
+								|| e.keyCode == 37
+								|| e.keyCode == 39
+								|| e.keyCode == 46
+								|| e.keyCode == 189 ) ) {
+									return false;
+								}
+			});
+	  });
+	  setTimeout( function() {  restrictSlugInput(); }, 500 );
+	}
+	
 	setTimeout( function() {
 		$('#wcfm-main-contentainer').find('select').each(function() {
 			if ( $(this).parent().is( "span" ) || $(this).parent().is( "label" ) ) {
@@ -386,6 +412,7 @@ jQuery( document ).ready( function( $ ) {
 		unwrapSelect();
 		
 		restrictNonNegativeInput();
+		restrictSlugInput();
 	}, 500 );
 	
 	// Menu Tip

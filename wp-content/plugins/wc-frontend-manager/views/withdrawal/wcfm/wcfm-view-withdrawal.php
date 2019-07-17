@@ -27,6 +27,15 @@ $reverse_balance    = 0;
 if( $withdrawal_reverse ) {
 	$reverse_balance = $WCFMmp->wcfmmp_withdraw->wcfm_get_pending_reverse_withdrawal_by_vendor( $vendor_id );
 }
+
+$generate_auto_withdrawal = isset( $WCFMmp->wcfmmp_withdrawal_options['generate_auto_withdrawal'] ) ? $WCFMmp->wcfmmp_withdrawal_options['generate_auto_withdrawal'] : 'no';
+if( isset( $WCFMmp->wcfmmp_withdrawal_options['withdrawal_mode'] ) ) {
+	$withdrawal_mode = isset( $WCFMmp->wcfmmp_withdrawal_options['withdrawal_mode'] ) ? $WCFMmp->wcfmmp_withdrawal_options['withdrawal_mode'] : '';
+} elseif( $generate_auto_withdrawal == 'yes' ) {
+	$withdrawal_mode = 'by_order_status';
+} else {
+	$withdrawal_mode = 'by_manual';
+}
 ?>
 <div class="collapse wcfm-collapse" id="wcfm_withdrawal_listing">
   <div class="wcfm-page-headig">
@@ -105,21 +114,23 @@ if( $withdrawal_reverse ) {
 			<div class="withdrawal_charge_help">** <?php _e( 'Withdrawal charges will be re-calculated depending upon total withdrawal amount.', 'wc-frontend-manager' ); ?></div>
 			<div class="wcfm-clearfix"></div>
 			
-			<div id="wcfm_products_simple_submit" class="wcfm_form_simple_submit_wrapper">
-			  <div class="wcfm-message" tabindex="-1"></div>
-			  
-			  <?php
-					if ( (float) $pending_withdrawal >= (float) $withdrawal_limit ) {
-						if( !$withdrawal_reverse || !$withdrawal_reverse_limit || ( $withdrawal_reverse  && ( (float) $reverse_balance < (float) $withdrawal_reverse_limit ) ) ) {
-					?>
-					  <input type="submit" name="withdrawal-data" value="<?php _e( 'Request', 'wc-frontend-manager' ); ?>" id="wcfm_withdrawal_request_button" class="wcfm_submit_button" />
-				<?php } else {
-								echo '<div class="wcfm-message wcfm-error" tabindex="-1" style="display: block;"><span class="wcicon-status-cancelled"></span>'. __( 'Withdrawal disable due to high reverse balance.', 'wc-frontend-manager' ) .'</div>';
-							}
-					} else {
-						echo '<div class="wcfm-message wcfm-error" tabindex="-1" style="display: block;"><span class="wcicon-status-cancelled"></span>'. __( 'Withdrawal disable due to low account balance.', 'wc-frontend-manager' ) .'</div>';
-					} ?>
-			</div>
+			<?php if( $withdrawal_mode == 'by_manual' ) { ?>
+				<div id="wcfm_products_simple_submit" class="wcfm_form_simple_submit_wrapper">
+					<div class="wcfm-message" tabindex="-1"></div>
+					
+					<?php
+						if ( (float) $pending_withdrawal >= (float) $withdrawal_limit ) {
+							if( !$withdrawal_reverse || !$withdrawal_reverse_limit || ( $withdrawal_reverse  && ( (float) $reverse_balance < (float) $withdrawal_reverse_limit ) ) ) {
+						?>
+							<input type="submit" name="withdrawal-data" value="<?php _e( 'Request', 'wc-frontend-manager' ); ?>" id="wcfm_withdrawal_request_button" class="wcfm_submit_button" />
+					<?php } else {
+									echo '<div class="wcfm-message wcfm-error" tabindex="-1" style="display: block;"><span class="wcicon-status-cancelled"></span>'. __( 'Withdrawal disable due to high reverse balance.', 'wc-frontend-manager' ) .'</div>';
+								}
+						} else {
+							echo '<div class="wcfm-message wcfm-error" tabindex="-1" style="display: block;"><span class="wcicon-status-cancelled"></span>'. __( 'Withdrawal disable due to low account balance.', 'wc-frontend-manager' ) .'</div>';
+						} ?>
+				</div>
+			<?php } ?>
 			<div class="wcfm-clearfix"></div>
 		</form>
 		<?php

@@ -8,7 +8,7 @@ if( $WCFM->is_marketplace && ( $WCFM->is_marketplace == 'wcfmmarketplace' ) && !
 														);
 } else {
 	$wcfm_reports_menus = array( 'sales-by-date' => __( 'Sales by date', 'wc-frontend-manager'), 
-														 'out-of-stock' => __( 'Out of stock', 'wc-frontend-manager')
+														   'out-of-stock' => __( 'Out of stock', 'wc-frontend-manager')
 													);
 }
 

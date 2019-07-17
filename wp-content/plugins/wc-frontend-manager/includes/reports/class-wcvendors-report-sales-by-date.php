@@ -101,7 +101,7 @@ class WC_Vendors_Report_Sales_By_Date extends WC_Admin_Report {
 				if( !$order_post_title ) continue;
 				try {
 					$order       = wc_get_order( $data->order_id );
-					$line_items  = $order->get_items( apply_filters( 'woocommerce_admin_order_item_types', 'line_item' ) );
+					$line_items  = $order->get_items( 'line_item' );
 					
 					foreach( $line_items as $key => $line_item ) {
 						if( $line_item->get_product_id() == 0 ) {
@@ -379,7 +379,7 @@ class WC_Vendors_Report_Sales_By_Date extends WC_Admin_Report {
 							if( !$order_post_title ) continue;
 							try {
 								$order       = wc_get_order( $order_id );
-								$line_items  = $order->get_items( apply_filters( 'woocommerce_admin_order_item_types', 'line_item' ) );
+								$line_items  = $order->get_items( 'line_item' );
 								$valid_items = (array) WCV_Queries::get_products_for_order( $order_id );
 								foreach( $line_items as $key => $line_item ) {
 									if( $line_item->get_product_id() == 0 ) {

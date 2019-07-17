@@ -187,10 +187,18 @@ class WCFM_WCBookings_Controller {
 				}
 				
 				// Start Date
-				$wcfm_bookings_json_arr[$index][] = date_i18n( wc_date_format() . ' ' . wc_time_format(), $the_booking->get_start( 'edit' ) );
+				if( $the_booking->get_all_day( 'edit' ) == 'YES' ) {
+					$wcfm_bookings_json_arr[$index][] = date_i18n( wc_date_format(), $the_booking->get_start( 'edit' ) );
+				} else {
+					$wcfm_bookings_json_arr[$index][] = date_i18n( wc_date_format() . ' ' . wc_time_format(), $the_booking->get_start( 'edit' ) );
+				}
 				
 				// End Date
-				$wcfm_bookings_json_arr[$index][] = date_i18n( wc_date_format() . ' ' . wc_time_format(), $the_booking->get_end( 'edit' ) );
+				if( $the_booking->get_all_day( 'edit' ) == 'YES' ) {
+					$wcfm_bookings_json_arr[$index][] = date_i18n( wc_date_format(), $the_booking->get_end( 'edit' ) );
+				} else {
+					$wcfm_bookings_json_arr[$index][] = date_i18n( wc_date_format() . ' ' . wc_time_format(), $the_booking->get_end( 'edit' ) );
+				}
 				
 				// Additional Info
 				if ( $the_order ) {

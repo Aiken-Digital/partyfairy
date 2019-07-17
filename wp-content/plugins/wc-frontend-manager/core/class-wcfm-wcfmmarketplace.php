@@ -183,6 +183,18 @@ class WCFM_Marketplace {
 		return $args;
   }
   
+  // Update Comment User as Vendor
+  public function wcfm_update_comment_vendor( $commentdata, $order ) {
+  	global $WCFM;
+		$vendor_id = $this->vendor_id;
+
+		$commentdata[ 'user_id' ]              = $vendor_id;
+		$commentdata[ 'comment_author' ]       = $WCFM->wcfm_vendor_support->wcfm_get_vendor_store_name_by_vendor( absint($vendor_id) );
+		$commentdata[ 'comment_author_email' ] = $WCFM->wcfm_vendor_support->wcfm_get_vendor_email_by_vendor( absint($vendor_id) );
+
+		return $commentdata;
+	}
+  
   // Orders Filter
   function wcfmmp_orders_filter() {
   	global $WCFM, $WCFMu, $wpdb, $wp_locale;
@@ -683,9 +695,11 @@ class WCFM_Marketplace {
     // WC Refund Support - 3.0.4
     $commission_ids = explode( ",", $order_due[0]->commission_ids );
     foreach( $commission_ids as $commission_id ) {
-    	$total_tax        += (float) $WCFMmp->wcfmmp_commission->wcfmmp_get_commission_meta( $commission_id, 'gross_tax_cost' );
-    	$total_shipping   += $WCFMmp->wcfmmp_commission->wcfmmp_get_commission_meta( $commission_id, 'gross_shipping_cost' );
-    	$shipping_tax     += $WCFMmp->wcfmmp_commission->wcfmmp_get_commission_meta( $commission_id, 'gross_shipping_tax' );
+    	if( method_exists( $WCFMmp->wcfmmp_commission, 'wcfmmp_get_commission_meta' ) ) {
+				$total_tax        += (float) $WCFMmp->wcfmmp_commission->wcfmmp_get_commission_meta( $commission_id, 'gross_tax_cost' );
+				$total_shipping   += $WCFMmp->wcfmmp_commission->wcfmmp_get_commission_meta( $commission_id, 'gross_shipping_cost' );
+				$shipping_tax     += $WCFMmp->wcfmmp_commission->wcfmmp_get_commission_meta( $commission_id, 'gross_shipping_tax' );
+			}
     }
     
     $calculated_total += ( float ) $total_tax;

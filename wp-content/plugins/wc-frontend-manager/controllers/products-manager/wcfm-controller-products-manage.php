@@ -322,7 +322,7 @@ class WCFM_Products_Manage_Controller {
 				
 				// Set Product Tags
 				if(isset($wcfm_products_manage_form_data['product_tags']) && !empty($wcfm_products_manage_form_data['product_tags'])) {
-					wp_set_post_terms( $new_product_id, $wcfm_products_manage_form_data['product_tags'], 'product_tag' );
+					wp_set_post_terms( $new_product_id, apply_filters( 'wcfm_pm_product_tags_before_save', $wcfm_products_manage_form_data['product_tags'], $new_product_id ), 'product_tag' );
 				}
 				
 				// Set Product Custom Taxonomies Flat
@@ -377,7 +377,9 @@ class WCFM_Products_Manage_Controller {
 						set_post_thumbnail( $new_product_id, $featured_img_id );
 						wp_update_post( array( 'ID' => $featured_img_id, 'post_parent' => $new_product_id ) );
 					} elseif(isset($wcfm_products_manage_form_data['featured_img']) && empty($wcfm_products_manage_form_data['featured_img'])) {
-						delete_post_thumbnail( $new_product_id );
+						if( !defined( 'FIFU_PLUGIN_DIR' ) ) {
+							delete_post_thumbnail( $new_product_id );
+						}
 					}
 				}
 				

@@ -1,4 +1,4 @@
-﻿=== WCFM - WooCommerce Frontend Manager ===
+﻿=== WCFM - WooCommerce Frontend Manager for WC Vendors Dokan with Bookings & Listings ===
 Contributors: wclovers
 Tags: woocommerce marketplace, multivendor marketplace, multi vendor, product vendors, wp user frontend, product vendor dashboard, ecommerce, vendor shop manager, woocommerce frontend shop manager, wcvendors, woocommerce frontend manager, wc frontend manager, woocommerce frontend shop manager, shop manager, ecommerce, e-commerce, woocommerce live manager
 Donate link: https://www.paypal.me/wclovers/25usd
@@ -7,7 +7,7 @@ Tested up to: 5.2
 WC requires at least: 3.0
 WC tested up to: 3.6.0
 Requires PHP: 5.6
-Stable tag: 6.1.5
+Stable tag: 6.2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,7 +21,7 @@ Experience the best ever WooCommerce Frontend Product Manager. WooCommerce Front
 >
 > FREE Modules -
 > [WCFM - Marketplace](https://wordpress.org/plugins/wc-multivendor-marketplace/) - [Demo](http://wcfmmp.wcfmdemos.com/my-account/) - [Documentation](https://wclovers.com/knowledgebase_category/wcfm-marketplace/)
-> [WCFM - Membership](https://wordpress.org/plugins/wc-multivendor-membership/) - [Demo](http://wcvendors.wcfmdemos.com/vendor-membership/) - [Documentation](https://wclovers.com/knowledgebase/wcfm-membership/)
+> [WCFM - Membership](https://wordpress.org/plugins/wc-multivendor-membership/) - [Demo](http://wcfmmp.wcfmdemos.com/vendor-membership/) - [Documentation](https://wclovers.com/knowledgebase/wcfm-membership/)
 >
 > Premium addons also add many more feathers into the frontend wing - 
 > [WCFM - Ultimate](https://wclovers.com/product/woocommerce-frontend-manager-ultimate/) - [Overview](https://youtu.be/gitvRdLMTjw) - [Guidelines](https://wclovers.com/blog/why-woocommerce-frontend-manager-ultimate/)
@@ -39,9 +39,9 @@ Fully compatible with WordPress-WooCommerce most popular multivendor marketplace
 
 - <strong>WooCommerce Multivendor Marketplace</strong> - [Documentation](https://wclovers.com/blog/woocommerce-multivendor-marketplace-wcfm-marketplace/) - [Demo](http://wcfmmp.wcfmdemos.com/my-account/)
 - <strong>Dokan Multivendor</strong> - [Demo](http://dokan.wcfmdemos.com/my-account)
-- <strong>WC Marketplace</strong> - [Overview](https://youtu.be/uZDU8NLeTb8) - [Documentation](https://wclovers.com/documentation/wcfm-wc-marketplace/) - [Demo](http://wcmp.wcfmdemos.com/my-account/)
-- <strong>WC Vendors</strong> - [Overview](https://youtu.be/efB2_UY49zI) - [Documentation](https://wclovers.com/documentation/wcfm-wc-vendors/) - [Demo](http://wcvendors.wcfmdemos.com/my-account/)
-- <strong>WooCommerce Product Vendors</strong> - [Overview](https://youtu.be/vSK0rS4Dm_0) - [Documentation](https://wclovers.com/documentation/wcfm-wc-product-vendors/) - [Demo](http://wcpvendors.wcfmdemos.com/my-account/)
+- <strong>WC Marketplace</strong> - [Overview](https://youtu.be/uZDU8NLeTb8) - [Documentation](https://wclovers.com/documentation/wcfm-wc-marketplace/)
+- <strong>WC Vendors</strong> - [Overview](https://youtu.be/efB2_UY49zI) - [Documentation](https://wclovers.com/documentation/wcfm-wc-vendors/)
+- <strong>WooCommerce Product Vendors</strong> - [Overview](https://youtu.be/vSK0rS4Dm_0) - [Documentation](https://wclovers.com/documentation/wcfm-wc-product-vendors/)
 
 = Booking Compatibility =
 
@@ -66,9 +66,9 @@ This will allow you to setup a system where vendor has to pay before adding a pr
 WCFM is now fully compatible with -
 
 - Dokan Multivendor & Dokan Pro - [WCFM Demo](http://dokan.wcfmdemos.com/my-account)
-- WC Vendors & WC Vendors Pro - [WCFM Demo](http://wcvendors.wcfmdemos.com/my-account/)
+- WC Vendors & WC Vendors Pro
 - WC Marketplace - [WCFM Demo](http://wcmp.wcfmdemos.com/my-account/)
-- WooCommerce Product Vendors - [WCFM Demo](http://wcpvendors.wcfmdemos.com/my-account/)
+- WooCommerce Product Vendors
 - WooCommerce Bookings - [WCFM Demo](http://wcbookings.wcfmdemos.com/my-account/)
 - WooCommerce Bookings Accommodation - [WCFM Demo](http://wcbookings.wcfmdemos.com/my-account/)
 - WooCommerce Appointments - [WCFM Demo](http://wcappointment.wcfmdemos.com/my-account/)
@@ -279,6 +279,54 @@ Fully compatible with all major multi-vendor marketplace plugins - <strong>WC Ma
 25. WCFM Dashboard - Mobile view
 
 == Changelog ==
+
+= 6.2.3 =
+*Updated - 06/07/2019*
+
+* Enhance - WP-Stateless – Google Cloud Storage - custom bucket support added
+* Enhance - Customer delete option added
+* Fixed   - Product manager custom validation check issue resolved
+
+= 6.2.2 =
+*Updated - 03/07/2019*
+
+* Enhance - Coupon, Bulk Stock Manager, Product Import and more module option added 
+* Enhance - WilCity theme JS conflict taken care for Store Manager page
+* Fixed   - Vendor capability "OFF" product data reset issue resolved 
+* Fixed   - Inquiry and Support notification setting not working issue resolved
+
+= 6.2.1 =
+*Updated - 26/06/2019*
+
+* Fixed   - Admin "add new vendor" page not loading issue resolved
+* Fixed   - Invoice currency display issue resolved
+
+= 6.2.0 =
+*Updated - 24/06/2019*
+
+* Feature - WCFM Marketplace Periodic Withdrawal compatibility added
+* Enhance - Downloadable products "woocommerce_uploads" directory compatibility added
+* Enhance - Store Manager restricted content vendor message shown as per their membership level
+* Enhance - Manual Booking and Manual Appointment "Add Customer" option added
+* Enhance - WooCommerce PDF Voucher product wise "Voucher Price" option added
+* Enhance - "Mark Featured" option added under "Edit Product" screen
+* Enhance - Admin Vendor list "Membership" filter option added
+* Enhance - Store Invoice download option added under Admin's order details
+* Enhance - WCFM Marketplace Store Policies and Customer Support setting option added under Admin's Vendor Manager
+* Enhance - WCFM Marketplace Store SEO and Social setting option added under Admin's Vendor Manager
+* Fixed   - WC Product Vendors customer list not visible issue resolved
+* Fixed   - Customer manage address "State/County Field" load issue resolved
+* Fixed   - Profile address "State/County Field" load issue resolved
+* Fixed   - Vendor able to see other vendor's order note issue resolved
+* Fixed   - WCFM - Category Hierarchy addon "Allowed Categories" capability check issue resolved
+
+= 6.1.6 =
+*Updated - 11/06/2019*
+
+* Enhance - YiTH Quick Product view "Catalog Mode" compatibility added
+* Enhance - Flatsome Quick Product view "Catalog Mode" compatibility added
+* Fixed   - WCFM Installer load issue resolved
+* Fixed   - WCFM Marketplace vendors able to see other vendors' order note issue resolved 
 
 = 6.1.5 =
 *Updated - 09/06/2019*
@@ -2031,13 +2079,7 @@ Fully compatible with all major multi-vendor marketplace plugins - <strong>WC Ma
 
 == Upgrade Notice ==
 
-= 6.1.5 =
-* Enhance - Inquiry and Support reply "Attachment" support added
-* Enhance - Inquiry Button position setting added
-* Enhance - Inquiry and Chat Now button display together improved
-* Enhance - New capability options added
-* Enhance - French Translation update
-* Tweak   - Product "Inquiry" button available though vendor's Inquiry Capability "OFF"
-* Tweak   - "Disable Ask a Question Button" setting option removed, will work as per "Inquiry Module" setting
-* Fixed   - Uncategorized category exclude filter issue resolved
-* Fixed   - Vendor customer "Total Spent" amount display issue resolved
+= 6.2.3 =
+* Enhance - WP-Stateless – Google Cloud Storage - custom bucket support added
+* Enhance - Customer delete option added
+* Fixed   - Product manager custom validation check issue resolved

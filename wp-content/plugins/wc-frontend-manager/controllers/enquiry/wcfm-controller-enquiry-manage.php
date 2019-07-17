@@ -191,8 +191,10 @@ class WCFM_Enquiry_Manage_Controller {
 			
 			// Admin Direct message
 			if( wcfm_is_vendor() ) {
-				$wcfm_messages = sprintf( __( 'New reply posted for Inquiry <b>%s</b>', 'wc-frontend-manager' ), '<a target="_blank" class="wcfm_dashboard_item_title" href="' . get_wcfm_enquiry_manage_url( $inquiry_id ) . '">#' . sprintf( '%06u', $inquiry_id ) . '</a>' );
-				$WCFM->wcfm_notification->wcfm_send_direct_message( $inquiry_vendor_id, 0, 0, 1, $wcfm_messages, 'enquiry', false );
+				if( apply_filters( 'wcfm_is_allow_notification_message', true, 'enquiry', 'admin' ) ) {
+					$wcfm_messages = sprintf( __( 'New reply posted for Inquiry <b>%s</b>', 'wc-frontend-manager' ), '<a target="_blank" class="wcfm_dashboard_item_title" href="' . get_wcfm_enquiry_manage_url( $inquiry_id ) . '">#' . sprintf( '%06u', $inquiry_id ) . '</a>' );
+					$WCFM->wcfm_notification->wcfm_send_direct_message( $inquiry_vendor_id, 0, 0, 1, $wcfm_messages, 'enquiry', false );
+				}
 			}
 			
 			if( defined('WCFM_REST_API_CALL') ) {
@@ -311,15 +313,19 @@ class WCFM_My_Account_Enquiry_Manage_Controller {
 			$message = str_replace( '{enquiry_id}', sprintf( '%06u', $inquiry_id ), $message );
 			$message = apply_filters( 'wcfm_email_content_wrapper', $message, __( 'Reply to Inquiry', 'wc-frontend-manager' ) . ' #' . sprintf( '%06u', $inquiry_id ) );
 			
-			if( apply_filters( 'wcfm_is_allow_enquiry_by_customer', true ) ) {
-			  wp_mail( $mail_to, $subject, $message, $headers, $mail_attachments );
-			} else {
-				wp_mail( $mail_to, $subject, $message, '', $mail_attachments );
+			if( apply_filters( 'wcfm_is_allow_notification_email', true, 'enquiry', 'admin' ) ) {
+				if( apply_filters( 'wcfm_is_allow_enquiry_by_customer', true ) ) {
+					wp_mail( $mail_to, $subject, $message, $headers, $mail_attachments );
+				} else {
+					wp_mail( $mail_to, $subject, $message, '', $mail_attachments );
+				}
 			}
 			
 			// Direct message
-			$wcfm_messages = sprintf( __( 'New reply received for Inquiry <b>%s</b>', 'wc-frontend-manager' ), '<a target="_blank" class="wcfm_dashboard_item_title" href="' . get_wcfm_enquiry_manage_url( $inquiry_id ) . '">#' . sprintf( '%06u', $inquiry_id ) . '</a>' );
-			$WCFM->wcfm_notification->wcfm_send_direct_message( -2, 0, 1, 0, $wcfm_messages, 'enquiry', false );
+			if( apply_filters( 'wcfm_is_allow_notification_message', true, 'enquiry', 'admin' ) ) {
+				$wcfm_messages = sprintf( __( 'New reply received for Inquiry <b>%s</b>', 'wc-frontend-manager' ), '<a target="_blank" class="wcfm_dashboard_item_title" href="' . get_wcfm_enquiry_manage_url( $inquiry_id ) . '">#' . sprintf( '%06u', $inquiry_id ) . '</a>' );
+				$WCFM->wcfm_notification->wcfm_send_direct_message( -2, 0, 1, 0, $wcfm_messages, 'enquiry', false );
+			}
 			
 			// Semd email to vendor
 			if( wcfm_is_marketplace() ) {
@@ -327,7 +333,7 @@ class WCFM_My_Account_Enquiry_Manage_Controller {
 					$is_allow_enquiry = $WCFM->wcfm_vendor_support->wcfm_vendor_has_capability( $inquiry_vendor_id, 'enquiry' );
 					if( $is_allow_enquiry && apply_filters( 'wcfm_is_allow_enquiry_vendor_notification', true ) ) {
 						$vendor_email = $WCFM->wcfm_vendor_support->wcfm_get_vendor_email_by_vendor( $inquiry_vendor_id );
-						if( $vendor_email ) {
+						if( $vendor_email && apply_filters( 'wcfm_is_allow_notification_email', true, 'enquiry', 'vendor' ) ) {
 							if( apply_filters( 'wcfm_is_allow_enquiry_by_customer', true ) ) {
 								wp_mail( $vendor_email, $subject, $message, $headers, $mail_attachments );
 							} else {
@@ -336,8 +342,10 @@ class WCFM_My_Account_Enquiry_Manage_Controller {
 						}
 						
 						// Direct message
-						$wcfm_messages = sprintf( __( 'New reply received for Inquiry <b>%s</b>', 'wc-frontend-manager' ), '<a target="_blank" class="wcfm_dashboard_item_title" href="' . get_wcfm_enquiry_manage_url( $inquiry_id ) . '">#' . sprintf( '%06u', $inquiry_id ) . '</a>' );
-						$WCFM->wcfm_notification->wcfm_send_direct_message( -1, $inquiry_vendor_id, 1, 0, $wcfm_messages, 'enquiry', false );
+						if( apply_filters( 'wcfm_is_allow_notification_message', true, 'enquiry', 'vendor' ) ) {
+							$wcfm_messages = sprintf( __( 'New reply received for Inquiry <b>%s</b>', 'wc-frontend-manager' ), '<a target="_blank" class="wcfm_dashboard_item_title" href="' . get_wcfm_enquiry_manage_url( $inquiry_id ) . '">#' . sprintf( '%06u', $inquiry_id ) . '</a>' );
+							$WCFM->wcfm_notification->wcfm_send_direct_message( -1, $inquiry_vendor_id, 1, 0, $wcfm_messages, 'enquiry', false );
+						}
 					}
 				}
 	  	}

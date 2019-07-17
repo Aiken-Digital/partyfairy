@@ -23,44 +23,44 @@ class WCFM_Profile_Controller {
 		$user_id = get_current_user_id();
 		
 		$wcfm_profile_default_fields = array( 'first_name'          => 'first_name',
-			'last_name'           => 'last_name',
+																					'last_name'           => 'last_name',
 																					//'billing_email'       => 'email',
-			'billing_phone'       => 'phone',
-			'billing_first_name'  => 'bfirst_name',
-			'billing_last_name'   => 'blast_name',
-			'billing_address_1'   => 'baddr_1',
-			'billing_address_2'   => 'baddr_2',
-			'billing_country'     => 'bcountry',
-			'billing_city'        => 'bcity',
-			'billing_state'       => 'bstate',
-			'billing_postcode'    => 'bzip'
-		);
+																					'billing_phone'       => 'phone',
+																					'billing_first_name'  => 'bfirst_name',
+																					'billing_last_name'   => 'blast_name',
+																					'billing_address_1'   => 'baddr_1',
+																					'billing_address_2'   => 'baddr_2',
+																					'billing_country'     => 'bcountry',
+																					'billing_city'        => 'bcity',
+																					'billing_state'       => 'bstate',
+																					'billing_postcode'    => 'bzip'
+																			  );
 		
 		$wcfm_profile_shipping_fields = array( 
-			'shipping_first_name'  => 'sfirst_name',
-			'shipping_last_name'   => 'slast_name',
-			'shipping_address_1'   => 'saddr_1',
-			'shipping_address_2'   => 'saddr_2',
-			'shipping_country'     => 'scountry',
-			'shipping_city'        => 'scity',
-			'shipping_state'       => 'sstate',
-			'shipping_postcode'    => 'szip'
-		);
+																					'shipping_first_name'  => 'sfirst_name',
+																					'shipping_last_name'   => 'slast_name',
+																					'shipping_address_1'   => 'saddr_1',
+																					'shipping_address_2'   => 'saddr_2',
+																					'shipping_country'     => 'scountry',
+																					'shipping_city'        => 'scity',
+																					'shipping_state'       => 'sstate',
+																					'shipping_postcode'    => 'szip'
+																			  );
 		
 		$wcfm_profile_billing_shipping_fields = array( 
-			'shipping_first_name'  => 'bfirst_name',
-			'shipping_last_name'   => 'blast_name',
-			'shipping_address_1'   => 'baddr_1',
-			'shipping_address_2'   => 'baddr_2',
-			'shipping_country'     => 'bcountry',
-			'shipping_city'        => 'bcity',
-			'shipping_state'       => 'bstate',
-			'shipping_postcode'    => 'bzip'
-		);
+																					'shipping_first_name'  => 'bfirst_name',
+																					'shipping_last_name'   => 'blast_name',
+																					'shipping_address_1'   => 'baddr_1',
+																					'shipping_address_2'   => 'baddr_2',
+																					'shipping_country'     => 'bcountry',
+																					'shipping_city'        => 'bcity',
+																					'shipping_state'       => 'bstate',
+																					'shipping_postcode'    => 'bzip'
+																			  );
 		
 		$wcfm_profile_form_data = array();
-		parse_str($_POST['wcfm_profile_form'], $wcfm_profile_form);
-		
+	  parse_str($_POST['wcfm_profile_form'], $wcfm_profile_form);
+	  
 	  // WCFM form custom validation filter
 		$custom_validation_results = apply_filters( 'wcfm_form_custom_validation', $wcfm_profile_form, 'profile_manage' );
 		if(isset($custom_validation_results['has_error']) && !empty($custom_validation_results['has_error'])) {
@@ -69,7 +69,7 @@ class WCFM_Profile_Controller {
 			echo '{"status": false, "message": "' . $custom_validation_error . '"}';
 			die;
 		}
-		
+	  
 	  // sanitize
 		//$wcfm_profile_form = array_map( 'sanitize_text_field', $wcfm_profile_form );
 		//$wcfm_profile_form = array_map( 'stripslashes', $wcfm_profile_form );
@@ -95,9 +95,9 @@ class WCFM_Profile_Controller {
 		if(isset($wcfm_profile_form['wp_user_avatar']) && !empty($wcfm_profile_form['wp_user_avatar'])) {
 			$wp_user_avatar = $WCFM->wcfm_get_attachment_id($wcfm_profile_form['wp_user_avatar']);
 			// Remove old attachment postmeta
-			delete_metadata( 'post', null, '_wp_attachment_wp_user_avatar', $user_id, true );
+      delete_metadata( 'post', null, '_wp_attachment_wp_user_avatar', $user_id, true );
       // Create new attachment postmeta
-			add_post_meta( $wp_user_avatar, '_wp_attachment_wp_user_avatar', $user_id );
+      add_post_meta( $wp_user_avatar, '_wp_attachment_wp_user_avatar', $user_id );
       // Update usermeta
 			update_user_meta( $user_id, $wpdb->get_blog_prefix($blog_id).'user_avatar', $wp_user_avatar );
 		} else {
@@ -125,47 +125,47 @@ class WCFM_Profile_Controller {
 				$is_marketplace = wcfm_is_marketplace();
 				if( $is_marketplace == 'wcvendors' )  {
 					$wcfm_profile_social_fields = array( 
-						'_wcv_twitter_username'    => 'twitter',
-						'_wcv_facebook_url'        => 'facebook',
-						'_wcv_instagram_username'  => 'instagram',
-						'_wcv_youtube_url'         => 'youtube',
-						'_wcv_linkedin_url'        => 'linkdin',
-						'_wcv_googleplus_url'      => 'google_plus',
-						'_wcv_snapchat_username'   => 'snapchat',
-						'_wcv_pinterest_url'       => 'pinterest',
-						'googleplus'               => 'google_plus',
-						'twitter'                  => 'twitter',
-						'facebook'                 => 'facebook',
-					);
+																							'_wcv_twitter_username'    => 'twitter',
+																							'_wcv_facebook_url'        => 'facebook',
+																							'_wcv_instagram_username'  => 'instagram',
+																							'_wcv_youtube_url'         => 'youtube',
+																							'_wcv_linkedin_url'        => 'linkdin',
+																							'_wcv_googleplus_url'      => 'google_plus',
+																							'_wcv_snapchat_username'   => 'snapchat',
+																							'_wcv_pinterest_url'       => 'pinterest',
+																							'googleplus'               => 'google_plus',
+																							'twitter'                  => 'twitter',
+																							'facebook'                 => 'facebook',
+																						);
 				} elseif( $is_marketplace == 'wcmarketplace' )  {
 					$wcfm_profile_social_fields = array( 
-						'_vendor_twitter_profile'      => 'twitter',
-						'_vendor_fb_profile'           => 'facebook',
-						'_vendor_instagram'            => 'instagram',
-						'_vendor_youtube'              => 'youtube',
-						'_vendor_linkdin_profile'      => 'linkdin',
-						'_vendor_google_plus_profile'  => 'google_plus',
-						'_vendor_snapchat'             => 'snapchat',
-						'_vendor_pinterest'            => 'pinterest',
-						'googleplus'                   => 'google_plus',
-						'twitter'                      => 'twitter',
-						'facebook'                     => 'facebook',
-					);
+																							'_vendor_twitter_profile'      => 'twitter',
+																							'_vendor_fb_profile'           => 'facebook',
+																							'_vendor_instagram'            => 'instagram',
+																							'_vendor_youtube'              => 'youtube',
+																							'_vendor_linkdin_profile'      => 'linkdin',
+																							'_vendor_google_plus_profile'  => 'google_plus',
+																							'_vendor_snapchat'             => 'snapchat',
+																							'_vendor_pinterest'            => 'pinterest',
+																							'googleplus'                   => 'google_plus',
+																							'twitter'                      => 'twitter',
+																							'facebook'                     => 'facebook',
+																						);
 				} elseif( $is_marketplace == 'dokan' )  {
 					$wcfm_profile_social_fields = array( 
-						'twitter'    => 'twitter',
-						'fb'         => 'facebook',
-						'instagram'  => 'instagram',
-						'youtube'    => 'youtube',
-						'linkedin'   => 'linkdin',
-						'gplus'      => 'google_plus',
-						'snapchat'   => 'snapchat',
-						'flickr'     => 'flickr',
-						'pinterest'  => 'pinterest',
-						'googleplus' => 'google_plus',
-						'twitter'    => 'twitter',
-						'facebook'   => 'facebook',
-					);
+																							'twitter'    => 'twitter',
+																							'fb'         => 'facebook',
+																							'instagram'  => 'instagram',
+																							'youtube'    => 'youtube',
+																							'linkedin'   => 'linkdin',
+																							'gplus'      => 'google_plus',
+																							'snapchat'   => 'snapchat',
+																							'flickr'     => 'flickr',
+																							'pinterest'  => 'pinterest',
+																							'googleplus' => 'google_plus',
+																							'twitter'    => 'twitter',
+																							'facebook'   => 'facebook',
+																						);
 					$social_fields = array();
 					foreach( $wcfm_profile_social_fields as $wcfm_profile_social_key => $wcfm_profile_social_field ) {
 						$social_fields[$wcfm_profile_social_key] = $wcfm_profile_form[$wcfm_profile_social_field];
@@ -175,18 +175,18 @@ class WCFM_Profile_Controller {
 					update_user_meta( $user_id, 'dokan_profile_settings', $vendor_data );
 				} elseif( $is_marketplace == 'wcfmmarketplace' )  {
 					$wcfm_profile_social_fields = apply_filters( 'wcfm_profile_social_types', array( 
-						'twitter'    => 'twitter',
-						'fb'         => 'facebook',
-						'instagram'  => 'instagram',
-						'youtube'    => 'youtube',
-						'linkedin'   => 'linkdin',
-						'gplus'      => 'google_plus',
-						'snapchat'   => 'snapchat',
-						'pinterest'  => 'pinterest',
-						'googleplus' => 'google_plus',
-						'twitter'    => 'twitter',
-						'facebook'   => 'facebook',
-					) );
+																																													'twitter'    => 'twitter',
+																																													'fb'         => 'facebook',
+																																													'instagram'  => 'instagram',
+																																													'youtube'    => 'youtube',
+																																													'linkedin'   => 'linkdin',
+																																													'gplus'      => 'google_plus',
+																																													'snapchat'   => 'snapchat',
+																																													'pinterest'  => 'pinterest',
+																																													'googleplus' => 'google_plus',
+																																													'twitter'    => 'twitter',
+																																													'facebook'   => 'facebook',
+																																												) );
 					$social_fields = array();
 					foreach( $wcfm_profile_social_fields as $wcfm_profile_social_key => $wcfm_profile_social_field ) {
 						$social_fields[$wcfm_profile_social_key] = $wcfm_profile_form[$wcfm_profile_social_field];
@@ -196,39 +196,39 @@ class WCFM_Profile_Controller {
 					update_user_meta( $user_id, 'wcfmmp_profile_settings', $vendor_data );
 				} else {
 					$wcfm_profile_social_fields = array( 
-						'_twitter_profile'      => 'twitter',
-						'_fb_profile'           => 'facebook',
-						'_instagram'            => 'instagram',
-						'_youtube'              => 'youtube',
-						'_linkdin_profile'      => 'linkdin',
-						'_google_plus_profile'  => 'google_plus',
-						'_snapchat'             => 'snapchat',
-						'_pinterest'            => 'pinterest',
-						'googleplus'            => 'google_plus',
-						'twitter'               => 'twitter',
-						'facebook'              => 'facebook',
-						'instagram'             => 'instagram',
-						'pinterest'             => 'pinterest',
-						'linkdin'               => 'linkdin',
-					);
+																							'_twitter_profile'      => 'twitter',
+																							'_fb_profile'           => 'facebook',
+																							'_instagram'            => 'instagram',
+																							'_youtube'              => 'youtube',
+																							'_linkdin_profile'      => 'linkdin',
+																							'_google_plus_profile'  => 'google_plus',
+																							'_snapchat'             => 'snapchat',
+																							'_pinterest'            => 'pinterest',
+																							'googleplus'            => 'google_plus',
+																							'twitter'               => 'twitter',
+																							'facebook'              => 'facebook',
+																							'instagram'             => 'instagram',
+																							'pinterest'             => 'pinterest',
+																							'linkdin'               => 'linkdin',
+																						);
 				}
 			} else {
 				$wcfm_profile_social_fields = array( 
-					'_twitter_profile'      => 'twitter',
-					'_fb_profile'           => 'facebook',
-					'_instagram'            => 'instagram',
-					'_youtube'              => 'youtube',
-					'_linkdin_profile'      => 'linkdin',
-					'_google_plus_profile'  => 'google_plus',
-					'_snapchat'             => 'snapchat',
-					'_pinterest'            => 'pinterest',
-					'googleplus'            => 'google_plus',
-					'twitter'               => 'twitter',
-					'facebook'              => 'facebook',
-					'instagram'             => 'instagram',
-					'pinterest'             => 'pinterest',
-					'linkdin'               => 'linkdin',
-				);
+																							'_twitter_profile'      => 'twitter',
+																							'_fb_profile'           => 'facebook',
+																							'_instagram'            => 'instagram',
+																							'_youtube'              => 'youtube',
+																							'_linkdin_profile'      => 'linkdin',
+																							'_google_plus_profile'  => 'google_plus',
+																							'_snapchat'             => 'snapchat',
+																							'_pinterest'            => 'pinterest',
+																							'googleplus'            => 'google_plus',
+																							'twitter'               => 'twitter',
+																							'facebook'              => 'facebook',
+																							'instagram'             => 'instagram',
+																							'pinterest'             => 'pinterest',
+																							'linkdin'               => 'linkdin',
+																						);
 			}
 			foreach( $wcfm_profile_social_fields as $wcfm_profile_social_key => $wcfm_profile_social_field ) {
 				update_user_meta( $user_id, $wcfm_profile_social_key, $wcfm_profile_form[$wcfm_profile_social_field] );
