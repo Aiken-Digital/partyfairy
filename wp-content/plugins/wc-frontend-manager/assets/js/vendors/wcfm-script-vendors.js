@@ -1,6 +1,5 @@
 $wcfm_vendors_table = '';
 $report_vendor = '';
-$report_membership = '';
 $report_for = '';	
 	
 jQuery(document).ready(function($) {
@@ -67,7 +66,6 @@ jQuery(document).ready(function($) {
 				d.action            = 'wcfm_ajax_controller',
 				d.controller        = 'wcfm-vendors',
 				d.report_vendor     = $report_vendor,
-				d.report_membership = $report_membership,
 				d.filter_date_form  = $filter_date_form,
 				d.filter_date_to    = $filter_date_to
 			},
@@ -89,13 +87,6 @@ jQuery(document).ready(function($) {
 			$report_vendor = $('#dropdown_vendor').val();
 			$wcfm_vendors_table.ajax.reload();
 		}).select2( $wcfm_vendor_select_args );
-	}
-	
-	if( $('#dropdown_membership').length > 0 ) {
-		$('#dropdown_membership').on('change', function() {
-			$report_membership = $('#dropdown_membership').val();
-			$wcfm_vendors_table.ajax.reload();
-		});
 	}
 	
 	// Action Manager

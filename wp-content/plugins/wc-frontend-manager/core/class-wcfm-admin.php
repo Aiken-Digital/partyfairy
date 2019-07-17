@@ -93,29 +93,25 @@ class WCFM_Admin {
 		}
 
 		// check if it has already been dismissed
-		$offer_key = 'wcfm_wcfmu_inactive24062019';
+		$offer_key = 'wcfm_wcfmu_inactive04062019';
 		$hide_notice = get_option( $offer_key . '_tracking_notice', 'no' );
 
 		if ( 'hide' == $hide_notice ) {
 			return;
 		}
-		
-		$offer_msg = __( '<h2>
-										 Is there anything missing in your front-end dashboard !!!
-										 </h2>', 'wc-frontend-manager' );
 
 		/*$offer_msg = __( '<h2>
 										 Cyber Monday sale is on - it is best time to upgrade your WCFM. Hurry up!
 										 </h2>', 'wc-frontend-manager' );*/
-										 
+		$offer_msg = __( '<h2>
+										 Is there anything missing in your front-end dashboard !!!
+										 </h2>', 'wc-frontend-manager' );
 		/*$offer_msg = sprintf( __( '<h2>
 										           Happy New Year! It\'s time to grab your best deals ...
 								               </h2>', 'wc-frontend-manager' ) );*/
-								               
 		/*$offer_msg = sprintf( __( '<h2>
-										           Avail 20% discount as we celebrate 10k+ active installs. Hurry Up!
-								               </h2>', 'wc-frontend-manager' ) );*/	
-								               
+										           Hey, it\'s our Birth Day! It\'s time to grab your best deals ...
+								               </h2>', 'wc-frontend-manager' ) );*/				               
 		$offer_msg .= __( '<p>WooCommerce Frontend Manage - Ultimate is there to fill up all those for you. Live Chat, Store Invoice, Support Ticket, Shipment Tracking, Direct Messaging, Followers, Badges, Verificaton, Product Importer, Bulk Edit and many more, almost a never ending features list for you.</p>', 'wc-frontend-manager' );
 		?>
 			<div class="notice is-dismissible wcfm_addon_inactive_notice_box" id="wcfm-ultimate-notice">
@@ -196,7 +192,7 @@ class WCFM_Admin {
 		}
 
 		// check if it has already been dismissed
-		$offer_key = 'wcfm_wcfmgs_inactive24062019';
+		$offer_key = 'wcfm_wcfmgs_inactive04062019';
 		$hide_notice = get_option( $offer_key . '_tracking_notice', 'no' );
 
 		if ( 'hide' == $hide_notice ) {
@@ -206,13 +202,11 @@ class WCFM_Admin {
 		$offer_msg = __( '<h2>
 										 Do you want to have different capabilities for each membership levels !!!
 										 </h2>', 'wc-frontend-manager' );
-										 
 		/*$offer_msg = sprintf( __( '<h2>
 										           Happy New Year! It\'s time to grab your best deals ...
 								               </h2>', 'wc-frontend-manager' ) );*/
-								               
 		/*$offer_msg = sprintf( __( '<h2>
-										           Avail 20% discount as we celebrate 10k+ active installs. Hurry Up!
+										           Hey, it\'s our Birth Day! It\'s time to grab your best deals ...
 								               </h2>', 'wc-frontend-manager' ) );*/
 		
 		$offer_msg .= __( '<p>WCFM - Groups & Staffs will empower you to set up totaly different capability rules for your each membership levels very easily.</p>', 'wc-frontend-manager' );

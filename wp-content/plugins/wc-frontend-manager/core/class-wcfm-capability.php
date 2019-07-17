@@ -106,7 +106,6 @@ class WCFM_Capability {
 		add_filter( 'wcfm_is_allow_add_customer', array( &$this, 'wcfmcap_is_allow_add_customers' ), 500 );
 		add_filter( 'wcfm_is_allow_edit_customer', array( &$this, 'wcfmcap_is_allow_edit_customers' ), 500 );
 		add_filter( 'wcfm_is_allow_view_customer', array( &$this, 'wcfmcap_is_allow_view_customers' ), 500 );
-		add_filter( 'wcfm_is_allow_delete_customer', array( &$this, 'wcfmcap_is_allow_delete_customer' ), 500 );
 		add_filter( 'wcfm_is_allow_customer_details_orders', array( &$this, 'wcfmcap_is_allow_customer_details_orders' ), 500 );
 		add_filter( 'show_customer_details_in_export_orders', array( &$this, 'wcfmcap_is_allow_customer_details_orders' ), 500 ); // WC Marketplace
 		add_filter( 'wcfm_allow_order_customer_details', array( &$this, 'wcfmcap_is_allow_view_customer_email' ), 500 );
@@ -785,15 +784,6 @@ class WCFM_Capability {
   	return $allow;
   }
   
-  // WCFM wcfmcap View Customers
-  function wcfmcap_is_allow_view_customers( $allow ) {
-  	$manage_customers = ( isset( $this->wcfm_capability_options['manage_customers'] ) ) ? $this->wcfm_capability_options['manage_customers'] : 'no';
-  	if( $manage_customers == 'yes' ) return false;
-  	$view_customers = ( isset( $this->wcfm_capability_options['view_customers'] ) ) ? $this->wcfm_capability_options['view_customers'] : 'no';
-  	if( $view_customers == 'yes' ) return false;
-  	return $allow;
-  }
-  
   // WCFM wcfmcap Edit Customers
   function wcfmcap_is_allow_edit_customers( $allow ) {
   	$manage_customers = ( isset( $this->wcfm_capability_options['manage_customers'] ) ) ? $this->wcfm_capability_options['manage_customers'] : 'no';
@@ -803,16 +793,12 @@ class WCFM_Capability {
   	return $allow;
   }
   
-  // WCFM wcfmcap Delete Customers
-  function wcfmcap_is_allow_delete_customer( $allow ) {
+  // WCFM wcfmcap View Customers
+  function wcfmcap_is_allow_view_customers( $allow ) {
   	$manage_customers = ( isset( $this->wcfm_capability_options['manage_customers'] ) ) ? $this->wcfm_capability_options['manage_customers'] : 'no';
   	if( $manage_customers == 'yes' ) return false;
   	$view_customers = ( isset( $this->wcfm_capability_options['view_customers'] ) ) ? $this->wcfm_capability_options['view_customers'] : 'no';
   	if( $view_customers == 'yes' ) return false;
-  	$edit_customers = ( isset( $this->wcfm_capability_options['edit_customers'] ) ) ? $this->wcfm_capability_options['edit_customers'] : 'no';
-  	if( $edit_customers == 'yes' ) return false;
-  	$delete_customers = ( isset( $this->wcfm_capability_options['delete_customers'] ) ) ? $this->wcfm_capability_options['delete_customers'] : 'no';
-  	if( $delete_customers == 'yes' ) return false;
   	return $allow;
   }
   

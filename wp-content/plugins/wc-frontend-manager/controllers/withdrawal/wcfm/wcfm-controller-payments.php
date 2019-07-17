@@ -164,8 +164,6 @@ class WCFM_Payments_Controller {
 						 $withdrawal_mode .= __( 'By Request', 'wc-frontend-manager' );
 					} elseif( $wcfm_payments_single->withdraw_mode == 'by_auto_request' ) {
 						 $withdrawal_mode .= __( 'By Auto Request', 'wc-frontend-manager' );
-					} elseif( $wcfm_payments_single->withdraw_mode == 'by_schedule' ) {
-						 $withdrawal_mode .= __( 'By Schedule Request', 'wc-frontend-manager' );
 					} elseif( $wcfm_payments_single->withdraw_mode == 'by_split_pay' ) {
 						 $withdrawal_mode .= __( 'Split Pay', 'wc-frontend-manager' );
 					}

@@ -243,10 +243,6 @@ div.wcfm-collapse-content h2 {
   font-style:italic;
 }
 
-div.wcfm-collapse-content h2:before {
-	display:none;
-}
-
 .wcfm-collapse .wcfm-container, .wcfm-tabWrap { 
 	background: #ffffff;
 	padding: 5px;
@@ -677,7 +673,6 @@ p.checkbox_title { vertical-align: middle; }
 
 #wcfm-main-contentainer .wcfm-checklist-group, #wcfm-main-contentainer .wcfm-radio-group {
 	padding-left: 0px;
-	border:0px;
 }
 
 #wcfm-main-contentainer .wcfm_full_ele,#wcfm-main-contentainer .wcfm_full_ele_title  {
@@ -730,7 +725,6 @@ input.wcfm-checkbox:checked:before {
 	padding: 0px;
 	margin: 0px;
 	margin-top: 5px;
-	border:0px;
 }
 
 #wcfm-main-contentainer fieldset.wcfm-checklist-group input[type="checkbox"] {

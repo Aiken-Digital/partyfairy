@@ -14,7 +14,7 @@ global $WCFM;
 
 
 if( !apply_filters( 'wcfm_is_pref_enquiry', true ) || !apply_filters( 'wcfm_is_allow_enquiry', true ) ) {
-	wcfm_restriction_message_show( "Inquiry Board" );
+	wcfm_restriction_message_show( "Enquiry Board" );
 	return;
 }
 

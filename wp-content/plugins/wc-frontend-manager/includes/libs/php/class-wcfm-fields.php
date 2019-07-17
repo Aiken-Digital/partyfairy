@@ -737,7 +737,6 @@ class WCFM_Fields {
   	
     $field['class'] 		 = isset( $field['class'] ) ? $field['class'] : 'upload_input';
     $field['mime_class'] = isset( $field['mime_class'] ) ? $field['mime_class'] : '';
-    $field['button_class'] = isset( $field['button_class'] ) ? $field['button_class'] : '';
     $field['mime'] 		   = isset( $field['mime'] ) ? $field['mime'] : 'image';
     $field['value'] 		 = isset( $field['value'] ) ? $field['value'] : '';
     $field['name'] 			 = isset( $field['name'] ) ? $field['name'] : $field['id'];
@@ -787,7 +786,7 @@ class WCFM_Fields {
         <span class="wcfm-wp-fields-uploader %s">
           %s
           <input type="text" name="%s" id="%s" style="%s" class="%s" readonly value="%s" %s data-mime="%s" />
-          <input type="button" class="upload_button button button-secondary %s" name="%s_button" id="%s_button" data-mime="%s" value="%s" />
+          <input type="button" class="upload_button button button-secondary" name="%s_button" id="%s_button" data-mime="%s" value="%s" />
           <input type="button" class="remove_button button button-secondary" name="%s_remove_button" id="%s_remove_button" data-mime="%s" value="%s" />
         </span>
         ',
@@ -800,7 +799,6 @@ class WCFM_Fields {
         esc_attr( $field['value'] ),
         implode( ' ', $custom_attributes ),
         $field['mime'],
-        esc_attr( $field['button_class'] ),
         esc_attr($field['id']),
         esc_attr($field['id']),
         $field['mime'],

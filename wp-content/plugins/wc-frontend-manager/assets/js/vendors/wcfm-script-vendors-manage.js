@@ -125,7 +125,6 @@ jQuery(document).ready( function($) {
 	});
 	
 	// WCfM Marketplace Settings Update
-	$('#wcfm-main-contentainer #country').select2();
 	$('#wcfm_store_setting_save_button, #wcfm_store_general_setting_save_button, #wcfm_store_address_setting_save_button').click(function(event) {
 	  event.preventDefault();
 	  
@@ -283,96 +282,6 @@ jQuery(document).ready( function($) {
 						$('#wcfm_vendor_manage_form_store_hours_setting_expander .wcfm-message').html('<span class="wcicon-status-cancelled"></span>' + $response_json.message).addClass('wcfm-error').slideDown();
 					}
 					$('#wcfm_vendor_manage_store_hours_setting_form').unblock();
-				}
-			});	
-		}
-	});
-	
-	// WCfM Marketplace Store SEO & Social Settings Update
-	$('#wcfm_store_seo_setting_save_button, #wcfm_store_social_setting_save_button').click(function(event) {
-	  event.preventDefault();
-	  
-	  // Validations
-		$('.wcfm-message').html('').removeClass('wcfm-error').removeClass('wcfm-success').slideUp();
-		$wcfm_is_valid_form = true;
-		$( document.body ).trigger( 'wcfm_form_validate', $('#wcfm_vendor_manage_store_seo_social_setting_form') );
-		$is_valid = $wcfm_is_valid_form;
-	  
-	  if($is_valid) {
-			$('#wcfm_vendor_manage_store_seo_social_setting_form').block({
-				message: null,
-				overlayCSS: {
-					background: '#fff',
-					opacity: 0.6
-				}
-			});
-			var data = {
-				action                    : 'wcfm_ajax_controller',
-				controller                : 'wcfm-vendors-manage-marketplace-settings',
-				wcfm_settings_form        : $('#wcfm_vendor_manage_store_seo_social_setting_form').serialize()
-			}	
-			$.post(wcfm_params.ajax_url, data, function(response) {
-				if(response) {
-					$response_json = $.parseJSON(response);
-					$('.wcfm-message').html('').removeClass('wcfm-error').removeClass('wcfm-success').slideUp();
-					if($response_json.status) {
-						wcfm_notification_sound.play();
-						$('#wcfm_vendor_manage_form_store_seo_social_setting_expander .wcfm-message').html('<span class="wcicon-status-completed"></span>' + $response_json.message).addClass('wcfm-success').slideDown();
-					} else {
-						wcfm_notification_sound.play();
-						$('#wcfm_vendor_manage_form_store_seo_social_setting_expander .wcfm-message').html('<span class="wcicon-status-cancelled"></span>' + $response_json.message).addClass('wcfm-error').slideDown();
-					}
-					$('#wcfm_vendor_manage_store_seo_social_setting_form').unblock();
-				}
-			});	
-		}
-	});
-	
-	// WCfM Marketplace Store Policy & Customer Support Settings Update
-	$('#wcfm-main-contentainer #vendor_csd_return_country').select2();
-	$('#wcfm_store_policy_setting_save_button, #wcfm_store_customer_support_setting_save_button').click(function(event) {
-	  event.preventDefault();
-	  
-	  var shipping_policy = getWCFMEditorContent( 'wcfm_shipping_policy' );
-		
-		var refund_policy = getWCFMEditorContent( 'wcfm_refund_policy' );
-		
-		var cancellation_policy = getWCFMEditorContent( 'wcfm_cancellation_policy' );
-	  
-	  // Validations
-		$('.wcfm-message').html('').removeClass('wcfm-error').removeClass('wcfm-success').slideUp();
-		$wcfm_is_valid_form = true;
-		$( document.body ).trigger( 'wcfm_form_validate', $('#wcfm_vendor_manage_store_policy_support_setting_form') );
-		$is_valid = $wcfm_is_valid_form;
-	  
-	  if($is_valid) {
-			$('#wcfm_vendor_manage_store_policy_support_setting_form').block({
-				message: null,
-				overlayCSS: {
-					background: '#fff',
-					opacity: 0.6
-				}
-			});
-			var data = {
-				action                    : 'wcfm_ajax_controller',
-				controller                : 'wcfm-vendors-manage-marketplace-settings',
-				wcfm_settings_form        : $('#wcfm_vendor_manage_store_policy_support_setting_form').serialize(),
-				shipping_policy           : shipping_policy,
-				refund_policy             : refund_policy,
-				cancellation_policy       : cancellation_policy
-			}	
-			$.post(wcfm_params.ajax_url, data, function(response) {
-				if(response) {
-					$response_json = $.parseJSON(response);
-					$('.wcfm-message').html('').removeClass('wcfm-error').removeClass('wcfm-success').slideUp();
-					if($response_json.status) {
-						wcfm_notification_sound.play();
-						$('#wcfm_vendor_manage_form_store_policy_support_setting_expander .wcfm-message').html('<span class="wcicon-status-completed"></span>' + $response_json.message).addClass('wcfm-success').slideDown();
-					} else {
-						wcfm_notification_sound.play();
-						$('#wcfm_vendor_manage_form_store_policy_support_setting_expander .wcfm-message').html('<span class="wcicon-status-cancelled"></span>' + $response_json.message).addClass('wcfm-error').slideDown();
-					}
-					$('#wcfm_vendor_manage_store_policy_support_setting_form').unblock();
 				}
 			});	
 		}

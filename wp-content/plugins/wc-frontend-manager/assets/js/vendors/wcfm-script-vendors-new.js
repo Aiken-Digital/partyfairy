@@ -65,12 +65,6 @@ jQuery(document).ready(function($) {
 	  
 	  var profile = getWCFMEditorContent( 'shop_description' );
 	  
-	  var shipping_policy = getWCFMEditorContent( 'wcfm_shipping_policy' );
-		
-		var refund_policy = getWCFMEditorContent( 'wcfm_refund_policy' );
-		
-		var cancellation_policy = getWCFMEditorContent( 'wcfm_cancellation_policy' );
-	  
 	  // Validations
 	  $is_valid = wcfm_vendors_new_form_validate();
 	  
@@ -87,9 +81,6 @@ jQuery(document).ready(function($) {
 				controller               : 'wcfm-vendors-new',
 				wcfm_vendors_new_form    : $('#wcfm_vendors_new_form').serialize(),
 				profile                  : profile,
-				shipping_policy          : shipping_policy,
-				refund_policy            : refund_policy,
-				cancellation_policy      : cancellation_policy,
 				status                   : 'submit'
 			}	
 			$.post(wcfm_params.ajax_url, data, function(response) {

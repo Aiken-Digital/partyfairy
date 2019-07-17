@@ -50,9 +50,6 @@ class WCFM_Customer {
 					add_action( 'wcfm_is_vendor_customer', array( &$this, 'wcfm_is_vendor_customer' ), 10, 2 );
 				}
 				
-				// Customer Delete
-				add_action( 'wp_ajax_delete_wcfm_customer', array( &$this, 'wcfm_delete_wcfm_customer' ) );
-				
 				add_filter( 'wcfm_message_types', array( &$this, 'wcfm_customer_message_types' ), 35 );
 				
 				// Customer Details Change Customer
@@ -204,8 +201,6 @@ class WCFM_Customer {
 				$colorpicker_l10n = array('clear' => __('Clear'), 'defaultString' => __('Default'), 'pick' => __('Select Color'));
 				wp_localize_script( 'wp-color-picker', 'wpColorPickerL10n', $colorpicker_l10n );
 				
-				wp_enqueue_script( 'wc-country-select' );
-				
 	  		wp_enqueue_script( 'wcfm_customers_manage_js', $WCFM->library->js_lib_url . 'customers/wcfm-script-customers-manage.js', array('jquery'), $WCFM->version, true );
 	  		
 	  		// Localized Script
@@ -316,7 +311,7 @@ class WCFM_Customer {
 	function wcfm_filter_customers( $args ) {
 		$vendor_id   = apply_filters( 'wcfm_current_vendor_id', get_current_user_id() );
 		$args['meta_key'] = '_wcfm_vendor';        
-		$args['meta_value'] = absint($vendor_id);
+		$args['meta_value'] = $vendor_id;
 		return $args;
 	}
 	
@@ -335,23 +330,6 @@ class WCFM_Customer {
 		} else return false;
 		return $is_vendor_cust;
 	}
-	
-	/**
-   * Handle Customer Delete
-   */
-  public function wcfm_delete_wcfm_customer() {
-  	global $WCFM, $WCFMu;
-  	
-  	$customerid = $_POST['customerid'];
-		
-		if($customerid) {
-			if(wp_delete_user($customerid)) {
-				echo 'success';
-				die;
-			}
-			die;
-		}
-  }
 	
 	function wcfm_customer_message_types( $message_types ) {
   	if( apply_filters( 'wcfm_is_allow_manage_customer', true ) ) {

@@ -29,7 +29,6 @@ class WCFM_Preferences {
 		add_filter( 'wcfm_is_pref_welcome_box', array( &$this, 'wcfmpref_welcome_box' ), 750 );
 		
 		add_filter( 'wcfm_is_pref_notice', array( &$this, 'wcfmpref_notice' ), 750 );
-		add_filter( 'wcfm_is_pref_notification', array( &$this, 'wcfmpref_notification' ), 750 );
 		add_filter( 'wcfm_is_pref_direct_message', array( &$this, 'wcfmpref_direct_message' ), 750 );
 		add_filter( 'wcfm_is_pref_enquiry', array( &$this, 'wcfmpref_enquiry' ), 750 );
 		add_filter( 'wcfm_is_pref_enquiry_tab', array( &$this, 'wcfmpref_enquiry_tab' ), 750 );
@@ -45,9 +44,6 @@ class WCFM_Preferences {
 		add_filter( 'wcfm_is_pref_article', array( &$this, 'wcfmpref_article' ), 750 );
 		
 		add_filter( 'wcfm_is_pref_customer', array( &$this, 'wcfmpref_customer' ), 750 );
-		
-		add_filter( 'wcfm_is_pref_coupon', array( &$this, 'wcfmpref_coupon' ), 750 );
-		add_filter( 'wcfm_is_pref_store_coupons', array( &$this, 'wcfmpref_coupon' ), 750 );
 		
 		add_filter( 'wcfm_is_pref_buddypress', array( &$this, 'wcfmpref_buddypress' ), 750 );
 		
@@ -117,13 +113,6 @@ class WCFM_Preferences {
   function wcfmpref_notice( $is_pref ) {
   	$notice = ( isset( $this->wcfm_module_options['notice'] ) ) ? $this->wcfm_module_options['notice'] : 'no';
   	if( $notice == 'yes' ) $is_pref = false;
-  	return $is_pref;
-  }
-  
-  // Notification
-  function wcfmpref_notification( $is_pref ) {
-  	$notification = ( isset( $this->wcfm_module_options['notification'] ) ) ? $this->wcfm_module_options['notification'] : 'no';
-  	if( $notification == 'yes' ) $is_pref = false;
   	return $is_pref;
   }
   
@@ -215,13 +204,6 @@ class WCFM_Preferences {
   function wcfmpref_customer( $is_pref ) {
   	$customer = ( isset( $this->wcfm_module_options['customer'] ) ) ? $this->wcfm_module_options['customer'] : 'no';
   	if( $customer == 'yes' ) $is_pref = false;
-  	return $is_pref;
-  }
-  
-  // Coupon
-  function wcfmpref_coupon( $is_pref ) {
-  	$coupon = ( isset( $this->wcfm_module_options['coupon'] ) ) ? $this->wcfm_module_options['coupon'] : 'no';
-  	if( $coupon == 'yes' ) $is_pref = false;
   	return $is_pref;
   }
   

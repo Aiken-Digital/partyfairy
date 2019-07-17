@@ -352,12 +352,6 @@ if( wcfm_is_vendor() && apply_filters( 'wcfm_is_allow_email_verification', true 
 			</div>
 			
 		</form>
-		<script type="text/javascript">
-			var selected_bstate = '<?php echo $bstate; ?>';
-			var input_selected_bstate = '<?php echo $bstate; ?>';
-			var selected_sstate = '<?php echo $sstate; ?>';
-			var input_selected_sstate = '<?php echo $sstate; ?>';
-		</script>
 		<?php
 		do_action( 'after_wcfm_wcvendors_profile' );
 		?>

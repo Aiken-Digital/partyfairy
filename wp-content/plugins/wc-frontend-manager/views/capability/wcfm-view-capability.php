@@ -138,17 +138,16 @@ $pdf_invoice = ( isset( $wcfm_capability_options['pdf_invoice'] ) ) ? $wcfm_capa
 $pdf_packing_slip = ( isset( $wcfm_capability_options['pdf_packing_slip'] ) ) ? $wcfm_capability_options['pdf_packing_slip'] : 'no';
 
 // Customer Capabilities
-$manage_customers      = ( isset( $wcfm_capability_options['manage_customers'] ) ) ? $wcfm_capability_options['manage_customers'] : 'no';
-$add_customers         = ( isset( $wcfm_capability_options['add_customers'] ) ) ? $wcfm_capability_options['add_customers'] : 'no';
-$view_customers        = ( isset( $wcfm_capability_options['view_customers'] ) ) ? $wcfm_capability_options['view_customers'] : 'no';
-$edit_customers        = ( isset( $wcfm_capability_options['edit_customers'] ) ) ? $wcfm_capability_options['edit_customers'] : 'no';
-$delete_customers      = ( isset( $wcfm_capability_options['delete_customers'] ) ) ? $wcfm_capability_options['delete_customers'] : 'no';
+$manage_customers = ( isset( $wcfm_capability_options['manage_customers'] ) ) ? $wcfm_capability_options['manage_customers'] : 'no';
+$add_customers = ( isset( $wcfm_capability_options['add_customers'] ) ) ? $wcfm_capability_options['add_customers'] : 'no';
+$edit_customers = ( isset( $wcfm_capability_options['edit_customers'] ) ) ? $wcfm_capability_options['edit_customers'] : 'no';
+$view_customers = ( isset( $wcfm_capability_options['view_customers'] ) ) ? $wcfm_capability_options['view_customers'] : 'no';
 $view_customers_orders = ( isset( $wcfm_capability_options['view_customers_orders'] ) ) ? $wcfm_capability_options['view_customers_orders'] : 'no';
-$view_customers_name   = ( isset( $wcfm_capability_options['view_name'] ) ) ? $wcfm_capability_options['view_name'] : 'no';
+$view_customers_name  = ( isset( $wcfm_capability_options['view_name'] ) ) ? $wcfm_capability_options['view_name'] : 'no';
 $view_customers_email  = ( isset( $wcfm_capability_options['view_email'] ) ) ? $wcfm_capability_options['view_email'] : 'no';
-$view_billing_details  = ( isset( $wcfm_capability_options['view_billing_details'] ) ) ? $wcfm_capability_options['view_billing_details'] : 'no';
+$view_billing_details = ( isset( $wcfm_capability_options['view_billing_details'] ) ) ? $wcfm_capability_options['view_billing_details'] : 'no';
 $view_shipping_details =  ( isset( $wcfm_capability_options['view_shipping_details'] ) ) ? $wcfm_capability_options['view_shipping_details'] : 'no';
-$customerlimit         = ( !empty( $wcfm_capability_options['customerlimit'] ) ) ? $wcfm_capability_options['customerlimit'] : '';
+$customerlimit = ( !empty( $wcfm_capability_options['customerlimit'] ) ) ? $wcfm_capability_options['customerlimit'] : '';
 
 $view_reports  = ( isset( $wcfm_capability_options['view_reports'] ) ) ? $wcfm_capability_options['view_reports'] : 'no';
 
@@ -352,7 +351,7 @@ $is_marketplace = wcfm_is_marketplace();
 																															) ) );
 								}*/
 								
-								if( method_exists( WCFM_Dependencies, 'wcfm_wp_job_manager_plugin_active_check' ) && WCFM_Dependencies::wcfm_wp_job_manager_plugin_active_check() ) {
+								if( WCFM_Dependencies::wcfm_wp_job_manager_plugin_active_check() ) {
 									$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_capability_settings_fields_vendor_listings', array(  "associate_listings" => array('label' => __('Associate Listings', 'wc-frontend-manager') , 'name' => 'wcfm_capability_options[associate_listings]', 'type' => 'checkboxoffon', 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'desc' => __( 'by WP Job Manager.', 'wc-frontend-manager' ), 'dfvalue' => $associate_listings),
 																															) ) );
 								}
@@ -368,67 +367,67 @@ $is_marketplace = wcfm_is_marketplace();
 																																) ) );
 									}
 									
-									if( method_exists( WCFMu_Dependencies, 'wcfm_wc_box_office_active_check' ) && WCFMu_Dependencies::wcfm_wc_box_office_active_check() ) {
+									if( WCFMu_Dependencies::wcfm_wc_box_office_active_check() ) {
 										$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_capability_settings_fields_wc_box_office', array(  "wc_box_office" => array('label' => __('Box Office', 'wc-frontend-manager') , 'name' => 'wcfm_capability_options[wc_box_office]', 'type' => 'checkboxoffon', 'desc' => __( 'by WooCommerce Box Office.', 'wc-frontend-manager' ), 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'dfvalue' => $wc_box_office),
 																																) ) );
 									}
 									
-									if( method_exists( WCFMu_Dependencies, 'wcfm_wc_lottery_active_check' ) && WCFMu_Dependencies::wcfm_wc_lottery_active_check() ) {
+									if( WCFMu_Dependencies::wcfm_wc_lottery_active_check() ) {
 										$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_capability_settings_fields_wc_lottery', array(  "wc_lottery" => array('label' => __('Lottery', 'wc-frontend-manager') , 'name' => 'wcfm_capability_options[wc_lottery]', 'type' => 'checkboxoffon', 'desc' => __( 'by WooCommerce Lottery.', 'wc-frontend-manager' ), 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'dfvalue' => $wc_lottery),
 																																) ) );
 									}
 									
-									if( method_exists( WCFMu_Dependencies, 'wcfm_wc_deposits_active_check' ) && WCFMu_Dependencies::wcfm_wc_deposits_active_check() ) {
+									if( WCFMu_Dependencies::wcfm_wc_deposits_active_check() ) {
 										$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_capability_settings_fields_wc_deposits', array(  "wc_deposits" => array('label' => __('Deposits', 'wc-frontend-manager') , 'name' => 'wcfm_capability_options[wc_deposits]', 'type' => 'checkboxoffon', 'desc' => __( 'by WooCommerce Deposits.', 'wc-frontend-manager' ), 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'dfvalue' => $wc_deposits),
 																																) ) );
 									}
 									
-									if( method_exists( WCFMu_Dependencies, 'wcfm_wc_tabs_manager_plugin_active_check' ) && WCFMu_Dependencies::wcfm_wc_tabs_manager_plugin_active_check() ) {
+									if( WCFMu_Dependencies::wcfm_wc_tabs_manager_plugin_active_check() ) {
 										$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_capability_settings_fields_wc_tabs_manager', array(  "wc_tabs_manager" => array('label' => __('Tabs Manager', 'wc-frontend-manager') , 'name' => 'wcfm_capability_options[wc_tabs_manager]', 'type' => 'checkboxoffon', 'desc' => __( 'by WooCommerce Tabs Manager.', 'wc-frontend-manager' ), 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'dfvalue' => $wc_tabs_manager),
 																																) ) );
 									}
 									
-									if( method_exists( WCFMu_Dependencies, 'wcfm_wc_warranty_plugin_active_check' ) && WCFMu_Dependencies::wcfm_wc_warranty_plugin_active_check() ) {
+									if( WCFMu_Dependencies::wcfm_wc_warranty_plugin_active_check() ) {
 										$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_capability_settings_fields_wc_warranty', array(  "wc_warranty" => array('label' => __('Warranty', 'wc-frontend-manager') , 'name' => 'wcfm_capability_options[wc_warranty]', 'type' => 'checkboxoffon', 'desc' => __( 'by WooCommerce Warranty.', 'wc-frontend-manager' ), 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'dfvalue' => $wc_warranty),
 																																) ) );
 									}
 									
-									if( method_exists( WCFMu_Dependencies, 'wcfm_wc_waitlist_plugin_active_check' ) && WCFMu_Dependencies::wcfm_wc_waitlist_plugin_active_check() ) {
+									if( WCFMu_Dependencies::wcfm_wc_waitlist_plugin_active_check() ) {
 										$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_capability_settings_fields_wc_waitlist', array(  "wc_waitlist" => array('label' => __('Waitlist', 'wc-frontend-manager') , 'name' => 'wcfm_capability_options[wc_waitlist]', 'type' => 'checkboxoffon', 'desc' => __( 'by WooCommerce Waitlist.', 'wc-frontend-manager' ), 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'dfvalue' => $wc_waitlist),
 																																) ) );
 									}
 									
-									if( method_exists( WCFMu_Dependencies, 'wcfm_wc_fooevents' ) && WCFMu_Dependencies::wcfm_wc_fooevents() ) {
+									if( WCFMu_Dependencies::wcfm_wc_fooevents() ) {
 										$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_capability_settings_fields_wc_fooevents', array(  "wc_fooevents" => array('label' => __('FooEvents', 'wc-frontend-manager') , 'name' => 'wcfm_capability_options[wc_fooevents]', 'type' => 'checkboxoffon', 'desc' => __( 'by WooCommerce FooEvents.', 'wc-frontend-manager' ), 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'dfvalue' => $wc_fooevents),
 																																) ) );
 									}
 									
-									if( method_exists( WCFMu_Dependencies, 'wcfm_wc_measurement_price_calculator' ) && WCFMu_Dependencies::wcfm_wc_measurement_price_calculator() ) {
+									if( WCFMu_Dependencies::wcfm_wc_measurement_price_calculator() ) {
 										$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_capability_settings_fields_wc_measurement', array(  "wc_measurement" => array('label' => __('Measurement Calculator', 'wc-frontend-manager') , 'name' => 'wcfm_capability_options[wc_measurement]', 'type' => 'checkboxoffon', 'desc' => __( 'by WC Measurement & Price Calculator.', 'wc-frontend-manager' ), 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'dfvalue' => $wc_measurement),
 																																) ) );
 									}
 									
-									if( method_exists( WCFMu_Dependencies, 'wcfm_wc_advanced_product_labels_active_check' ) && WCFMu_Dependencies::wcfm_wc_advanced_product_labels_active_check() ) {
+									if( WCFMu_Dependencies::wcfm_wc_advanced_product_labels_active_check() ) {
 										$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_capability_settings_fields_wc_advanced_product_labels', array(  "wc_advanced_product_labels" => array('label' => __('Product Labels', 'wc-frontend-manager') , 'name' => 'wcfm_capability_options[wc_advanced_product_labels]', 'type' => 'checkboxoffon', 'desc' => __( 'by WC Advanced Product Labels.', 'wc-frontend-manager' ), 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'dfvalue' => $wc_advanced_product_labels),
 																																) ) );
 									}
 									
-									if( method_exists( WCFMu_Dependencies, 'wcfm_wholesale_active_check' ) && WCFMu_Dependencies::wcfm_wholesale_active_check() ) {
+									if( WCFMu_Dependencies::wcfm_wholesale_active_check() ) {
 										$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_capability_settings_fields_wholesale', array(  "wc_wholesale" => array('label' => __('Wholesale Price', 'wc-frontend-manager') , 'name' => 'wcfm_capability_options[wc_wholesale]', 'type' => 'checkboxoffon', 'desc' => __( 'by WooCommerce Wholesale Price.', 'wc-frontend-manager' ), 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'dfvalue' => $wc_wholesale),
 																																) ) );
 									}
 									
-									if( method_exists( WCFMu_Dependencies, 'wcfm_wc_min_max_quantities_active_check' ) && WCFMu_Dependencies::wcfm_wc_min_max_quantities_active_check() ) {
+									if( WCFMu_Dependencies::wcfm_wc_min_max_quantities_active_check() ) {
 										$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_capability_settings_fields_wc_min_max_quantities', array(  "wc_min_max_quantities" => array('label' => __('Min/Max Quantities', 'wc-frontend-manager') , 'name' => 'wcfm_capability_options[wc_min_max_quantities]', 'type' => 'checkboxoffon', 'desc' => __( 'by WooCommerce Min/Max Quantities.', 'wc-frontend-manager' ), 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'dfvalue' => $wc_min_max_quantities),
 																																) ) );
 									}
 									
-									if( method_exists( WCFMu_Dependencies, 'wcfm_wc_360_images_active_check' ) && WCFMu_Dependencies::wcfm_wc_360_images_active_check() ) {
+									if( WCFMu_Dependencies::wcfm_wc_360_images_active_check() ) {
 										$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_capability_settings_fields_wc_360_images', array(  "wc_360_images" => array('label' => __('360° Images', 'wc-frontend-manager') , 'name' => 'wcfm_capability_options[wc_360_images]', 'type' => 'checkboxoffon', 'desc' => __( 'by WooCommerce 360° Images.', 'wc-frontend-manager' ), 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'dfvalue' => $wc_360_images),
 																																) ) );
 									}
 									
-									if( method_exists( WCFMu_Dependencies, 'wcfm_wc_product_badge_manager_active_check' ) && WCFMu_Dependencies::wcfm_wc_product_badge_manager_active_check() ) {
+									if( WCFMu_Dependencies::wcfm_wc_product_badge_manager_active_check() ) {
 										$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_capability_settings_fields_wc_product_badge', array(  "wc_product_badge" => array('label' => __('Product Badge', 'wc-frontend-manager') , 'name' => 'wcfm_capability_options[wc_product_badge]', 'type' => 'checkboxoffon', 'desc' => __( 'by WooCommerce Product Badge.', 'wc-frontend-manager' ), 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'dfvalue' => $wc_product_badge),
 																																) ) );
 									}
@@ -438,7 +437,7 @@ $is_marketplace = wcfm_is_marketplace();
 																																) ) );
 									}
 									
-									if( method_exists( WCFMu_Dependencies, 'wcfm_wc_fooevents' ) && WCFMu_Dependencies::wcfm_wc_fancy_product_designer_active_check() ) {
+									if( WCFMu_Dependencies::wcfm_wc_fancy_product_designer_active_check() ) {
 										$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_capability_settings_fields_wc_fancy_product_designer', array(  "wc_fancy_product_designer" => array('label' => __('Fancy Product Designer', 'wc-frontend-manager') , 'name' => 'wcfm_capability_options[wc_fancy_product_designer]', 'type' => 'checkboxoffon', 'desc' => __( 'by Fancy Product Designer.', 'wc-frontend-manager' ), 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'dfvalue' => $wc_fancy_product_designer),
 																																) ) );
 									}
@@ -567,9 +566,8 @@ $is_marketplace = wcfm_is_marketplace();
 									<?php
 									$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_capability_settings_fields_customers', array("manage_customers" => array('label' => __('Manage Customers', 'wc-frontend-manager') , 'name' => 'wcfm_capability_options[manage_customers]','type' => 'checkboxoffon', 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'dfvalue' => $manage_customers),
 																																																											 "add_customers" => array('label' => __('Add Customer', 'wc-frontend-manager') , 'name' => 'wcfm_capability_options[add_customers]','type' => 'checkboxoffon', 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'dfvalue' => $add_customers),
-																																																											 "view_customers" => array('label' => __('View Customer', 'wc-frontend-manager') , 'name' => 'wcfm_capability_options[view_customers]','type' => 'checkboxoffon', 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'dfvalue' => $view_customers),
 																																																											 "edit_customers" => array('label' => __('Edit Customer', 'wc-frontend-manager') , 'name' => 'wcfm_capability_options[edit_customers]','type' => 'checkboxoffon', 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'dfvalue' => $edit_customers),
-																																																											 "delete_customers" => array('label' => __('Delete Customer', 'wc-frontend-manager') , 'name' => 'wcfm_capability_options[delete_customers]','type' => 'checkboxoffon', 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'dfvalue' => $delete_customers),
+																																																											 "view_customers" => array('label' => __('View Customer', 'wc-frontend-manager') , 'name' => 'wcfm_capability_options[view_customers]','type' => 'checkboxoffon', 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'dfvalue' => $view_customers),
 																																																											 "view_customers_orders" => array('label' => __('View Customer Orders', 'wc-frontend-manager') , 'name' => 'wcfm_capability_options[view_customers_orders]','type' => 'checkboxoffon', 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'dfvalue' => $view_customers_orders),
 																																																											 "view_name" => array('label' => __('View Customer Name', 'wc-frontend-manager') , 'name' => 'wcfm_capability_options[view_name]','type' => 'checkboxoffon', 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'dfvalue' => $view_customers_name),
 																																																											 "view_email" => array('label' => __('View Customer Email', 'wc-frontend-manager') , 'name' => 'wcfm_capability_options[view_email]','type' => 'checkboxoffon', 'class' => 'wcfm-checkbox wcfm_ele', 'value' => 'yes', 'label_class' => 'wcfm_title checkbox_title', 'dfvalue' => $view_customers_email),

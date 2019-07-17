@@ -2,7 +2,7 @@
 global $wp, $WCFM;                         
 
 $wcfm_is_allow_manage_coupons = apply_filters( 'wcfm_is_allow_manage_coupons', true );
-if( !current_user_can( 'edit_shop_coupons' ) || !apply_filters( 'wcfm_is_pref_coupon', true ) || !$wcfm_is_allow_manage_coupons ) {
+if( !current_user_can( 'edit_shop_coupons' ) || !$wcfm_is_allow_manage_coupons ) {
 	wcfm_restriction_message_show( "Coupons" );
 	return;
 }

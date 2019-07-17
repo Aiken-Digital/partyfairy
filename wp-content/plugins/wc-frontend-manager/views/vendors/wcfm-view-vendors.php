@@ -37,8 +37,8 @@ $admin_fee_mode = apply_filters( 'wcfm_is_admin_fee_mode', false );
 		
 		<div class="wcfm_vendors_filter_wrap wcfm_filters_wrap">
 			<?php
-			$is_marketplace = wcfm_is_marketplace();
-			if( $wcfm_is_products_vendor_filter = apply_filters( 'wcfm_is_vendors_vendor_filter', true ) ) {
+			if( $wcfm_is_products_vendor_filter = apply_filters( 'wcfm_is_products_vendor_filter', true ) ) {
+				$is_marketplace = wcfm_is_marketplace();
 				if( $is_marketplace ) {
 					if( !wcfm_is_vendor() ) {
 						$vendor_arr = array(); //$WCFM->wcfm_vendor_support->wcfm_get_vendor_list();
@@ -46,21 +46,6 @@ $admin_fee_mode = apply_filters( 'wcfm_is_admin_fee_mode', false );
 																											"dropdown_vendor" => array( 'type' => 'select', 'options' => $vendor_arr, 'attributes' => array( 'style' => 'width: 150px;' ) )
 																											 ) );
 					}
-				}
-			}
-			
-			if( function_exists( 'get_wcfm_memberships' ) && apply_filters( 'wcfm_is_vendors_membership_filter', true ) ) {
-				$wcfm_memberships_list = get_wcfm_memberships();
-				if( count( $wcfm_memberships_list ) >= 1 ) {
-					$membership_arr = array( '' => __( 'Show all ...', 'wc-frontend-manager' ) );
-					if( !empty( $wcfm_memberships_list ) ) {
-						foreach( $wcfm_memberships_list as $wcfm_membership_list ) {
-							$membership_arr[$wcfm_membership_list->ID] = esc_html( $wcfm_membership_list->post_title );
-						}
-					}
-					$WCFM->wcfm_fields->wcfm_generate_form_field( array(
-																											"dropdown_membership" => array( 'type' => 'select', 'options' => $membership_arr, 'attributes' => array( 'style' => 'width: 150px;' ) )
-																											 ) );
 				}
 			}
 			?>

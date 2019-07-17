@@ -295,9 +295,9 @@ if( $WCFM->is_marketplace && ( $WCFM->is_marketplace == 'wcfmmarketplace' ) && a
 						do_action( 'before_wcfm_vendor_vendor_fields_general', $vendor_admin_id, $vendor_id );
 					
 						if( $vendor_id ) {
-							$WCFM->wcfm_fields->wcfm_generate_form_field(  array( "user_name" => array( 'label' => __('Store Admin', 'wc-frontend-manager') , 'type' => 'text', 'attributes' => array( 'readonly' => true ), 'class' => 'wcfm-text wcfm_ele ', 'label_class' => 'wcfm_ele wcfm_title', 'value' => $first_name . ' ' . $last_name . ' (#' . $vendor_id . ' - ' . $user_name . ')' ) ) );
+							$WCFM->wcfm_fields->wcfm_generate_form_field(  array( "user_name" => array( 'label' => __('Store Admin', 'wc-frontend-manager') , 'type' => 'text', 'attributes' => array( 'readonly' => true ), 'class' => 'wcfm-text wcfm_ele ', 'label_class' => 'wcfm_ele wcfm_title', 'value' => $first_name . ' ' . $last_name . ' (' . $user_name . ')' ) ) );
 						} else {
-							$WCFM->wcfm_fields->wcfm_generate_form_field(  array( "user_name" => array( 'label' => __('Store Admin', 'wc-frontend-manager') , 'type' => 'text', 'class' => 'wcfm-text wcfm_ele ', 'label_class' => 'wcfm_ele wcfm_title', 'value' => $first_name . ' ' . $last_name . ' (#' . $vendor_id . ' - ' . $user_name . ')' ) ) );
+							$WCFM->wcfm_fields->wcfm_generate_form_field(  array( "user_name" => array( 'label' => __('Store Admin', 'wc-frontend-manager') , 'type' => 'text', 'class' => 'wcfm-text wcfm_ele ', 'label_class' => 'wcfm_ele wcfm_title', 'value' => $first_name . ' ' . $last_name . ' (' . $user_name . ')' ) ) );
 						}
 						$WCFM->wcfm_fields->wcfm_generate_form_field( apply_filters( 'wcfm_vendor_vendor_fields_general', array(  
 																																					"user_email" => array( 'label' => __('Email', 'wc-frontend-manager') , 'type' => 'text', 'attributes' => array( 'readonly' => true ), 'class' => 'wcfm-text wcfm_ele ', 'label_class' => 'wcfm_ele wcfm_title', 'value' => $user_email),

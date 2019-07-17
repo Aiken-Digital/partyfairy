@@ -172,8 +172,6 @@ $transaction_meta_labels = array(
 										_e( 'By Request', 'wc-frontend-manager' );
 									} elseif( $transaction->withdraw_mode == 'by_auto_request' ) {
 										_e( 'By Auto Request', 'wc-frontend-manager' );
-									} elseif( $transaction->withdraw_mode == 'by_schedule' ) {
-										_e( 'By Schedule Request', 'wc-frontend-manager' );
 									} elseif( $transaction->withdraw_mode == 'by_split_pay' ) {
 										 _e( 'By Split Pay', 'wc-frontend-manager' );
 									}

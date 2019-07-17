@@ -250,11 +250,5 @@ do_action( 'before_wcfm_customers_manage' );
 			do_action( 'after_wcfm_customers_manage' );
 			?>
 		</form>
-		<script type="text/javascript">
-			var selected_bstate = '<?php echo $bstate; ?>';
-			var input_selected_bstate = '<?php echo $bstate; ?>';
-			var selected_sstate = '<?php echo $sstate; ?>';
-			var input_selected_sstate = '<?php echo $sstate; ?>';
-		</script>
 	</div>
 </div>

@@ -208,7 +208,7 @@
 
 #banner_slider { 
 	width: 360px;
-	margin-left: 35% !important;
+	margin-left: 35%;
 }
 
 #banner_slider .multi_input_block {
@@ -315,7 +315,7 @@ textarea.wcfm-textarea {
 	}
 	
 	#banner_slider {
-		margin-left: 0% !important;
+		margin-left: 0%;
 	}
 	
 	#wcfm-marketplace-map { 

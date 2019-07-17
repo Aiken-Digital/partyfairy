@@ -59,12 +59,12 @@ if( !$wcfm_is_allow_headpanels ) {
     <a href="<?php echo get_wcfm_profile_url(); ?>" class="wcfm_header_panel_profile <?php if( isset( $wp->query_vars['wcfm-profile'] ) ) echo 'active'; ?>"><img class="wcfm_header_panel_profile_img  text_tip" src="<?php echo $wp_user_avatar; ?>" data-tip="<?php _e( 'Profile', 'wc-frontend-manager' ); ?>" /></a>
   <?php } ?>
   
-  <?php if( ( apply_filters( 'wcfm_is_pref_direct_message', true ) && apply_filters( 'wcfm_is_allow_direct_message', true ) ) || ( apply_filters( 'wcfm_is_pref_notification', true ) && apply_filters( 'wcfm_is_allow_notifications', true ) ) ) { ?>
+  <?php if( ( apply_filters( 'wcfm_is_pref_direct_message', true ) && apply_filters( 'wcfm_is_allow_direct_message', true ) ) || apply_filters( 'wcfm_is_allow_notifications', true ) ) { ?>
     <a href="<?php echo get_wcfm_messages_url( ); ?>" class="wcfm_header_panel_messages text_tip <?php if( isset( $wp->query_vars['wcfm-messages'] ) ) echo 'active'; ?>" data-tip="<?php _e( 'Notification Board', 'wc-frontend-manager' ); ?>"><i class="wcfmfa fa-bell"></i><span class="unread_notification_count message_count"><?php echo $unread_message; ?></span><div class="notification-ring"></div></a>
   <?php } ?>
   
   <?php if( apply_filters( 'wcfm_is_pref_enquiry', true ) && apply_filters( 'wcfm_is_allow_enquiry', true ) ) { ?>
-    <a href="<?php echo get_wcfm_enquiry_url(); ?>" class="wcfm_header_panel_enquiry text_tip <?php if( isset( $wp->query_vars['wcfm-enquiry'] ) || isset( $wp->query_vars['wcfm-enquiry-manage'] ) ) echo 'active'; ?>" data-tip="<?php _e( 'Inquiry Board', 'wc-frontend-manager' ); ?>"><i class="wcfmfa fa-question-circle"></i><span class="unread_notification_count enquiry_count"><?php echo $unread_enquiry; ?></span><div class="notification-ring"></div></a>
+    <a href="<?php echo get_wcfm_enquiry_url(); ?>" class="wcfm_header_panel_enquiry text_tip <?php if( isset( $wp->query_vars['wcfm-enquiry'] ) || isset( $wp->query_vars['wcfm-enquiry-manage'] ) ) echo 'active'; ?>" data-tip="<?php _e( 'Enquiry Board', 'wc-frontend-manager' ); ?>"><i class="wcfmfa fa-question-circle"></i><span class="unread_notification_count enquiry_count"><?php echo $unread_enquiry; ?></span><div class="notification-ring"></div></a>
   <?php } ?>
   
   <?php if( apply_filters( 'wcfm_is_pref_notice', true ) && apply_filters( 'wcfm_is_allow_notice', true ) ) { ?>

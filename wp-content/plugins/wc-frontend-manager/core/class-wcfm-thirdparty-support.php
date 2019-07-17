@@ -119,9 +119,9 @@ class WCFM_ThirdParty_Support {
 		
 		// WooCommerce Product Schedular - 6.1.4
     if( apply_filters( 'wcfm_is_allow_wc_product_scheduler', true ) ) {
-			//if( WCFM_Dependencies::wcfm_wc_product_scheduler_active_check() ) {
-				//add_filter( 'end_wcfm_products_manage', array( &$this, 'wcfm_wc_product_scheduler_product_manage_views' ), 160 );
-			//}
+			if( WCFM_Dependencies::wcfm_wc_product_scheduler_active_check() ) {
+				add_filter( 'end_wcfm_products_manage', array( &$this, 'wcfm_wc_product_scheduler_product_manage_views' ), 160 );
+			}
 		}
 		
 		// Product Manage Third Party Plugins View

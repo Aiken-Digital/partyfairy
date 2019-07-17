@@ -21,9 +21,6 @@ class WCFM_WCPVendors {
     	
     	$this->vendor_id   = apply_filters( 'wcfm_current_vendor_id', WC_Product_Vendors_Utils::get_logged_in_vendor() );
     	
-    	// Set Global Vendor ID
-    	add_filter( 'wcfm_current_vendor_id', array( &$this, 'wcfm_load_current_vendor_id' ), 20 );
-    	
     	// Store Identity
     	add_filter( 'wcfm_store_logo', array( &$this, 'wcpvendors_store_logo' ) );
     	add_filter( 'wcfm_store_name', array( &$this, 'wcpvendors_store_name' ) );
@@ -93,11 +90,6 @@ class WCFM_WCPVendors {
 			// Message Author Filter
 			add_filter( 'wcfm_message_author', array( &$this, 'wcpvendors_message_author' ) );
 		}
-  }
-  
-  function wcfm_load_current_vendor_id( $vendor_id ) {
-  	$vendor_id = $this->vendor_id;
-  	return $vendor_id;
   }
   
   // WCFM wcpvendors Store Logo
@@ -179,7 +171,6 @@ class WCFM_WCPVendors {
   	global $WCFM, $wpdb;
   	
   	$vendor_customers  = array();
-  	
   	// Own Customers
   	$wcfm_customers_array = get_users( $args );
   	if(!empty($wcfm_customers_array)) {
@@ -187,7 +178,7 @@ class WCFM_WCPVendors {
 				$vendor_customers[$wcfm_customers_single->ID] = $wcfm_customers_single->ID;
 			}
 		}
-		
+  	
 		// Order Customers
   	$sql = 'SELECT order_id FROM ' . WC_PRODUCT_VENDORS_COMMISSION_TABLE;
 		$sql .= ' WHERE 1=1';

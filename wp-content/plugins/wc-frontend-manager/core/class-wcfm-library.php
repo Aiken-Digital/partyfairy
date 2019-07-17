@@ -366,8 +366,6 @@ class WCFM_Library {
 				
 				$this->load_multiinput_lib();
 				
-				wp_enqueue_script( 'wc-country-select' );
-				
       	wp_enqueue_script( 'wcfm_profile_js', $this->js_lib_url . 'profile/wcfm-script-profile.js', array('jquery','select2_js'), $WCFM->version, true );
       	
       	$wcfm_profile_params = array( 'short' => __( 'Too short', 'wc-frontend-manager' ), 'weak' => __( 'Weak', 'wc-frontend-manager' ), 'good' => __( 'Good', 'wc-frontend-manager' ), 'strong' => __( 'Strong', 'wc-frontend-manager' ), 'passowrd_failed' => __( 'Password strength should be atleast "Good".', 'wc-frontend-manager' ) );
@@ -1271,7 +1269,7 @@ class WCFM_Library {
 		if( $start_date && $end_date ) $wcfm_date_range = $start_date . ' ' . __( 'to', 'wc-frontend-manager' ) . ' ' . $end_date;
 		?>
 		<div class="wcfm-date-range-field">
-			<input type="text" name="wcfm-date-range" class="wcfm-date-range" autocomplete="off" placeholder="<?php _e( 'Choose Date Range', 'wc-frontend-manager' ); ?> ..." value="<?php echo $wcfm_date_range; ?>">
+			<input type="text" name="wcfm-date-range" class="wcfm-date-range" autocomplete="off" placeholder="<?php _e( 'Choose Data Range', 'wc-frontend-manager' ); ?> ..." value="<?php echo $wcfm_date_range; ?>">
 
 			<input type="hidden" name="wcfm-date_from" autocomplete="off" value="">
 			<input type="hidden" name="wcfm-date_to" autocomplete="off" value="">

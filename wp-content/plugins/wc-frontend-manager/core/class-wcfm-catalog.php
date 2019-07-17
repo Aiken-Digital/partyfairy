@@ -25,13 +25,6 @@ class WCFM_Catalog {
 		add_action( 'woocommerce_single_product_summary',			array( &$this, 'wcfm_catalog_mode_pricing' ), 9 );
 		add_action( 'woocommerce_single_product_summary',			array( &$this, 'wcfm_catalog_mode_add_to_cart' ), 29 );
 		
-		// YiTH Quick View Catalog Support
-		add_action( 'yith_wcqv_product_summary',			array( &$this, 'wcfm_catalog_mode_pricing' ), 14 );
-		add_action( 'yith_wcqv_product_summary',			array( &$this, 'wcfm_catalog_mode_add_to_cart' ), 24 );
-		
-		// Flatsome Quick View Catalog Support
-		add_action( 'woocommerce_single_product_lightbox_summary',			array( &$this, 'wcfm_catalog_mode_pricing' ), 9 );
-		add_action( 'woocommerce_single_product_lightbox_summary',			array( &$this, 'wcfm_catalog_mode_add_to_cart' ), 29 );
 	}
 	
 	/**
@@ -180,12 +173,6 @@ class WCFM_Catalog {
 				$disable_price = ( get_post_meta( $product_id, 'disable_price', true) ) ? get_post_meta( $product_id, 'disable_price', true) : 'no';
 				if( $disable_price == 'yes' ) {
 					remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
-					
-					// YiTH Quick View Catalog Support
-					remove_action( 'yith_wcqv_product_summary', 'woocommerce_template_single_price', 15 );
-					
-					// Flatsome Quick View Catalog Support
-					remove_action( 'woocommerce_single_product_lightbox_summary', 'woocommerce_template_single_price', 10 );
 				}
 			}
 		}
@@ -210,12 +197,6 @@ class WCFM_Catalog {
 				if( $disable_add_to_cart == 'yes' ) {
 					add_filter( 'woocommerce_is_purchasable', '__return_false' );
 					remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
-					
-					// YiTH Quick View Catalog Support
-					remove_action( 'yith_wcqv_product_summary', 'woocommerce_template_single_add_to_cart', 25 );
-					
-					// Flatsome Quick View Catalog Support
-					remove_action( 'woocommerce_single_product_lightbox_summary', 'woocommerce_template_single_add_to_cart', 30 );
 				}
 			}
 		}

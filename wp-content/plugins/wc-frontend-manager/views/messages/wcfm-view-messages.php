@@ -11,7 +11,7 @@
  
 global $WCFM;
 
-if( (!apply_filters( 'wcfm_is_pref_notification', true ) || !apply_filters( 'wcfm_is_allow_notifications', true ) ) && ( !apply_filters( 'wcfm_is_allow_direct_message', true ) || !apply_filters( 'wcfm_is_pref_direct_message', true ) ) ) {
+if( !apply_filters( 'wcfm_is_allow_notifications', true ) && ( !apply_filters( 'wcfm_is_allow_direct_message', true ) || !apply_filters( 'wcfm_is_pref_direct_message', true ) ) ) {
 	wcfm_restriction_message_show( "Notifications" );
 	return;
 }
@@ -41,7 +41,7 @@ $message_types  = get_wcfm_message_types();
 		
 		<?php do_action( 'before_wcfm_messages_form' ); ?>
 		
-		<?php if( apply_filters( 'wcfm_is_pref_notification', true ) && apply_filters( 'wcfm_is_allow_notifications', true ) ) { ?>
+		<?php if( apply_filters( 'wcfm_is_allow_notifications', true ) ) { ?>
 			<?php do_action( 'before_wcfm_messages' ); ?>
 			
 			<div class="wcfm-container wcfm-top-element-container">

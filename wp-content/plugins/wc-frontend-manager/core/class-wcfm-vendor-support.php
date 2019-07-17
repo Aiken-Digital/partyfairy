@@ -18,15 +18,15 @@ class WCFM_Vendor_Support {
 			if ( !is_admin() || defined('DOING_AJAX') ) {
 				if( !wcfm_is_vendor() ) {
 					if( $is_allow_vendors = apply_filters( 'wcfm_is_allow_vendors', true ) ) {
-						// Vendors Query Var Filter
+						// WC Booking Query Var Filter
 						add_filter( 'wcfm_query_vars', array( &$this, 'vendors_wcfm_query_vars' ), 20 );
 						add_filter( 'wcfm_endpoint_title', array( &$this, 'vendors_wcfm_endpoint_title' ), 20, 2 );
 						add_action( 'init', array( &$this, 'vendors_wcfm_init' ), 20 );
 						
-						// WCFM Vendors Endpoint Edit
+						// WCFM Third Party Endpoint Edit
 						add_filter( 'wcfm_endpoints_slug', array( $this, 'wcfm_vendors_endpoints_slug' ) );
 						
-						// Vendors Menu Filter
+						// WC Booking Menu Filter
 						add_filter( 'wcfm_menus', array( &$this, 'vendors_wcfm_menus' ), 20 );
 					}
 				}
@@ -794,8 +794,6 @@ class WCFM_Vendor_Support {
         $vendor_role->add_cap( 'manage_woocommerce' );
         $vendor_role->add_cap( 'publish_shop_orders' );
         $vendor_role->add_cap( 'list_users' );
-        $vendor_role->add_cap( 'create_users' );
-        $vendor_role->add_cap( 'edit_users' );
         
         // WooCommerce POS Capability
         $vendor_role->add_cap( 'manage_woocommerce_pos' );
@@ -839,9 +837,6 @@ class WCFM_Vendor_Support {
 						$vendor_role->add_cap( 'woo_vendor_options' );
 					}
 				}
-				
-				// FooSales Capability
-				$vendor_role->add_cap( 'publish_foosales' );
 				
 				// FooEvent Capability
 				if( WCFM_Dependencies::wcfmu_plugin_active_check() ) {
@@ -1073,7 +1068,7 @@ class WCFM_Vendor_Support {
 					$all_users = get_users( $args );
 					if( !empty( $all_users ) ) {
 						foreach( $all_users as $all_user ) {
-							$vendor_arr[$all_user->ID] = $this->wcfm_get_vendor_store_name_by_vendor( $all_user->ID ) . ' - ' . $all_user->display_name . ' (#' . $all_user->ID . ' - ' . $all_user->user_login . ')';
+							$vendor_arr[$all_user->ID] = $this->wcfm_get_vendor_store_name_by_vendor( $all_user->ID ) . ' - ' . $all_user->display_name . ' (' . $all_user->user_login . ')';
 						}
 					}
 				}
@@ -1128,7 +1123,7 @@ class WCFM_Vendor_Support {
 			}
 		}
 		
-		return apply_filters( 'wcfmmp_store_logo', $store_logo, $vendor_id );
+		return $store_logo;
 	}
 	
 	public function wcfm_get_vendor_store_name_by_vendor( $vendor_id ) {
@@ -1227,8 +1222,8 @@ class WCFM_Vendor_Support {
 				$shop_name     = $vendor_user->display_name;
 			}
 			$shop_link     = wcfmmp_get_store_url( $vendor_id );
-			if( $shop_name ) { $vendor_store = '<a class="wcfm_dashboard_item_title" ' . $store_open_by . ' href="' . apply_filters( 'wcfmmp_vendor_shop_permalink', $shop_link, $vendor_id ) . '">' . $shop_name . '</a>'; }
-			else { $vendor_store = '<a class="wcfm_dashboard_item_title" ' . $store_open_by . ' href="' . apply_filters( 'wcfmmp_vendor_shop_permalink', $shop_link, $vendor_id ) . '">' . __('Shop', 'wc-frontend-manager') . '</a>'; }
+			if( $shop_name ) { $vendor_store = '<a class="wcfm_dashboard_item_title" ' . $store_open_by . ' href="' . apply_filters('wcfmmp_vendor_shop_permalink', $shop_link) . '">' . $shop_name . '</a>'; }
+			else { $vendor_store = '<a class="wcfm_dashboard_item_title" ' . $store_open_by . ' href="' . apply_filters('wcfmmp_vendor_shop_permalink', $shop_link) . '">' . __('Shop', 'wc-frontend-manager') . '</a>'; }
 		}
 		
 		return $vendor_store;
@@ -1448,7 +1443,7 @@ class WCFM_Vendor_Support {
 						if( !$order_post_title ) continue;
 						try {
 							$order       = wc_get_order( $net_sale_whole_week->order_id );
-							$line_items  = $order->get_items( 'line_item' );
+							$line_items  = $order->get_items( apply_filters( 'woocommerce_admin_order_item_types', 'line_item' ) );
 							$valid_items = (array) $order_item_ids = explode( ",", $net_sale_whole_week->product_ids );
 							
 							foreach( $line_items as $key => $line_item ) {

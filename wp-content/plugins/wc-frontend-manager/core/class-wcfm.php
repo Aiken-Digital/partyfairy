@@ -105,7 +105,7 @@ class WCFM {
 		$this->wcfm_options = get_option( 'wcfm_options', array() );
 		
 		// Load WCFM Dashbaord setup class
-		// http://localhost/wcfm/wp-admin/?page=wcfm-setup&step=dashboard
+		// http://localhost/wrd/wp-admin/?page=wcfm-setup&step=dashboard
 		if ( is_admin() ) {
 			$current_page = filter_input( INPUT_GET, 'page' );
 			if ( $current_page && $current_page == 'wcfm-setup' ) {
@@ -500,10 +500,10 @@ class WCFM {
 		
 		$wcfm_tables = $wpdb->query( "SHOW tables like '{$wpdb->prefix}wcfm_support_response_meta'");
 		if( !$wcfm_tables ) {
-			delete_option( 'wcfm_updated_6_1_5' );
+			delete_option( 'wcfm_updated_5_1_3' );
 			delete_option( 'wcfm_table_install' );
 		}
-		if( !get_option( 'wcfm_updated_6_1_5' ) ) {
+		if( !get_option( 'wcfm_updated_5_1_3' ) ) {
 			delete_option( 'wcfm_table_install' );
 			require_once ( $WCFM->plugin_path . 'helpers/class-wcfm-install.php' );
 			$WCFM_Install = new WCFM_Install();
@@ -665,7 +665,7 @@ class WCFM {
 																								)
 														);
 		
-		if ( !function_exists( 'wc_coupons_enabled' ) || ( function_exists( 'wc_coupons_enabled' ) && !wc_coupons_enabled() ) || !apply_filters( 'wcfm_is_pref_coupon', true ) ) unset( $wcfm_menus['wcfm-coupons'] );
+		if ( !function_exists( 'wc_coupons_enabled' ) || ( function_exists( 'wc_coupons_enabled' ) && !wc_coupons_enabled() ) ) unset( $wcfm_menus['wcfm-coupons'] );
 		
 		uasort( $wcfm_menus, array( &$this, 'wcfm_sort_by_priority' ) );
 		
@@ -746,21 +746,19 @@ class WCFM {
 	function get_wcfm_modules() {
 		$wcfm_modules = array(
 													'product_popup'       => array( 'label' => __( 'Popup Add Product', 'wc-frontend-manager' ) ),
+													'menu_manager'        => array( 'label' => __( 'Menu Manager', 'wc-frontend-manager' ) ),
 													'enquiry'             => array( 'label' => __( 'Enquiry', 'wc-frontend-manager' ) ),
 													'enquiry_tab'         => array( 'label' => __( 'Enquiry Tab', 'wc-frontend-manager' ), 'hints' => __( 'If you just want to hide Single Product page `Enquiry Tab`, but keep enable `Enquiry Module` for `Catalog Mode`.', 'wc-frontend-manager' ) ),
 													'catalog'             => array( 'label' => __( 'Catalog', 'wc-frontend-manager' ), 'hints' => __( 'If you disable `Enquiry Module` then `Catalog Module` will stop working automatically.', 'wc-frontend-manager' ) ),
 													'article'             => array( 'label' => __( 'Article', 'wc-frontend-manager' ) ),
 													'customer'            => array( 'label' => __( 'Customer', 'wc-frontend-manager' ) ),
-													'coupon'              => array( 'label' => __( 'Coupon', 'wc-frontend-manager' ) ),
-													'profile'             => array( 'label' => __( 'Profile', 'wc-frontend-manager' ) ),
-													'policies'            => array( 'label' => __( 'Policies', 'wc-frontend-manager' ) ),
-													'custom_field'        => array( 'label' => __( 'Custom Field', 'wc-frontend-manager' ) ),
-													'menu_manager'        => array( 'label' => __( 'Menu Manager', 'wc-frontend-manager' ) ),
-													'notification'        => array( 'label' => __( 'Notification', 'wc-frontend-manager' ) ),
 													'direct_message'      => array( 'label' => __( 'Direct Message', 'wc-frontend-manager' ) ),
 													'knowledgebase'       => array( 'label' => __( 'Knowledgebase', 'wc-frontend-manager' ) ),
-													'notice'              => array( 'label' => __( 'Annoncement', 'wc-frontend-manager' ) ),
-													//'submenu'             => array( 'label' => __( 'Sub-menu', 'wc-frontend-manager' ), 'hints' => __( 'This will disable `Add New` sub-menus on hover.', 'wc-frontend-manager' ) ),
+													'profile'             => array( 'label' => __( 'Profile', 'wc-frontend-manager' ) ),
+													'notice'              => array( 'label' => __( 'Notice', 'wc-frontend-manager' ) ),
+													'policies'            => array( 'label' => __( 'Policies', 'wc-frontend-manager' ) ),
+													'custom_field'        => array( 'label' => __( 'Custom Field', 'wc-frontend-manager' ) ),
+													'submenu'             => array( 'label' => __( 'Sub-menu', 'wc-frontend-manager' ), 'hints' => __( 'This will disable `Add New` sub-menus on hover.', 'wc-frontend-manager' ) ),
 													'withdrawal'          => array( 'label' => __( 'Withdrawal', 'wc-frontend-manager' ) ),
 													'refund'              => array( 'label' => __( 'Refund', 'wc-frontend-manager' ) ),
 													);
@@ -894,8 +892,6 @@ class WCFM {
 		$upload_dir_paths = wp_upload_dir();
 		$attachment_id = 0;
 		
-		$attachment_url = apply_filters( 'wcfm_attachment_url', $attachment_url );
-		
 		if( class_exists('WPH') ) {
 			global $wph;
 			
@@ -932,11 +928,11 @@ class WCFM {
 			//$attachment_url = str_replace( $new_content_path, '/wp-content', str_replace( $new_upload_path, '/uploads', $attachment_url ) );
 		}
 		
-		//if( function_exists( 'ud_get_stateless_media' ) ) {
-			//$bucketLink = ud_get_stateless_media()->get_gs_host();
+		if( function_exists( 'ud_get_stateless_media' ) ) {
+			$bucketLink = ud_get_stateless_media()->get_gs_host();
       //$bucketLink = apply_filters('wp_stateless_bucket_link', $bucketLink);
-      //$attachment_url = str_replace( $bucketLink . '/', '', $attachment_url );
-		//}
+      $attachment_url = str_replace( $bucketLink . '/', '', $attachment_url );
+		}
 		
 		// If this is the URL of an auto-generated thumbnail, get the URL of the original image
 		if ( false !== strpos( $attachment_url, $upload_dir_paths['baseurl'] . '/' ) ) {
@@ -960,7 +956,7 @@ class WCFM {
 			$attachment_id = (int) attachment_url_to_postid( $attachment_url );
 		}
 		
-		return apply_filters( 'wcfm_attachment_id', $attachment_id, $attachment_url ); 
+		return $attachment_id; 
 	}
 	
 	/**

@@ -109,7 +109,7 @@ class WCFM_Customers_Controller {
 			if( $is_marketplace ) {
 				if( !wcfm_is_vendor() ) {
 					$args['meta_key'] = '_wcfm_vendor';        
-					$args['meta_value'] = absint( $_POST['customer_vendor'] );
+					$args['meta_value'] = $_POST['customer_vendor'];
 				}
 			}
 		}
@@ -235,9 +235,7 @@ class WCFM_Customers_Controller {
 				if( apply_filters( 'wcfm_is_allow_edit_customer', true ) && apply_filters( 'wcfm_is_vendor_customer', true, $wcfm_customers_single->ID ) ) {
 					$actions .= '<a class="wcfm-action-icon" href="' . get_wcfm_customers_manage_url( $wcfm_customers_single->ID ) . '"><span class="wcfmfa fa-edit text_tip" data-tip="' . esc_attr__( 'Edit Customer', 'wc-frontend-manager' ) . '"></span></a>';
 				}
-				if ( empty( $orders ) && apply_filters( 'wcfm_is_allow_edit_customer', true ) && apply_filters( 'wcfm_is_allow_delete_customer', true ) && ( !wcfm_is_vendor() || apply_filters( 'wcfm_is_vendor_customer', true, $wcfm_customers_single->ID ) ) ) {
-					$actions .= '<a class="wcfm_customer_delete wcfm-action-icon" href="#" data-customerid="' . $wcfm_customers_single->ID . '"><span class="wcfmfa fa-trash-alt text_tip" data-tip="' . esc_attr__( 'Delete', 'wc-frontend-manager' ) . '"></span></a>';
-				}
+				//$actions .= '<a class="wcfm_customer_delete wcfm-action-icon" href="#" data-customerid="' . $wcfm_customers_single->ID . '"><span class="wcfmfa fa-trash-alt text_tip" data-tip="' . esc_attr__( 'Delete', 'wc-frontend-manager' ) . '"></span></a>';
 				$wcfm_customers_json_arr[$index][] = apply_filters ( 'wcfm_customers_actions', $actions, $wcfm_customers_single );
 				
 				
