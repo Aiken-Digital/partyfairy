@@ -259,33 +259,13 @@ class WCFM_Orders_Controller {
 					$order_date = ( version_compare( WC_VERSION, '2.7', '<' ) ) ? $the_order->order_date : $the_order->get_date_created();
 					$wcfm_orders_json_arr[$index][] = date_i18n( wc_date_format(), strtotime( $order_date ) );
 					
-				// Action
-					$actions = ''; 
+				
+		// Action
+				$actions = '';
+				if( $wcfm_is_allow_order_status_update = apply_filters( 'wcfm_is_allow_order_status_update', true ) ) {
+					$order_status = sanitize_title( $the_order->get_status() );
 
-if( $wcfm_is_allow_order_status_update = apply_filters( 'wcfm_is_allow_order_status_update', true ) ) {
-						$order_status = sanitize_title( $the_order->get_status() );
-
-						if( !in_array( $order_status, array( 'failed', 'cancelled', 'refunded', 'completed' ) ) ) 
-
-		            $actions = '<a class="wcfm_order_mark_complete wcfm-action-icon" href="#" data-orderid="' . $wcfm_orders_single->ID . '"><span class="wcfmfa fa-check-circle text_tip" data-tip="' . esc_attr__( 'Mark as Complete', 'wc-frontend-manager' ) . '"></span></a>';
-					}
-
-					
-					if( $wcfm_is_allow_order_details = apply_filters( 'wcfm_is_allow_order_details', true ) ) {
-						$actions .= '<a class="wcfm-action-icon" href="' . get_wcfm_view_order_url($wcfm_orders_single->ID, $the_order) . '"><span class="wcfmfa fa-eye text_tip" data-tip="' . esc_attr__( 'View Details', 'wc-frontend-manager' ) . '"></span></a>';
-
-					}
-					
-					if( !WCFM_Dependencies::wcfmu_plugin_active_check() || !WCFM_Dependencies::wcfm_wc_pdf_invoices_packing_slips_plugin_active_check() ) {
-						if( $is_wcfmu_inactive_notice_show = apply_filters( 'is_wcfmu_inactive_notice_show', true ) ) {
-							$actions .= '<a class="wcfm_pdf_invoice_dummy wcfm-action-icon" href="#" data-orderid="' . $wcfm_orders_single->ID . '"><span class="wcfmfa fa-file-invoice text_tip" data-tip="' . esc_attr__( 'PDF Invoice', 'wc-frontend-manager' ) . '"></span></a>';
-						}
-					}
-					
-					
-					
-					$custom_menu = "";
-
+///////////////////////////
 					if( $order_status == 'pending'){
 
 
@@ -300,9 +280,12 @@ if( $wcfm_is_allow_order_status_update = apply_filters( 'wcfm_is_allow_order_sta
 						padding: 4px;
 						color: white; margin:2px;" href="'.$complete_url_decline.'">Decline</a>';
 
-						$custom_menu .=  $menu_pending;
+						$actions .=  $menu_pending;
 
-					}elseif($order_status == 'processing-cancel'){
+					}
+//////////////////////////////
+
+					if($order_status == 'processing-cancel'){
 
 						$items = $the_order->get_items();
 						foreach ( $items as $item ) {
@@ -349,15 +332,20 @@ if( $wcfm_is_allow_order_status_update = apply_filters( 'wcfm_is_allow_order_sta
 
 
 
-						$custom_menu .= $tindakan;
+						$actions .= $tindakan;
 
 
-					}elseif($order_status == 'processing'){
+					}
+
+/////////////////////////////
+
+
+					if($order_status == 'processing'){
 
 						$items = $the_order->get_items();
 						foreach ( $items as $item ) {
 
-							$product_name = $item->get_name();
+							$product_name[] = $item->get_name();
 							$product_id = $item->get_product_id();
 							$product_variation_id = $item->get_variation_id();
 
@@ -399,18 +387,26 @@ if( $wcfm_is_allow_order_status_update = apply_filters( 'wcfm_is_allow_order_sta
 
 
 
-						$custom_menu .= $tindakan;
+						$actions .= $tindakan;
 
 
-					}elseif($order_status == 'completed'){
+					}
+
+					///////////////////
+
+
+if($order_status == 'completed'){
 
 						$tindakan .= '<a style="background-color: #1ad40e !important;
 						padding: 4px;
 						color: white; margin:2px;" href="#">Completed</a>';
 						
-						$custom_menu .= $tindakan;
+						$actions .= $tindakan;
+}
+						////////////////
 
-					}elseif($order_status == 'cancelled'){
+
+if($order_status == 'cancelled'){
 
 						$complete_url_decline = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=refunded&order_id='.$wcfm_orders_single->ID ), 'woocommerce-mark-order-status' );
 
@@ -419,9 +415,13 @@ if( $wcfm_is_allow_order_status_update = apply_filters( 'wcfm_is_allow_order_sta
 						padding: 4px;
 						color: white; margin:2px;" href="'.$complete_url_decline.'">Refund</a>';
 
-						$custom_menu .=  $menu_pending;
+						$actions .=  $menu_pending;
 
-					}elseif($order_status == 'refunded'){
+					}
+
+////////////////////////
+
+if($order_status == 'refunded'){
 
 						
 
@@ -429,21 +429,29 @@ if( $wcfm_is_allow_order_status_update = apply_filters( 'wcfm_is_allow_order_sta
 						padding: 4px;
 						color: white; margin:2px;" href="#">Success Refund</a>';
 
-						$custom_menu .=  $menu_pending;
-
-					}else{
-
-						//$wcfm_orders_json_arr[$index][] =  apply_filters ( 'wcfm_orders_actions', $actions, $wcfm_orders_single, $the_order );
-						$custom_menu .=  '';
-
+						$actions .=  $menu_pending;
 
 
 					}
 
+					////////////////////////
+				}
+  	
+				if( $wcfm_is_allow_order_details = apply_filters( 'wcfm_is_allow_order_details', true ) ) {
+					//$actions .= '<a class="wcfm-action-icon" href="' . get_wcfm_view_order_url($wcfm_orders_single->ID, $the_order) . '"><span class="wcfmfa fa-eye text_tip" data-tip="' . esc_attr__( 'View Details', 'wc-frontend-manager' ) . '"></span></a>';
+				}
+				
+				if( !WCFM_Dependencies::wcfmu_plugin_active_check() || !WCFM_Dependencies::wcfm_wc_pdf_invoices_packing_slips_plugin_active_check() ) {
+					if( $is_wcfmu_inactive_notice_show = apply_filters( 'is_wcfmu_inactive_notice_show', true ) ) {
+						//$actions .= '<a class="wcfm_pdf_invoice_dummy wcfm-action-icon" href="#" data-orderid="' . $wcfm_orders_single->ID . '"><span class="wcfmfa fa-file-invoice text_tip" data-tip="' . esc_attr__( 'PDF Invoice', 'wc-frontend-manager' ) . '"></span></a>';
+					}
+				}
+				
+				$actions = apply_filters ( 'wcfm_orders_module_actions', $actions, $wcfm_orders_single->ID, $the_order );
 
-				$actions = apply_filters ( 'wcfm_orders_module_actions', $custom_menu, $wcfm_orders_single->ID, $the_order );
 				
 				$wcfm_orders_json_arr[$index][] =  apply_filters ( 'wcfm_orders_actions', $actions, $wcfm_orders_single, $the_order );
+
 
 
 
