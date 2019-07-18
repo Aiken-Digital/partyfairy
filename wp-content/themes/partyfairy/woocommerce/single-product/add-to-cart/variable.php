@@ -178,7 +178,47 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
                     <?php foreach ($detail as $key => $value) {  ?>
 
 
-                      <?php if($value['dietary_preference']){ ?>
+                      <?php if($value['dietary_preference']){
+
+
+                          foreach($value['dietary_preference'] as $skey => $svalue) { 
+
+                                $data_dummy[] = array('name' =>$svalue->name,
+                                                      'slug' =>$svalue->slug,
+                                                      'icon' => $icon = get_field('icon', 'dietary-preference_'.$svalue->term_id) );
+
+                          }
+                     
+if(count($data_dummy) == 1) {
+                    if(in_array("i-eat-everything", array_column($data_dummy, 'slug'))) { 
+
+} else { ?> 
+
+ <div class="row m-b-15">
+                        <div class="col-4">
+                          <div>
+                            <p class="uppercase">Dietary Preference</p>
+                          </div>
+                        </div>
+                        <div class="col-8">
+                          <?php 
+                          foreach($data_dummy as $xkey => $xvalue) { ?>
+                            <div class="d-flex align-items-center">
+                              <div class="icon m-r-10">﻿ 
+                                <?php if($xvalue['icon']) { ?> <img src="<?php echo $xvalue['icon']; ?>" width="30" height="30" /> <?php  } ?>
+                              </div>
+                             <?php if($xvalue['slug'] !="i-eat-everything"){ echo $xvalue['name']; }  ?>
+                            </div>
+                          <?php } ?>
+                        </div>
+                      </div>
+
+
+
+<?php }
+
+} else {
+                       ?>
                        <div class="row m-b-15">
                         <div class="col-4">
                           <div>
@@ -187,18 +227,17 @@ do_action( 'woocommerce_before_add_to_cart_form' ); ?>
                         </div>
                         <div class="col-8">
                           <?php 
-                          foreach($value['dietary_preference'] as $skey => $svalue) { ?>
+                          foreach($data_dummy as $xkey => $xvalue) { ?>
                             <div class="d-flex align-items-center">
                               <div class="icon m-r-10">﻿ 
-                                <?php $icon = get_field('icon', 'dietary-preference_'.$svalue->term_id); ?>
-                                <?php if($icon) { ?> <img src="<?php echo $icon; ?>" width="30" height="30" /> <?php  } ?>
+                                <?php if($xvalue['icon']) { ?> <img src="<?php echo $xvalue['icon']; ?>" width="30" height="30" /> <?php  } ?>
                               </div>
-                             <?php if($svalue->slug !="i-eat-everything"){ echo $svalue->name; }  ?>
+                             <?php if($xvalue['slug'] !="i-eat-everything"){ echo $xvalue['name']; }  ?>
                             </div>
                           <?php } ?>
                         </div>
                       </div>
-                    <?php } ?>
+                    <?php }  } ?>
 
                     <?php if($value['whats_included']){ ?>
                      <div class="row m-b-15">
