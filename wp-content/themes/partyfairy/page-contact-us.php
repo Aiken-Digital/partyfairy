@@ -15,7 +15,7 @@
              <h2 class="text-center">You can also reach us via</h2>
              <div class="row m-t-60 m-b-60 justify-content-center">
                 <div class="col-lg-3 text-center">
-                   <a class="center-icon-column p-t-30 p-b-30 hover--bglightblue d-inline-block" href="#">
+                   <a class="center-icon-column p-t-30 p-b-30 hover--bglightblue d-inline-block" target="_blank" href="https://wa.me/<?php the_field('phone_wa', get_option('page_for_posts')); ?>">
                       <div class="center-icon-column--img">
                          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" version="1.1" fill="#60bcf0">
                             <g id="surface1" fill="#60bcf0">
@@ -28,7 +28,7 @@
                    </a>
                 </div>
                 <div class="col-lg-3 text-center">
-                   <a class="center-icon-column p-t-30 p-b-30 hover--bglightblue d-inline-block" href="mailto:<?php the_field('email', get_option('page_for_posts')); ?>">
+                   <a class="center-icon-column p-t-30 p-b-30 hover--bglightblue d-inline-block" target="_blank" href="mailto:<?php the_field('email', get_option('page_for_posts')); ?>">
                       <div class="center-icon-column--img">
                         
                          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" version="1.1" fill="#60bcf0">
@@ -42,7 +42,7 @@
                    </a>
                 </div>
                 <div class="col-lg-3 text-center">
-                   <a class="center-icon-column p-t-30 p-b-30 hover--bglightblue d-inline-block" hre="#">
+                   <a class="center-icon-column p-t-30 p-b-30 hover--bglightblue d-inline-block" hre="<?php the_field('live_chat_url', get_option('page_for_posts')); ?>">
                       <div class="center-icon-column--img">
                          
                          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" version="1.1" fill="#60bcf0">
