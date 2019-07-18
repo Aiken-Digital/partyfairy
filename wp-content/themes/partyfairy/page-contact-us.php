@@ -42,7 +42,7 @@
                    </a>
                 </div>
                 <div class="col-lg-3 text-center">
-                   <a class="center-icon-column p-t-30 p-b-30 hover--bglightblue d-inline-block" href="<?php the_field('live_chat_url', get_option('page_for_posts')); ?>">
+                   <a class="center-icon-column p-t-30 p-b-30 hover--bglightblue d-inline-block" href="<?php the_field('live_chat_url', get_option('page_for_posts')); ?>" target="_blank">
                       <div class="center-icon-column--img">
                          
                          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" version="1.1" fill="#60bcf0">
