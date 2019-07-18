@@ -61,6 +61,22 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
  * character instead.
  */
 
+.wcfmmp-stripe-split-pay-card-group {
+    width: 100%;
+}
+
+#wcfmmp-stripe-split-pay-exp-element {
+    width: 100%;
+}
+
+#wcfmmp-stripe-split-pay-cvc-element {
+    width: 100%;
+}
+
+i.stripe-credit-card-brand.stripe-card-brand {
+    margin-top: 5px !important;
+    margin-right: 30px !important;
+}
 
 .dropbtn {
   background-color: white;
