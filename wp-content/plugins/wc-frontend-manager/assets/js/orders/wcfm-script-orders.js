@@ -176,6 +176,94 @@ jQuery(document).ready(function($) {
 		});
 	}
 	
+
+	//////////////////////////////// PROSESS BY DAVIT //////////////////////
+
+	// Mark Order as Processing
+	$( document.body ).on( 'updated_wcfm-orders', function() {
+		$('.wcfm_order_mark_processing').each(function() {
+			$(this).click(function(event) {
+				event.preventDefault();
+				var rconfirm = confirm(wcfm_dashboard_messages.order_mark_processing_confirm);
+				if(rconfirm) markProcessingWCFMOrder($(this));
+				return false;
+			});
+		});
+	});
+	
+	function markProcessingWCFMOrder(item) {
+		clearTimeout(orderTableRefrsherTime);
+		$('#wcfm-orders_wrapper').block({
+			message: null,
+			overlayCSS: {
+				background: '#fff',
+				opacity: 0.6
+			}
+		});
+		var data = {
+			action : 'wcfm_order_mark_processing',
+			orderid : item.data('orderid')
+		}	
+		$.ajax({
+			type:		'POST',
+			url: wcfm_params.ajax_url,
+			data: data,
+			success:	function(response) {
+				$wcfm_orders_table.ajax.reload();
+				$('#wcfm-orders_wrapper').unblock();
+				orderTableRefrsher();
+			}
+		});
+	}
+	
+	//////////////////////////////// PROSESS BY DAVIT //////////////////////
+
+
+
+	//////////////////////////////// CANCEL BY DAVIT //////////////////////
+
+	// Mark Order as Processing
+	$( document.body ).on( 'updated_wcfm-orders', function() {
+		$('.wcfm_order_mark_decline').each(function() {
+			$(this).click(function(event) {
+				event.preventDefault();
+				var rconfirm = confirm(wcfm_dashboard_messages.order_mark_decline_confirm);
+				if(rconfirm) markDeclineWCFMOrder($(this));
+				return false;
+			});
+		});
+	});
+	
+	function markDeclineWCFMOrder(item) {
+		clearTimeout(orderTableRefrsherTime);
+		$('#wcfm-orders_wrapper').block({
+			message: null,
+			overlayCSS: {
+				background: '#fff',
+				opacity: 0.6
+			}
+		});
+		var data = {
+			action : 'wcfm_order_mark_decline',
+			orderid : item.data('orderid')
+		}	
+		$.ajax({
+			type:		'POST',
+			url: wcfm_params.ajax_url,
+			data: data,
+			success:	function(response) {
+				$wcfm_orders_table.ajax.reload();
+				$('#wcfm-orders_wrapper').unblock();
+				orderTableRefrsher();
+			}
+		});
+	}
+	
+	//////////////////////////////// CANCEL BY DAVIT //////////////////////
+
+
+
+
 	// Screen Manager
 	$( document.body ).on( 'updated_wcfm-orders', function() {
 		$.each(wcfm_orders_screen_manage, function( column, column_val ) {

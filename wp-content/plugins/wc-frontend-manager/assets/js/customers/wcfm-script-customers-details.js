@@ -98,7 +98,89 @@ jQuery(document).ready(function($) {
 			}
 		});
 	}
+
+////////////////////////////////////// processing by davit //////////////////////////////
+		// Mark Order as Completed
+	$( document.body ).on( 'updated_wcfm_customers_orders', function() {
+		$('.wcfm_order_mark_processing').each(function() {
+			$(this).click(function(event) {
+				event.preventDefault();
+				var rconfirm = confirm( wcfm_dashboard_messages.order_mark_processing_confirm );
+				if(rconfirm) markProcessingWCFMOrder($(this));
+				return false;
+			});
+		});
+	});
 	
+	function markProcessingWCFMOrder(item) {
+		$('#wcfm_customers_orders_listing_expander').block({
+			message: null,
+			overlayCSS: {
+				background: '#fff',
+				opacity: 0.6
+			}
+		});
+		var data = {
+			action : 'wcfm_order_mark_processing',
+			orderid : item.data('orderid')
+		}	
+		$.ajax({
+			type:		'POST',
+			url: wcfm_params.ajax_url,
+			data: data,
+			success:	function(response) {
+				$wcfm_customers_orders_table.ajax.reload();
+				$('#wcfm_customers_orders_listing_expander').unblock();
+			}
+		});
+	}
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+////////////////////////////////////// decline by davit //////////////////////////////
+		// Mark Order as Completed
+	$( document.body ).on( 'updated_wcfm_customers_orders', function() {
+		$('.wcfm_order_mark_decline').each(function() {
+			$(this).click(function(event) {
+				event.preventDefault();
+				var rconfirm = confirm( wcfm_dashboard_messages.order_mark_decline_confirm );
+				if(rconfirm) markDeclineWCFMOrder($(this));
+				return false;
+			});
+		});
+	});
+	
+	function markDeclineWCFMOrder(item) {
+		$('#wcfm_customers_orders_listing_expander').block({
+			message: null,
+			overlayCSS: {
+				background: '#fff',
+				opacity: 0.6
+			}
+		});
+		var data = {
+			action : 'wcfm_order_mark_decline',
+			orderid : item.data('orderid')
+		}	
+		$.ajax({
+			type:		'POST',
+			url: wcfm_params.ajax_url,
+			data: data,
+			success:	function(response) {
+				$wcfm_customers_orders_table.ajax.reload();
+				$('#wcfm_customers_orders_listing_expander').unblock();
+			}
+		});
+	}
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
 	// Invoice Dummy
 	$( document.body ).on( 'updated_wcfm_customers_orders', function() {
 		$('.wcfm_pdf_invoice_dummy').each(function() {

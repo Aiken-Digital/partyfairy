@@ -391,93 +391,39 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 				
 				// Action
 				$actions = '';
-				if( apply_filters( 'wcfm_is_allow_order_status_update', true ) && !in_array( 'requested', $refund_statuses ) && in_array( 0, $is_refundeds ) ) {
+
+				if( apply_filters( 'wcfm_is_allow_order_status_update', true )) {
 					if( $order_sync == 'yes' ) {
+
 						$order_status = sanitize_title( $the_order->get_status() );
+
 					} else {
+
 						$order_status = sanitize_title( $order->commission_status );
 					}
-					$allowed_order_status = apply_filters( 'wcfm_allowed_order_status', wc_get_order_statuses(), $order->order_id );
-
-					$status_update_block_statuses = apply_filters( 'wcfm_status_update_block_statuses', array( 'refunded', 'cancelled', 'failed' ), $order->order_id );
-
-					// if( in_array( 'wc-completed', array_keys($allowed_order_status) ) && !in_array( 'completed', $status_update_block_statuse ) && !in_array( $order_status, array( 'failed', 'cancelled', 'refunded', 'completed' ) ) ) $actions = '<a class="wcfm_order_mark_complete wcfm-action-icon" href="#" data-orderid="' . $order->order_id . '"><span class="wcfmfa fa-check-circle text_tip" data-tip="' . esc_attr__( 'Mark as Complete', 'wc-frontend-manager' ) . '"></span></a>';
-				}
-				
 
 
-				//$actions = apply_filters ( 'wcfm_orders_module_actions', $actions, $order->order_id, $the_order, $this->vendor_id );
+					//$allowed_order_status = apply_filters( 'wcfm_allowed_order_status', wc_get_order_statuses(), $order->order_id );
 
-				///$wcfm_orders_json_arr[$index][] =  apply_filters ( 'wcfmmarketplace_orders_actions', $actions, $user_id, $order, $the_order, $this->vendor_id );
+					//$status_update_block_statuses = apply_filters( 'wcfm_status_update_block_statuses', array( 'refunded', 'cancelled', 'failed' ), $order->order_id );
 
-
-				if( $order_status == 'pending'){
-
-
-					$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processing&order_id='.$order->order_id ), 'woocommerce-mark-order-status' );
-					$complete_url_decline = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=cancelled&order_id='.$order->order_id ), 'woocommerce-mark-order-status' );
-
-					$menu_pending = '<a style="background-color: #1ad40e !important;
-					padding: 4px;
-					color: white; margin:2px;" href="'.$complete_url.'">Accept</a>';
-
-					$menu_pending .='<a style="background-color: #d40e33 !important;
-					padding: 4px;
-					color: white; margin:2px;" href="'.$complete_url_decline.'">Decline</a>';
-
-					$wcfm_orders_json_arr[$index][] =  $menu_pending;
-
-				}elseif($order_status == 'processing-cancel'){
-
-					$items = $the_order->get_items();
-					foreach ( $items as $item ) {
-
-						$product_name = $item->get_name();
-						$product_id = $item->get_product_id();
-						$product_variation_id = $item->get_variation_id();
-
-					}
-
-					$delivery_estimate = get_post_meta($product_id, 'delivery_estimate', true);
-					$delivery_product  = get_post_meta($product_id, 'delivery_product', true);
-					$pickup_product    = get_post_meta($product_id, 'pickup_product', true);
-					
-					$tindakan = '';
+					//if( in_array( 'wc-completed', array_keys($allowed_order_status) ) && !in_array( 'completed', $status_update_block_statuse ) && !in_array( $order_status, array( 'failed', 'cancelled', 'refunded', 'completed' ) ) ) 
 
 
-					$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=processed&order_id='.$order->order_id), 'woocommerce-mark-order-status' );
-
-					if($delivery_estimate == "Y") {
-
-
-						$tindakan .= '<a style="background-color: #1ad40e !important;
-						padding: 4px;
-						color: white; margin:2px;" href="'.$complete_url.'">Ready To Ship</a>';
-
-						} //
-
-						if($delivery_product == "Y") {
-
-							$tindakan .= '<a style="background-color: #1ad40e !important;
-							padding: 4px;
-							color: white; margin:2px;" href="'.$complete_url.'">Ready To Ship</a>';
-
-						}
-
-						if($pickup_product == "Y") {
-
-							$tindakan .= '<a style="background-color: #1ad40e !important;
-							padding: 4px;
-							color: white; margin:2px;" href="'.$complete_url.'">Ready To Pick</a>';
-
-						}
+						//$actions = '<a class="wcfm_order_mark_complete wcfm-action-icon" href="#" data-orderid="' . $order->order_id . '"><span class="wcfmfa fa-check-circle text_tip" data-tip="' . esc_attr__( 'Mark as Complete', 'wc-frontend-manager' ) . '"></span></a>';
 
 
 
-						$wcfm_orders_json_arr[$index][] = $tindakan;
+if(in_array( $order_status, array( 'pending' ) ) ) {
+
+	$actions .= '<a class="wcfm_order_mark_processing" style="background-color: #1ad40e !important; padding: 4px; color: white; margin:2px;" href="#" data-orderid="' . $order->order_id . '">Accept</a>';
+
+	$actions .= '<a class="wcfm_order_mark_decline" style="background-color: #d40e33 !important; padding: 4px; color: white; margin:2px;" href="#" data-orderid="' . $order->order_id . '">Decline</a>';
+}
 
 
-					}elseif($order_status == 'processing'){
+
+if(in_array( $order_status, array( 'processing' ) ) ){
 
 						$items = $the_order->get_items();
 						foreach ( $items as $item ) {
@@ -495,14 +441,13 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 						$tindakan = '';
 
 
-						$complete_url = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=completed&order_id='.$order->order_id ), 'woocommerce-mark-order-status' );
 
 						if($delivery_estimate == "Y") {
 
 
 							$tindakan .= '<a style="background-color: #1ad40e !important;
 							padding: 4px;
-							color: white; margin:2px;" href="'.$complete_url.'">Track</a>';
+							color: white; margin:2px;" class="wcfm_order_mark_complete" data-orderid="' . $order->order_id . '" href="#">Track</a>';
 
 						}
 
@@ -510,7 +455,7 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 
 							$tindakan .= '<a style="background-color: #1ad40e !important;
 							padding: 4px;
-							color: white; margin:2px;" href="'.$complete_url.'">Track</a>';
+							color: white; margin:2px;" class="wcfm_order_mark_complete" data-orderid="' . $order->order_id . '" href="#">Track</a>';
 
 						}
 
@@ -518,52 +463,54 @@ class WCFM_Orders_WCFMMarketplace_Controller {
 
 							$tindakan .= '<a style="background-color: #1ad40e !important;
 							padding: 4px;
-							color: white; margin:2px;" href="'.$complete_url.'">Picked Up</a>';
+							color: white; margin:2px;" class="wcfm_order_mark_complete" data-orderid="' . $order->order_id . '" href="#">Picked Up</a>';
 
 						}
 
 
 
-						$wcfm_orders_json_arr[$index][] = $tindakan;
-
-
-					}elseif($order_status == 'completed'){
-
-						$tindakan .= '<a style="background-color: #1ad40e !important;
-						padding: 4px;
-						color: white; margin:2px;" href="#">Completed</a>';
-						
-						$wcfm_orders_json_arr[$index][] = $tindakan;
-
-					}elseif($order_status == 'cancelled'){
-
-						$complete_url_decline = wp_nonce_url( admin_url( 'admin-ajax.php?action=woocommerce_mark_order_status&status=refunded&order_id='.$order->order_id ), 'woocommerce-mark-order-status' );
-
-
-						$menu_pending .='<a style="background-color: #d40e33 !important;
-						padding: 4px;
-						color: white; margin:2px;" href="'.$complete_url_decline.'">Refund</a>';
-
-						$wcfm_orders_json_arr[$index][] =  $menu_pending;
-
-					}elseif($order_status == 'refunded'){
-
-						
-
-						$menu_pending .='<a style="background-color: #d40e33 !important;
-						padding: 4px;
-						color: white; margin:2px;" href="#">Success Refund</a>';
-
-						$wcfm_orders_json_arr[$index][] =  $menu_pending;
-
-					}else{
-
-						//$wcfm_orders_json_arr[$index][] =  apply_filters ( 'wcfm_orders_actions', $actions, $wcfm_orders_single, $the_order );
-						$wcfm_orders_json_arr[$index][] =  '';
-
+						$actions .= $tindakan;
 
 
 					}
+
+
+
+if(in_array( $order_status, array( 'completed' ) ) ){ 
+
+	$actions .='<a style="background-color: #1ad40e !important;padding: 4px; color: white; margin:2px;" href="#">Completed</a>';
+
+}
+
+
+
+
+if(in_array( $order_status, array( 'cancelled' ) ) ){
+
+			$actions .='<a style="background-color: #d40e33 !important;
+						padding: 4px;
+						color: white; margin:2px;" class="wcfmmp_order_refund_request" href="#" data-order="' . $order->order_id . '" >Refund</a>';
+
+			
+
+					}
+
+if(in_array( $order_status, array( 'refunded' ) ) ){					
+						$actions .='<a style="background-color: #d40e33 !important;
+						padding: 4px;
+						color: white; margin:2px;display: block;" href="#">Success Refund</a>';
+
+					}
+
+
+				}
+				
+
+				$actions = apply_filters ( 'wcfm_orders_module_actions', $actions, $order->order_id, $the_order, $this->vendor_id );
+
+				 $wcfm_orders_json_arr[$index][] =  apply_filters ( 'wcfmmarketplace_orders_actions', $actions, $user_id, $order, $the_order, $this->vendor_id );
+
+
 					$index++;
 				}
 			}
